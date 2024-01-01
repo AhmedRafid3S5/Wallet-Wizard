@@ -76,8 +76,6 @@ object Form3: TForm3
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
-        ExplicitWidth = 677
-        ExplicitHeight = 661
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0
