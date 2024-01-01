@@ -17,7 +17,7 @@ object Form3: TForm3
     Top = 0
     Width = 697
     Height = 706
-    ActivePage = Analytics
+    ActivePage = Waqt
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
@@ -49,6 +49,15 @@ object Form3: TForm3
         TabOrder = 1
         OnClick = Button1Click
       end
+      object Button4: TButton
+        Left = 465
+        Top = 349
+        Width = 75
+        Height = 25
+        Caption = 'SecondButton'
+        TabOrder = 2
+        OnClick = Button4Click
+      end
     end
     object Analytics: TTabSheet
       Caption = 'Analytics'
@@ -67,6 +76,8 @@ object Form3: TForm3
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
+        ExplicitWidth = 677
+        ExplicitHeight = 661
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0
@@ -202,7 +213,7 @@ object Form3: TForm3
             Pointer.Brush.Color = clGreen
             Pointer.Brush.Image.Data = {
               07544269746D61707E000000424D7E000000000000003E000000280000001000
-              0000100000000100010000000000400000000000000000000000020000000200
+              0000100000000100010000000000400000000000000000000000020000000000
               000000000000FFFFFF0000000000AAAA000000000000AAAA000000000000AAAA
               000000000000AAAA000000000000AAAA000000000000AAAA000000000000AAAA
               000000000000AAAA0000}

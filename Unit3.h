@@ -179,6 +179,7 @@ __published:	// IDE-managed Components
 	TPointSeries *Series5;
 	TFastLineSeries *Series6;
 	TCustomTeeFunction *TeeFunction1;
+	TButton *Button4;
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall PageControl1Change(TObject *Sender);
@@ -195,6 +196,7 @@ __published:	// IDE-managed Components
           int Y);
 	void __fastcall ComboBox2Change(TObject *Sender);
 	void __fastcall Chart4Scroll(TObject *Sender);
+	void __fastcall Button4Click(TObject *Sender);
 
 
 
