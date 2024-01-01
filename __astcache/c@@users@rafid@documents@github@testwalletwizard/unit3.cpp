@@ -47,6 +47,8 @@ std::vector<int> e_amount;
 std::vector<UnicodeString> i_category;
 std::vector<int> i_amount;
 
+int randomGlobalVar;
+
 void loadGoldFile()
 {
       // URL of the webpage
@@ -127,6 +129,8 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TForm3::Button1Click(TObject *Sender)
 {
+	ShowMessage("Button Clicked");
+
 	   // URL of the webpage
 	std::string url = "https://www.islamicfinder.org/world/bangladesh/1185241/dhaka-prayer-times/";
 
@@ -838,6 +842,19 @@ void __fastcall TForm3::Chart4Scroll(TObject *Sender)
 			double y = m * x + c;
 			Series6->AddXY(x, y);
 		}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::Button4Click(TObject *Sender)
+{
+ ShowMessage("2nd Button Pressed");
+ ShowMessage("2nd Button Pressed 2");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::Button5Click(TObject *Sender)
+{
+ ShowMessage("Tracker Button pressed");
 }
 //---------------------------------------------------------------------------
 

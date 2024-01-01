@@ -21,6 +21,8 @@ object Form3: TForm3
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
+    ExplicitWidth = 691
+    ExplicitHeight = 697
     object Waqt: TTabSheet
       Caption = 'Waqt'
       object RichEdit1: TRichEdit
