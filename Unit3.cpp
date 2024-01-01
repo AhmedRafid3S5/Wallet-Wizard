@@ -848,6 +848,7 @@ void __fastcall TForm3::Chart4Scroll(TObject *Sender)
 void __fastcall TForm3::Button4Click(TObject *Sender)
 {
  ShowMessage("2nd Button Pressed");
+ ShowMessage("2nd Button Pressed 2");
 }
 //---------------------------------------------------------------------------
 
