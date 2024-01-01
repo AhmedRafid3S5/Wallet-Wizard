@@ -47,6 +47,8 @@ std::vector<int> e_amount;
 std::vector<UnicodeString> i_category;
 std::vector<int> i_amount;
 
+int randomGlobalVar;
+
 void loadGoldFile()
 {
       // URL of the webpage
@@ -846,6 +848,12 @@ void __fastcall TForm3::Chart4Scroll(TObject *Sender)
 void __fastcall TForm3::Button4Click(TObject *Sender)
 {
  ShowMessage("2nd Button Pressed");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::Button5Click(TObject *Sender)
+{
+ ShowMessage("Tracker Button pressed");
 }
 //---------------------------------------------------------------------------
 

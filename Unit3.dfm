@@ -17,12 +17,10 @@ object Form3: TForm3
     Top = 0
     Width = 697
     Height = 706
-    ActivePage = Waqt
+    ActivePage = Tracker
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
-    ExplicitWidth = 691
-    ExplicitHeight = 697
     object Waqt: TTabSheet
       Caption = 'Waqt'
       object RichEdit1: TRichEdit
@@ -76,8 +74,6 @@ object Form3: TForm3
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
-        ExplicitWidth = 677
-        ExplicitHeight = 661
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0
@@ -388,6 +384,19 @@ object Form3: TForm3
         Caption = 'Enter'
         TabOrder = 4
         OnClick = Button2Click
+      end
+    end
+    object Tracker: TTabSheet
+      Caption = 'Tracker'
+      ImageIndex = 3
+      object Button5: TButton
+        Left = 24
+        Top = 56
+        Width = 75
+        Height = 25
+        Caption = 'Button5'
+        TabOrder = 0
+        OnClick = Button5Click
       end
     end
   end
