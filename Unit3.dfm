@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 706
-  ClientWidth = 697
+  ClientHeight = 673
+  ClientWidth = 683
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,14 +15,12 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 697
-    Height = 706
-    ActivePage = Tracker
+    Width = 683
+    Height = 673
+    ActivePage = Waqt
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
-    ExplicitWidth = 691
-    ExplicitHeight = 697
     object Waqt: TTabSheet
       Caption = 'Waqt'
       object RichEdit1: TRichEdit
@@ -58,6 +56,15 @@ object Form3: TForm3
         TabOrder = 2
         OnClick = Button4Click
       end
+      object Button5: TButton
+        Left = 336
+        Top = 349
+        Width = 75
+        Height = 39
+        Caption = 'Button5'
+        TabOrder = 3
+        OnClick = Button5Click
+      end
     end
     object Analytics: TTabSheet
       Caption = 'Analytics'
@@ -66,8 +73,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 683
-        Height = 670
+        Width = 661
+        Height = 624
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
@@ -89,7 +96,6 @@ object Form3: TForm3
             '')
           Legend.Font.Height = -15
           Legend.Font.Style = [fsBold]
-          Title.Font.Height = -20
           Title.Font.Name = 'Copperplate Gothic Bold'
           Title.Text.Strings = (
             'Expenses')
@@ -141,7 +147,6 @@ object Form3: TForm3
           Foot.Font.Style = [fsItalic, fsUnderline]
           Legend.Font.Height = -15
           Legend.Font.Style = [fsBold]
-          Title.Font.Height = -20
           Title.Font.Name = 'Copperplate Gothic Bold'
           Title.Text.Strings = (
             'Income')
@@ -391,15 +396,6 @@ object Form3: TForm3
     object Tracker: TTabSheet
       Caption = 'Tracker'
       ImageIndex = 3
-      object Button5: TButton
-        Left = 24
-        Top = 56
-        Width = 75
-        Height = 25
-        Caption = 'Button5'
-        TabOrder = 0
-        OnClick = Button5Click
-      end
     end
   end
 end
