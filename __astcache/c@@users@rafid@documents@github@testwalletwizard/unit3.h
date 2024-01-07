@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+﻿//---------------------------------------------------------------------------
 
 #ifndef Unit3H
 #define Unit3H
@@ -151,10 +151,7 @@ class Transaction_Summary
 class TForm3 : public TForm
 {
 __published:	// IDE-managed Components
-	TRichEdit *RichEdit1;
-	TButton *Button1;
 	TPageControl *PageControl1;
-	TTabSheet *Waqt;
 	TTabSheet *Analytics;
 	TTabSheet *ZakatPage;
 	TStaticText *StaticText1;
@@ -179,11 +176,10 @@ __published:	// IDE-managed Components
 	TPointSeries *Series5;
 	TFastLineSeries *Series6;
 	TCustomTeeFunction *TeeFunction1;
-	TButton *Button4;
 	TTabSheet *Tracker;
 	TButton *Button5;
 	TRichEdit *RichEdit3;
-	void __fastcall Button1Click(TObject *Sender);
+	TButton *MoreInfo;
 	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
@@ -201,6 +197,7 @@ __published:	// IDE-managed Components
 	void __fastcall Chart4Scroll(TObject *Sender);
 	void __fastcall Button4Click(TObject *Sender);
 	void __fastcall Button5Click(TObject *Sender);
+	void __fastcall MoreInfoClick(TObject *Sender);
 
 
 

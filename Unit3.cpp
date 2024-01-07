@@ -132,108 +132,6 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm3::Button1Click(TObject *Sender)
-{
-	ShowMessage("Button Clicked");
-
-	   // URL of the webpage
-	std::string url = "https://www.islamicfinder.org/world/bangladesh/1185241/dhaka-prayer-times/";
-
-	// Create a file stream to store the webpage content
-	std::ofstream webpageFile("webpage.html");
-
-	if (!webpageFile.is_open()) {
-		std::cerr << "Failed to open the file for writing." << std::endl;
-
-	}
-
-	// Use system command to fetch the webpage content and write it to the file
-	std::string command = "curl -s -o webpage.html " + url;
-	if (system(command.c_str()) != 0) {
-		std::cerr << "Failed to fetch the webpage." << std::endl;
-		webpageFile.close();
-
-	}
-
-    webpageFile.close();
-
-    // Open the downloaded file for parsing
-	std::ifstream file("webpage.html");
-    if (!file.is_open()) {
-		std::cerr << "Failed to open the file for reading." << std::endl;
-
-    }
-
-    std::string line;
-    std::string content;
-    while (std::getline(file, line)) {
-		content += line;
-	}
-    file.close();
-
-    // Find the positions of "Fajar Prayer Time" and "Maghrib Prayer Time"
-    size_t fajarPos = content.find("Fajar Prayer Time");
-	size_t maghribPos = content.find("Maghrib Prayer Time");
-	UnicodeString fajarTime;
-	UnicodeString maghribTime;
-	std::string fT;
-	std::string mT;
-    if (fajarPos != std::string::npos && maghribPos != std::string::npos) {
-        // Extract the Fajar and Maghrib times
-		fT = content.substr(fajarPos + 17, 9); // Assuming the time format is HH:MM AM/PM
-		mT = content.substr(maghribPos + 19, 9);
-
-		fajarTime = content.substr(fajarPos + 17, 9); // Assuming the time format is HH:MM AM/PM
-		 maghribTime = content.substr(maghribPos + 19, 9);
-
-
-		//std::cout << "Fajar Prayer Time: " << fajarTime << std::endl;
-		//std::cout << "Maghrib Prayer Time: " << maghribTime << std::endl;
-
-
-    } else {
-        std::cerr << "Fajar and Maghrib times not found in the webpage content." << std::endl;
-	}
-
-	RichEdit1->PlainText = true;
-		RichEdit1->Lines->Text =  "Fajar Time:" + fajarTime+"\n";
-		RichEdit1->Lines->Add( "Maghrib Time:" + maghribTime +"\n");
-
-	int mh,mm,fh,fm; //mh = maghrib hour mm = maghrib minute fh = fajr hour fm = fajr minute
-
-	 fh = (fT[1]-'0')*10 + (fT[2]-'0');
-	 fm = (fT[4]-'0')*10 + (fT[5]-'0');
-
-	 mh = (((mT[1]-'0')*10 + (mT[2]-'0'))+12)%24;
-	 mm = (mT[4]-'0')*10 + (mT[5]-'0');
-
-    int last_time= ((60*mh+mm)+(60*fh+fm))/2;
-	int ih= last_time/60;
-	int im= last_time%60;
-
-    // Convert ih and im to strings
-UnicodeString ihStr = IntToStr(ih);
-UnicodeString imStr = IntToStr(im);
-
-
-	if(ih>=12 && im<10)
-		//printf("Isha last time is : %d:0%d am",ih,im);
-		RichEdit1->Lines->Add(  "Last Time:" + ihStr +":0" + imStr + "am") ;
-
-	else if (ih>=12 && im>10)
-		//printf("Isha last time is : %d:%d am",ih,im);
-		RichEdit1->Lines->Add ( "Last Time:" + ihStr +":" + imStr + "am") ;
-
-	else if(ih<12 && im<10)
-		//printf("Isha last time is : %d:0%d pm",ih,im);
-		RichEdit1->Lines->Add( "Last Time:" + ihStr +":0" + imStr + "pm" );
-
-    else
-		//printf("Isha last time is : %d:%d pm",ih,im);
-		RichEdit1->Lines->Add("Last Time:" + ihStr +":" + imStr + "pm") ;
-}
-
-//---------------------------------------------------------------------------
 
 
 
@@ -454,7 +352,7 @@ RichEdit3->SelAttributes->Color = clMenuHighlight;
 RichEdit3->Lines->Add("  Advice: To maintain good financial health, your savings rate should be at least 20%");
 
 
-  }
+}
 
 void loadPieData(std::vector<Transaction_Summary<UnicodeString,int>>& List,
 				 std::string ledger,
@@ -573,17 +471,6 @@ void __fastcall TForm3::PageControl1Change(TObject *Sender)
 	 UnicodeString Tk = " Tk";
 	 StaticText1->Caption = "To be able to give zakat" + youMustHave + moneyThreshold + Tk;
 
-	 //Testing with Memo  (Can have more multiline texts)
-	 /* Memo1->Clear();
-	  Memo1->SelStart = 0;
-	  Memo1->SelLength = 37;
-	  //Memo1->SetColor();
-	  Memo1->Lines->Add( "Eligibility Criteria for giving Zakat");
-	  Memo1->Lines->Add("Annual saving >= " + moneyThreshold);
-	  //Memo1->Left = 10;
-	  //Memo1->Top = 100;
-	  Memo1->ReadOnly = true;  */
-
 	  //Testing with Richedit (Can have more control over text color and fonts)
 	  RichEdit2->ReadOnly = true;
 	  RichEdit2->Clear();
@@ -658,18 +545,7 @@ void __fastcall TForm3::Button3Click(TObject *Sender)
 
 //---------------------------------------------------------------------------
 
-/*void __fastcall TForm3::ScrollBar1Change(TObject *Sender)
-{
-  Chart1->Top = -50* ScrollBar1->Position;
-  Chart2->Top = -50* ScrollBar1->Position + 500;
-  Chart3->Top = Chart2->Top + Chart2->Height;
-
-}*/
 //---------------------------------------------------------------------------
-
-
-
-
 
 void __fastcall TForm3::ScrollBox1MouseWheelDown(TObject *Sender, TShiftState Shift,
           TPoint &MousePos, bool &Handled)
@@ -904,6 +780,49 @@ void __fastcall TForm3::Button4Click(TObject *Sender)
 void __fastcall TForm3::Button5Click(TObject *Sender)
 {
  ShowMessage("Tracker Button pressed");
+}
+//---------------------------------------------------------------------------
+
+void pop_up(TObject *Sender)
+{
+
+		// Create a new form
+	TForm *MyForm = new TForm(Form3);
+	MyForm->Caption = "Help";
+	// Create a TRichEdit component
+	TRichEdit *RichEdit1 = new TRichEdit(MyForm);
+	RichEdit1->Parent = MyForm;
+	RichEdit1->Align = alClient;
+
+	// Set formatted text
+
+	RichEdit1->ReadOnly = True;
+	RichEdit1->SelStart = 0;
+	RichEdit1->SelLength = RichEdit1->Lines->Text.Length();
+	RichEdit1->SelAttributes->Style = TFontStyles() << fsBold; // Set bold style
+	RichEdit1->Lines->Add("This is a prediction model based on your savings and expense record.");
+	RichEdit1->SelAttributes->Style = TFontStyles() << fsBold;
+	RichEdit1->SelAttributes->Color = clBlack;
+	RichEdit1->Lines->Add("You can use this prediction model to estimate how much you must cut on your expenses to reach a targeted savings amount.");
+    RichEdit1->SelAttributes->Style = TFontStyles() << fsBold;
+	RichEdit1->SelAttributes->Color = clBlack;
+	RichEdit1->Lines->Add("Estimated expense and income are based on this linear model.")   ;
+	// Show the form
+	MyForm->Width  =  Form3->Width / 2;
+	MyForm->Height = Form3->Height / 4;
+	MyForm->Top = Form3->Chart4->Top + 50;
+	MyForm->Left = Form3->Left + Form3->Left/3;
+	MyForm->ShowModal();
+
+	// Clean up
+	delete MyForm;
+}
+
+void __fastcall TForm3::MoreInfoClick(TObject *Sender)
+{
+
+		pop_up(Sender);
+
 }
 //---------------------------------------------------------------------------
 

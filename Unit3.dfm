@@ -21,44 +21,6 @@ object Form3: TForm3
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
-    ExplicitWidth = 691
-    ExplicitHeight = 697
-    object Waqt: TTabSheet
-      Caption = 'Waqt'
-      object RichEdit1: TRichEdit
-        Left = 3
-        Top = 6
-        Width = 537
-        Height = 337
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        Lines.Strings = (
-          'RichEdit1')
-        ParentFont = False
-        TabOrder = 0
-      end
-      object Button1: TButton
-        Left = 3
-        Top = 349
-        Width = 75
-        Height = 25
-        Caption = 'Show'
-        TabOrder = 1
-        OnClick = Button1Click
-      end
-      object Button4: TButton
-        Left = 465
-        Top = 349
-        Width = 75
-        Height = 25
-        Caption = 'SecondButton'
-        TabOrder = 2
-        OnClick = Button4Click
-      end
-    end
     object Analytics: TTabSheet
       Caption = 'Analytics'
       ImageIndex = 1
@@ -72,14 +34,17 @@ object Form3: TForm3
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
         VertScrollBar.ButtonSize = 10
+        VertScrollBar.Position = 383
         Align = alClient
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
+        ExplicitWidth = 677
+        ExplicitHeight = 661
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0
-          Top = -338
+          Top = -721
           Width = 665
           Height = 360
           Foot.Font.Height = -17
@@ -133,7 +98,7 @@ object Form3: TForm3
         end
         object Chart2: TChart
           Left = 0
-          Top = -490
+          Top = -873
           Width = 669
           Height = 360
           Foot.Font.Height = -17
@@ -182,7 +147,7 @@ object Form3: TForm3
         end
         object Chart3: TChart
           Left = 3
-          Top = 28
+          Top = -355
           Width = 668
           Height = 500
           Title.Text.Strings = (
@@ -250,7 +215,7 @@ object Form3: TForm3
         end
         object StaticText4: TStaticText
           Left = 200
-          Top = 0
+          Top = -383
           Width = 301
           Height = 25
           Caption = 'Monthly Financial Analysis'
@@ -266,7 +231,7 @@ object Form3: TForm3
         end
         object Button3: TButton
           Left = 590
-          Top = 30
+          Top = -353
           Width = 75
           Height = 25
           Caption = 'Refresh'
@@ -275,7 +240,7 @@ object Form3: TForm3
         end
         object ComboBox1: TComboBox
           Left = 39
-          Top = 31
+          Top = -352
           Width = 130
           Height = 23
           TabOrder = 5
@@ -284,7 +249,7 @@ object Form3: TForm3
         end
         object Edit3: TEdit
           Left = 3
-          Top = 31
+          Top = -352
           Width = 38
           Height = 23
           TabOrder = 6
@@ -292,7 +257,7 @@ object Form3: TForm3
         end
         object Chart4: TChart
           Left = -2
-          Top = 528
+          Top = 145
           Width = 668
           Height = 500
           Title.Text.Strings = (
@@ -302,6 +267,15 @@ object Form3: TForm3
           TabOrder = 7
           DefaultCanvas = 'TGDIPlusCanvas'
           ColorPaletteIndex = 13
+          object MoreInfo: TButton
+            Left = 582
+            Top = 40
+            Width = 75
+            Height = 25
+            Caption = 'MoreInfo'
+            TabOrder = 0
+            OnClick = MoreInfoClick
+          end
           object Series5: TPointSeries
             HoverElement = [heCurrent]
             ClickableLine = False
@@ -329,7 +303,7 @@ object Form3: TForm3
         end
         object RichEdit3: TRichEdit
           Left = -2
-          Top = 703
+          Top = 320
           Width = 657
           Height = 161
           Color = clBtnFace
