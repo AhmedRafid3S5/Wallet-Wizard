@@ -1,0 +1,219 @@
+Start
+2023
+01
+01 Donations 100
+01 Bills 400
+05 Rent 7000
+05 Food 70
+06 Food 80
+10 Games 750
+11 Food 50
+14 Games 3000
+15 Clothes 450
+15 Food 500
+16 Electricity_Bill 760
+17 Donations 3000
+End
+Start
+2023
+02
+02 Games 450
+05 Rent 7000
+05 Food 70
+06 Food 80
+10 Games 750
+11 Food 50
+14 Games 3000
+15 Clothes 450
+15 Food 500
+16 Electricity_Bill 760
+17 Groceries 1000
+20 Groceries 450
+End
+Start
+2023
+03
+02 Games 450
+05 Rent 7000
+05 Food 70
+06 Food 80
+10 Games 750
+11 Food 50
+14 Games 3000
+15 Clothes 450
+15 Food 500
+16 Electricity_Bill 760
+17 Groceries 1000
+20 Groceries 450
+25 Appliances 2000
+End
+Start
+2023
+04
+02 Travel 250
+05 Entertainment 6000
+05 Dining 90
+06 Shopping 120
+10 Hobbies 800
+11 Dining 45
+14 Travel 2800
+15 Electronics 300
+15 Groceries 400
+16 Rent 700
+17 Health 1200
+20 Home_Decor 350
+25 Utilities 1500
+End
+Start
+2023
+05
+02 Travel 250
+05 Entertainment 600
+05 Dining 90
+06 Shopping 120
+10 Hobbies 800
+11 Dining 45
+14 Travel 2800
+15 Electronics 300
+15 Groceries 400
+16 Rent 700
+17 Health 1200
+20 Home_Decor 350
+25 Utilities 1500
+End
+Start
+2023
+06
+02 Travel 250
+05 Entertainment 600
+05 Dining 90
+06 Shopping 120
+10 Hobbies 800
+11 Dining 45
+14 Travel 2800
+15 Electronics 300
+15 Groceries 400
+16 Rent 700
+17 Health 1200
+20 Home_Decor 350
+25 Utilities 1500
+End
+Start
+2023
+07
+02 Travel 250
+05 Entertainment 600
+05 Dining 90
+06 Shopping 120
+10 Hobbies 800
+11 Dining 45
+14 Travel 2800
+15 Electronics 300
+15 Groceries 400
+16 Rent 700
+17 Health 1200
+20 Home_Decor 350
+25 Utilities 1500
+End
+Start
+2023
+08
+02 Travel 250
+05 Entertainment 600
+05 Dining 90
+06 Shopping 120
+10 Hobbies 800
+11 Dining 45
+14 Travel 2800
+15 Electronics 300
+15 Groceries 400
+16 Rent 700
+17 Health 1200
+20 Home_Decor 350
+25 Utilities 1500
+End
+Start
+2023
+09
+02 Travel 250
+05 Entertainment 600
+05 Dining 90
+06 Shopping 120
+10 Hobbies 800
+11 Dining 45
+14 Travel 2800
+15 Electronics 300
+15 Groceries 400
+16 Rent 700
+17 Health 1200
+20 Home_Decor 350
+25 Utilities 1500
+End
+Start
+2023
+10
+02 Travel 250
+05 Entertainment 600
+05 Dining 90
+06 Shopping 120
+10 Hobbies 800
+11 Dining 45
+14 Travel 2800
+15 Electronics 300
+15 Groceries 400
+16 Rent 700
+17 Health 1200
+20 Home_Decor 350
+25 Utilities 1500
+End
+Start
+2023
+11
+02 Travel 250
+05 Entertainment 600
+05 Dining 90
+06 Shopping 120
+10 Hobbies 800
+11 Dining 45
+14 Travel 2800
+15 Electronics 300
+15 Groceries 400
+16 Rent 700
+17 Health 1200
+20 Home_Decor 350
+25 Utilities 1500
+End
+Start
+2023
+12
+02 Travel 250
+05 Entertainment 600
+05 Dining 90
+06 Shopping 120
+10 Hobbies 800
+11 Dining 45
+14 Travel 2800
+15 Electronics 300
+15 Groceries 400
+16 Rent 700
+17 Health 1200
+20 Home_Decor 350
+25 Utilities 1500
+End
+Start
+2024
+01
+02 Travel 250
+05 Entertainment 600
+05 Dining 90
+06 Shopping 1200
+10 Hobbies 800
+11 Dining 45
+14 Travel 2800
+15 Electronics 300
+15 Groceries 400
+16 Rent 700
+17 Health 1200
+20 Home_Decor 350
+25 Utilities 1500
+End

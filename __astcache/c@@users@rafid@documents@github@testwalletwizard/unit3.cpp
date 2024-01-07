@@ -41,13 +41,14 @@ float totalZakat = 0;
 std::vector<Transaction_Summary<UnicodeString,int>> ExpenseList;
 std::vector<Transaction_Summary<UnicodeString,int>> IncomeList;
 
+//These vectors load up with the requested month and year data
 std::vector<UnicodeString> e_category;
 std::vector<int> e_amount;
 
 std::vector<UnicodeString> i_category;
 std::vector<int> i_amount;
+//--------------------------------------------------------------
 
-int randomGlobalVar;
 
 void loadGoldFile()
 {
@@ -114,9 +115,11 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 //-----------------------------------------------------------------------------
 
 	Chart1->Top = 75;
-	Chart2->Top = 50 + Chart1->Top + Chart1->Height;
+	Chart2->Top = Chart1->Top + Chart1->Height;
 	Chart3->Top = Chart2->Top + Chart2->Height;
 	Chart4->Top = Chart3->Top + Chart3->Height;
+	RichEdit3->Top = Chart4->Top + Chart4->Height;
+	RichEdit3->Width = Chart4->Width;
    //Set Tab size (Initializer)
 	 PageControl1->TabWidth = PageControl1->ClientWidth/Total_Tabs - 1;
    //Set ScrollBar Limit (Initializer)
@@ -125,109 +128,9 @@ __fastcall TForm3::TForm3(TComponent* Owner)
    loadGoldFile();
 
 
+
+
 }
-//---------------------------------------------------------------------------
-void __fastcall TForm3::Button1Click(TObject *Sender)
-{
-	ShowMessage("Button Clicked");
-
-	   // URL of the webpage
-	std::string url = "https://www.islamicfinder.org/world/bangladesh/1185241/dhaka-prayer-times/";
-
-	// Create a file stream to store the webpage content
-	std::ofstream webpageFile("webpage.html");
-
-	if (!webpageFile.is_open()) {
-		std::cerr << "Failed to open the file for writing." << std::endl;
-
-	}
-
-	// Use system command to fetch the webpage content and write it to the file
-	std::string command = "curl -s -o webpage.html " + url;
-	if (system(command.c_str()) != 0) {
-		std::cerr << "Failed to fetch the webpage." << std::endl;
-		webpageFile.close();
-
-	}
-
-    webpageFile.close();
-
-    // Open the downloaded file for parsing
-	std::ifstream file("webpage.html");
-    if (!file.is_open()) {
-		std::cerr << "Failed to open the file for reading." << std::endl;
-
-    }
-
-    std::string line;
-    std::string content;
-    while (std::getline(file, line)) {
-		content += line;
-	}
-    file.close();
-
-    // Find the positions of "Fajar Prayer Time" and "Maghrib Prayer Time"
-    size_t fajarPos = content.find("Fajar Prayer Time");
-	size_t maghribPos = content.find("Maghrib Prayer Time");
-	UnicodeString fajarTime;
-	UnicodeString maghribTime;
-	std::string fT;
-	std::string mT;
-    if (fajarPos != std::string::npos && maghribPos != std::string::npos) {
-        // Extract the Fajar and Maghrib times
-		fT = content.substr(fajarPos + 17, 9); // Assuming the time format is HH:MM AM/PM
-		mT = content.substr(maghribPos + 19, 9);
-
-		fajarTime = content.substr(fajarPos + 17, 9); // Assuming the time format is HH:MM AM/PM
-		 maghribTime = content.substr(maghribPos + 19, 9);
-
-
-		//std::cout << "Fajar Prayer Time: " << fajarTime << std::endl;
-		//std::cout << "Maghrib Prayer Time: " << maghribTime << std::endl;
-
-
-    } else {
-        std::cerr << "Fajar and Maghrib times not found in the webpage content." << std::endl;
-	}
-
-	RichEdit1->PlainText = true;
-		RichEdit1->Lines->Text =  "Fajar Time:" + fajarTime+"\n";
-		RichEdit1->Lines->Add( "Maghrib Time:" + maghribTime +"\n");
-
-	int mh,mm,fh,fm; //mh = maghrib hour mm = maghrib minute fh = fajr hour fm = fajr minute
-
-	 fh = (fT[1]-'0')*10 + (fT[2]-'0');
-	 fm = (fT[4]-'0')*10 + (fT[5]-'0');
-
-	 mh = (((mT[1]-'0')*10 + (mT[2]-'0'))+12)%24;
-	 mm = (mT[4]-'0')*10 + (mT[5]-'0');
-
-    int last_time= ((60*mh+mm)+(60*fh+fm))/2;
-	int ih= last_time/60;
-	int im= last_time%60;
-
-    // Convert ih and im to strings
-UnicodeString ihStr = IntToStr(ih);
-UnicodeString imStr = IntToStr(im);
-
-
-	if(ih>=12 && im<10)
-		//printf("Isha last time is : %d:0%d am",ih,im);
-		RichEdit1->Lines->Add(  "Last Time:" + ihStr +":0" + imStr + "am") ;
-
-	else if (ih>=12 && im>10)
-		//printf("Isha last time is : %d:%d am",ih,im);
-		RichEdit1->Lines->Add ( "Last Time:" + ihStr +":" + imStr + "am") ;
-
-	else if(ih<12 && im<10)
-		//printf("Isha last time is : %d:0%d pm",ih,im);
-		RichEdit1->Lines->Add( "Last Time:" + ihStr +":0" + imStr + "pm" );
-
-    else
-		//printf("Isha last time is : %d:%d pm",ih,im);
-		RichEdit1->Lines->Add("Last Time:" + ihStr +":" + imStr + "pm") ;
-}
-
 //---------------------------------------------------------------------------
 
 
@@ -324,23 +227,23 @@ void TForm3::drawCharts(int year,int month )
 	Series3->LegendTitle = "Avg_Income";
 	Series4->LegendTitle = "Avg_Expense";
 
-	for(int i=0;i<ExpenseList.size();i++)
+	for(int i=ExpenseList.size()-12;i<ExpenseList.size();i++)
 	{
 	   Transaction_Summary<UnicodeString,int> entry = IncomeList[i];
 	   double monthAvg =  entry.return_avg();
 	   int month = entry.getMonth();
-	   UnicodeString m = FormatSettings.ShortMonthNames[month-1] ;
+	    UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
 	   Series3->AddXY(i+1,monthAvg,m);
 	}
 
 	// Add data points for average expense
 
-	for(int i=0;i<ExpenseList.size();i++)
+	for(int i=ExpenseList.size()-12;i<ExpenseList.size();i++)
 	{
 	   Transaction_Summary<UnicodeString,int> entry = ExpenseList[i];
 	   double monthAvg =  entry.return_avg();
 	   int month = entry.getMonth();
-	   UnicodeString m = FormatSettings.ShortMonthNames[month-1] ;
+		UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
 	   Series4->AddXY(i+1,monthAvg,m);
 	}
 
@@ -352,23 +255,23 @@ void TForm3::drawCharts(int year,int month )
 		Series3->LegendTitle = "Total_Income";
 		Series4->LegendTitle = "Total_Expense";
 
-	for(int i=0;i<ExpenseList.size();i++)
+	for(int i=ExpenseList.size()-12;i<ExpenseList.size();i++)
 	{
 	   Transaction_Summary<UnicodeString,int> entry = IncomeList[i];
 	   double monthTotal =  entry.return_total();
 	   int month = entry.getMonth();
-	   UnicodeString m = FormatSettings.ShortMonthNames[month-1] ;
+	   UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
 	   Series3->AddXY(i+1,monthTotal,m);
 	}
 
 	// Add data points for average expense
 
-	for(int i=0;i<ExpenseList.size();i++)
+	for(int i=ExpenseList.size()-12;i<ExpenseList.size();i++)
 	{
 	   Transaction_Summary<UnicodeString,int> entry = ExpenseList[i];
 	   double monthTotal =  entry.return_total();
 	   int month = entry.getMonth();
-	   UnicodeString m = FormatSettings.ShortMonthNames[month-1] ;
+	   UnicodeString m = FormatSettings.ShortMonthNames[month-1] + IntToStr(year%1000);
 	   Series4->AddXY(i+1,monthTotal,m);
 	}
 	}
@@ -379,19 +282,23 @@ void TForm3::drawCharts(int year,int month )
 	Series5->Clear();
 	Series6->Clear();
 
+    	regression r;
+	update_regression_model(r);
+
+	float m = r.coefficient();
+	float c = r.constant();
+
 	for(int i=0;i<ExpenseList.size();i++)
 	{
 		float y = ExpenseList[i].return_total();
 		float x = IncomeList[i].return_total() - y;
 
 		Series5->AddXY(x,y);
-    }
+	}
 
-	regression r;
-	update_regression_model(r);
+	Series5->AddXY(0,c);
+	Series5->AddXY(-c/m,0) ;
 
-	float m = r.coefficient();
-	float c = r.constant();
 
 
    // Add points to the series based on the equation y = ax + b
@@ -401,10 +308,51 @@ void TForm3::drawCharts(int year,int month )
 
    }
 
+   UnicodeString BaseExp = FloatToStr((int)c);
+   UnicodeString BaseIncome = FloatToStr((int)(-c/m));
+
+   float totalIncome = std::accumulate(i_amount.begin(),i_amount.end(),0);
+   float totalExpense = std::accumulate(e_amount.begin(),e_amount.end(),0);
+   int savings_rate = ( (totalIncome - totalExpense) / totalIncome)*100;
+
+    RichEdit3->Clear();
+RichEdit3->ReadOnly = true;
+
+// Add empty line
+RichEdit3->Lines->Add("");
+
+// Estimated Base Expense with red font
 
 
+RichEdit3->Lines->Add("  Estimated Base Expense " + BaseExp + " Tk");
+RichEdit3->SelStart = 26;
+RichEdit3->SelLength = BaseExp.Length()+1;
+RichEdit3->SelAttributes->Color = clRed;
 
-  }
+// Estimated Base Income with green font
+RichEdit3->Lines->Add("  Estimated Base Income " + BaseIncome + " TK");
+RichEdit3->SelStart = RichEdit3->Text.Length() - 13;
+RichEdit3->SelLength = BaseIncome.Length()+1;
+RichEdit3->SelAttributes->Color = clGreen;
+// Savings rate with month and year in bold
+RichEdit3->SelStart = RichEdit3->Text.Length();
+RichEdit3->SelLength = 0;
+RichEdit3->SelAttributes->Style = RichEdit3->SelAttributes->Style << fsBold;
+RichEdit3->SelAttributes->Color = clBlack;  // Reset color
+RichEdit3->Lines->Add(" Savings rate for " + FormatSettings.LongMonthNames[month - 1] +
+    " " + IntToStr(year) + " : " + FloatToStr(savings_rate) + "%");
+
+// Reset style
+RichEdit3->SelAttributes->Style = TFontStyles();
+
+// Advice sentence in light blue font
+RichEdit3->SelStart = RichEdit3->Text.Length();
+RichEdit3->SelLength = 0;
+RichEdit3->SelAttributes->Color = clMenuHighlight;
+RichEdit3->Lines->Add("  Advice: To maintain good financial health, your savings rate should be at least 20%");
+
+
+}
 
 void loadPieData(std::vector<Transaction_Summary<UnicodeString,int>>& List,
 				 std::string ledger,
@@ -523,17 +471,6 @@ void __fastcall TForm3::PageControl1Change(TObject *Sender)
 	 UnicodeString Tk = " Tk";
 	 StaticText1->Caption = "To be able to give zakat" + youMustHave + moneyThreshold + Tk;
 
-	 //Testing with Memo  (Can have more multiline texts)
-	 /* Memo1->Clear();
-	  Memo1->SelStart = 0;
-	  Memo1->SelLength = 37;
-	  //Memo1->SetColor();
-	  Memo1->Lines->Add( "Eligibility Criteria for giving Zakat");
-	  Memo1->Lines->Add("Annual saving >= " + moneyThreshold);
-	  //Memo1->Left = 10;
-	  //Memo1->Top = 100;
-	  Memo1->ReadOnly = true;  */
-
 	  //Testing with Richedit (Can have more control over text color and fonts)
 	  RichEdit2->ReadOnly = true;
 	  RichEdit2->Clear();
@@ -608,18 +545,7 @@ void __fastcall TForm3::Button3Click(TObject *Sender)
 
 //---------------------------------------------------------------------------
 
-/*void __fastcall TForm3::ScrollBar1Change(TObject *Sender)
-{
-  Chart1->Top = -50* ScrollBar1->Position;
-  Chart2->Top = -50* ScrollBar1->Position + 500;
-  Chart3->Top = Chart2->Top + Chart2->Height;
-
-}*/
 //---------------------------------------------------------------------------
-
-
-
-
 
 void __fastcall TForm3::ScrollBox1MouseWheelDown(TObject *Sender, TShiftState Shift,
           TPoint &MousePos, bool &Handled)
@@ -848,13 +774,55 @@ void __fastcall TForm3::Chart4Scroll(TObject *Sender)
 void __fastcall TForm3::Button4Click(TObject *Sender)
 {
  ShowMessage("2nd Button Pressed");
- ShowMessage("2nd Button Pressed 2");
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm3::Button5Click(TObject *Sender)
 {
  ShowMessage("Tracker Button pressed");
+}
+//---------------------------------------------------------------------------
+
+void pop_up(TObject *Sender)
+{
+
+		// Create a new form
+	TForm *MyForm = new TForm(Form3);
+	MyForm->Caption = "Help";
+	// Create a TRichEdit component
+	TRichEdit *RichEdit1 = new TRichEdit(MyForm);
+	RichEdit1->Parent = MyForm;
+	RichEdit1->Align = alClient;
+
+	// Set formatted text
+
+	RichEdit1->ReadOnly = True;
+	RichEdit1->SelStart = 0;
+	RichEdit1->SelLength = RichEdit1->Lines->Text.Length();
+	RichEdit1->SelAttributes->Style = TFontStyles() << fsBold; // Set bold style
+	RichEdit1->Lines->Add("This is a prediction model based on your savings and expense record.");
+	RichEdit1->SelAttributes->Style = TFontStyles() << fsBold;
+	RichEdit1->SelAttributes->Color = clBlack;
+	RichEdit1->Lines->Add("You can use this prediction model to estimate how much you must cut on your expenses to reach a targeted savings amount.");
+    RichEdit1->SelAttributes->Style = TFontStyles() << fsBold;
+	RichEdit1->SelAttributes->Color = clBlack;
+	RichEdit1->Lines->Add("Estimated expense and income are based on this linear model.")   ;
+	// Show the form
+	MyForm->Width  =  Form3->Width / 2;
+	MyForm->Height = Form3->Height / 4;
+	MyForm->Top = Form3->Chart4->Top + 50;
+	MyForm->Left = Form3->Left + Form3->Left/3;
+	MyForm->ShowModal();
+
+	// Clean up
+	delete MyForm;
+}
+
+void __fastcall TForm3::MoreInfoClick(TObject *Sender)
+{
+
+		pop_up(Sender);
+
 }
 //---------------------------------------------------------------------------
 
