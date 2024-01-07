@@ -176,10 +176,12 @@ __published:	// IDE-managed Components
 	TPointSeries *Series5;
 	TFastLineSeries *Series6;
 	TCustomTeeFunction *TeeFunction1;
-	TTabSheet *Tracker;
+	TTabSheet *Income;
 	TButton *Button5;
 	TRichEdit *RichEdit3;
 	TButton *MoreInfo;
+	TTabSheet *Budget;
+	TTabSheet *Expense;
 	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
@@ -198,6 +200,8 @@ __published:	// IDE-managed Components
 	void __fastcall Button4Click(TObject *Sender);
 	void __fastcall Button5Click(TObject *Sender);
 	void __fastcall MoreInfoClick(TObject *Sender);
+
+
 
 
 

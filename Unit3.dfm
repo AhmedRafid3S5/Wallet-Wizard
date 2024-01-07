@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 706
-  ClientWidth = 697
+  ClientHeight = 673
+  ClientWidth = 683
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,12 +15,33 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 697
-    Height = 706
-    ActivePage = Analytics
+    Width = 683
+    Height = 673
+    ActivePage = Budget
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
+    object Income: TTabSheet
+      Caption = 'Income'
+      ImageIndex = 3
+      object Button5: TButton
+        Left = 24
+        Top = 56
+        Width = 75
+        Height = 25
+        Caption = 'Button5'
+        TabOrder = 0
+        OnClick = Button5Click
+      end
+    end
+    object Expense: TTabSheet
+      Caption = 'Expense'
+      ImageIndex = 4
+    end
+    object Budget: TTabSheet
+      Caption = 'Budget'
+      ImageIndex = 3
+    end
     object Analytics: TTabSheet
       Caption = 'Analytics'
       ImageIndex = 1
@@ -28,8 +49,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 683
-        Height = 670
+        Width = 661
+        Height = 624
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
@@ -39,8 +60,6 @@ object Form3: TForm3
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
-        ExplicitWidth = 677
-        ExplicitHeight = 661
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0
@@ -54,7 +73,6 @@ object Form3: TForm3
             '')
           Legend.Font.Height = -15
           Legend.Font.Style = [fsBold]
-          Title.Font.Height = -20
           Title.Font.Name = 'Copperplate Gothic Bold'
           Title.Text.Strings = (
             'Expenses')
@@ -106,7 +124,6 @@ object Form3: TForm3
           Foot.Font.Style = [fsItalic, fsUnderline]
           Legend.Font.Height = -15
           Legend.Font.Style = [fsBold]
-          Title.Font.Height = -20
           Title.Font.Name = 'Copperplate Gothic Bold'
           Title.Text.Strings = (
             'Income')
@@ -377,19 +394,6 @@ object Form3: TForm3
         Caption = 'Enter'
         TabOrder = 4
         OnClick = Button2Click
-      end
-    end
-    object Tracker: TTabSheet
-      Caption = 'Tracker'
-      ImageIndex = 3
-      object Button5: TButton
-        Left = 24
-        Top = 56
-        Width = 75
-        Height = 25
-        Caption = 'Button5'
-        TabOrder = 0
-        OnClick = Button5Click
       end
     end
   end
