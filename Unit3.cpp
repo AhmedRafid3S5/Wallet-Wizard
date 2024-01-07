@@ -41,13 +41,14 @@ float totalZakat = 0;
 std::vector<Transaction_Summary<UnicodeString,int>> ExpenseList;
 std::vector<Transaction_Summary<UnicodeString,int>> IncomeList;
 
+//These vectors load up with the requested month and year data
 std::vector<UnicodeString> e_category;
 std::vector<int> e_amount;
 
 std::vector<UnicodeString> i_category;
 std::vector<int> i_amount;
+//--------------------------------------------------------------
 
-int randomGlobalVar;
 
 void loadGoldFile()
 {
@@ -114,15 +115,19 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 //-----------------------------------------------------------------------------
 
 	Chart1->Top = 75;
-	Chart2->Top = 50 + Chart1->Top + Chart1->Height;
+	Chart2->Top = Chart1->Top + Chart1->Height;
 	Chart3->Top = Chart2->Top + Chart2->Height;
 	Chart4->Top = Chart3->Top + Chart3->Height;
+	RichEdit3->Top = Chart4->Top + Chart4->Height;
+	RichEdit3->Width = Chart4->Width;
    //Set Tab size (Initializer)
 	 PageControl1->TabWidth = PageControl1->ClientWidth/Total_Tabs - 1;
    //Set ScrollBar Limit (Initializer)
 
    //Load File function calls
    loadGoldFile();
+
+
 
 
 }
@@ -324,23 +329,23 @@ void TForm3::drawCharts(int year,int month )
 	Series3->LegendTitle = "Avg_Income";
 	Series4->LegendTitle = "Avg_Expense";
 
-	for(int i=0;i<ExpenseList.size();i++)
+	for(int i=ExpenseList.size()-12;i<ExpenseList.size();i++)
 	{
 	   Transaction_Summary<UnicodeString,int> entry = IncomeList[i];
 	   double monthAvg =  entry.return_avg();
 	   int month = entry.getMonth();
-	   UnicodeString m = FormatSettings.ShortMonthNames[month-1] ;
+	    UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
 	   Series3->AddXY(i+1,monthAvg,m);
 	}
 
 	// Add data points for average expense
 
-	for(int i=0;i<ExpenseList.size();i++)
+	for(int i=ExpenseList.size()-12;i<ExpenseList.size();i++)
 	{
 	   Transaction_Summary<UnicodeString,int> entry = ExpenseList[i];
 	   double monthAvg =  entry.return_avg();
 	   int month = entry.getMonth();
-	   UnicodeString m = FormatSettings.ShortMonthNames[month-1] ;
+		UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
 	   Series4->AddXY(i+1,monthAvg,m);
 	}
 
@@ -352,23 +357,23 @@ void TForm3::drawCharts(int year,int month )
 		Series3->LegendTitle = "Total_Income";
 		Series4->LegendTitle = "Total_Expense";
 
-	for(int i=0;i<ExpenseList.size();i++)
+	for(int i=ExpenseList.size()-12;i<ExpenseList.size();i++)
 	{
 	   Transaction_Summary<UnicodeString,int> entry = IncomeList[i];
 	   double monthTotal =  entry.return_total();
 	   int month = entry.getMonth();
-	   UnicodeString m = FormatSettings.ShortMonthNames[month-1] ;
+	   UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
 	   Series3->AddXY(i+1,monthTotal,m);
 	}
 
 	// Add data points for average expense
 
-	for(int i=0;i<ExpenseList.size();i++)
+	for(int i=ExpenseList.size()-12;i<ExpenseList.size();i++)
 	{
 	   Transaction_Summary<UnicodeString,int> entry = ExpenseList[i];
 	   double monthTotal =  entry.return_total();
 	   int month = entry.getMonth();
-	   UnicodeString m = FormatSettings.ShortMonthNames[month-1] ;
+	   UnicodeString m = FormatSettings.ShortMonthNames[month-1] + IntToStr(year%1000);
 	   Series4->AddXY(i+1,monthTotal,m);
 	}
 	}
@@ -379,19 +384,23 @@ void TForm3::drawCharts(int year,int month )
 	Series5->Clear();
 	Series6->Clear();
 
+    	regression r;
+	update_regression_model(r);
+
+	float m = r.coefficient();
+	float c = r.constant();
+
 	for(int i=0;i<ExpenseList.size();i++)
 	{
 		float y = ExpenseList[i].return_total();
 		float x = IncomeList[i].return_total() - y;
 
 		Series5->AddXY(x,y);
-    }
+	}
 
-	regression r;
-	update_regression_model(r);
+	Series5->AddXY(0,c);
+	Series5->AddXY(-c/m,0) ;
 
-	float m = r.coefficient();
-	float c = r.constant();
 
 
    // Add points to the series based on the equation y = ax + b
@@ -401,7 +410,48 @@ void TForm3::drawCharts(int year,int month )
 
    }
 
+   UnicodeString BaseExp = FloatToStr((int)c);
+   UnicodeString BaseIncome = FloatToStr((int)(-c/m));
 
+   float totalIncome = std::accumulate(i_amount.begin(),i_amount.end(),0);
+   float totalExpense = std::accumulate(e_amount.begin(),e_amount.end(),0);
+   int savings_rate = ( (totalIncome - totalExpense) / totalIncome)*100;
+
+    RichEdit3->Clear();
+RichEdit3->ReadOnly = true;
+
+// Add empty line
+RichEdit3->Lines->Add("");
+
+// Estimated Base Expense with red font
+
+
+RichEdit3->Lines->Add("  Estimated Base Expense " + BaseExp + " Tk");
+RichEdit3->SelStart = 26;
+RichEdit3->SelLength = BaseExp.Length()+1;
+RichEdit3->SelAttributes->Color = clRed;
+
+// Estimated Base Income with green font
+RichEdit3->Lines->Add("  Estimated Base Income " + BaseIncome + " TK");
+RichEdit3->SelStart = RichEdit3->Text.Length() - 13;
+RichEdit3->SelLength = BaseIncome.Length()+1;
+RichEdit3->SelAttributes->Color = clGreen;
+// Savings rate with month and year in bold
+RichEdit3->SelStart = RichEdit3->Text.Length();
+RichEdit3->SelLength = 0;
+RichEdit3->SelAttributes->Style = RichEdit3->SelAttributes->Style << fsBold;
+RichEdit3->SelAttributes->Color = clBlack;  // Reset color
+RichEdit3->Lines->Add(" Savings rate for " + FormatSettings.LongMonthNames[month - 1] +
+    " " + IntToStr(year) + " : " + FloatToStr(savings_rate) + "%");
+
+// Reset style
+RichEdit3->SelAttributes->Style = TFontStyles();
+
+// Advice sentence in light blue font
+RichEdit3->SelStart = RichEdit3->Text.Length();
+RichEdit3->SelLength = 0;
+RichEdit3->SelAttributes->Color = clMenuHighlight;
+RichEdit3->Lines->Add("  Advice: To maintain good financial health, your savings rate should be at least 20%");
 
 
   }

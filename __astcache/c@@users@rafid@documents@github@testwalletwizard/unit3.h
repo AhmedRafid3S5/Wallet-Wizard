@@ -182,6 +182,7 @@ __published:	// IDE-managed Components
 	TButton *Button4;
 	TTabSheet *Tracker;
 	TButton *Button5;
+	TRichEdit *RichEdit3;
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall PageControl1Change(TObject *Sender);

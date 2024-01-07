@@ -17,7 +17,7 @@ object Form3: TForm3
     Top = 0
     Width = 697
     Height = 706
-    ActivePage = Tracker
+    ActivePage = Analytics
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
@@ -307,7 +307,7 @@ object Form3: TForm3
             ClickableLine = False
             Pointer.HorizSize = 8
             Pointer.InflateMargins = True
-            Pointer.Style = psCircle
+            Pointer.Style = psDiagCross
             Pointer.VertSize = 8
             XValues.Name = 'X'
             XValues.Order = loAscending
@@ -326,6 +326,23 @@ object Form3: TForm3
               NumPoints = 100
             end
           end
+        end
+        object RichEdit3: TRichEdit
+          Left = -2
+          Top = 703
+          Width = 657
+          Height = 161
+          Color = clBtnFace
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Comic Sans MS'
+          Font.Style = []
+          Lines.Strings = (
+            'RichEdit3')
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 8
         end
       end
     end
