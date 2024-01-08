@@ -2,7 +2,7 @@ Start
 2023
 01
 01 Donations 100
-01 Bills 252525
+01 Bills 252
 05 Rent 7000
 05 Food 70
 06 Food 80
@@ -207,7 +207,7 @@ Start
 05 Entertainment 600
 05 Dining 90
 06 Shopping 1200
-09 sdsd -5
+09 Car 565
 10 Hobbies 800
 11 Dining 45
 14 Travel 2800

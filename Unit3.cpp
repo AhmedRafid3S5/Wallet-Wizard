@@ -17,6 +17,7 @@
 #include <iomanip>     //for the setw setfill flags during fileprint
 #define userledger "ledger.txt"
 #define incomeledger "incomes.txt"
+#define saving "savings.txt"
 #define Total_Tabs 5
 #include "Unit3.h"
 #include "Regression.h"
@@ -165,7 +166,55 @@ void SortExpense()
 	   }
    }
 }
+//Calculate total savings
 
+//Necessary Prototypes
+void AddExpenseOperations();
+void refreshSavings()
+{
+ std::ofstream outFile(saving);
+	if (!outFile.is_open()) {
+		ShowMessage("Cannot open file");
+		return;
+	}
+	int Sav=0;
+	for ( auto& income : IncomeRead) {
+		std::stringstream ss;
+		// Start tag
+		Sav=0;
+		ss << "Start" << std::endl;
+		// Year and Month
+		ss << income.Getyear() << std::endl;
+		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
+		// Data entries
+		for (int i = 0; i < income.date.size(); ++i) {
+			Sav+=income.amount[i];
+		}
+		for ( auto& expense : ExpenseRead)
+		{
+			if(expense.month==income.month &&  expense.year==income.year )
+			{
+				 for (int i = 0; i < expense.date.size(); ++i) {
+				 Sav-=expense.amount[i];
+		}
+				break;
+            }
+		}
+		 //string(income.category[i].c_str())
+		// End tag
+		ss<< Sav <<endl;
+		ss << "End" << std::endl;
+		outFile << ss.str();
+		if (outFile.fail())
+		{
+			std::cerr << "Error writing to the output file!" << std::endl;
+			ShowMessage("Error writing to the output file.");
+			outFile.close();  // Close the file before returning
+			return;
+		}
+	}
+	outFile.close();
+}
 //---------------------------------------------------------------------------
 
 void __fastcall TForm3::ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled)
@@ -826,6 +875,8 @@ void __fastcall TForm3::Button5Click(TObject *Sender)
 		UnicodeString Month=Edit5->Text;
 		UnicodeString Year=Edit6->Text;
 		AddNewIncomeEntry(Amount,Source,Date,Month,Year);
+		AddExpenseOperations();
+		refreshSavings();
   }
 }
 //---------------------------------------------------------------------------
@@ -1016,6 +1067,8 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 		UnicodeString expenseMonth=Edit11->Text;
 		UnicodeString expenseYear=Edit12->Text;
 		AddNewExpenseEntry(expenseAmnt,expenseCat, expenseDate, expenseMonth, expenseYear);
+		AddIncomeOperations();
+		refreshSavings();
   }
 }
   void EditIncomeEntry(UnicodeString Amount ,UnicodeString Source,UnicodeString Date,UnicodeString Month,UnicodeString Year)
@@ -1136,6 +1189,8 @@ void __fastcall TForm3::Button4Click(TObject *Sender)
 		UnicodeString Month=Edit5->Text;
 		UnicodeString Year=Edit6->Text;
 		EditIncomeEntry(Amount,Source,Date,Month,Year);
+        AddExpenseOperations();
+		refreshSavings();
   }
 }
 void __fastcall TForm3::Button6Click(TObject *Sender)
@@ -1268,6 +1323,8 @@ if( Edit8->Text == ""||Edit9->Text == "" ||Edit10->Text == ""||Edit11->Text == "
 		UnicodeString expenseMonth=Edit11->Text;
 		UnicodeString expenseYear=Edit12->Text;
 		EditExpenseEntry(expenseAmnt,expenseCat, expenseDate, expenseMonth, expenseYear);
+        AddIncomeOperations();
+		refreshSavings();
   }
 }
 //---------------------------------------------------------------------------

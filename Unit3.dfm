@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 415
-  ClientWidth = 567
+  ClientHeight = 448
+  ClientWidth = 603
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,12 +15,14 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 567
-    Height = 415
-    ActivePage = Expense
+    Width = 603
+    Height = 448
+    ActivePage = Income
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
+    ExplicitWidth = 553
+    ExplicitHeight = 382
     object Income: TTabSheet
       Caption = 'Income'
       ImageIndex = 3
@@ -338,7 +340,7 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 559
+        Width = 581
         Height = 399
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
