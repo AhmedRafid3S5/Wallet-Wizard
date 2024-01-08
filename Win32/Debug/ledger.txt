@@ -217,4 +217,6 @@ Start
 20 Home_Decor 350
 25 Utilities 1500
 26 Shoe 1200
+27 Utility 5000
+28 Transportation 3500
 End
