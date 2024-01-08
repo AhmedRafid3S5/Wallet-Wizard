@@ -114,4 +114,5 @@ Start
 10 Investment 2600
 15 Gifts 600
 20 Bonus 1200
+25 Bonus 200
 End

@@ -15,10 +15,11 @@
 #include <Vcl.ComCtrls.hpp> //added for pop up richedit
 #include <VCLTee.Series.hpp>
 #pragma hdrstop
+#include <iomanip>     //for the setw setfill flags during fileprint
 
 #define userledger "ledger.txt"
 #define incomeledger "incomes.txt"
-#define Total_Tabs 4
+#define Total_Tabs 5
 
 #include "Unit3.h"
 #include "Regression.h"
@@ -48,8 +49,13 @@ std::vector<int> e_amount;
 
 std::vector<UnicodeString> i_category;
 std::vector<int> i_amount;
-//--------------------------------------------------------------
+//-------------------------------------------------------------
 
+
+//Variables for income tab
+
+int IncomeClass::TotalIncome=0;
+vector<IncomeClass> IncomeRead;
 
 void loadGoldFile()
 {
@@ -788,7 +794,7 @@ void __fastcall TForm3::Button4Click(TObject *Sender)
 
 void AddIncomeOperations()
 {
-	 vector<IncomeClass> IncomeRead;
+	 IncomeRead.clear() ;
 
 	 ifstream inputFile(incomeledger);
 
@@ -824,6 +830,7 @@ void AddIncomeOperations()
 					UnicodeString c = UnicodeString(category.c_str());
 					fileinput.Addcategory(c);
 					fileinput.Addamount(amount);
+					IncomeClass::TotalIncome+=amount;
 				}
 			}
 			IncomeRead.push_back(fileinput);
@@ -835,8 +842,71 @@ void AddIncomeOperations()
 
 	   }
 	 }
-}
+	 inputFile.close();
 
+}
+   void AddNewIncomeEntry(UnicodeString Amount ,UnicodeString Source,UnicodeString Date,UnicodeString Month,UnicodeString Year)
+   {
+	   //ShowMessage("Function is being called");
+	   int A =StrToInt(Amount);
+	   int D =StrToInt(Date);
+	   int M =StrToInt(Month);
+	   int Y =StrToInt(Year);
+	   for(int i=0;i<IncomeRead.size();i++)
+		 {
+			if(IncomeRead[i].Getmonth() == M && IncomeRead[i].Getyear() == Y)
+			{
+			 IncomeRead[i].Adddate(D);
+			 IncomeRead[i].Addamount(A);
+			 IncomeRead[i].Addcategory(Source);
+			 break;
+			}
+		 }
+		 //ShowMessage("Received data " + Amount );
+		 std::ofstream outFile(incomeledger);
+
+	if (!outFile.is_open()) {
+		ShowMessage("Cannot open file");
+		return;
+	}
+
+
+	for ( auto& income : IncomeRead) {
+		std::stringstream ss;
+
+		// Start tag
+		ss << "Start" << std::endl;
+
+		// Year and Month
+		ss << income.Getyear() << std::endl;
+		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
+
+		// Data entries
+		for (size_t i = 0; i < income.date.size(); ++i) {
+
+			wstring wstr = income.category[i].c_str();
+			string cat= string(wstr.begin(), wstr.end());
+			ss << std::setw(2) << income.date[i] << " "
+			   << cat << " "
+			   << income.amount[i] << std::endl;
+		}
+		 //string(income.category[i].c_str())
+		// End tag
+		ss << "End" << std::endl;
+
+		outFile << ss.str();
+		if (outFile.fail())
+		{
+			std::cerr << "Error writing to the output file!" << std::endl;
+			ShowMessage("Error writing to the output file.");
+			outFile.close();  // Close the file before returning
+			return;
+		}
+	}
+
+	outFile.close();
+	return;
+   }
 void __fastcall TForm3::Button5Click(TObject *Sender)
 {
 
@@ -847,6 +917,13 @@ void __fastcall TForm3::Button5Click(TObject *Sender)
   else
   {
 		AddIncomeOperations() ;
+		UnicodeString Amount=Edit2->Text;
+		UnicodeString Source=Edit7->Text;
+		UnicodeString Date=Edit4->Text;
+		UnicodeString Month=Edit5->Text;
+		UnicodeString Year=Edit6->Text;
+		AddNewIncomeEntry(Amount,Source,Date,Month,Year);
+		ShowMessage("New entry added to your income");
   }
 }
 //---------------------------------------------------------------------------

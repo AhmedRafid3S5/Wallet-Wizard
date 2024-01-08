@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+﻿//---------------------------------------------------------------------------
 
 #ifndef Unit3H
 #define Unit3H
@@ -238,62 +238,56 @@ public:		// User declarations
 
 //Base class for the income and expense tab
 //---------------------------
-
-class IncomeClass
+class Transaction
 {
 	public:
-		IncomeClass(){} ;
+		Transaction(){} ;
+		virtual ~Transaction(){};
+
+		int Getmonth() { return month; }
+		void Setmonth(int val) { month = val; }
+		int Getyear() { return year; }
+		void Setyear(int val) { year = val; }
+		vector<int> Getamount() { return amount; }
+		void Addamount(int val) { amount.push_back(val); }
+		vector<UnicodeString> Getcategory() { return category; }
+		void Addcategory(UnicodeString val) { category.push_back(val); }
+		map<UnicodeString,int> GetTypeToCat() { return TypeToCat; }
+		void SetTypeToCat(map<UnicodeString,int> val) { TypeToCat = val; }
+		vector<int> Getdate() { return date; }
+		void Adddate(int val) { date.push_back(val); }
+
+  //	private:
+		int month;
+		int year;
+		vector<int> amount;
+		vector<UnicodeString> category;
+		map<UnicodeString,int> TypeToCat;
+		vector<int> date;
+};
+
+ class IncomeClass : public Transaction
+{
+	public:
+		IncomeClass(){};
 		virtual ~IncomeClass(){};
+		static int TotalIncome;
 
-		int Getmonth() { return month; }
-		void Setmonth(int val) { month = val; }
-		int Getyear() { return year; }
-		void Setyear(int val) { year = val; }
-		vector<int> Getamount() { return amount; }
-		void Addamount(int val) { amount.push_back(val); }
-		vector<UnicodeString> Getcategory() { return category; }
-		void Addcategory(UnicodeString val) { category.push_back(val); }
-		map<UnicodeString,int> GetTypeToCat() { return TypeToCat; }
-		void SetTypeToCat(map<UnicodeString,int> val) { TypeToCat = val; }
-		vector<int> Getdate() { return date; }
-		void Adddate(int val) { date.push_back(val); }
+	protected:
 
 	private:
-		int month;
-		int year;
-		vector<int> amount;
-		vector<UnicodeString> category;
-		map<UnicodeString,int> TypeToCat;
-		vector<int> date;
 };
-class Expense
+class ExpenseClass : public Transaction
 {
 	public:
-		Expense(){};
-		virtual ~Expense(){};
+		ExpenseClass(){};
+		virtual ~ExpenseClass(){};
+		static int TotalExpense;
 
-		int Getmonth() { return month; }
-		void Setmonth(int val) { month = val; }
-		int Getyear() { return year; }
-		void Setyear(int val) { year = val; }
-		vector<int> Getamount() { return amount; }
-		void Addamount(int val) { amount.push_back(val); }
-		vector<UnicodeString> Getcategory() { return category; }
-		void Addcategory(UnicodeString val) { category.push_back(val); }
-		map<UnicodeString,int> GetTypeToCat() { return TypeToCat; }
-		void SetTypeToCat(map<UnicodeString,int> val) { TypeToCat = val; }
-		vector<int> Getdate() { return date; }
-		void Adddate(int val) { date.push_back(val); }
+	protected:
 
 	private:
-		int month;
-		int year;
-		vector<int> amount;
-		vector<UnicodeString> category;
-		map<UnicodeString,int> TypeToCat;
-		vector<int> date;
 };
-
 
 //---------------------------------------------------------------------------
 extern PACKAGE TForm3 *Form3;
