@@ -25,6 +25,8 @@
 #include<map>
 #include<numeric>
 
+using namespace std;
+
 //Extracts unique category and total amount for each category
 template <class type,class typeVal>
 class Transaction_Summary
@@ -95,10 +97,10 @@ class Transaction_Summary
 	  categoryAmount[c] += a;
 	}
     //only set to true when 'end' marker is found
-    void setMapCompletion_true()
+	void setMapCompletion_true()
 	{
-      map_complete = true;
-    }
+	  map_complete = true;
+	}
 
 	void setMapCompletion_false()
 	{
@@ -147,6 +149,9 @@ class Transaction_Summary
 };
 
 
+
+
+
 //---------------------------------------------------------------------------
 class TForm3 : public TForm
 {
@@ -182,6 +187,16 @@ __published:	// IDE-managed Components
 	TButton *MoreInfo;
 	TTabSheet *Budget;
 	TTabSheet *Expense;
+	TLabel *Label1;
+	TLabel *Label2;
+	TEdit *Edit2;
+	TLabel *Label3;
+	TLabel *Label4;
+	TEdit *Edit4;
+	TEdit *Edit5;
+	TEdit *Edit6;
+	TEdit *Edit7;
+	TMemo *Memo1;
 	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
@@ -213,12 +228,72 @@ __published:	// IDE-managed Components
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);
-        void drawCharts(int year ,int month);
+		void drawCharts(int year ,int month);
 
 
 };
 //---------------------------------------------------------------------------
 //My custom class
+
+
+//Base class for the income and expense tab
+//---------------------------
+
+class IncomeClass
+{
+	public:
+		IncomeClass(){} ;
+		virtual ~IncomeClass(){};
+
+		int Getmonth() { return month; }
+		void Setmonth(int val) { month = val; }
+		int Getyear() { return year; }
+		void Setyear(int val) { year = val; }
+		vector<int> Getamount() { return amount; }
+		void Addamount(int val) { amount.push_back(val); }
+		vector<UnicodeString> Getcategory() { return category; }
+		void Addcategory(UnicodeString val) { category.push_back(val); }
+		map<UnicodeString,int> GetTypeToCat() { return TypeToCat; }
+		void SetTypeToCat(map<UnicodeString,int> val) { TypeToCat = val; }
+		vector<int> Getdate() { return date; }
+		void Adddate(int val) { date.push_back(val); }
+
+	private:
+		int month;
+		int year;
+		vector<int> amount;
+		vector<UnicodeString> category;
+		map<UnicodeString,int> TypeToCat;
+		vector<int> date;
+};
+class Expense
+{
+	public:
+		Expense(){};
+		virtual ~Expense(){};
+
+		int Getmonth() { return month; }
+		void Setmonth(int val) { month = val; }
+		int Getyear() { return year; }
+		void Setyear(int val) { year = val; }
+		vector<int> Getamount() { return amount; }
+		void Addamount(int val) { amount.push_back(val); }
+		vector<UnicodeString> Getcategory() { return category; }
+		void Addcategory(UnicodeString val) { category.push_back(val); }
+		map<UnicodeString,int> GetTypeToCat() { return TypeToCat; }
+		void SetTypeToCat(map<UnicodeString,int> val) { TypeToCat = val; }
+		vector<int> Getdate() { return date; }
+		void Adddate(int val) { date.push_back(val); }
+
+	private:
+		int month;
+		int year;
+		vector<int> amount;
+		vector<UnicodeString> category;
+		map<UnicodeString,int> TypeToCat;
+		vector<int> date;
+};
+
 
 //---------------------------------------------------------------------------
 extern PACKAGE TForm3 *Form3;

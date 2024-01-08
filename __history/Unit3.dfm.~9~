@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 706
-  ClientWidth = 697
+  ClientHeight = 640
+  ClientWidth = 669
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,21 +15,81 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 697
-    Height = 706
-    ActivePage = Analytics
+    Width = 669
+    Height = 640
+    ActivePage = Income
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
-    ExplicitWidth = 691
-    ExplicitHeight = 697
-    object Waqt: TTabSheet
-      Caption = 'Waqt'
+    object Income: TTabSheet
+      Caption = 'Income'
+      ImageIndex = 3
+      object Label1: TLabel
+        Left = 30
+        Top = 24
+        Width = 143
+        Height = 37
+        Caption = 'Add Income'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -27
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 30
+        Top = 83
+        Width = 63
+        Height = 30
+        Caption = 'Source'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label3: TLabel
+        Left = 30
+        Top = 171
+        Width = 75
+        Height = 30
+        Caption = 'Amount'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 30
+        Top = 264
+        Width = 44
+        Height = 30
+        Caption = 'Date'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Button5: TButton
+        Left = 30
+        Top = 359
+        Width = 75
+        Height = 25
+        Caption = 'Add '
+        TabOrder = 0
+        OnClick = Button5Click
+      end
       object RichEdit1: TRichEdit
-        Left = 3
-        Top = 6
-        Width = 537
-        Height = 337
+        Left = 30
+        Top = 127
+        Width = 185
+        Height = 26
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
@@ -38,17 +98,49 @@ object Form3: TForm3
         Lines.Strings = (
           'RichEdit1')
         ParentFont = False
-        TabOrder = 0
-      end
-      object Button1: TButton
-        Left = 3
-        Top = 349
-        Width = 75
-        Height = 25
-        Caption = 'Show'
         TabOrder = 1
-        OnClick = Button1Click
+        OnChange = RichEdit1Change
       end
+      object Edit2: TEdit
+        Left = 30
+        Top = 215
+        Width = 129
+        Height = 26
+        TabOrder = 2
+        Text = 'Edit2'
+      end
+      object Edit4: TEdit
+        Left = 30
+        Top = 312
+        Width = 75
+        Height = 23
+        TabOrder = 3
+        Text = 'Edit4'
+      end
+      object Edit5: TEdit
+        Left = 128
+        Top = 312
+        Width = 75
+        Height = 23
+        TabOrder = 4
+        Text = 'Edit5'
+      end
+      object Edit6: TEdit
+        Left = 224
+        Top = 312
+        Width = 75
+        Height = 23
+        TabOrder = 5
+        Text = 'Edit6'
+      end
+    end
+    object Expense: TTabSheet
+      Caption = 'Expense'
+      ImageIndex = 4
+    end
+    object Budget: TTabSheet
+      Caption = 'Budget'
+      ImageIndex = 3
     end
     object Analytics: TTabSheet
       Caption = 'Analytics'
@@ -57,12 +149,13 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 683
-        Height = 670
+        Width = 647
+        Height = 591
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
         VertScrollBar.ButtonSize = 10
+        VertScrollBar.Position = 383
         Align = alClient
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
@@ -70,7 +163,7 @@ object Form3: TForm3
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0
-          Top = -338
+          Top = -721
           Width = 665
           Height = 360
           Foot.Font.Height = -17
@@ -80,7 +173,6 @@ object Form3: TForm3
             '')
           Legend.Font.Height = -15
           Legend.Font.Style = [fsBold]
-          Title.Font.Height = -20
           Title.Font.Name = 'Copperplate Gothic Bold'
           Title.Text.Strings = (
             'Expenses')
@@ -124,7 +216,7 @@ object Form3: TForm3
         end
         object Chart2: TChart
           Left = 0
-          Top = -490
+          Top = -873
           Width = 669
           Height = 360
           Foot.Font.Height = -17
@@ -132,7 +224,6 @@ object Form3: TForm3
           Foot.Font.Style = [fsItalic, fsUnderline]
           Legend.Font.Height = -15
           Legend.Font.Style = [fsBold]
-          Title.Font.Height = -20
           Title.Font.Name = 'Copperplate Gothic Bold'
           Title.Text.Strings = (
             'Income')
@@ -173,7 +264,7 @@ object Form3: TForm3
         end
         object Chart3: TChart
           Left = 3
-          Top = 28
+          Top = -355
           Width = 668
           Height = 500
           Title.Text.Strings = (
@@ -202,7 +293,7 @@ object Form3: TForm3
             Pointer.Brush.Color = clGreen
             Pointer.Brush.Image.Data = {
               07544269746D61707E000000424D7E000000000000003E000000280000001000
-              0000100000000100010000000000400000000000000000000000020000000200
+              0000100000000100010000000000400000000000000000000000020000000000
               000000000000FFFFFF0000000000AAAA000000000000AAAA000000000000AAAA
               000000000000AAAA000000000000AAAA000000000000AAAA000000000000AAAA
               000000000000AAAA0000}
@@ -241,7 +332,7 @@ object Form3: TForm3
         end
         object StaticText4: TStaticText
           Left = 200
-          Top = 0
+          Top = -383
           Width = 301
           Height = 25
           Caption = 'Monthly Financial Analysis'
@@ -257,7 +348,7 @@ object Form3: TForm3
         end
         object Button3: TButton
           Left = 590
-          Top = 30
+          Top = -353
           Width = 75
           Height = 25
           Caption = 'Refresh'
@@ -266,7 +357,7 @@ object Form3: TForm3
         end
         object ComboBox1: TComboBox
           Left = 39
-          Top = 31
+          Top = -352
           Width = 130
           Height = 23
           TabOrder = 5
@@ -275,7 +366,7 @@ object Form3: TForm3
         end
         object Edit3: TEdit
           Left = 3
-          Top = 31
+          Top = -352
           Width = 38
           Height = 23
           TabOrder = 6
@@ -283,7 +374,7 @@ object Form3: TForm3
         end
         object Chart4: TChart
           Left = -2
-          Top = 528
+          Top = 145
           Width = 668
           Height = 500
           Title.Text.Strings = (
@@ -293,12 +384,21 @@ object Form3: TForm3
           TabOrder = 7
           DefaultCanvas = 'TGDIPlusCanvas'
           ColorPaletteIndex = 13
+          object MoreInfo: TButton
+            Left = 582
+            Top = 40
+            Width = 75
+            Height = 25
+            Caption = 'MoreInfo'
+            TabOrder = 0
+            OnClick = MoreInfoClick
+          end
           object Series5: TPointSeries
             HoverElement = [heCurrent]
             ClickableLine = False
             Pointer.HorizSize = 8
             Pointer.InflateMargins = True
-            Pointer.Style = psCircle
+            Pointer.Style = psDiagCross
             Pointer.VertSize = 8
             XValues.Name = 'X'
             XValues.Order = loAscending
@@ -317,6 +417,23 @@ object Form3: TForm3
               NumPoints = 100
             end
           end
+        end
+        object RichEdit3: TRichEdit
+          Left = -2
+          Top = 320
+          Width = 657
+          Height = 161
+          Color = clBtnFace
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Comic Sans MS'
+          Font.Style = []
+          Lines.Strings = (
+            'RichEdit3')
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 8
         end
       end
     end

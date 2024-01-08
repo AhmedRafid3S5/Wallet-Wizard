@@ -22,6 +22,7 @@
 
 #include "Unit3.h"
 #include "Regression.h"
+using namespace std;
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -126,6 +127,13 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 
    //Load File function calls
    loadGoldFile();
+
+   //This is to clear the input boxes
+	Edit2->Text = "";
+	Edit6->Text = "";
+	Edit4->Text = "";
+	Edit5->Text = "";
+	Edit7->Text = "";
 
 
 
@@ -376,28 +384,28 @@ void loadPieData(std::vector<Transaction_Summary<UnicodeString,int>>& List,
 	if(line == "Start")
 	{
 	  std::getline(inputFile,line);
-      //Read year and month
-      int year = std::stoi(line);
+	  //Read year and month
+	  int year = std::stoi(line);
 	  std::getline(inputFile,line);
-      int month = std::stoi(line);
+	  int month = std::stoi(line);
 
 	  //Set year and month for (class) entry
-      entry.setYear(year);
-      entry.setMonth(month);
+	  entry.setYear(year);
+	  entry.setMonth(month);
 
-      //Read entries until 'End' marker is found
-      while (std::getline(inputFile, line) && line != "End") {
+	  //Read entries until 'End' marker is found
+	  while (std::getline(inputFile, line) && line != "End") {
 				std::istringstream iss(line);
-                int day, amount;
+				int day, amount;
 				std::string category;
 
 				if (iss >> day >> category >> amount) {
 					UnicodeString c = UnicodeString(category.c_str());
 					entry.updateCategory(c,amount);
-                }
+				}
 			}
 	  entry.setMapCompletion_true();
-      entry.populateArrays();
+	  entry.populateArrays();
 	  //push to the vector of ExpenseSummary
 	  List.push_back(entry);
 	}
@@ -576,7 +584,7 @@ void __fastcall TForm3::ComboBox1Change(TObject *Sender)
 }
 void __fastcall TForm3::ComboBox2Change(TObject *Sender)
 {
-     //Call the load function and populate the vectors
+	 //Call the load function and populate the vectors
 	 UnicodeString year = Edit3->Text;
 	 loadPieData(ExpenseList,userledger,e_category,e_amount,1+ComboBox1->ItemIndex,StrToInt(year));
 	 loadPieData(IncomeList,incomeledger,i_category,i_amount,1+ComboBox1->ItemIndex,StrToInt(year));
@@ -777,9 +785,69 @@ void __fastcall TForm3::Button4Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+void AddIncomeOperations()
+{
+	 vector<IncomeClass> IncomeRead;
+
+	 ifstream inputFile(incomeledger);
+
+	if (!inputFile.is_open()) {
+		ShowMessage("Failed to open the file.");
+		return;
+	}
+	string line;
+	 while(getline(inputFile,line))
+	 {
+	   if(line == "Start")
+	   {
+		   IncomeClass fileinput;
+
+		   std::getline(inputFile,line);
+		   //Read year and month
+		   int year = std::stoi(line);
+		   getline(inputFile,line);
+		   int month = std::stoi(line);
+
+		   //Set year and month for (class) entry
+		   fileinput.Setyear(year);
+		   fileinput.Setmonth(month);
+
+
+		   while (std::getline(inputFile, line) && line != "End") {
+				istringstream iss(line);
+				int day, amount;
+				std::string category;
+
+				if (iss >> day >> category >> amount) {
+					fileinput.Adddate(day);
+					UnicodeString c = UnicodeString(category.c_str());
+					fileinput.Addcategory(c);
+					fileinput.Addamount(amount);
+				}
+			}
+			IncomeRead.push_back(fileinput);
+		   //	cout<<IncomeRead.size()<<endl;
+		  // string p="This month has income sources : ";
+		   //string s= to_string(IncomeRead.size());
+			// p=p+s;
+			// Memo1->Lines->Add("Hello");
+
+	   }
+	 }
+}
+
 void __fastcall TForm3::Button5Click(TObject *Sender)
 {
- ShowMessage("Tracker Button pressed");
+
+  if( Edit2->Text == ""||Edit4->Text == "" ||Edit5->Text == ""||Edit6->Text == "" || Edit5->Text == "")
+  {
+	  ShowMessage("Please Provide Valid Input In All Fields.");
+  }
+  else
+  {
+		AddIncomeOperations() ;
+  }
 }
 //---------------------------------------------------------------------------
 
@@ -825,6 +893,17 @@ void __fastcall TForm3::MoreInfoClick(TObject *Sender)
 
 }
 //---------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
 
 
 
