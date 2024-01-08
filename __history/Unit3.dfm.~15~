@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 523
-  ClientWidth = 615
+  ClientHeight = 532
+  ClientWidth = 621
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +15,8 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 615
-    Height = 523
+    Width = 621
+    Height = 532
     ActivePage = Expense
     Align = alClient
     TabOrder = 0
@@ -194,7 +194,7 @@ object Form3: TForm3
         Left = 224
         Top = 80
         Width = 163
-        Height = 23
+        Height = 30
         TabOrder = 0
         Text = 'Edit8'
       end
@@ -202,7 +202,7 @@ object Form3: TForm3
         Left = 224
         Top = 144
         Width = 163
-        Height = 23
+        Height = 30
         TabOrder = 1
         Text = 'Edit9'
       end
@@ -210,7 +210,7 @@ object Form3: TForm3
         Left = 224
         Top = 208
         Width = 57
-        Height = 23
+        Height = 30
         TabOrder = 2
         Text = 'Edit10'
       end
@@ -218,7 +218,7 @@ object Form3: TForm3
         Left = 304
         Top = 208
         Width = 65
-        Height = 23
+        Height = 30
         TabOrder = 3
         Text = 'Edit11'
       end
@@ -226,7 +226,7 @@ object Form3: TForm3
         Left = 392
         Top = 208
         Width = 65
-        Height = 23
+        Height = 30
         TabOrder = 4
         Text = 'Edit12'
       end
@@ -257,8 +257,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 601
-        Height = 487
+        Width = 607
+        Height = 496
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
