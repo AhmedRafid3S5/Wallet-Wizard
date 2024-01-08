@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 490
-  ClientWidth = 601
+  ClientHeight = 481
+  ClientWidth = 595
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,8 +15,8 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 601
-    Height = 490
+    Width = 595
+    Height = 481
     ActivePage = Expense
     Align = alClient
     TabOrder = 0
@@ -190,111 +190,145 @@ object Form3: TForm3
       Caption = 'Expense'
       ImageIndex = 4
       object Label5: TLabel
-        Left = 224
-        Top = 16
-        Width = 163
-        Height = 25
+        Left = 192
+        Top = 24
+        Width = 213
+        Height = 31
         Caption = 'EXPENSE TRACKER'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
-        Font.Height = -18
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold, fsUnderline]
+        Font.Height = -22
+        Font.Name = 'Comic Sans MS'
+        Font.Style = [fsBold]
         ParentFont = False
       end
       object Label6: TLabel
-        Left = 48
-        Top = 80
-        Width = 76
+        Left = 43
+        Top = 148
+        Width = 78
         Height = 30
         Caption = 'Amount'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -22
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsItalic]
+        Font.Name = 'Comic Sans MS'
+        Font.Style = []
         ParentFont = False
       end
       object Label7: TLabel
-        Left = 48
-        Top = 144
-        Width = 87
-        Height = 30
+        Left = 43
+        Top = 80
+        Width = 92
+        Height = 32
         Caption = 'Category'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -22
-        Font.Name = 'Segoe UI'
+        Font.Name = 'Comic Sans MS'
         Font.Style = [fsItalic]
         ParentFont = False
       end
+      object Label12: TLabel
+        Left = 98
+        Top = 237
+        Width = 76
+        Height = 15
+        Caption = 'DD/MM/YYYY'
+      end
       object Label8: TLabel
-        Left = 48
-        Top = 208
-        Width = 46
+        Left = 43
+        Top = 225
+        Width = 49
         Height = 30
         Caption = 'Date'
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -22
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsItalic]
+        Font.Name = 'Comic Sans MS'
+        Font.Style = []
         ParentFont = False
       end
       object Edit8: TEdit
-        Left = 224
-        Top = 80
-        Width = 163
+        Left = 43
+        Top = 184
+        Width = 138
         Height = 23
         TabOrder = 0
         Text = 'Edit8'
       end
       object Edit9: TEdit
-        Left = 224
-        Top = 144
-        Width = 163
+        Left = 43
+        Top = 119
+        Width = 136
         Height = 23
         TabOrder = 1
         Text = 'Edit9'
       end
       object Edit10: TEdit
-        Left = 224
-        Top = 208
+        Left = 43
+        Top = 262
         Width = 57
         Height = 23
         TabOrder = 2
         Text = 'Edit10'
       end
       object Edit11: TEdit
-        Left = 304
-        Top = 208
+        Left = 106
+        Top = 262
         Width = 65
         Height = 23
         TabOrder = 3
         Text = 'Edit11'
       end
       object Edit12: TEdit
-        Left = 392
-        Top = 208
+        Left = 184
+        Top = 262
         Width = 65
         Height = 23
         TabOrder = 4
         Text = 'Edit12'
       end
       object Button1: TButton
-        Left = 264
-        Top = 280
-        Width = 75
+        Left = 43
+        Top = 312
+        Width = 70
         Height = 25
-        Caption = 'Enter'
+        Caption = 'Add'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
         Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
+        Font.Style = []
         ParentFont = False
         TabOrder = 5
         OnClick = Button1Click
+      end
+      object Button7: TButton
+        Left = 152
+        Top = 312
+        Width = 75
+        Height = 25
+        Caption = 'Edit'
+        TabOrder = 6
+        OnClick = Button7Click
+      end
+      object Memo2: TMemo
+        Left = 352
+        Top = 112
+        Width = 217
+        Height = 185
+        Lines.Strings = (
+          'Memo2')
+        TabOrder = 7
+      end
+      object Button8: TButton
+        Left = 192
+        Top = 231
+        Width = 57
+        Height = 25
+        Caption = 'Auto'
+        TabOrder = 8
+        OnClick = Button8Click
       end
     end
     object Analytics: TTabSheet
@@ -304,8 +338,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 593
-        Height = 463
+        Width = 581
+        Height = 445
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
@@ -315,8 +349,6 @@ object Form3: TForm3
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
-        ExplicitWidth = 585
-        ExplicitHeight = 450
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0

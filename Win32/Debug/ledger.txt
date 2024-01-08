@@ -2,7 +2,7 @@ Start
 2023
 01
 01 Donations 100
-01 Bills 400
+01 Bills 252525
 05 Rent 7000
 05 Food 70
 06 Food 80
@@ -215,6 +215,7 @@ Start
 16 Rent 700
 17 Health 1200
 20 Home_Decor 350
+20 Food 1850
 25 Utilities 1500
 26 Shoe 1200
 27 Utility 5000

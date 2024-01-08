@@ -153,7 +153,7 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 
- //Sorts entries according to date
+ //Sorts Income entries according to date
 void SortIncome()
 {
    for(int i=0;i<IncomeRead.size();i++)
@@ -169,11 +169,36 @@ void SortIncome()
 				   swap(IncomeRead[i].category[k],IncomeRead[i].category[k+1]);
 			   }
 		   }
-       }
+	   }
 
    }
 
 }
+
+
+ //Sorts Expense entries according to date
+void SortExpense()
+{
+   for(int i=0;i<ExpenseRead.size();i++)
+   {
+	   for(int j=0;j<ExpenseRead[i].category.size();j++)
+	   {
+		   for(int k=0;k< ExpenseRead[i].category.size()-j-1;k++)
+		   {
+			   if(ExpenseRead[i].date[k]>ExpenseRead[i].date[k+1] )
+			   {
+				   swap(ExpenseRead[i].date[k],ExpenseRead[i].date[k+1]);
+				   swap(ExpenseRead[i].amount[k],ExpenseRead[i].amount[k+1]);
+				   swap(ExpenseRead[i].category[k],ExpenseRead[i].category[k+1]);
+			   }
+		   }
+	   }
+
+   }
+
+}
+
+
 
 //---------------------------------------------------------------------------
 
@@ -234,7 +259,7 @@ void TForm3::drawCharts(int year,int month )
    Chart1->Foot->Text->Add(footerTitleMonth + " " + footerTitleYear);
    //-------------------------------------------------------------------------------------
 
-    //Series2
+	//Series2
 		//Chart1->ClearChart();
 		Series2->Clear();
 
@@ -257,7 +282,7 @@ void TForm3::drawCharts(int year,int month )
 
 	Series3->Clear();
 	Series4->Clear();
-    Series4->LinePen->Color = clRed;
+	Series4->LinePen->Color = clRed;
 
 	if(ComboBox2->ItemIndex == 0){
 	// Add data points for average income
@@ -271,7 +296,7 @@ void TForm3::drawCharts(int year,int month )
 	   Transaction_Summary<UnicodeString,int> entry = IncomeList[i];
 	   double monthAvg =  entry.return_avg();
 	   int month = entry.getMonth();
-	    UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
+		UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
 	   Series3->AddXY(i+1,monthAvg,m);
 	}
 
@@ -290,7 +315,7 @@ void TForm3::drawCharts(int year,int month )
 
 	else if(ComboBox2->ItemIndex == 1)
 	{
-	    Chart3->Title->Caption="Transaction summations over the months";
+		Chart3->Title->Caption="Transaction summations over the months";
 		Series3->LegendTitle = "Total_Income";
 		Series4->LegendTitle = "Total_Expense";
 
@@ -321,7 +346,7 @@ void TForm3::drawCharts(int year,int month )
 	Series5->Clear();
 	Series6->Clear();
 
-    	regression r;
+		regression r;
 	update_regression_model(r);
 
 	float m = r.coefficient();
@@ -354,7 +379,7 @@ void TForm3::drawCharts(int year,int month )
    float totalExpense = std::accumulate(e_amount.begin(),e_amount.end(),0);
    int savings_rate = ( (totalIncome - totalExpense) / totalIncome)*100;
 
-    RichEdit3->Clear();
+	RichEdit3->Clear();
 RichEdit3->ReadOnly = true;
 
 // Add empty line
@@ -379,7 +404,7 @@ RichEdit3->SelLength = 0;
 RichEdit3->SelAttributes->Style = RichEdit3->SelAttributes->Style << fsBold;
 RichEdit3->SelAttributes->Color = clBlack;  // Reset color
 RichEdit3->Lines->Add(" Savings rate for " + FormatSettings.LongMonthNames[month - 1] +
-    " " + IntToStr(year) + " : " + FloatToStr(savings_rate) + "%");
+	" " + IntToStr(year) + " : " + FloatToStr(savings_rate) + "%");
 
 // Reset style
 RichEdit3->SelAttributes->Style = TFontStyles();
@@ -538,16 +563,16 @@ void __fastcall TForm3::PageControl1Change(TObject *Sender)
 void __fastcall TForm3::Button2Click(TObject *Sender)
 {
    // Get the user input from the Edit1 component
-    UnicodeString userInput = Edit1->Text;
+	UnicodeString userInput = Edit1->Text;
 
 
-    try {
-        // Convert the user input to an integer
+	try {
+		// Convert the user input to an integer
 		 inputValue = StrToInt(userInput);
 
-        // Now 'inputValue' contains the numeric user input
-        // You can use 'inputValue' in your application
-    } catch (EConvertError &e) {
+		// Now 'inputValue' contains the numeric user input
+		// You can use 'inputValue' in your application
+	} catch (EConvertError &e) {
 		ShowMessage("Invalid input. Please enter a valid number.");
 	}
   std::cout<<inputValue;
@@ -587,14 +612,14 @@ void __fastcall TForm3::Button3Click(TObject *Sender)
 //---------------------------------------------------------------------------
 
 void __fastcall TForm3::ScrollBox1MouseWheelDown(TObject *Sender, TShiftState Shift,
-          TPoint &MousePos, bool &Handled)
+		  TPoint &MousePos, bool &Handled)
 {
   ScrollBox1->VertScrollBar->Position += 50;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm3::ScrollBox1MouseWheelUp(TObject *Sender, TShiftState Shift,
-          TPoint &MousePos, bool &Handled)
+		  TPoint &MousePos, bool &Handled)
 {
   ScrollBox1->VertScrollBar->Position -= 50;
 
@@ -654,7 +679,7 @@ void ShowFormattedText(TCustomSeries *Sender,UnicodeString L1,UnicodeString L2,T
 }
 
 void __fastcall TForm3::Series3ClickPointer(TCustomSeries *Sender, int ValueIndex,
-          int X, int Y)
+		  int X, int Y)
 {
    if(ValueIndex == 0)
 	 return;
@@ -715,7 +740,7 @@ void __fastcall TForm3::Series3ClickPointer(TCustomSeries *Sender, int ValueInde
 //---------------------------------------------------------------------------
 
 void __fastcall TForm3::Series4ClickPointer(TCustomSeries *Sender, int ValueIndex,
-          int X, int Y)
+		  int X, int Y)
 {
 
    if(ValueIndex == 0)
@@ -972,7 +997,7 @@ void pop_up(TObject *Sender)
 	RichEdit1->SelAttributes->Style = TFontStyles() << fsBold;
 	RichEdit1->SelAttributes->Color = clBlack;
 	RichEdit1->Lines->Add("You can use this prediction model to estimate how much you must cut on your expenses to reach a targeted savings amount.");
-    RichEdit1->SelAttributes->Style = TFontStyles() << fsBold;
+	RichEdit1->SelAttributes->Style = TFontStyles() << fsBold;
 	RichEdit1->SelAttributes->Color = clBlack;
 	RichEdit1->Lines->Add("Estimated expense and income are based on this linear model.")   ;
 	// Show the form
@@ -1066,6 +1091,8 @@ void AddExpenseOperations()
 			 break;
 			}
 		 }
+
+		 SortExpense();
 		 //ShowMessage("Received data " + Amount );
 		 std::ofstream outExpenseFile(userledger);
 
@@ -1159,7 +1186,7 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 		 {
 			 ShowMessage("Record does not exist" );
 			 return;
-         }
+		 }
 		 //ShowMessage("Received data " + Amount );
 
 		 std::ofstream outFile(incomeledger);
@@ -1229,13 +1256,125 @@ void __fastcall TForm3::Button4Click(TObject *Sender)
 
 void __fastcall TForm3::Button6Click(TObject *Sender)
 {
-    TDateTime currentDate = Now();
+	TDateTime currentDate = Now();
 	year = YearOf(currentDate);
 	month = MonthOf(currentDate);
 	day = DayOf(currentDate);
 		Edit4->Text =day;
 		Edit5->Text=month;
 		Edit6->Text=year;
+}
+//---------------------------------------------------------------------------
+
+void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString exDate,UnicodeString exMonth,UnicodeString exYear)
+   {
+	   //ShowMessage("Function is being called");
+	   int A =StrToInt(exAmnt);
+	   int D =StrToInt(exDate);
+	   int M =StrToInt(exMonth);
+	   int Y =StrToInt(exYear);
+
+	   int flag =0;
+
+	   for(int i=0;i<ExpenseRead.size();i++)
+		 {
+			if(ExpenseRead[i].Getmonth() == M && ExpenseRead[i].Getyear() == Y)
+			{
+			  for(int j=0;j< ExpenseRead[i].category.size();j++)
+			  {
+				  if(ExpenseRead[i].category[j]== exCat && ExpenseRead[i].date[j]== D)
+				  {
+					   flag++;
+					   ExpenseRead[i].amount[j]=A;
+					   break;
+				  }
+			  }
+			  break;
+			}
+		 }
+
+		 if(flag==0)
+		 {
+			 ShowMessage("Record does not exist" );
+			 return;
+		 }
+
+		 //ShowMessage("Received data " + Amount );
+		 std::ofstream outExpenseFile(userledger);
+
+	if (!outExpenseFile.is_open()) {
+		ShowMessage("Cannot open Ledger file");
+		return;
+	}
+
+
+	for ( auto& exp : ExpenseRead) {
+		std::stringstream ss;
+
+		// Start tag
+		ss << "Start" << std::endl;
+
+		// Year and Month
+		ss << exp.Getyear() << std::endl;
+		ss << std::setfill('0') << std::setw(2) << exp.Getmonth() << std::endl;
+
+		// Data entries
+		for (size_t i = 0; i < exp.date.size(); ++i) {
+
+			wstring wstr = exp.category[i].c_str();
+			string cat= string(wstr.begin(), wstr.end());
+			ss << std::setw(2) << exp.date[i] << " "
+			   << cat << " "
+			   << exp.amount[i] << std::endl;
+		}
+		 //string(income.category[i].c_str())
+		// End tag
+		ss << "End" << std::endl;
+
+		outExpenseFile << ss.str();
+		if (outExpenseFile.fail())
+		{
+			std::cerr << "Error writing to the output file!" << std::endl;
+			ShowMessage("Error writing to the output file.");
+			outExpenseFile.close();  // Close the file before returning
+			return;
+		}
+	}
+
+	outExpenseFile.close();
+	return;
+   }
+
+
+void __fastcall TForm3::Button7Click(TObject *Sender)
+{
+if( Edit8->Text == ""||Edit9->Text == "" ||Edit10->Text == ""||Edit11->Text == "" || Edit12->Text == "")
+  {
+	  ShowMessage("Please Provide Valid Input In All Fields.");
+  }
+  else
+  {
+		AddExpenseOperations() ;
+		UnicodeString expenseAmnt=Edit8->Text;
+		UnicodeString expenseCat=Edit9->Text;
+		UnicodeString expenseDate=Edit10->Text;
+		UnicodeString expenseMonth=Edit11->Text;
+		UnicodeString expenseYear=Edit12->Text;
+		EditExpenseEntry(expenseAmnt,expenseCat, expenseDate, expenseMonth, expenseYear);
+		ShowMessage("Requested Edit Completed");
+  }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::Button8Click(TObject *Sender)
+{
+       TDateTime currentDate = Now();
+	year = YearOf(currentDate);
+	month = MonthOf(currentDate);
+	day = DayOf(currentDate);
+		Edit10->Text =day;
+		Edit11->Text=month;
+		Edit12->Text=year;
 }
 //---------------------------------------------------------------------------
 
