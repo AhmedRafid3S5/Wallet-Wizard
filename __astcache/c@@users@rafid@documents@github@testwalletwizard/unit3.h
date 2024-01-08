@@ -18,6 +18,8 @@
 #include <VCLTee.TeeProcs.hpp>
 #include <VCLTee.TeeSpline.hpp>
 #include <VCLTee.TeeFunci.hpp>
+#include <Vcl.Menus.hpp>
+#include <Vcl.Dialogs.hpp>
 #include<iostream>
 #include<fstream>
 #include<vector>
@@ -177,9 +179,16 @@ __published:	// IDE-managed Components
 	TFastLineSeries *Series6;
 	TCustomTeeFunction *TeeFunction1;
 	TTabSheet *Tracker;
-	TButton *Button5;
 	TRichEdit *RichEdit3;
 	TButton *MoreInfo;
+	TComboBox *ComboBox3;
+	TStaticText *StaticText3;
+	TScrollBox *ScrollBox2;
+	TButton *LoadFromSavings;
+	TStaticText *StaticText5;
+	TButton *ByWeightInfo;
+	TButton *ManualBTInfo;
+	TTabSheet *TabSheet1;
 	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
@@ -198,6 +207,10 @@ __published:	// IDE-managed Components
 	void __fastcall Button4Click(TObject *Sender);
 	void __fastcall Button5Click(TObject *Sender);
 	void __fastcall MoreInfoClick(TObject *Sender);
+	void __fastcall ComboBox3Change(TObject *Sender);
+	void __fastcall LoadFromSavingsClick(TObject *Sender);
+	void __fastcall ByWeightInfoClick(TObject *Sender);
+	void __fastcall ManualBTInfoClick(TObject *Sender);
 
 
 

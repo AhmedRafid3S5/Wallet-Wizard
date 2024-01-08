@@ -17,10 +17,18 @@ object Form3: TForm3
     Top = 0
     Width = 697
     Height = 706
-    ActivePage = Analytics
+    ActivePage = Tracker
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
+    object TabSheet1: TTabSheet
+      Caption = 'TabSheet1'
+      ImageIndex = 3
+    end
+    object Tracker: TTabSheet
+      Caption = 'Tracker'
+      ImageIndex = 3
+    end
     object Analytics: TTabSheet
       Caption = 'Analytics'
       ImageIndex = 1
@@ -34,17 +42,14 @@ object Form3: TForm3
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
         VertScrollBar.ButtonSize = 10
-        VertScrollBar.Position = 383
         Align = alClient
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
-        ExplicitWidth = 677
-        ExplicitHeight = 661
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0
-          Top = -721
+          Top = -338
           Width = 665
           Height = 360
           Foot.Font.Height = -17
@@ -98,7 +103,7 @@ object Form3: TForm3
         end
         object Chart2: TChart
           Left = 0
-          Top = -873
+          Top = -490
           Width = 669
           Height = 360
           Foot.Font.Height = -17
@@ -147,7 +152,7 @@ object Form3: TForm3
         end
         object Chart3: TChart
           Left = 3
-          Top = -355
+          Top = 28
           Width = 668
           Height = 500
           Title.Text.Strings = (
@@ -215,7 +220,7 @@ object Form3: TForm3
         end
         object StaticText4: TStaticText
           Left = 200
-          Top = -383
+          Top = 0
           Width = 301
           Height = 25
           Caption = 'Monthly Financial Analysis'
@@ -231,7 +236,7 @@ object Form3: TForm3
         end
         object Button3: TButton
           Left = 590
-          Top = -353
+          Top = 30
           Width = 75
           Height = 25
           Caption = 'Refresh'
@@ -240,7 +245,7 @@ object Form3: TForm3
         end
         object ComboBox1: TComboBox
           Left = 39
-          Top = -352
+          Top = 31
           Width = 130
           Height = 23
           TabOrder = 5
@@ -249,7 +254,7 @@ object Form3: TForm3
         end
         object Edit3: TEdit
           Left = 3
-          Top = -352
+          Top = 31
           Width = 38
           Height = 23
           TabOrder = 6
@@ -257,7 +262,7 @@ object Form3: TForm3
         end
         object Chart4: TChart
           Left = -2
-          Top = 145
+          Top = 528
           Width = 668
           Height = 500
           Title.Text.Strings = (
@@ -303,7 +308,7 @@ object Form3: TForm3
         end
         object RichEdit3: TRichEdit
           Left = -2
-          Top = 320
+          Top = 703
           Width = 657
           Height = 161
           Color = clBtnFace
@@ -324,72 +329,139 @@ object Form3: TForm3
       Caption = 'Zakat'
       ImageIndex = 2
       OnContextPopup = ZakatPageContextPopup
-      object StaticText1: TStaticText
-        Left = 36
-        Top = 40
-        Width = 4
-        Height = 4
+      DesignSize = (
+        689
+        676)
+      object ScrollBox2: TScrollBox
+        AlignWithMargins = True
+        Left = 0
+        Top = 0
+        Width = 687
+        Height = 664
+        HorzScrollBar.ButtonSize = 10
+        VertScrollBar.ButtonSize = 10
+        Anchors = [akLeft, akTop, akRight, akBottom]
+        ParentShowHint = False
+        ShowHint = False
         TabOrder = 0
-      end
-      object RichEdit2: TRichEdit
-        Left = 3
-        Top = 3
-        Width = 611
-        Height = 296
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        Lines.Strings = (
-          'RichEdit2')
-        ParentFont = False
-        TabOrder = 1
-      end
-      object Edit1: TEdit
-        Left = 3
-        Top = 329
-        Width = 121
-        Height = 23
-        NumbersOnly = True
-        TabOrder = 2
-        Text = 'Edit1'
-      end
-      object StaticText2: TStaticText
-        Left = 3
-        Top = 313
-        Width = 150
-        Height = 18
-        Caption = 'Enter current balance'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Stencil'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 3
-      end
-      object Button2: TButton
-        Left = 3
-        Top = 358
-        Width = 75
-        Height = 25
-        Caption = 'Enter'
-        TabOrder = 4
-        OnClick = Button2Click
-      end
-    end
-    object Tracker: TTabSheet
-      Caption = 'Tracker'
-      ImageIndex = 3
-      object Button5: TButton
-        Left = 24
-        Top = 56
-        Width = 75
-        Height = 25
-        Caption = 'Button5'
-        TabOrder = 0
-        OnClick = Button5Click
+        object StaticText1: TStaticText
+          Left = 36
+          Top = 40
+          Width = 4
+          Height = 4
+          TabOrder = 0
+        end
+        object StaticText2: TStaticText
+          Left = 3
+          Top = 353
+          Width = 133
+          Height = 20
+          Caption = 'Enter current balance'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Comic Sans MS'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+        end
+        object StaticText3: TStaticText
+          Left = 3
+          Top = 3
+          Width = 172
+          Height = 23
+          Caption = 'Choose calculation method'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Comic Sans MS'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+        end
+        object RichEdit2: TRichEdit
+          Left = 3
+          Top = 43
+          Width = 686
+          Height = 304
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Comic Sans MS'
+          Font.Style = [fsBold]
+          Lines.Strings = (
+            'RichEdit2')
+          ParentFont = False
+          TabOrder = 3
+        end
+        object Edit1: TEdit
+          Left = 3
+          Top = 379
+          Width = 121
+          Height = 24
+          NumbersOnly = True
+          TabOrder = 4
+          Text = 'Edit1'
+        end
+        object ComboBox3: TComboBox
+          Left = 3
+          Top = 21
+          Width = 145
+          Height = 23
+          TabOrder = 5
+          Text = 'ComboBox3'
+          OnChange = ComboBox3Change
+        end
+        object Button2: TButton
+          Left = 3
+          Top = 402
+          Width = 75
+          Height = 23
+          Caption = 'Enter'
+          TabOrder = 6
+          OnClick = Button2Click
+        end
+        object LoadFromSavings: TButton
+          Left = 544
+          Top = 376
+          Width = 136
+          Height = 25
+          Caption = 'Load'
+          TabOrder = 7
+          OnClick = LoadFromSavingsClick
+        end
+        object StaticText5: TStaticText
+          Left = 509
+          Top = 353
+          Width = 177
+          Height = 20
+          Caption = 'Load Balance from App data?'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Comic Sans MS'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 8
+        end
+        object ByWeightInfo: TButton
+          Left = 146
+          Top = 21
+          Width = 21
+          Height = 23
+          Caption = '!'
+          TabOrder = 9
+          OnClick = ByWeightInfoClick
+        end
+        object ManualBTInfo: TButton
+          Left = 124
+          Top = 379
+          Width = 21
+          Height = 24
+          Caption = '!'
+          TabOrder = 10
+          OnClick = ManualBTInfoClick
+        end
       end
     end
   end
