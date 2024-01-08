@@ -153,8 +153,27 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 
+ //Sorts entries according to date
+void SortIncome()
+{
+   for(int i=0;i<IncomeRead.size();i++)
+   {
+	   for(int j=0;j<IncomeRead[i].category.size();j++)
+	   {
+		   for(int k=0;k<  IncomeRead[i].category.size()-j-1;k++)
+		   {
+			   if( IncomeRead[i].date[k]>IncomeRead[i].date[k+1] )
+			   {
+				   swap(IncomeRead[i].date[k],IncomeRead[i].date[k+1]);
+				   swap(IncomeRead[i].amount[k],IncomeRead[i].amount[k+1]);
+				   swap(IncomeRead[i].category[k],IncomeRead[i].category[k+1]);
+			   }
+		   }
+       }
 
+   }
 
+}
 
 //---------------------------------------------------------------------------
 
@@ -791,10 +810,7 @@ void __fastcall TForm3::Chart4Scroll(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm3::Button4Click(TObject *Sender)
-{
- ShowMessage("2nd Button Pressed");
-}
+
 //---------------------------------------------------------------------------
 
 
@@ -868,6 +884,7 @@ void AddIncomeOperations()
 			 break;
 			}
 		 }
+		 SortIncome();
 		 //ShowMessage("Received data " + Amount );
 		 std::ofstream outFile(incomeledger);
 
@@ -1113,6 +1130,112 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 		ShowMessage("New entry added to your Expense");
   }
 }
-//---------------------------------------------------------------------------
 
+  void EditIncomeEntry(UnicodeString Amount ,UnicodeString Source,UnicodeString Date,UnicodeString Month,UnicodeString Year)
+   {
+	   //ShowMessage("Function is being called");
+	   int A =StrToInt(Amount);
+	   int D =StrToInt(Date);
+	   int M =StrToInt(Month);
+	   int Y =StrToInt(Year);
+	   int flag=0;
+	   for(int i=0;i<IncomeRead.size();i++)
+		 {
+			if(IncomeRead[i].Getmonth() == M && IncomeRead[i].Getyear() == Y)
+			{
+			  for(int j=0;j< IncomeRead[i].category.size();j++)
+			  {
+				  if(IncomeRead[i].category[j]== Source && IncomeRead[i].date[j]== D)
+				  {
+					   flag++;
+					   IncomeRead[i].amount[j]=A;
+					   break;
+				  }
+			  }
+			  break;
+			}
+		 }
+		 if(flag==0)
+		 {
+			 ShowMessage("Record does not exist" );
+			 return;
+         }
+		 //ShowMessage("Received data " + Amount );
+
+		 std::ofstream outFile(incomeledger);
+
+	if (!outFile.is_open()) {
+		ShowMessage("Cannot open file");
+		return;
+	}
+
+
+	for ( auto& income : IncomeRead) {
+		std::stringstream ss;
+
+		// Start tag
+		ss << "Start" << std::endl;
+
+		// Year and Month
+		ss << income.Getyear() << std::endl;
+		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
+
+		// Data entries
+		for (size_t i = 0; i < income.date.size(); ++i) {
+
+			wstring wstr = income.category[i].c_str();
+			string cat= string(wstr.begin(), wstr.end());
+			ss << std::setw(2) << income.date[i] << " "
+			   << cat << " "
+			   << income.amount[i] << std::endl;
+		}
+		 //string(income.category[i].c_str())
+		// End tag
+		ss << "End" << std::endl;
+
+		outFile << ss.str();
+		if (outFile.fail())
+		{
+			std::cerr << "Error writing to the output file!" << std::endl;
+			ShowMessage("Error writing to the output file.");
+			outFile.close();  // Close the file before returning
+			return;
+		}
+	}
+
+	outFile.close();
+	return;
+   }
+//---------------------------------------------------------------------------
+void __fastcall TForm3::Button4Click(TObject *Sender)
+{
+ if( Edit2->Text == ""||Edit4->Text == "" ||Edit5->Text == ""||Edit6->Text == "" || Edit5->Text == "")
+  {
+	  ShowMessage("Please Provide Valid Input In All Fields.");
+  }
+  else
+  {
+		AddIncomeOperations() ;
+		UnicodeString Amount=Edit2->Text;
+		UnicodeString Source=Edit7->Text;
+		UnicodeString Date=Edit4->Text;
+		UnicodeString Month=Edit5->Text;
+		UnicodeString Year=Edit6->Text;
+		EditIncomeEntry(Amount,Source,Date,Month,Year);
+		ShowMessage("Requested Edit Completed");
+  }
+
+}
+
+void __fastcall TForm3::Button6Click(TObject *Sender)
+{
+    TDateTime currentDate = Now();
+	year = YearOf(currentDate);
+	month = MonthOf(currentDate);
+	day = DayOf(currentDate);
+		Edit4->Text =day;
+		Edit5->Text=month;
+		Edit6->Text=year;
+}
+//---------------------------------------------------------------------------
 

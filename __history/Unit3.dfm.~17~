@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 706
-  ClientWidth = 697
+  ClientHeight = 499
+  ClientWidth = 607
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,48 +15,276 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 697
-    Height = 706
-    ActivePage = Analytics
+    Width = 607
+    Height = 499
+    ActivePage = Income
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
-    ExplicitWidth = 691
-    ExplicitHeight = 697
-    object Waqt: TTabSheet
-      Caption = 'Waqt'
-      object RichEdit1: TRichEdit
-        Left = 3
-        Top = 6
-        Width = 537
-        Height = 337
+    object Income: TTabSheet
+      Caption = 'Income'
+      ImageIndex = 3
+      object Label1: TLabel
+        Left = 174
+        Top = 16
+        Width = 209
+        Height = 38
+        Caption = 'Income Tracker'
         Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -27
+        Font.Name = 'Comic Sans MS'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label2: TLabel
+        Left = 30
+        Top = 91
+        Width = 63
+        Height = 30
+        Caption = 'Source'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label3: TLabel
+        Left = 30
+        Top = 156
+        Width = 75
+        Height = 30
+        Caption = 'Amount'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 30
+        Top = 221
+        Width = 44
+        Height = 30
+        Caption = 'Date'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label9: TLabel
+        Left = 30
+        Top = 64
+        Width = 129
+        Height = 29
+        Caption = 'Add Or Edit '
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Comic Sans MS'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label10: TLabel
+        Left = 80
+        Top = 232
+        Width = 76
+        Height = 15
+        Caption = 'DD/MM/YYYY'
+      end
+      object Label11: TLabel
+        Left = 360
+        Top = 59
+        Width = 69
+        Height = 29
+        Caption = 'Search'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Comic Sans MS'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Button5: TButton
+        Left = 30
+        Top = 319
+        Width = 75
+        Height = 25
+        Caption = 'Add '
+        TabOrder = 0
+        OnClick = Button5Click
+      end
+      object Edit2: TEdit
+        Left = 30
+        Top = 192
+        Width = 100
+        Height = 23
+        TabOrder = 1
+        Text = 'Edit2'
+      end
+      object Edit4: TEdit
+        Left = 30
+        Top = 257
+        Width = 75
+        Height = 23
+        TabOrder = 2
+        Text = 'Edit4'
+      end
+      object Edit5: TEdit
+        Left = 111
+        Top = 257
+        Width = 75
+        Height = 23
+        TabOrder = 3
+        Text = 'Edit5'
+      end
+      object Edit6: TEdit
+        Left = 192
+        Top = 257
+        Width = 75
+        Height = 23
+        TabOrder = 4
+        Text = 'Edit6'
+      end
+      object Edit7: TEdit
+        Left = 30
+        Top = 127
+        Width = 100
+        Height = 23
+        TabOrder = 5
+        Text = 'Edit7'
+      end
+      object Memo1: TMemo
+        Left = 360
+        Top = 94
+        Width = 185
+        Height = 186
+        Lines.Strings = (
+          'Memo1')
+        TabOrder = 6
+      end
+      object Button4: TButton
+        Left = 136
+        Top = 319
+        Width = 75
+        Height = 25
+        Caption = 'Edit'
+        TabOrder = 7
+      end
+    end
+    object Expense: TTabSheet
+      Caption = 'Expense'
+      ImageIndex = 4
+      object Label5: TLabel
+        Left = 224
+        Top = 16
+        Width = 163
+        Height = 25
+        Caption = 'EXPENSE TRACKER'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -18
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold, fsUnderline]
+        ParentFont = False
+      end
+      object Label6: TLabel
+        Left = 48
+        Top = 80
+        Width = 76
+        Height = 30
+        Caption = 'Amount'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -22
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsItalic]
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 48
+        Top = 144
+        Width = 87
+        Height = 30
+        Caption = 'Category'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -22
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsItalic]
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 48
+        Top = 208
+        Width = 46
+        Height = 30
+        Caption = 'Date'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -22
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsItalic]
+        ParentFont = False
+      end
+      object Edit8: TEdit
+        Left = 224
+        Top = 80
+        Width = 163
+        Height = 23
+        TabOrder = 0
+        Text = 'Edit8'
+      end
+      object Edit9: TEdit
+        Left = 224
+        Top = 144
+        Width = 163
+        Height = 23
+        TabOrder = 1
+        Text = 'Edit9'
+      end
+      object Edit10: TEdit
+        Left = 224
+        Top = 208
+        Width = 57
+        Height = 23
+        TabOrder = 2
+        Text = 'Edit10'
+      end
+      object Edit11: TEdit
+        Left = 304
+        Top = 208
+        Width = 65
+        Height = 23
+        TabOrder = 3
+        Text = 'Edit11'
+      end
+      object Edit12: TEdit
+        Left = 392
+        Top = 208
+        Width = 65
+        Height = 23
+        TabOrder = 4
+        Text = 'Edit12'
+      end
+      object Button1: TButton
+        Left = 264
+        Top = 280
+        Width = 75
+        Height = 25
+        Caption = 'Enter'
+        Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
         Font.Name = 'Segoe UI'
-        Font.Style = []
-        Lines.Strings = (
-          'RichEdit1')
+        Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 0
-      end
-      object Button1: TButton
-        Left = 3
-        Top = 349
-        Width = 75
-        Height = 25
-        Caption = 'Show'
-        TabOrder = 1
+        TabOrder = 5
         OnClick = Button1Click
-      end
-      object Button4: TButton
-        Left = 465
-        Top = 349
-        Width = 75
-        Height = 25
-        Caption = 'SecondButton'
-        TabOrder = 2
-        OnClick = Button4Click
       end
     end
     object Analytics: TTabSheet
@@ -66,8 +294,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 683
-        Height = 670
+        Width = 585
+        Height = 450
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
@@ -89,7 +317,6 @@ object Form3: TForm3
             '')
           Legend.Font.Height = -15
           Legend.Font.Style = [fsBold]
-          Title.Font.Height = -20
           Title.Font.Name = 'Copperplate Gothic Bold'
           Title.Text.Strings = (
             'Expenses')
@@ -141,7 +368,6 @@ object Form3: TForm3
           Foot.Font.Style = [fsItalic, fsUnderline]
           Legend.Font.Height = -15
           Legend.Font.Style = [fsBold]
-          Title.Font.Height = -20
           Title.Font.Name = 'Copperplate Gothic Bold'
           Title.Text.Strings = (
             'Income')
@@ -302,6 +528,15 @@ object Form3: TForm3
           TabOrder = 7
           DefaultCanvas = 'TGDIPlusCanvas'
           ColorPaletteIndex = 13
+          object MoreInfo: TButton
+            Left = 582
+            Top = 40
+            Width = 75
+            Height = 25
+            Caption = 'MoreInfo'
+            TabOrder = 0
+            OnClick = MoreInfoClick
+          end
           object Series5: TPointSeries
             HoverElement = [heCurrent]
             ClickableLine = False
@@ -403,19 +638,6 @@ object Form3: TForm3
         Caption = 'Enter'
         TabOrder = 4
         OnClick = Button2Click
-      end
-    end
-    object Tracker: TTabSheet
-      Caption = 'Tracker'
-      ImageIndex = 3
-      object Button5: TButton
-        Left = 24
-        Top = 56
-        Width = 75
-        Height = 25
-        Caption = 'Button5'
-        TabOrder = 0
-        OnClick = Button5Click
       end
     end
   end
