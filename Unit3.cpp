@@ -56,6 +56,7 @@ std::vector<int> i_amount;
 
 int IncomeClass::TotalIncome=0;
 vector<IncomeClass> IncomeRead;
+vector<ExpenseClass> ExpenseRead;
 
 void loadGoldFile()
 {
@@ -140,6 +141,11 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 	Edit4->Text = "";
 	Edit5->Text = "";
 	Edit7->Text = "";
+	Edit8->Text = "";
+	Edit9->Text = "";
+	Edit10->Text = "";
+	Edit11->Text = "";
+	Edit12->Text = "";
 
 
 
@@ -972,15 +978,141 @@ void __fastcall TForm3::MoreInfoClick(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
+void AddExpenseOperations()
+{
+	 ExpenseRead.clear() ;
+
+	 ifstream inputExpenseFile(userledger);
+
+	if (!inputExpenseFile.is_open()) {
+		ShowMessage("Failed to open Ledger the file.");
+		return;
+	}
+	string line;
+	 while(getline(inputExpenseFile,line))
+	 {
+	   if(line == "Start")
+	   {
+		   ExpenseClass fileExpenseinput;
+
+		   std::getline(inputExpenseFile,line);
+		   //Read year and month
+		   int year = std::stoi(line);
+		   getline(inputExpenseFile,line);
+		   int month = std::stoi(line);
+
+		   //Set year and month for (class) entry
+		   fileExpenseinput.Setyear(year);
+		   fileExpenseinput.Setmonth(month);
 
 
+		   while (std::getline(inputExpenseFile, line) && line != "End") {
+				istringstream iss(line);
+				int day, amount;
+				std::string category;
+
+				if (iss >> day >> category >> amount) {
+					fileExpenseinput.Adddate(day);
+					UnicodeString c = UnicodeString(category.c_str());
+					fileExpenseinput.Addcategory(c);
+					fileExpenseinput.Addamount(amount);
+					//IncomeClass::TotalIncome+=amount;
+				}
+			}
+			ExpenseRead.push_back(fileExpenseinput);
+		   //	cout<<IncomeRead.size()<<endl;
+		  // string p="This month has income sources : ";
+		   //string s= to_string(IncomeRead.size());
+			// p=p+s;
+			// Memo1->Lines->Add("Hello");
+
+	   }
+	 }
+	 inputExpenseFile.close();
+
+}
+
+ void AddNewExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString exDate,UnicodeString exMonth,UnicodeString exYear)
+   {
+	   //ShowMessage("Function is being called");
+	   int A =StrToInt(exAmnt);
+	   int D =StrToInt(exDate);
+	   int M =StrToInt(exMonth);
+	   int Y =StrToInt(exYear);
+	   for(int i=0;i<ExpenseRead.size();i++)
+		 {
+			if(ExpenseRead[i].Getmonth() == M && ExpenseRead[i].Getyear() == Y)
+			{
+			 ExpenseRead[i].Adddate(D);
+			 ExpenseRead[i].Addamount(A);
+			 ExpenseRead[i].Addcategory(exCat);
+			 break;
+			}
+		 }
+		 //ShowMessage("Received data " + Amount );
+		 std::ofstream outExpenseFile(userledger);
+
+	if (!outExpenseFile.is_open()) {
+		ShowMessage("Cannot open Ledger file");
+		return;
+	}
 
 
+	for ( auto& exp : ExpenseRead) {
+		std::stringstream ss;
 
+		// Start tag
+		ss << "Start" << std::endl;
 
+		// Year and Month
+		ss << exp.Getyear() << std::endl;
+		ss << std::setfill('0') << std::setw(2) << exp.Getmonth() << std::endl;
 
+		// Data entries
+		for (size_t i = 0; i < exp.date.size(); ++i) {
 
+			wstring wstr = exp.category[i].c_str();
+			string cat= string(wstr.begin(), wstr.end());
+			ss << std::setw(2) << exp.date[i] << " "
+			   << cat << " "
+			   << exp.amount[i] << std::endl;
+		}
+		 //string(income.category[i].c_str())
+		// End tag
+		ss << "End" << std::endl;
 
+		outExpenseFile << ss.str();
+		if (outExpenseFile.fail())
+		{
+			std::cerr << "Error writing to the output file!" << std::endl;
+			ShowMessage("Error writing to the output file.");
+			outExpenseFile.close();  // Close the file before returning
+			return;
+		}
+	}
 
+	outExpenseFile.close();
+	return;
+   }
+
+void __fastcall TForm3::Button1Click(TObject *Sender)
+{
+ if( Edit8->Text == ""||Edit9->Text == "" ||Edit10->Text == ""||Edit11->Text == "" || Edit12->Text == "")
+  {
+	  ShowMessage("Please Provide Valid Input In All Fields.");
+  }
+  else
+  {
+		AddExpenseOperations() ;
+		UnicodeString expenseAmnt=Edit8->Text;
+		UnicodeString expenseCat=Edit9->Text;
+		UnicodeString expenseDate=Edit10->Text;
+		UnicodeString expenseMonth=Edit11->Text;
+		UnicodeString expenseYear=Edit12->Text;
+		AddNewExpenseEntry(expenseAmnt,expenseCat, expenseDate, expenseMonth, expenseYear);
+		ShowMessage("New entry added to your Expense");
+  }
+}
+//---------------------------------------------------------------------------
 
 

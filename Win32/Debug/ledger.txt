@@ -216,4 +216,5 @@ Start
 17 Health 1200
 20 Home_Decor 350
 25 Utilities 1500
+26 Shoe 1200
 End
