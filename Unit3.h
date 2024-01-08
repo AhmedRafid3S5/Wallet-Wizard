@@ -196,7 +196,6 @@ __published:	// IDE-managed Components
 	TEdit *Edit5;
 	TEdit *Edit6;
 	TEdit *Edit7;
-	TMemo *Memo1;
 	TLabel *Label5;
 	TLabel *Label6;
 	TLabel *Label7;
@@ -207,6 +206,7 @@ __published:	// IDE-managed Components
 	TEdit *Edit11;
 	TEdit *Edit12;
 	TButton *Button1;
+	TMemo *Memo1;
 	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);

@@ -219,4 +219,5 @@ Start
 26 Shoe 1200
 27 Utility 5000
 28 Transportation 3500
+20 Food 150
 End

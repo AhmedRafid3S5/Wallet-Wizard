@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+﻿//---------------------------------------------------------------------------
 
 #ifndef Unit3H
 #define Unit3H
@@ -207,6 +207,7 @@ __published:	// IDE-managed Components
 	TEdit *Edit11;
 	TEdit *Edit12;
 	TButton *Button1;
+	TComboBox *ComboBox3;
 	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);

@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 532
-  ClientWidth = 621
+  ClientHeight = 514
+  ClientWidth = 609
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,9 +15,9 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 621
-    Height = 532
-    ActivePage = Expense
+    Width = 609
+    Height = 514
+    ActivePage = Income
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
@@ -126,10 +126,10 @@ object Form3: TForm3
         Text = 'Edit7'
       end
       object Memo1: TMemo
-        Left = 416
+        Left = 376
         Top = 100
         Width = 185
-        Height = 149
+        Height = 157
         Lines.Strings = (
           'Memo1')
         TabOrder = 6
@@ -194,7 +194,7 @@ object Form3: TForm3
         Left = 224
         Top = 80
         Width = 163
-        Height = 30
+        Height = 23
         TabOrder = 0
         Text = 'Edit8'
       end
@@ -202,7 +202,7 @@ object Form3: TForm3
         Left = 224
         Top = 144
         Width = 163
-        Height = 30
+        Height = 23
         TabOrder = 1
         Text = 'Edit9'
       end
@@ -210,7 +210,7 @@ object Form3: TForm3
         Left = 224
         Top = 208
         Width = 57
-        Height = 30
+        Height = 23
         TabOrder = 2
         Text = 'Edit10'
       end
@@ -218,7 +218,7 @@ object Form3: TForm3
         Left = 304
         Top = 208
         Width = 65
-        Height = 30
+        Height = 23
         TabOrder = 3
         Text = 'Edit11'
       end
@@ -226,7 +226,7 @@ object Form3: TForm3
         Left = 392
         Top = 208
         Width = 65
-        Height = 30
+        Height = 23
         TabOrder = 4
         Text = 'Edit12'
       end
@@ -257,8 +257,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 607
-        Height = 496
+        Width = 595
+        Height = 478
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
