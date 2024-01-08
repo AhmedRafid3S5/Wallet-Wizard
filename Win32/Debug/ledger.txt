@@ -207,6 +207,7 @@ Start
 05 Entertainment 600
 05 Dining 90
 06 Shopping 1200
+09 sdsd -5
 10 Hobbies 800
 11 Dining 45
 14 Travel 2800

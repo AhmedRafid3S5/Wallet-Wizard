@@ -199,7 +199,6 @@ __published:	// IDE-managed Components
 	TLabel *Label5;
 	TLabel *Label6;
 	TLabel *Label7;
-	TLabel *Label8;
 	TEdit *Edit8;
 	TEdit *Edit9;
 	TEdit *Edit10;
@@ -211,6 +210,11 @@ __published:	// IDE-managed Components
 	TLabel *Label10;
 	TLabel *Label11;
 	TButton *Button6;
+	TLabel *Label12;
+	TButton *Button7;
+	TMemo *Memo2;
+	TButton *Button8;
+	TLabel *Label8;
 	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
@@ -231,6 +235,9 @@ __published:	// IDE-managed Components
 	void __fastcall MoreInfoClick(TObject *Sender);
 	void __fastcall Button1Click(TObject *Sender);
 	void __fastcall Button6Click(TObject *Sender);
+	//void __fastcall Label8Click(TObject *Sender);
+	void __fastcall Button7Click(TObject *Sender);
+	void __fastcall Button8Click(TObject *Sender);
 
 
 
