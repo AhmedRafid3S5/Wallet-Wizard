@@ -187,8 +187,8 @@ Added income from Bonus Source
 Did some freelancing
 10 Investment 2600
 Added income from Investment Source
-10 Freelance 4500
-Testing the combobox
+10 Freelance 700
+Freelance increase
 15 Gifts 600
 Added income from Gifts Source
 20 Bonus 1200

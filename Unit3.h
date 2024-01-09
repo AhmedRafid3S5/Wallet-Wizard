@@ -244,6 +244,8 @@ __published:	// IDE-managed Components
 	TButton *Button11;
 	TLabel *Label22;
 	TComboBox *ComboBox4;
+	TButton *Button12;
+	TButton *Button13;
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
