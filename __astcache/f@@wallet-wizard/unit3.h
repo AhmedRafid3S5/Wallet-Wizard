@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+﻿//---------------------------------------------------------------------------
 
 #ifndef Unit3H
 #define Unit3H
@@ -352,6 +352,58 @@ class ExpenseClass : public Transaction
 	private:
 };
 
+//The Budget Class
+class Budget {
+private:
+    std::vector<std::string> categories;
+    std::vector<int> amounts;
+
+public:
+    // Default constructor
+    Budget() {}
+
+    // Getter for categories
+    std::vector<std::string> getCategories() const {
+        return categories;
+    }
+
+    // Getter for amounts
+    std::vector<int> getAmounts() const {
+        return amounts;
+    }
+
+    // Setter for categories
+    void setCategories(const std::vector<std::string>& cats) {
+        categories = cats;
+    }
+
+    // Setter for amounts
+    void setAmounts(const std::vector<int>& amts) {
+        amounts = amts;
+    }
+
+    // Add a new category and its corresponding amount
+    void addEntry(const std::string& category, int amount) {
+        categories.push_back(category);
+        amounts.push_back(amount);
+    }
+
+    // Delete a category and its corresponding amount by index
+    void deleteCategory(int index) {
+        if (index >= 0 && index < categories.size()) {
+            categories.erase(categories.begin() + index);
+            amounts.erase(amounts.begin() + index);
+        }
+    }
+
+    // Edit the amount at a given index
+    void editAmount(int index, int newAmount) {
+        if (index >= 0 && index < amounts.size()) {
+            amounts[index] = newAmount;
+        }
+    }
+
+};
 //---------------------------------------------------------------------------
 extern PACKAGE TForm3 *Form3;
 //---------------------------------------------------------------------------

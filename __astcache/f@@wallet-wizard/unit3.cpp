@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+﻿//---------------------------------------------------------------------------
 #include <vcl.h>
 #include <IdHTTP.hpp>
 #include <SysUtils.hpp>
@@ -357,7 +357,7 @@ void refreshSavings()
 			{
 				 for (int i = 0; i < expense.date.size(); ++i) {
 				 Sav-=expense.amount[i];
-		}
+			}
 				break;
             }
 		}
@@ -376,6 +376,54 @@ void refreshSavings()
 	}
 	outFile.close();
 }
+
+//Working with Budget Tab
+// Global Budget object
+Budget currentBudget;
+// Function to read from the file and populate a Budget object
+Budget readBudgetFromFile() {
+    Budget budget;
+    std::ifstream inFile("currentbudget.txt");
+
+    if (!inFile.is_open()) {
+        std::cerr << "Unable to open file currentbudget.txt" << std::endl;
+        return budget;  // Return an empty budget if unable to open the file
+    }
+
+    std::string line;
+    while (std::getline(inFile, line)) {
+        std::istringstream iss(line);
+        std::string category;
+        int amount;
+
+        if (iss >> category >> amount) {
+            budget.addEntry(category, amount);
+        }
+    }
+
+    inFile.close();
+    return budget;
+}
+
+// Function to write the contents of a Budget object back to the file
+void writeBudgetToFile(const Budget& budget) {
+    std::ofstream outFile("currentbudget.txt");
+
+    if (!outFile.is_open()) {
+        std::cerr << "Unable to open file currentbudget.txt for writing." << std::endl;
+        return;
+    }
+
+    auto categories = budget.getCategories();
+    auto amounts = budget.getAmounts();
+
+    for (size_t i = 0; i < categories.size(); ++i) {
+        outFile << categories[i] << " " << amounts[i] << std::endl;
+    }
+
+    outFile.close();
+}
+
 //---------------------------------------------------------------------------
 
   //float nisab=0;

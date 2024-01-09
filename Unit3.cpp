@@ -357,7 +357,7 @@ void refreshSavings()
 			{
 				 for (int i = 0; i < expense.date.size(); ++i) {
 				 Sav-=expense.amount[i];
-		}
+			}
 				break;
             }
 		}
@@ -376,6 +376,54 @@ void refreshSavings()
 	}
 	outFile.close();
 }
+
+//Working with Budget Tab
+// Global Budget object
+Budget currentBudget;
+// Function to read from the file and populate a Budget object
+Budget readBudgetFromFile() {
+    Budget budget;
+    std::ifstream inFile("currentbudget.txt");
+
+    if (!inFile.is_open()) {
+        std::cerr << "Unable to open file currentbudget.txt" << std::endl;
+        return budget;  // Return an empty budget if unable to open the file
+    }
+
+    std::string line;
+    while (std::getline(inFile, line)) {
+        std::istringstream iss(line);
+        std::string category;
+        int amount;
+
+        if (iss >> category >> amount) {
+            budget.addEntry(category, amount);
+        }
+    }
+
+    inFile.close();
+    return budget;
+}
+
+// Function to write the contents of a Budget object back to the file
+void writeBudgetToFile(const Budget& budget) {
+    std::ofstream outFile("currentbudget.txt");
+
+    if (!outFile.is_open()) {
+        std::cerr << "Unable to open file currentbudget.txt for writing." << std::endl;
+        return;
+    }
+
+    auto categories = budget.getCategories();
+    auto amounts = budget.getAmounts();
+
+    for (size_t i = 0; i < categories.size(); ++i) {
+        outFile << categories[i] << " " << amounts[i] << std::endl;
+    }
+
+    outFile.close();
+}
+
 //---------------------------------------------------------------------------
 
   //float nisab=0;
@@ -992,15 +1040,10 @@ void AddIncomeOperations()
 		}
 	}
 
-	//int flag=0;
 	for (int i = 0; i < IncomeRead.size(); i++)
 	{
 		if (IncomeRead[i].Getmonth() == M && IncomeRead[i].Getyear() == Y)
 		{
-
-		   //for(j=0; j<incomeRead[i].date.size(); j++)
-		   //if(incomeread[i].date[j] == D && incomeread[i].category[j] == source && IncomeRead[i].amount[j] == A)
-		   //flag++;
 			IncomeRead[i].Adddate(D);
 			IncomeRead[i].Addamount(A);
 			IncomeRead[i].Addcategory(Source);
@@ -1087,13 +1130,9 @@ void AddIncomeOperations()
 
 	outFile2.close();
 
-	//if(flag==0)showerror
-	//else{Successfully deleted};
 	ShowMessage("New entry added to your income");
 	return;
 }
-
-
 
 void __fastcall TForm3::Button5Click(TObject *Sender)
 {
@@ -1106,7 +1145,7 @@ void __fastcall TForm3::Button5Click(TObject *Sender)
 		AddIncomeOperations() ;
 		UnicodeString Amount=Edit2->Text;
 	   // Here we will use the combobox
-		UnicodeString Source;
+        UnicodeString Source;
 	   if (ComboBox4->ItemIndex != -1) {  // Check if an item is selected
 		Source = ComboBox4->Items->Strings[ComboBox4->ItemIndex];
 		}
@@ -1118,7 +1157,6 @@ void __fastcall TForm3::Button5Click(TObject *Sender)
 		UnicodeString Year=Edit6->Text;
 		UnicodeString Note= Edit13->Text;
 		AddNewIncomeEntry(Amount,Source,Date,Month,Year,Note);
-		//delete income entry
 		AddExpenseOperations();
 		refreshSavings();
   }
@@ -2086,372 +2124,5 @@ UnicodeString newCategory = Edit9->Text.Trim();  // Get the text from Edit9 and 
 }
 //---------------------------------------------------------------------------
 
-void DeleteIncomeEntry(UnicodeString Amount, UnicodeString Source, UnicodeString Date, UnicodeString Month, UnicodeString Year, UnicodeString Note)
-{
-	int A = StrToInt(Amount);
-	int D = StrToInt(Date);
-	int M = StrToInt(Month);
-	int Y = StrToInt(Year);
 
-	if (Source.Pos(" ") != 0)
-	{
-		ShowMessage("Source Name Cannot Be More Than One Word");
-		return;
-	}
-
-	if (A < 0)
-	{
-		ShowMessage("Amount cannot be negative");
-		return;
-	}
-
-	if (D <= 0 || M <= 0 || Y <= 0 || M > 12 || D > 31)
-	{
-		ShowMessage("Invalid date input.");
-		return;
-	}
-
-	if (M == 2 && ((Y % 4 == 0 && Y % 100 != 0) || (Y % 400 == 0)))
-	{
-		if (D > 29)
-		{
-			ShowMessage("Invalid date for February in a leap year.");
-			return;
-		}
-	}
-	else
-	{
-		static const int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-		if (D > daysInMonth[M])
-		{
-			ShowMessage("Invalid date for the given month.");
-			return;
-		}
-	}
-
-	int flag=0;
-	for (int i = 0; i < IncomeRead.size(); i++)
-	{
-		if (IncomeRead[i].Getmonth() == M && IncomeRead[i].Getyear() == Y)
-		{
-
-		   for(int j=0; j<IncomeRead[i].date.size(); j++)
-		   {
-			if(IncomeRead[i].date[j] == D && IncomeRead[i].category[j] == Source && IncomeRead[i].amount[j] == A)
-			{
-				IncomeRead[i].date.erase(IncomeRead[i].date.begin() + j);
-				IncomeRead[i].category.erase(IncomeRead[i].category.begin() + j);
-				IncomeRead[i].amount.erase(IncomeRead[i].amount.begin() + j);
-				IncomeRead[i].notes.erase(IncomeRead[i].notes.begin() + j);
-				flag++;
-			}
-
-		   }
-
-		}
-	}
-
-	SortIncome();
-
-	std::ofstream outFile(incomeledger);
-	if (!outFile.is_open())
-	{
-		ShowMessage("Cannot open file");
-		return;
-	}
-
-	for (auto& income : IncomeRead)
-	{
-		std::stringstream ss;
-		ss << "Start" << std::endl;
-		ss << income.Getyear() << std::endl;
-		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
-
-		for (size_t i = 0; i < income.date.size(); ++i)
-		{
-			wstring wstr = income.category[i].c_str();
-			string cat = string(wstr.begin(), wstr.end());
-			ss << std::setw(2) << income.date[i] << " "
-			   << cat << " "
-			   << income.amount[i] << std::endl;
-		}
-
-		ss << "End" << std::endl;
-		outFile << ss.str();
-
-		if (outFile.fail())
-		{
-			std::cerr << "Error writing to the output file!" << std::endl;
-			ShowMessage("Error writing to the output file.");
-			outFile.close();
-			return;
-		}
-	}
-		outFile.close();
-
-	std::ofstream outFile2(incomewithnotes);
-	if (!outFile2.is_open())
-	{
-		ShowMessage("Cannot open file");
-		return;
-	}
-
-	for (auto& income : IncomeRead)
-	{
-		std::stringstream ss;
-		ss << "Start" << std::endl;
-		ss << income.Getyear() << std::endl;
-		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
-
-		for (size_t i = 0; i < income.date.size(); ++i)
-		{
-			wstring wstr = income.category[i].c_str();
-			string cat = string(wstr.begin(), wstr.end());
-			ss << std::setw(2) << income.date[i] << " "
-			   << cat << " "
-			   << income.amount[i] << std::endl;
-			wstring wnotes = income.notes[i].c_str();
-			string snotes=   string(wnotes.begin(), wnotes.end());
-			ss << snotes << std::endl;
-		}
-
-		ss << "End" << std::endl;
-		outFile2 << ss.str();
-
-		if (outFile2.fail())
-		{
-			std::cerr << "Error writing to the output file!" << std::endl;
-			ShowMessage("Error writing to the output file.");
-			outFile2.close();
-			return;
-		}
-	}
-
-	outFile2.close();
-
-	if(flag==0)
-	{
-		ShowMessage("No Record Found");
-	}
-	else
-	{
-		ShowMessage("Successfully Deleted");
-	};
-
-	return;
-}
-
-//-----------------------------------------------------------------------
-void __fastcall TForm3::Button12Click(TObject *Sender)
-{
-  if( Edit2->Text == ""||Edit4->Text == "" || Edit5->Text == ""|| Edit6->Text == ""|| ComboBox4->Text == "")
-  {
-	  ShowMessage("Please Provide Valid Inputs In Source, Amount and Date fields.");
-  }
-  else
-  {
-
-		AddIncomeOperations() ;
-		UnicodeString Amount=Edit2->Text;
-	   // Here we will use the combobox
-		UnicodeString Source;
-	   if (ComboBox4->ItemIndex != -1) {  // Check if an item is selected
-		Source = ComboBox4->Items->Strings[ComboBox4->ItemIndex];
-		}
-		 else {
-		ShowMessage("Please select a source from the Dropdown.");
-		}
-		UnicodeString Date=Edit4->Text;
-		UnicodeString Month=Edit5->Text;
-		UnicodeString Year=Edit6->Text;
-		UnicodeString Note= Edit13->Text;
-		DeleteIncomeEntry(Amount,Source,Date,Month,Year,Note);
-		AddExpenseOperations();
-		refreshSavings();
-
-  }
-}
-//---------------------------------------------------------------------------
-
-
-//----------------------------------------------------------------------------
-//Function for deleting an Entry
-void DeleteExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString exDate,UnicodeString exMonth,UnicodeString exYear,UnicodeString exNote)
-{
-	  int A =StrToInt(exAmnt);
-	   int D =StrToInt(exDate);
-	   int M =StrToInt(exMonth);
-	   int Y =StrToInt(exYear);
-	   if(exCat.Pos(" ") != 0)
-	   {
-		   ShowMessage("Category Name Cannot Be More Than One Word");
-		   return;
-	   }
-		if(A <0)
-	   {
-		   ShowMessage("Amount cannot be negative");
-		   return;
-	   }
-		// Validate the input date
-	if (D <= 0 || M <= 0 || Y <= 0 || M > 12 || D > 31)
-	{
-		ShowMessage("Invalid date input.");
-		return;
-	}
-
-	// Validate the date based on the month and year
-	if (M == 2 && ((Y % 4 == 0 && Y % 100 != 0) || (Y % 400 == 0)))
-	{
-		if (D > 29)
-		{
-			ShowMessage("Invalid date for February in a leap year.");
-			return;
-		}
-	}
-	else
-	{
-		static const int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-		if (D > daysInMonth[M])
-		{
-			ShowMessage("Invalid date for the given month.");
-			return;
-		}
-	}
-	   int flag = 0;
-	   for(int i=0;i<ExpenseRead.size();i++)
-	   {
-			if(ExpenseRead[i].Getmonth() == M && ExpenseRead[i].Getyear() == Y)
-			{
-			 for(int j=0; j<ExpenseRead[i].date.size(); j++)
-			 {
-				if(ExpenseRead[i].date[j] == D && ExpenseRead[i].category[j] == exCat && ExpenseRead[i].amount[j] == A)
-				{
-				ExpenseRead[i].date.erase(ExpenseRead[i].date.begin() + j);
-				ExpenseRead[i].category.erase(ExpenseRead[i].category.begin() + j);
-				ExpenseRead[i].amount.erase(ExpenseRead[i].amount.begin() + j);
-				ExpenseRead[i].notes.erase(ExpenseRead[i].notes.begin() + j);
-				flag++;
-				}
-
-
-			 }
-		}
-	   }
-		 SortExpense();
-		 //ShowMessage("Received data " + Amount );
-		 std::ofstream outExpenseFile(userledger);
-	if (!outExpenseFile.is_open()) {
-		ShowMessage("Cannot open Ledger file");
-		return;
-	}
-
-	for ( auto& exp : ExpenseRead) {
-		std::stringstream ss;
-		// Start tag
-		ss << "Start" << std::endl;
-		// Year and Month
-		ss << exp.Getyear() << std::endl;
-		ss << std::setfill('0') << std::setw(2) << exp.Getmonth() << std::endl;
-		// Data entries
-		for (size_t i = 0; i < exp.date.size(); ++i) {
-			wstring wstr = exp.category[i].c_str();
-			string cat= string(wstr.begin(), wstr.end());
-			ss << std::setw(2) << exp.date[i] << " "
-			   << cat << " "
-			   << exp.amount[i] << std::endl;
-		}
-		 //string(income.category[i].c_str())
-		// End tag
-		ss << "End" << std::endl;
-		outExpenseFile << ss.str();
-		if (outExpenseFile.fail())
-		{
-			std::cerr << "Error writing to the output file!" << std::endl;
-			ShowMessage("Error writing to the output file.");
-			outExpenseFile.close();  // Close the file before returning
-			return;
-		}
-	}
-	outExpenseFile.close();
-
-
-	//for writing notes in file
-	 std::ofstream outExpenseFile2(expensewithnotes);
-	if (!outExpenseFile2.is_open()) {
-		ShowMessage("Cannot open Ledger file");
-		return;
-	}
-
-	for ( auto& exp : ExpenseRead) {
-		std::stringstream ss;
-		// Start tag
-		ss << "Start" << std::endl;
-		// Year and Month
-		ss << exp.Getyear() << std::endl;
-		ss << std::setfill('0') << std::setw(2) << exp.Getmonth() << std::endl;
-		// Data entries
-		for (size_t i = 0; i < exp.date.size(); ++i) {
-			wstring wstr = exp.category[i].c_str();
-			string cat= string(wstr.begin(), wstr.end());
-			ss << std::setw(2) << exp.date[i] << " "
-			   << cat << " "
-			   << exp.amount[i] << std::endl;
-			  wstring wnotes = exp.notes[i].c_str();
-			string snotes=   string(wnotes.begin(), wnotes.end());
-			ss << snotes << std::endl;
-		}
-		 //string(income.category[i].c_str())
-		// End tag
-		ss << "End" << std::endl;
-		outExpenseFile2 << ss.str();
-		if (outExpenseFile2.fail())
-		{
-			std::cerr << "Error writing to the output file!" << std::endl;
-			ShowMessage("Error writing to the output file.");
-			outExpenseFile2.close();  // Close the file before returning
-			return;
-		}
-	}
-	outExpenseFile2.close();
-
-	if(flag==0)
-	{
-		ShowMessage("No Record Found");
-	}
-	else
-	{
-		ShowMessage("Successfully Deleted");
-	};
-
-	return;
-}
-
-//-----------------------------------------------------------------------------
-void __fastcall TForm3::Button13Click(TObject *Sender)
-{
-  if( ComboBox5->Text == "" || Edit8->Text == ""||Edit10->Text == ""||Edit11->Text == "" || Edit12->Text == "")
-  {
-	  ShowMessage("Please Provide Valid Inputs In Category, Date and Amount Fields.");
-  }
-
-  else
-  {
-		AddExpenseOperations() ;
-		UnicodeString expenseAmnt=Edit8->Text;
-		UnicodeString expenseCat;
-		if (ComboBox5->ItemIndex != -1) {  // Check if an item is selected
-		expenseCat = ComboBox5->Items->Strings[ComboBox5->ItemIndex].Trim();  // Trim any leading/trailing spaces
-	} else {
-		ShowMessage("Please select a category from the ComboBox.");
-	}
-		UnicodeString expenseDate=Edit10->Text;
-		UnicodeString expenseMonth=Edit11->Text;
-		UnicodeString expenseYear=Edit12->Text;
-		UnicodeString expenseNote= Edit16->Text;
-		DeleteExpenseEntry(expenseAmnt,expenseCat, expenseDate, expenseMonth, expenseYear,expenseNote);
-		AddIncomeOperations();
-		refreshSavings();
-  }
-}
-//---------------------------------------------------------------------------
 
