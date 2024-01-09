@@ -28,6 +28,8 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
+
+//All global variable initializations
 TForm3 *Form3;
 TPieSeries  *Series1;
 TPieSeries  *Series2;
@@ -40,7 +42,6 @@ std::string content;// holds html string for gold data
 std::string silver_string; // holds html string for silver data
 int inputValue = 0;
 int year, month, day;
-float totalZakat = 0;
 std::vector<Transaction_Summary<UnicodeString,int>> ExpenseList;
 std::vector<Transaction_Summary<UnicodeString,int>> IncomeList;
 
@@ -56,6 +57,11 @@ std::vector<int> i_amount;
 std::vector<float> monthly_savings;
 //This variable holds current account balance (Variable used by the zakat tab #Rafid)
 float currentAccountBalance;
+
+//Global variables for zakat and nisab
+float totalZakat = 0;
+float nisab=0;
+
 
 void loadGoldFile()
 {
@@ -211,21 +217,10 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 //---------------------------------------------------------------------------
 
 
-
-
 //---------------------------------------------------------------------------
 
 
-void __fastcall TForm3::ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled)
-{
 
-	//convert string to float value
-	//multiply per gram price with 85.
-	//If eligible, zakat = 2.5 % of available money
-}
-//---------------------------------------------------------------------------
-
-  float nisab=0;
 
 //create a linear expense model to predict total expense for a required savings
 void update_regression_model(regression& r)
@@ -874,17 +869,7 @@ void __fastcall TForm3::Chart4Scroll(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm3::Button4Click(TObject *Sender)
-{
- ShowMessage("2nd Button Pressed");
-}
-//---------------------------------------------------------------------------
 
-void __fastcall TForm3::Button5Click(TObject *Sender)
-{
- ShowMessage("Tracker Button pressed");
-}
-//---------------------------------------------------------------------------
 
 void pop_up(TObject *Sender)
 {
@@ -1081,7 +1066,7 @@ void __fastcall TForm3::ByWeightInfoClick(TObject *Sender)
 
 void __fastcall TForm3::ManualBTInfoClick(TObject *Sender)
 {
-  ShowMessage("You can enter your current balance manually if the account balance in the add does not reflect your actual balance.");
+  ShowMessage("You can enter your current balance manually if the account balance in the app does not reflect your actual balance.");
 }
 //---------------------------------------------------------------------------
 

@@ -21,6 +21,8 @@ object Form3: TForm3
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
+    ExplicitWidth = 691
+    ExplicitHeight = 697
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
       ImageIndex = 3
@@ -258,7 +260,7 @@ object Form3: TForm3
           Width = 38
           Height = 23
           TabOrder = 6
-          Text = 'Edit3'
+          Text = 'Year'
         end
         object Chart4: TChart
           Left = -2
@@ -328,7 +330,6 @@ object Form3: TForm3
     object ZakatPage: TTabSheet
       Caption = 'Zakat'
       ImageIndex = 2
-      OnContextPopup = ZakatPageContextPopup
       DesignSize = (
         689
         676)
@@ -398,10 +399,9 @@ object Form3: TForm3
           Left = 3
           Top = 379
           Width = 121
-          Height = 24
+          Height = 23
           NumbersOnly = True
           TabOrder = 4
-          Text = 'Edit1'
         end
         object ComboBox3: TComboBox
           Left = 3

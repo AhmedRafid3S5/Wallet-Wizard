@@ -189,7 +189,6 @@ __published:	// IDE-managed Components
 	TButton *ByWeightInfo;
 	TButton *ManualBTInfo;
 	TTabSheet *TabSheet1;
-	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
@@ -204,8 +203,6 @@ __published:	// IDE-managed Components
           int Y);
 	void __fastcall ComboBox2Change(TObject *Sender);
 	void __fastcall Chart4Scroll(TObject *Sender);
-	void __fastcall Button4Click(TObject *Sender);
-	void __fastcall Button5Click(TObject *Sender);
 	void __fastcall MoreInfoClick(TObject *Sender);
 	void __fastcall ComboBox3Change(TObject *Sender);
 	void __fastcall LoadFromSavingsClick(TObject *Sender);
