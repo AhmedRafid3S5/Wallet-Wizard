@@ -17,6 +17,7 @@
 #include <iomanip>     //for the setw setfill flags during fileprint
 #define userledger "ledger.txt"
 #define incomeledger "incomes.txt"
+#define zakatledger "Myzakat.txt"
 #define saving "savings.txt"
 #define incomewithnotes "incomenotes.txt"
 #define expensewithnotes "ledgernotes.txt"
@@ -27,6 +28,7 @@ using namespace std;
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
+//All global variable initializations
 TForm3 *Form3;
 TPieSeries  *Series1;
 TPieSeries  *Series2;
@@ -34,10 +36,10 @@ TLineSeries *Series3;
 TLineSeries *Series4;
 TLineSeries *Series5;
 TLineSeries *Series6;
-std::string content;
+std::string content;// holds html string for gold data
+std::string silver_string; // holds html string for silver data
 int inputValue = 0;
 int year, month, day;
-float totalZakat = 0;
 std::vector<Transaction_Summary<UnicodeString,int>> ExpenseList;
 std::vector<Transaction_Summary<UnicodeString,int>> IncomeList;
 //These vectors load up with the requested month and year data
@@ -45,7 +47,14 @@ std::vector<UnicodeString> e_category;
 std::vector<int> e_amount;
 std::vector<UnicodeString> i_category;
 std::vector<int> i_amount;
-//-------------------------------------------------------------
+//--------------------------------------------------------------
+//This vector holds savings data for each month
+std::vector<float> monthly_savings;
+//This variable holds current account balance (Variable used by the zakat tab #Rafid)
+float currentAccountBalance;
+//Global variables for zakat and nisab
+float totalZakat = 0;
+float nisab=0;
 
 //Variables for income tab
 int IncomeClass::TotalIncome=0;
@@ -84,6 +93,57 @@ void loadGoldFile()
 	}
 	file.close();
 }
+
+void loadSilverFile()
+{
+	  // URL of the webpage
+	std::string url = "https://www.livepriceofgold.com/silver-price/bangladesh.html"; //chnange url here with your location's url
+	// Create a file stream to store the webpage content
+	std::ofstream webpageFile("silverwebpage.html");
+	if (!webpageFile.is_open()) {
+		ShowMessage( "Failed to open the file for writing.");
+		return;
+	}
+	// Use system command to fetch the webpage content and write it to the file
+	std::string command = "curl -s -o silverwebpage.html " + url;
+	if (system(command.c_str()) != 0) {
+		ShowMessage("Failed to fetch the webpage for silver unit price.");
+		webpageFile.close();
+		return;
+	}
+	webpageFile.close();
+	// Open the downloaded file for parsing
+	std::ifstream file("silverwebpage.html");
+	if (!file.is_open()) {
+		ShowMessage("Failed to open the file{silverwebpage} for reading.");
+		return;
+	}
+	std::string line;
+	while (std::getline(file, line)) {
+		silver_string += line;
+	}
+	file.close();
+}
+void loadZakat ()
+{
+	  std::ifstream zakatFile(zakatledger);
+	  if (!zakatFile.is_open()) {
+		ShowMessage("Failed to open the file{zakatFile} for reading.");
+		return;
+	}
+
+	zakatFile>>totalZakat;
+	zakatFile.close();
+}
+void saveZakat()
+{
+	std::ofstream zakatFile(zakatledger);
+	 if (!zakatFile.is_open()) {
+		ShowMessage("Failed to open the file{zakatFile} for reading.");
+		return;
+	}
+	zakatFile << totalZakat;
+}
 //---------------------------------------------------------------------------
 __fastcall TForm3::TForm3(TComponent* Owner)
 	: TForm(Owner)
@@ -105,6 +165,9 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 	ComboBox2->Style = csDropDownList;
 	ComboBox2->Items->Add("Average");
 	ComboBox2->Items->Add("Cumilative");
+	ComboBox3->Style = csDropDownList;
+	ComboBox3->Items->Add("By Gold Weight");
+	ComboBox3->Items->Add("By Silver Weight");
 //-----------------------------------------------------------------------------
 	Chart1->Top = 75;
 	Chart2->Top = Chart1->Top + Chart1->Height;
@@ -117,6 +180,8 @@ __fastcall TForm3::TForm3(TComponent* Owner)
    //Set ScrollBar Limit (Initializer)
    //Load File function calls
    loadGoldFile();
+   loadSilverFile();
+   loadZakat();
    //This is to clear the input boxes
 	Edit2->Text = "";
 	Edit6->Text = "";
@@ -231,14 +296,7 @@ void refreshSavings()
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm3::ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled)
-{
-	//convert string to float value
-	//multiply per gram price with 85.
-	//If eligible, zakat = 2.5 % of available money
-}
-//---------------------------------------------------------------------------
-  float nisab=0;
+  //float nisab=0;
 //create a linear expense model to predict total expense for a required savings
 void update_regression_model(regression& r)
 {
@@ -469,6 +527,9 @@ void __fastcall TForm3::PageControl1Change(TObject *Sender)
 		//Set line graph (by default) to average income and expense
 	}
 	if (activePage == ZakatPage) {
+	//Init combobox3 index
+    ComboBox3->ItemIndex = 0;
+	//Extracting gold price
 	size_t GoldPricePos = content.find("1 GRAM GOLD 24K");
 	std::string pureGoldPrice;
 	UnicodeString goldPrice;
@@ -477,32 +538,48 @@ void __fastcall TForm3::PageControl1Change(TObject *Sender)
 		pureGoldPrice = content.substr(GoldPricePos+45,8); // substr(beginPOs,append how many char?)
 		goldPrice =  content.substr(GoldPricePos+45,8);
 	}
-	//std::cout<<pureGoldPrice<<"\n";
-	//Conversion to float then to string for display
-	//RichEdit2->Lines->Add(goldPrice) ;
 	goldPrice = goldPrice.Delete(goldPrice.Pos(","),1);
 	float unitGoldPrice =  StrToFloat(goldPrice);
-	 nisab = 85*unitGoldPrice;
+	//Extracting silver price
+	size_t SilverPricePos = silver_string.find("Fine, Pure Silver Price per Gram");
+	std::string pureSilverPrice;
+	UnicodeString silverPrice;
+	if(SilverPricePos != std::string::npos)
+	{
+		pureSilverPrice = silver_string.substr(SilverPricePos+67,7); // substr(beginPOs,append how many char?)
+		silverPrice =  silver_string.substr(SilverPricePos+67,7);
+	}
+	//silverPrice = silverPrice.Delete(silverPrice.Pos(","),1);
+	float unitSilverPrice =  StrToFloat(silverPrice);
+	 if(ComboBox3->ItemIndex == 0)
+	   nisab = 85*unitGoldPrice;
+	 if(ComboBox3->ItemIndex == 1)
+	  nisab = 595*unitSilverPrice  ;
+	 UnicodeString moneyThreshold = IntToStr((int)nisab);
 
-	 UnicodeString moneyThreshold = FloatToStr(nisab);
-
-	 //Testing with Static Text
+	//Testing with Static Text
 	 UnicodeString youMustHave = " You must have " ;
 	 UnicodeString Tk = " Tk";
-	 StaticText1->Caption = "To be able to give zakat" + youMustHave + moneyThreshold + Tk;
+	 //StaticText1->Caption = "To be able to give zakat" + youMustHave + moneyThreshold + Tk;
 	  //Testing with Richedit (Can have more control over text color and fonts)
 	  RichEdit2->ReadOnly = true;
 	  RichEdit2->Clear();
 	  RichEdit2->SelStart = 0; // Starting position
 	  RichEdit2->SelLength = 37; // Length of the text to format
-	  RichEdit2->SelAttributes->Name = L"Arial"; // Font name
-	  RichEdit2->SelAttributes->Size = 12; // Font size
+	  //RichEdit2->SelAttributes->Name = L"Arial"; // Font name
+	  RichEdit2->SelAttributes->Size = 10; // Font size
 	  RichEdit2->SelAttributes->Style = TFontStyles() << fsBold; // Font style (e.g., bold)
-	  RichEdit2->Lines->Add("Eligibility Criteria for giving Zakat");
-	  RichEdit2->SelStart = 80; // Starting position
-	  RichEdit2->SelLength = moneyThreshold.Length(); // Length of the text to format
-	  //RichEdit2->SelAttributes->Color = clGreen;
-	  RichEdit2->Lines->Add("Annual saving >= " + moneyThreshold);
+	  RichEdit2->Lines->Add("\n24K Gold price per gram "+ goldPrice + " Tk                          | Pure Silver price per gram "+silverPrice+" Tk");
+	  RichEdit2->Lines->Add("-------------------------------------------------------------------------------------");
+	  RichEdit2->Lines->Add("\nTo be able to give zakat" + youMustHave + moneyThreshold + Tk);
+	  RichEdit2->Lines->Add("Eligibility Criteria for giving Zakat :");
+	  RichEdit2->Lines->Add("Annual saving must be at least " + moneyThreshold + Tk);
+	  if(totalZakat > -1)
+	  {
+	   RichEdit2->SelAttributes->Color = clTeal;
+	   RichEdit2->Lines->Add("*You net payable zakat currently is : " + FloatToStr(totalZakat) + " Tk");
+	   RichEdit2->SelAttributes->Color = clBlack;
+	  }
 	}
 }
 //---------------------------------------------------------------------------
@@ -513,29 +590,32 @@ void __fastcall TForm3::PageControl1Change(TObject *Sender)
 void __fastcall TForm3::Button2Click(TObject *Sender)
 {
    // Get the user input from the Edit1 component
-	UnicodeString userInput = Edit1->Text;
+    UnicodeString userInput = Edit1->Text;
 
-	try {
-		// Convert the user input to an integer
+    try {
+        // Convert the user input to an integer
 		 inputValue = StrToInt(userInput);
-		// Now 'inputValue' contains the numeric user input
-		// You can use 'inputValue' in your application
-	} catch (EConvertError &e) {
+        // Now 'inputValue' contains the numeric user input
+        // You can use 'inputValue' in your application
+    } catch (EConvertError &e) {
 		ShowMessage("Invalid input. Please enter a valid number.");
 	}
-  std::cout<<inputValue;
+  currentAccountBalance = inputValue;
   Edit1->Clear();
-  RichEdit2->Lines->Add("Current Balance:" + IntToStr(inputValue));
+  RichEdit2->Lines->Add("-------------------------------------------------------------------------------------");
+  RichEdit2->Lines->Add("Current Balance:" + IntToStr(inputValue) + " Tk");
   RichEdit2->Lines->Add("");
   if(inputValue >= nisab)
   {
 	  totalZakat = inputValue*0.025;
+	  saveZakat();
 	  RichEdit2->Lines->Add("You are eligible to give Zakat !");
-	  RichEdit2->Lines->Add("Zakat: " + FloatToStr(totalZakat));
+	  RichEdit2->Lines->Add("Zakat amount " + FloatToStr(totalZakat) + " Tk");
   }
   else
   {
 	  RichEdit2->Lines->Add("You are not eligible to give Zakat.");
+	  totalZakat = -1;
   }
 }
 //---------------------------------------------------------------------------
@@ -546,7 +626,7 @@ void __fastcall TForm3::Button3Click(TObject *Sender)
 	loadPieData(ExpenseList,userledger,e_category,e_amount,1+ComboBox1->ItemIndex,StrToInt(year));
 	loadPieData(IncomeList,incomeledger,i_category,i_amount,1+ComboBox1->ItemIndex,StrToInt(year));
 	drawCharts(StrToInt(year),1+ComboBox1->ItemIndex);
-	ShowMessage("List size" + IntToStr(static_cast<int>(ExpenseList.size())));
+	//ShowMessage("List size" + IntToStr(static_cast<int>(ExpenseList.size())));
 }
 
 //---------------------------------------------------------------------------
@@ -1697,6 +1777,140 @@ void __fastcall TForm3::SearchClick(TObject *Sender)
 
 
 
+}
+//---------------------------------------------------------------------------
+
+
+
+void __fastcall TForm3::ByWeightInfoClick(TObject *Sender)
+{
+
+  ShowMessage("Select the method by which you want to calculate nisab.\n"
+			  "1) By Gold Weight, nisab equals 85 grams of 24K gold.\n"
+			  "2) By Silver Weight, nisab equals 595 grams of pure silver.\n"
+			  "\n**Program needs internet connectivity to work."
+			  );
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::ManualBTInfoClick(TObject *Sender)
+{
+    ShowMessage("You can enter your current balance manually if the account balance in the app does not reflect your actual balance.");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::ComboBox3Change(TObject *Sender)
+{
+  //Extracting gold price
+	size_t GoldPricePos = content.find("1 GRAM GOLD 24K");
+	std::string pureGoldPrice;
+	UnicodeString goldPrice;
+	if(GoldPricePos != std::string::npos)
+	{
+		pureGoldPrice = content.substr(GoldPricePos+45,8); // substr(beginPOs,append how many char?)
+		goldPrice =  content.substr(GoldPricePos+45,8);
+	}
+	goldPrice = goldPrice.Delete(goldPrice.Pos(","),1);
+	float unitGoldPrice =  StrToFloat(goldPrice);
+	//Extracting silver price
+	size_t SilverPricePos = silver_string.find("Fine, Pure Silver Price per Gram");
+	std::string pureSilverPrice;
+	UnicodeString silverPrice;
+	if(SilverPricePos != std::string::npos)
+	{
+		pureSilverPrice = silver_string.substr(SilverPricePos+67,7); // substr(beginPOs,append how many char?)
+		silverPrice =  silver_string.substr(SilverPricePos+67,7);
+	}
+	//silverPrice = silverPrice.Delete(silverPrice.Pos(","),1);
+	float unitSilverPrice =  StrToFloat(silverPrice);
+	 if(ComboBox3->ItemIndex == 0)
+	   nisab = 85*unitGoldPrice;
+	 if(ComboBox3->ItemIndex == 1)
+	  nisab = 595*unitSilverPrice  ;
+	 UnicodeString moneyThreshold = IntToStr((int)nisab);
+
+	 //Testing with Static Text
+	 UnicodeString youMustHave = " You must have " ;
+	 UnicodeString Tk = " Tk";
+	 //StaticText1->Caption = "To be able to give zakat" + youMustHave + moneyThreshold + Tk;
+	  //Testing with Richedit (Can have more control over text color and fonts)
+	  RichEdit2->ReadOnly = true;
+	  RichEdit2->Clear();
+	  RichEdit2->SelStart = 0; // Starting position
+	  RichEdit2->SelLength = 37; // Length of the text to format
+	  //RichEdit2->SelAttributes->Name = L"Arial"; // Font name
+	  RichEdit2->SelAttributes->Size = 10; // Font size
+	  RichEdit2->SelAttributes->Style = TFontStyles() << fsBold; // Font style (e.g., bold)
+	  RichEdit2->Lines->Add("\n24K Gold price per gram "+ goldPrice + " Tk                          | Pure Silver price per gram "+silverPrice+" Tk");
+	  RichEdit2->Lines->Add("-------------------------------------------------------------------------------------");
+	  RichEdit2->Lines->Add("\nTo be able to give zakat" + youMustHave + moneyThreshold + Tk);
+	  RichEdit2->Lines->Add("Eligibility Criteria for giving Zakat :");
+	  RichEdit2->SelStart = 80; // Starting position
+	  RichEdit2->SelLength = moneyThreshold.Length(); // Length of the text to format
+	  //RichEdit2->SelAttributes->Color = clGreen;
+	  RichEdit2->Lines->Add("Annual saving must be at least " + moneyThreshold + " Tk");
+	   if(totalZakat > -1)
+	  {
+	   RichEdit2->SelAttributes->Color = clTeal;
+	   RichEdit2->Lines->Add("*You net payable zakat currently is : " + FloatToStr(totalZakat) + " Tk");
+	   RichEdit2->SelAttributes->Color = clBlack;
+	  }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::LoadFromSavingsClick(TObject *Sender)
+{
+
+  //Clear any existing data in the savings array
+   monthly_savings.clear();
+   //Read from savings file
+	  std::ifstream inputFile(saving);
+	if (!inputFile.is_open()) {
+		ShowMessage("Failed to open the savings file.");
+		return;
+	}
+  std::string line;
+  while(std::getline(inputFile,line))
+  {
+	if(line == "Start")
+	{
+	  std::getline(inputFile,line);
+	  //Read year and month
+	  int year = std::stoi(line);
+	  std::getline(inputFile,line);
+	  int month = std::stoi(line);
+
+	  //Read entries until 'End' marker is found
+	  while (std::getline(inputFile, line) && line != "End") {
+				std::istringstream iss(line);
+				float amount;
+
+				if (iss >>amount) {
+					monthly_savings.push_back(amount);
+				}
+			}
+
+	}
+  }
+
+   currentAccountBalance = std::accumulate(monthly_savings.begin(),monthly_savings.end(),0);
+   //Displaying on panel
+  inputValue = currentAccountBalance;
+  RichEdit2->Lines->Add("-------------------------------------------------------------------------------------");
+  RichEdit2->Lines->Add("Current Balance:" + IntToStr(inputValue) + " Tk");
+  RichEdit2->Lines->Add("");
+  if(inputValue >= nisab)
+  {
+	  totalZakat = inputValue*0.025;
+	  saveZakat();
+	  RichEdit2->Lines->Add("You are eligible to give Zakat !");
+	  RichEdit2->Lines->Add("Zakat amount " + FloatToStr(totalZakat) + " Tk");
+  }
+  else
+  {
+	  RichEdit2->Lines->Add("You are not eligible to give Zakat.");
+	  totalZakat = -1;
+  }
 }
 //---------------------------------------------------------------------------
 

@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 469
-  ClientWidth = 635
+  ClientHeight = 534
+  ClientWidth = 698
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,12 +15,14 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 635
-    Height = 469
+    Width = 698
+    Height = 534
     ActivePage = Income
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
+    ExplicitWidth = 692
+    ExplicitHeight = 525
     object Income: TTabSheet
       Caption = 'Income'
       ImageIndex = 3
@@ -477,7 +479,7 @@ object Form3: TForm3
         Left = 264
         Top = 345
         Width = 70
-        Height = 24
+        Height = 23
         TabOrder = 10
         Text = 'Edit17'
       end
@@ -485,7 +487,7 @@ object Form3: TForm3
         Left = 382
         Top = 345
         Width = 81
-        Height = 24
+        Height = 23
         TabOrder = 11
         Text = 'Edit18'
       end
@@ -506,24 +508,21 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 627
-        Height = 442
+        Width = 684
+        Height = 498
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
         VertScrollBar.ButtonSize = 10
-        VertScrollBar.Position = 554
         Align = alClient
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
-        ExplicitWidth = 569
-        ExplicitHeight = 370
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0
-          Top = -892
-          Width = 665
+          Top = -338
+          Width = 668
           Height = 360
           Foot.Font.Height = -17
           Foot.Font.Name = 'Copperplate Gothic Bold'
@@ -575,8 +574,8 @@ object Form3: TForm3
         end
         object Chart2: TChart
           Left = 0
-          Top = -1044
-          Width = 669
+          Top = -490
+          Width = 668
           Height = 360
           Foot.Font.Height = -17
           Foot.Font.Name = 'Copperplate Gothic Bold'
@@ -623,7 +622,7 @@ object Form3: TForm3
         end
         object Chart3: TChart
           Left = 3
-          Top = -526
+          Top = 28
           Width = 668
           Height = 500
           Title.Text.Strings = (
@@ -691,7 +690,7 @@ object Form3: TForm3
         end
         object StaticText4: TStaticText
           Left = 200
-          Top = -554
+          Top = 0
           Width = 301
           Height = 25
           Caption = 'Monthly Financial Analysis'
@@ -707,7 +706,7 @@ object Form3: TForm3
         end
         object Button3: TButton
           Left = 590
-          Top = -524
+          Top = 30
           Width = 75
           Height = 25
           Caption = 'Refresh'
@@ -716,7 +715,7 @@ object Form3: TForm3
         end
         object ComboBox1: TComboBox
           Left = 39
-          Top = -523
+          Top = 31
           Width = 130
           Height = 23
           TabOrder = 5
@@ -725,15 +724,15 @@ object Form3: TForm3
         end
         object Edit3: TEdit
           Left = 3
-          Top = -523
+          Top = 31
           Width = 38
           Height = 23
           TabOrder = 6
           Text = 'Edit3'
         end
         object Chart4: TChart
-          Left = -2
-          Top = -26
+          Left = -5
+          Top = 545
           Width = 668
           Height = 500
           Title.Text.Strings = (
@@ -779,8 +778,8 @@ object Form3: TForm3
         end
         object RichEdit3: TRichEdit
           Left = -2
-          Top = 149
-          Width = 657
+          Top = 703
+          Width = 668
           Height = 161
           Color = clBtnFace
           Font.Charset = ANSI_CHARSET
@@ -799,60 +798,129 @@ object Form3: TForm3
     object ZakatPage: TTabSheet
       Caption = 'Zakat'
       ImageIndex = 2
-      OnContextPopup = ZakatPageContextPopup
-      object StaticText1: TStaticText
-        Left = 36
-        Top = 40
-        Width = 4
-        Height = 4
+      object ScrollBox2: TScrollBox
+        Left = -4
+        Top = 0
+        Width = 701
+        Height = 512
         TabOrder = 0
-      end
-      object RichEdit2: TRichEdit
-        Left = 3
-        Top = 3
-        Width = 611
-        Height = 296
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        Lines.Strings = (
-          'RichEdit2')
-        ParentFont = False
-        TabOrder = 1
-      end
-      object Edit1: TEdit
-        Left = 3
-        Top = 329
-        Width = 121
-        Height = 23
-        NumbersOnly = True
-        TabOrder = 2
-        Text = 'Edit1'
-      end
-      object StaticText2: TStaticText
-        Left = 3
-        Top = 313
-        Width = 150
-        Height = 18
-        Caption = 'Enter current balance'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Stencil'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 3
-      end
-      object Button2: TButton
-        Left = 3
-        Top = 358
-        Width = 75
-        Height = 25
-        Caption = 'Enter'
-        TabOrder = 4
-        OnClick = Button2Click
+        object Edit1: TEdit
+          Left = 3
+          Top = 368
+          Width = 121
+          Height = 23
+          NumbersOnly = True
+          TabOrder = 0
+        end
+        object Button2: TButton
+          Left = 3
+          Top = 391
+          Width = 75
+          Height = 25
+          Caption = 'Enter'
+          TabOrder = 1
+          OnClick = Button2Click
+        end
+        object RichEdit2: TRichEdit
+          Left = 3
+          Top = 50
+          Width = 691
+          Height = 297
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Comic Sans MS'
+          Font.Style = [fsBold]
+          Lines.Strings = (
+            'RichEdit2')
+          ParentFont = False
+          TabOrder = 2
+        end
+        object StaticText1: TStaticText
+          Left = 36
+          Top = 40
+          Width = 4
+          Height = 4
+          TabOrder = 3
+        end
+        object StaticText2: TStaticText
+          Left = 3
+          Top = 353
+          Width = 133
+          Height = 20
+          Caption = 'Enter current balance'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Comic Sans MS'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 4
+        end
+        object StaticText3: TStaticText
+          Left = 3
+          Top = 6
+          Width = 172
+          Height = 23
+          Caption = 'Choose calculation method'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -13
+          Font.Name = 'Comic Sans MS'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 5
+        end
+        object ComboBox3: TComboBox
+          Left = 3
+          Top = 26
+          Width = 145
+          Height = 23
+          TabOrder = 6
+          Text = 'ComboBox3'
+          OnChange = ComboBox3Change
+        end
+        object ByWeightInfo: TButton
+          Left = 146
+          Top = 26
+          Width = 21
+          Height = 23
+          Caption = '!'
+          TabOrder = 7
+          OnClick = ByWeightInfoClick
+        end
+        object ManualBTInfo: TButton
+          Left = 124
+          Top = 368
+          Width = 21
+          Height = 24
+          Caption = '!'
+          TabOrder = 8
+          OnClick = ManualBTInfoClick
+        end
+        object StaticText5: TStaticText
+          Left = 509
+          Top = 353
+          Width = 177
+          Height = 20
+          Caption = 'Load Balance from App data?'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Comic Sans MS'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 9
+        end
+        object LoadFromSavings: TButton
+          Left = 544
+          Top = 368
+          Width = 136
+          Height = 25
+          Caption = 'Load'
+          TabOrder = 10
+          OnClick = LoadFromSavingsClick
+        end
       end
     end
   end

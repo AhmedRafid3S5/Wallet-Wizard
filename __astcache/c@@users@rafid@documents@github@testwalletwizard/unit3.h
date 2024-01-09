@@ -25,6 +25,8 @@
 #include<map>
 #include<numeric>
 
+using namespace std;
+
 //Extracts unique category and total amount for each category
 template <class type,class typeVal>
 class Transaction_Summary
@@ -95,10 +97,10 @@ class Transaction_Summary
 	  categoryAmount[c] += a;
 	}
     //only set to true when 'end' marker is found
-    void setMapCompletion_true()
+	void setMapCompletion_true()
 	{
-      map_complete = true;
-    }
+	  map_complete = true;
+	}
 
 	void setMapCompletion_false()
 	{
@@ -147,6 +149,9 @@ class Transaction_Summary
 };
 
 
+
+
+
 //---------------------------------------------------------------------------
 class TForm3 : public TForm
 {
@@ -176,11 +181,63 @@ __published:	// IDE-managed Components
 	TPointSeries *Series5;
 	TFastLineSeries *Series6;
 	TCustomTeeFunction *TeeFunction1;
-	TTabSheet *Tracker;
+	TTabSheet *Income;
 	TButton *Button5;
 	TRichEdit *RichEdit3;
 	TButton *MoreInfo;
-	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
+	TTabSheet *Expense;
+	TLabel *Label1;
+	TLabel *Label2;
+	TEdit *Edit2;
+	TLabel *Label3;
+	TLabel *Label4;
+	TEdit *Edit4;
+	TEdit *Edit5;
+	TEdit *Edit6;
+	TEdit *Edit7;
+	TLabel *Label5;
+	TLabel *Label6;
+	TLabel *Label7;
+	TEdit *Edit8;
+	TEdit *Edit9;
+	TEdit *Edit10;
+	TEdit *Edit11;
+	TEdit *Edit12;
+	TButton *Button1;
+	TButton *Button4;
+	TLabel *Label9;
+	TLabel *Label10;
+	TLabel *Label11;
+	TButton *Button6;
+	TLabel *Label12;
+	TButton *Button7;
+	TButton *Button8;
+	TLabel *Label8;
+	TListBox *ListBox1;
+	TEdit *Edit13;
+	TLabel *Label13;
+	TButton *Button9;
+	TEdit *Edit14;
+	TEdit *Edit15;
+	TLabel *Label14;
+	TLabel *Label15;
+	TEdit *Edit16;
+	TLabel *Label16;
+	TListBox *ListBox2;
+	TLabel *Label17;
+	TLabel *Label18;
+	TLabel *Label19;
+	TLabel *Label20;
+	TEdit *Edit17;
+	TEdit *Edit18;
+	TButton *Search;
+	TScrollBox *ScrollBox2;
+	TStaticText *StaticText3;
+	TComboBox *ComboBox3;
+	TButton *ByWeightInfo;
+	TButton *ManualBTInfo;
+	TStaticText *StaticText5;
+	TButton *LoadFromSavings;
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
@@ -198,6 +255,19 @@ __published:	// IDE-managed Components
 	void __fastcall Button4Click(TObject *Sender);
 	void __fastcall Button5Click(TObject *Sender);
 	void __fastcall MoreInfoClick(TObject *Sender);
+	void __fastcall Button1Click(TObject *Sender);
+	void __fastcall Button6Click(TObject *Sender);
+	//void __fastcall Label8Click(TObject *Sender);
+	void __fastcall Button7Click(TObject *Sender);
+	void __fastcall Button8Click(TObject *Sender);
+	void __fastcall Button9Click(TObject *Sender);
+	void __fastcall SearchClick(TObject *Sender);
+	void __fastcall ByWeightInfoClick(TObject *Sender);
+	void __fastcall ManualBTInfoClick(TObject *Sender);
+	void __fastcall ComboBox3Change(TObject *Sender);
+	void __fastcall LoadFromSavingsClick(TObject *Sender);
+
+
 
 
 
@@ -209,12 +279,68 @@ __published:	// IDE-managed Components
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm3(TComponent* Owner);
-        void drawCharts(int year ,int month);
+		void drawCharts(int year ,int month);
 
 
 };
 //---------------------------------------------------------------------------
 //My custom class
+
+
+//Base class for the income and expense tab
+//---------------------------
+class Transaction
+{
+	public:
+		Transaction(){} ;
+		virtual ~Transaction(){};
+
+		int Getmonth() { return month; }
+		void Setmonth(int val) { month = val; }
+		int Getyear() { return year; }
+		void Setyear(int val) { year = val; }
+		vector<int> Getamount() { return amount; }
+		void Addamount(int val) { amount.push_back(val); }
+		vector<UnicodeString> Getcategory() { return category; }
+		void Addcategory(UnicodeString val) { category.push_back(val); }
+		void Addnotes(UnicodeString val) { notes.push_back(val); }   //For short notes
+		map<UnicodeString,int> GetTypeToCat() { return TypeToCat; }
+		void SetTypeToCat(map<UnicodeString,int> val) { TypeToCat = val; }
+		vector<int> Getdate() { return date; }
+		void Adddate(int val) { date.push_back(val); }
+
+  //	private:
+		int month;
+		int year;
+		vector<int> amount;
+		vector<UnicodeString> category;
+		map<UnicodeString,int> TypeToCat;
+		vector<int> date;
+		vector<UnicodeString> notes;  //Will keep the notes
+};
+
+ class IncomeClass : public Transaction
+{
+	public:
+		IncomeClass(){};
+		virtual ~IncomeClass(){};
+		static int TotalIncome;
+
+	protected:
+
+	private:
+};
+class ExpenseClass : public Transaction
+{
+	public:
+		ExpenseClass(){};
+		virtual ~ExpenseClass(){};
+		static int TotalExpense;
+
+	protected:
+
+	private:
+};
 
 //---------------------------------------------------------------------------
 extern PACKAGE TForm3 *Form3;
