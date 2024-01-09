@@ -329,7 +329,7 @@ void __fastcall TForm3::ZakatPageContextPopup(TObject *Sender, TPoint &MousePos,
 	//If eligible, zakat = 2.5 % of available money
 }
 //---------------------------------------------------------------------------
-  float nisab=0;
+  //float nisab=0;
 //create a linear expense model to predict total expense for a required savings
 void update_regression_model(regression& r)
 {
@@ -610,11 +610,11 @@ void __fastcall TForm3::PageControl1Change(TObject *Sender)
 
 	 nisab = 85*unitGoldPrice;
 
-	 UnicodeString moneyThreshold = FloatToStr(nisab);
+	 //UnicodeString moneyThreshold = FloatToStr(nisab);
 
 	 //Testing with Static Text
-	 UnicodeString youMustHave = " You must have " ;
-	 UnicodeString Tk = " Tk";
+	// UnicodeString youMustHave = " You must have " ;
+	 //UnicodeString Tk = " Tk";
 	 StaticText1->Caption = "To be able to give zakat" + youMustHave + moneyThreshold + Tk;
 	  //Testing with Richedit (Can have more control over text color and fonts)
 	  RichEdit2->ReadOnly = true;

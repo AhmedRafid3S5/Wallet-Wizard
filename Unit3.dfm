@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 469
-  ClientWidth = 635
+  ClientHeight = 442
+  ClientWidth = 617
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,9 +15,9 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 635
-    Height = 469
-    ActivePage = Income
+    Width = 617
+    Height = 442
+    ActivePage = Expense
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
@@ -477,7 +477,7 @@ object Form3: TForm3
         Left = 264
         Top = 345
         Width = 70
-        Height = 24
+        Height = 23
         TabOrder = 10
         Text = 'Edit17'
       end
@@ -485,7 +485,7 @@ object Form3: TForm3
         Left = 382
         Top = 345
         Width = 81
-        Height = 24
+        Height = 23
         TabOrder = 11
         Text = 'Edit18'
       end
@@ -506,8 +506,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 627
-        Height = 442
+        Width = 603
+        Height = 406
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
@@ -517,12 +517,6 @@ object Form3: TForm3
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
-        object Chart1: TChart
-          AlignWithMargins = True
-          Left = 0
-          Top = -338
-        ExplicitWidth = 569
-        ExplicitHeight = 370
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0
@@ -733,7 +727,7 @@ object Form3: TForm3
           Width = 38
           Height = 23
           TabOrder = 6
-          Text = 'Year'
+          Text = 'Edit3'
         end
         object Chart4: TChart
           Left = -2
@@ -803,138 +797,13 @@ object Form3: TForm3
     object ZakatPage: TTabSheet
       Caption = 'Zakat'
       ImageIndex = 2
-      DesignSize = (
-        689
-        676)
-      object ScrollBox2: TScrollBox
-        AlignWithMargins = True
-        Left = 0
-        Top = 0
-        Width = 687
-        Height = 664
-        HorzScrollBar.ButtonSize = 10
-        VertScrollBar.ButtonSize = 10
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        ParentShowHint = False
-        ShowHint = False
+      OnContextPopup = ZakatPageContextPopup
+      object StaticText1: TStaticText
+        Left = 36
+        Top = 40
+        Width = 4
+        Height = 4
         TabOrder = 0
-        object StaticText1: TStaticText
-          Left = 36
-          Top = 40
-          Width = 4
-          Height = 4
-          TabOrder = 0
-        end
-        object StaticText2: TStaticText
-          Left = 3
-          Top = 353
-          Width = 133
-          Height = 20
-          Caption = 'Enter current balance'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Comic Sans MS'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 1
-        end
-        object StaticText3: TStaticText
-          Left = 3
-          Top = 3
-          Width = 172
-          Height = 23
-          Caption = 'Choose calculation method'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -13
-          Font.Name = 'Comic Sans MS'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 2
-        end
-        object RichEdit2: TRichEdit
-          Left = 3
-          Top = 43
-          Width = 686
-          Height = 304
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Comic Sans MS'
-          Font.Style = [fsBold]
-          Lines.Strings = (
-            'RichEdit2')
-          ParentFont = False
-          TabOrder = 3
-        end
-        object Edit1: TEdit
-          Left = 3
-          Top = 379
-          Width = 121
-          Height = 23
-          NumbersOnly = True
-          TabOrder = 4
-        end
-        object ComboBox3: TComboBox
-          Left = 3
-          Top = 21
-          Width = 145
-          Height = 23
-          TabOrder = 5
-          Text = 'ComboBox3'
-          OnChange = ComboBox3Change
-        end
-        object Button2: TButton
-          Left = 3
-          Top = 402
-          Width = 75
-          Height = 23
-          Caption = 'Enter'
-          TabOrder = 6
-          OnClick = Button2Click
-        end
-        object LoadFromSavings: TButton
-          Left = 544
-          Top = 376
-          Width = 136
-          Height = 25
-          Caption = 'Load'
-          TabOrder = 7
-          OnClick = LoadFromSavingsClick
-        end
-        object StaticText5: TStaticText
-          Left = 509
-          Top = 353
-          Width = 177
-          Height = 20
-          Caption = 'Load Balance from App data?'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Comic Sans MS'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 8
-        end
-        object ByWeightInfo: TButton
-          Left = 146
-          Top = 21
-          Width = 21
-          Height = 23
-          Caption = '!'
-          TabOrder = 9
-          OnClick = ByWeightInfoClick
-        end
-        object ManualBTInfo: TButton
-          Left = 124
-          Top = 379
-          Width = 21
-          Height = 24
-          Caption = '!'
-          TabOrder = 10
-          OnClick = ManualBTInfoClick
-        end
       end
       object RichEdit2: TRichEdit
         Left = 3

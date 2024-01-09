@@ -196,8 +196,8 @@ __published:	// IDE-managed Components
 	TTabSheet *TabSheet1;
 	TTabSheet *Income;
 	TButton *Button5;
-	TRichEdit *RichEdit3;
-	TButton *MoreInfo;
+	//TRichEdit *RichEdit3;
+	//TButton *MoreInfo;
 	TTabSheet *Expense;
 	TLabel *Label1;
 	TLabel *Label2;
@@ -271,6 +271,8 @@ __published:	// IDE-managed Components
 	void __fastcall Button8Click(TObject *Sender);
 	void __fastcall Button9Click(TObject *Sender);
 	void __fastcall SearchClick(TObject *Sender);
+	void __fastcall Button4Click(TObject *Sender);
+	void __fastcall Button5Click(TObject *Sender);
 
 
 
