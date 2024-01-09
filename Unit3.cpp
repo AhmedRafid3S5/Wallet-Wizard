@@ -132,6 +132,8 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 	Edit14->Text = "";
 	Edit15->Text = "";
 	Edit16->Text = "";
+	Edit17->Text = "";
+	Edit18->Text = "";
 
 
 
@@ -787,72 +789,72 @@ void AddIncomeOperations()
   void AddNewIncomeEntry(UnicodeString Amount, UnicodeString Source, UnicodeString Date, UnicodeString Month, UnicodeString Year, UnicodeString Note)
 {
 	int A = StrToInt(Amount);
-    int D = StrToInt(Date);
-    int M = StrToInt(Month);
+	int D = StrToInt(Date);
+	int M = StrToInt(Month);
 	int Y = StrToInt(Year);
 
-    if (Source.Pos(" ") != 0)
+	if (Source.Pos(" ") != 0)
 	{
-        ShowMessage("Source Name Cannot Be More Than One Word");
-        return;
-	}
-
-    if (A < 0)
-	{
-        ShowMessage("Amount cannot be negative");
+		ShowMessage("Source Name Cannot Be More Than One Word");
 		return;
 	}
 
-    if (D <= 0 || M <= 0 || Y <= 0 || M > 12 || D > 31)
+	if (A < 0)
 	{
-        ShowMessage("Invalid date input.");
-        return;
+		ShowMessage("Amount cannot be negative");
+		return;
 	}
 
-    if (M == 2 && ((Y % 4 == 0 && Y % 100 != 0) || (Y % 400 == 0)))
+	if (D <= 0 || M <= 0 || Y <= 0 || M > 12 || D > 31)
 	{
-        if (D > 29)
-        {
+		ShowMessage("Invalid date input.");
+		return;
+	}
+
+	if (M == 2 && ((Y % 4 == 0 && Y % 100 != 0) || (Y % 400 == 0)))
+	{
+		if (D > 29)
+		{
 			ShowMessage("Invalid date for February in a leap year.");
-            return;
-        }
+			return;
+		}
 	}
-    else
-    {
+	else
+	{
 		static const int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        if (D > daysInMonth[M])
-        {
+		if (D > daysInMonth[M])
+		{
 			ShowMessage("Invalid date for the given month.");
-            return;
-        }
+			return;
+		}
 	}
 
-    for (int i = 0; i < IncomeRead.size(); i++)
+	for (int i = 0; i < IncomeRead.size(); i++)
 	{
-        if (IncomeRead[i].Getmonth() == M && IncomeRead[i].Getyear() == Y)
-        {
+		if (IncomeRead[i].Getmonth() == M && IncomeRead[i].Getyear() == Y)
+		{
 			IncomeRead[i].Adddate(D);
-            IncomeRead[i].Addamount(A);
-            IncomeRead[i].Addcategory(Source);
+			IncomeRead[i].Addamount(A);
+			IncomeRead[i].Addcategory(Source);
 			IncomeRead[i].Addnotes(Note);
-            break;
-        }
+			break;
+		}
 	}
 
 	SortIncome();
 
 	std::ofstream outFile(incomeledger);
-    if (!outFile.is_open())
+	if (!outFile.is_open())
 	{
-        ShowMessage("Cannot open file");
+		ShowMessage("Cannot open file");
 		return;
-    }
+	}
 
-    for (auto& income : IncomeRead)
+	for (auto& income : IncomeRead)
 	{
-        std::stringstream ss;
+		std::stringstream ss;
 		ss << "Start" << std::endl;
-        ss << income.Getyear() << std::endl;
+		ss << income.Getyear() << std::endl;
 		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
 
 		for (size_t i = 0; i < income.date.size(); ++i)
@@ -875,7 +877,7 @@ void AddIncomeOperations()
 			return;
 		}
 	}
-        outFile.close();
+		outFile.close();
 
 	std::ofstream outFile2(incomewithnotes);
 	if (!outFile2.is_open())
@@ -1038,12 +1040,12 @@ void AddExpenseOperations()
 		   ShowMessage("Category Name Cannot Be More Than One Word");
 		   return;
 	   }
-        if(A <0)
+		if(A <0)
 	   {
 		   ShowMessage("Amount cannot be negative");
 		   return;
 	   }
-       	// Validate the input date
+		// Validate the input date
 	if (D <= 0 || M <= 0 || Y <= 0 || M > 12 || D > 31)
 	{
 		ShowMessage("Invalid date input.");
@@ -1190,12 +1192,12 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 		   ShowMessage("Source Name Cannot Be More Than One Word");
 		   return;
 	   }
-        if(A <0)
+		if(A <0)
 	   {
 		   ShowMessage("Amount cannot be negative");
 		   return;
 	   }
-       	// Validate the input date
+		// Validate the input date
 	if (D <= 0 || M <= 0 || Y <= 0 || M > 12 || D > 31)
 	{
 		ShowMessage("Invalid date input.");
@@ -1280,7 +1282,7 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 		}
 	}
 	outFile.close();
-    	std::ofstream outFile2(incomewithnotes);
+		std::ofstream outFile2(incomewithnotes);
 	if (!outFile2.is_open())
 	{
 		ShowMessage("Cannot open file");
@@ -1331,7 +1333,7 @@ void __fastcall TForm3::Button4Click(TObject *Sender)
   }
   else
   {
-		AddIncomeOperations() ;
+		AddIncomeOperations();
 		UnicodeString Amount=Edit2->Text;
 		UnicodeString Source=Edit7->Text;
 		UnicodeString Date=Edit4->Text;
@@ -1371,7 +1373,7 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 		   ShowMessage("Amount cannot be negative");
 		   return;
 	   }
-       	// Validate the input date
+		// Validate the input date
 	if (D <= 0 || M <= 0 || Y <= 0 || M > 12 || D > 31)
 	{
 		ShowMessage("Invalid date input.");
@@ -1457,7 +1459,7 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 	outExpenseFile.close();
 
 	//writing notes oin file
-    std::ofstream outExpenseFile2(expensewithnotes);
+	std::ofstream outExpenseFile2(expensewithnotes);
 	if (!outExpenseFile2.is_open()) {
 		ShowMessage("Cannot open Ledger file");
 		return;
@@ -1514,14 +1516,14 @@ if( Edit8->Text == ""||Edit9->Text == "" ||Edit10->Text == ""||Edit11->Text == "
 		UnicodeString expenseYear=Edit12->Text;
 		UnicodeString expenseNote=Edit16->Text;
 		EditExpenseEntry(expenseAmnt,expenseCat, expenseDate, expenseMonth, expenseYear,expenseNote);
-        AddIncomeOperations();
+		AddIncomeOperations();
 		refreshSavings();
   }
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm3::Button8Click(TObject *Sender)
 {
-       TDateTime currentDate = Now();
+	   TDateTime currentDate = Now();
 	year = YearOf(currentDate);
 	month = MonthOf(currentDate);
 	day = DayOf(currentDate);
@@ -1529,26 +1531,172 @@ void __fastcall TForm3::Button8Click(TObject *Sender)
 		Edit11->Text=month;
 		Edit12->Text=year;
 }
+
+//---------------------------------------------------------------------------
+//Function to find the searched income class object
+IncomeClass FindIncomeClassObject(int IM, int IY)
+{
+
+	   int flag = 0;
+
+	   for(int i=0; i< IncomeRead.size(); i++)
+	   {
+		   if(IncomeRead[i].Getmonth() == IM && IncomeRead[i].Getyear() == IY)
+		   {
+			   flag++;
+			   IncomeClass curr = IncomeRead[i];
+			   return curr;
+		   }
+	   }
+
+	   if(flag == 0)
+	   {
+		   IncomeClass Empty;
+		   return  Empty;
+	   }
+}
+
+
 //---------------------------------------------------------------------------
 void __fastcall TForm3::Button9Click(TObject *Sender)
 {
-   ListBox1->Items->Clear();
-   ListBox1->Items->Add( "Testing works" );
-   ListBox1->Items->Add( "Rumman will implement this" );
-   ListBox1->Items->Add( "Best of luck" );
-   //UnicodeString selectedMonth=
-   //UnicodeString selectedyear=
-   //call function
-   //IncomeClass found= findObj;
-   //for(i.......)
-   //unicodestring date,category,Note,amount
-   //date=found.date[i] ,category,Note,amount
-   //unicodestring line 1= date + " " + catergory +am
-   //Listbox1->Items->Add(line1 );
-	  //Listbox1->Items->Add(Note );
-	  //loop end
+	ListBox1->Items->Clear();
+
+	AddIncomeOperations();
+
+   //ListBox1->Items->Add( "Testing works" );
+
+   if(Edit14->Text == "" || Edit15->Text == "")
+   {
+	   ShowMessage("Please Provide Valid Input In All Fields.");
+	   return;
+   }
+
+	  UnicodeString IncomeSelectedMonth = Edit14->Text;
+	  UnicodeString IncomeSelectedYear =  Edit15->Text;
+
+		int IM =StrToInt(IncomeSelectedMonth);
+		int IY =StrToInt(IncomeSelectedYear);
+
+	   if(IM <= 0 || IY <= 0 || IM > 12)
+		{
+		ShowMessage("Invalid date input.");
+		return;
+		}
+
+	  IncomeClass found = FindIncomeClassObject(IM, IY);
+
+	  if(found.date.size() == 0)
+	  {
+		UnicodeString ErrLine = "No Record Found.";
+		ListBox1->Items->Add(ErrLine);
+      }
+
+	  else
+	  {
+         for(int i=0; i<found.date.size(); i++)
+	  {
+		  UnicodeString fdate, fcategory, fnote, famount;
+		  fdate =  found.date[i];
+		  fcategory = found.category[i];
+		  fnote = found.notes[i];
+		  famount = found.amount[i];
+
+		  UnicodeString iline1 = "Date: " + fdate + "    Source: " + fcategory + "    Amount: " + famount;
+		  UnicodeString iline2 = "Short Note: "+ fnote;
+
+		  ListBox1->Items->Add(iline1);
+		  ListBox1->Items->Add(iline2);
+
+	  }
+      }
+
+
 
 }
 //---------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------
+//Function to find the searched Expense class object
+
+ExpenseClass FindExpenseClassObject(int EM, int EY)
+{
+
+	   int flag = 0;
+
+	   for(int i=0; i< ExpenseRead.size(); i++)
+	   {
+		   if(ExpenseRead[i].Getmonth() == EM && ExpenseRead[i].Getyear() == EY)
+		   {
+			   flag++;
+			   ExpenseClass curr = ExpenseRead[i];
+			   return curr;
+		   }
+	   }
+
+       if(flag == 0)
+	   {
+		   ExpenseClass Empty;
+		   return  Empty;
+	   }
+}
+
+
+
+
+void __fastcall TForm3::SearchClick(TObject *Sender)
+{
+		  ListBox2->Items->Clear();
+
+		  AddExpenseOperations();
+
+		  if(Edit17->Text == "" || Edit18->Text == "")
+		  {
+		   ShowMessage("Please Provide Valid Input In All Fields.");
+		   return;
+		  }
+
+		  UnicodeString ExpenseSelectedMonth = Edit17->Text;
+		  UnicodeString ExpenseSelectedYear=  Edit18->Text;
+
+          int EM =StrToInt(ExpenseSelectedMonth);
+		  int EY =StrToInt(ExpenseSelectedYear);
+
+		 if(EM <= 0 || EY <= 0 || EM > 12)
+		 {
+		  ShowMessage("Invalid date input.");
+		  return;
+		 }
+
+		 ExpenseClass found = FindExpenseClassObject(EM, EY);
+
+		 if(found.date.size() == 0)
+		 {
+			   UnicodeString ErrLine = "No Record Found.";
+			   ListBox2->Items->Add(ErrLine);
+         }
+
+		 else
+		 {
+           for(int i=0; i<found.date.size(); i++)
+		   {
+		  UnicodeString fdate, fcategory, fnote, famount;
+		  fdate =  found.date[i];
+		  fcategory = found.category[i];
+		  fnote = found.notes[i];
+		  famount = found.amount[i];
+
+		  UnicodeString eline1 = "Date: " + fdate + "    Source: " + fcategory + "    Amount: " + famount;
+		  UnicodeString eline2 = "Short Note: "+ fnote;
+
+		  ListBox2->Items->Add(eline1);
+		  ListBox2->Items->Add(eline2);
+
+		  }
+         }
+
+
+
+}
+//---------------------------------------------------------------------------
 

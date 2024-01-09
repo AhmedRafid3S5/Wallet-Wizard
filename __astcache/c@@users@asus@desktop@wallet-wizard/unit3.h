@@ -195,7 +195,6 @@ __published:	// IDE-managed Components
 	TEdit *Edit5;
 	TEdit *Edit6;
 	TEdit *Edit7;
-	TMemo *Memo1;
 	TLabel *Label5;
 	TLabel *Label6;
 	TLabel *Label7;
@@ -212,9 +211,26 @@ __published:	// IDE-managed Components
 	TButton *Button6;
 	TLabel *Label12;
 	TButton *Button7;
-	TMemo *Memo2;
 	TButton *Button8;
 	TLabel *Label8;
+	TListBox *ListBox1;
+	TEdit *Edit13;
+	TLabel *Label13;
+	TButton *Button9;
+	TEdit *Edit14;
+	TEdit *Edit15;
+	TLabel *Label14;
+	TLabel *Label15;
+	TEdit *Edit16;
+	TLabel *Label16;
+	TListBox *ListBox2;
+	TLabel *Label17;
+	TLabel *Label18;
+	TLabel *Label19;
+	TLabel *Label20;
+	TEdit *Edit17;
+	TEdit *Edit18;
+	TButton *Search;
 	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
@@ -238,6 +254,8 @@ __published:	// IDE-managed Components
 	//void __fastcall Label8Click(TObject *Sender);
 	void __fastcall Button7Click(TObject *Sender);
 	void __fastcall Button8Click(TObject *Sender);
+	void __fastcall Button9Click(TObject *Sender);
+	void __fastcall SearchClick(TObject *Sender);
 
 
 
@@ -275,6 +293,7 @@ class Transaction
 		void Addamount(int val) { amount.push_back(val); }
 		vector<UnicodeString> Getcategory() { return category; }
 		void Addcategory(UnicodeString val) { category.push_back(val); }
+		void Addnotes(UnicodeString val) { notes.push_back(val); }   //For short notes
 		map<UnicodeString,int> GetTypeToCat() { return TypeToCat; }
 		void SetTypeToCat(map<UnicodeString,int> val) { TypeToCat = val; }
 		vector<int> Getdate() { return date; }
@@ -287,6 +306,7 @@ class Transaction
 		vector<UnicodeString> category;
 		map<UnicodeString,int> TypeToCat;
 		vector<int> date;
+		vector<UnicodeString> notes;  //Will keep the notes
 };
 
  class IncomeClass : public Transaction
