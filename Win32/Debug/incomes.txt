@@ -114,8 +114,9 @@ Start
 05 Freelance 1250
 06 Salary 4000
 08 Bonus 500
-09 Bonus 500
+09 Bonus 1000
 09 Bonus 400
+09 Freelance 500
 10 Investment 2600
 15 Gifts 600
 20 Bonus 1200

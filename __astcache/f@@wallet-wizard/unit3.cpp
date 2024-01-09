@@ -18,6 +18,8 @@
 #define userledger "ledger.txt"
 #define incomeledger "incomes.txt"
 #define saving "savings.txt"
+#define incomewithnotes "incomenotes.txt"
+#define expensewithnotes "ledgernotes.txt"
 #define Total_Tabs 5
 #include "Unit3.h"
 #include "Regression.h"
@@ -49,6 +51,9 @@ std::vector<int> i_amount;
 int IncomeClass::TotalIncome=0;
 vector<IncomeClass> IncomeRead;
 vector<ExpenseClass> ExpenseRead;
+//IncomeClass SearchedIncome;
+//ExpenseClass SearchedExpense;
+
 void loadGoldFile()
 {
       // URL of the webpage
@@ -123,6 +128,11 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 	Edit10->Text = "";
 	Edit11->Text = "";
 	Edit12->Text = "";
+	Edit13->Text = "";
+	Edit14->Text = "";
+	Edit15->Text = "";
+	Edit16->Text = "";
+
 
 
 }
@@ -141,6 +151,7 @@ void SortIncome()
 				   swap(IncomeRead[i].date[k],IncomeRead[i].date[k+1]);
 				   swap(IncomeRead[i].amount[k],IncomeRead[i].amount[k+1]);
 				   swap(IncomeRead[i].category[k],IncomeRead[i].category[k+1]);
+				   swap(IncomeRead[i].notes[k],IncomeRead[i].notes[k+1]);
 			   }
 		   }
 	   }
@@ -161,6 +172,7 @@ void SortExpense()
 				   swap(ExpenseRead[i].date[k],ExpenseRead[i].date[k+1]);
 				   swap(ExpenseRead[i].amount[k],ExpenseRead[i].amount[k+1]);
 				   swap(ExpenseRead[i].category[k],ExpenseRead[i].category[k+1]);
+					swap(ExpenseRead[i].notes[k],ExpenseRead[i].notes[k+1]);
 			   }
 		   }
 	   }
@@ -727,7 +739,7 @@ void __fastcall TForm3::Chart4Scroll(TObject *Sender)
 void AddIncomeOperations()
 {
 	 IncomeRead.clear() ;
-	 ifstream inputFile(incomeledger);
+	 ifstream inputFile(incomewithnotes);
 	if (!inputFile.is_open()) {
 		ShowMessage("Failed to open the file.");
 		return;
@@ -755,8 +767,11 @@ void AddIncomeOperations()
 					fileinput.Adddate(day);
 					UnicodeString c = UnicodeString(category.c_str());
 					fileinput.Addcategory(c);
-					fileinput.Addamount(amount);
+					fileinput.Addamount(amount);  //extra for notes
 					IncomeClass::TotalIncome+=amount;
+					getline(inputFile, line);
+					UnicodeString L = UnicodeString(line.c_str());
+					fileinput.Addnotes(L);
 				}
 			}
 			IncomeRead.push_back(fileinput);
@@ -769,100 +784,146 @@ void AddIncomeOperations()
 	 }
 	 inputFile.close();
 }
-   void AddNewIncomeEntry(UnicodeString Amount ,UnicodeString Source,UnicodeString Date,UnicodeString Month,UnicodeString Year)
-   {
-	   //ShowMessage("Function is being called");
-	   int A =StrToInt(Amount);
-	   int D =StrToInt(Date);
-	   int M =StrToInt(Month);
-	   int Y =StrToInt(Year);
-	   if(Source.Pos(" ") != 0)
-	   {
-		   ShowMessage("Source Name Cannot Be More Than One Word");
-		   return;
-	   }
-	   if(A <0)
-	   {
-		   ShowMessage("Amount cannot be negative");
-		   return;
-	   }
-		// Validate the input date
-	if (D <= 0 || M <= 0 || Y <= 0 || M > 12 || D > 31)
+  void AddNewIncomeEntry(UnicodeString Amount, UnicodeString Source, UnicodeString Date, UnicodeString Month, UnicodeString Year, UnicodeString Note)
+{
+	int A = StrToInt(Amount);
+    int D = StrToInt(Date);
+    int M = StrToInt(Month);
+	int Y = StrToInt(Year);
+
+    if (Source.Pos(" ") != 0)
 	{
-		ShowMessage("Invalid date input.");
+        ShowMessage("Source Name Cannot Be More Than One Word");
+        return;
+	}
+
+    if (A < 0)
+	{
+        ShowMessage("Amount cannot be negative");
 		return;
 	}
 
-	// Validate the date based on the month and year
-	if (M == 2 && ((Y % 4 == 0 && Y % 100 != 0) || (Y % 400 == 0)))
+    if (D <= 0 || M <= 0 || Y <= 0 || M > 12 || D > 31)
 	{
-		if (D > 29)
-		{
+        ShowMessage("Invalid date input.");
+        return;
+	}
+
+    if (M == 2 && ((Y % 4 == 0 && Y % 100 != 0) || (Y % 400 == 0)))
+	{
+        if (D > 29)
+        {
 			ShowMessage("Invalid date for February in a leap year.");
-			return;
-		}
+            return;
+        }
 	}
-	else
-	{
+    else
+    {
 		static const int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-		if (D > daysInMonth[M])
-		{
+        if (D > daysInMonth[M])
+        {
 			ShowMessage("Invalid date for the given month.");
-			return;
-		}
-	}
-	   for(int i=0;i<IncomeRead.size();i++)
-		 {
-			if(IncomeRead[i].Getmonth() == M && IncomeRead[i].Getyear() == Y)
-			{
-			 IncomeRead[i].Adddate(D);
-			 IncomeRead[i].Addamount(A);
-			 IncomeRead[i].Addcategory(Source);
-			 break;
-			}
-		 }
-		 SortIncome();
-		 //ShowMessage("Received data " + Amount );
-		 std::ofstream outFile(incomeledger);
-	if (!outFile.is_open()) {
-		ShowMessage("Cannot open file");
-		return;
+            return;
+        }
 	}
 
-	for ( auto& income : IncomeRead) {
-		std::stringstream ss;
-		// Start tag
+    for (int i = 0; i < IncomeRead.size(); i++)
+	{
+        if (IncomeRead[i].Getmonth() == M && IncomeRead[i].Getyear() == Y)
+        {
+			IncomeRead[i].Adddate(D);
+            IncomeRead[i].Addamount(A);
+            IncomeRead[i].Addcategory(Source);
+			IncomeRead[i].Addnotes(Note);
+            break;
+        }
+	}
+
+	SortIncome();
+
+	std::ofstream outFile(incomeledger);
+    if (!outFile.is_open())
+	{
+        ShowMessage("Cannot open file");
+		return;
+    }
+
+    for (auto& income : IncomeRead)
+	{
+        std::stringstream ss;
 		ss << "Start" << std::endl;
-		// Year and Month
-		ss << income.Getyear() << std::endl;
+        ss << income.Getyear() << std::endl;
 		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
-		// Data entries
-		for (size_t i = 0; i < income.date.size(); ++i) {
+
+		for (size_t i = 0; i < income.date.size(); ++i)
+		{
 			wstring wstr = income.category[i].c_str();
-			string cat= string(wstr.begin(), wstr.end());
+			string cat = string(wstr.begin(), wstr.end());
 			ss << std::setw(2) << income.date[i] << " "
 			   << cat << " "
 			   << income.amount[i] << std::endl;
 		}
-		 //string(income.category[i].c_str())
-		// End tag
+
 		ss << "End" << std::endl;
 		outFile << ss.str();
+
 		if (outFile.fail())
 		{
 			std::cerr << "Error writing to the output file!" << std::endl;
 			ShowMessage("Error writing to the output file.");
-			outFile.close();  // Close the file before returning
+			outFile.close();
 			return;
 		}
 	}
-	outFile.close();
+        outFile.close();
+
+	std::ofstream outFile2(incomewithnotes);
+	if (!outFile2.is_open())
+	{
+		ShowMessage("Cannot open file");
+		return;
+	}
+
+	for (auto& income : IncomeRead)
+	{
+		std::stringstream ss;
+		ss << "Start" << std::endl;
+		ss << income.Getyear() << std::endl;
+		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
+
+		for (size_t i = 0; i < income.date.size(); ++i)
+		{
+			wstring wstr = income.category[i].c_str();
+			string cat = string(wstr.begin(), wstr.end());
+			ss << std::setw(2) << income.date[i] << " "
+			   << cat << " "
+			   << income.amount[i] << std::endl;
+			wstring wnotes = income.notes[i].c_str();
+			string snotes=   string(wnotes.begin(), wnotes.end());
+			ss << snotes << std::endl;
+		}
+
+		ss << "End" << std::endl;
+		outFile2 << ss.str();
+
+		if (outFile2.fail())
+		{
+			std::cerr << "Error writing to the output file!" << std::endl;
+			ShowMessage("Error writing to the output file.");
+			outFile2.close();
+			return;
+		}
+	}
+
+	outFile2.close();
+
 	ShowMessage("New entry added to your income");
 	return;
-   }
+}
+
 void __fastcall TForm3::Button5Click(TObject *Sender)
 {
-  if( Edit2->Text == ""||Edit4->Text == "" ||Edit5->Text == ""||Edit6->Text == "" || Edit5->Text == "")
+  if( Edit2->Text == ""||Edit4->Text == "" ||Edit5->Text == ""||Edit6->Text == "" || Edit5->Text == ""||Edit13->Text == "")
   {
 	  ShowMessage("Please Provide Valid Input In All Fields.");
   }
@@ -874,7 +935,8 @@ void __fastcall TForm3::Button5Click(TObject *Sender)
 		UnicodeString Date=Edit4->Text;
 		UnicodeString Month=Edit5->Text;
 		UnicodeString Year=Edit6->Text;
-		AddNewIncomeEntry(Amount,Source,Date,Month,Year);
+		UnicodeString Note= Edit13->Text;
+		AddNewIncomeEntry(Amount,Source,Date,Month,Year,Note);
 		AddExpenseOperations();
 		refreshSavings();
   }
@@ -919,7 +981,7 @@ void __fastcall TForm3::MoreInfoClick(TObject *Sender)
 void AddExpenseOperations()
 {
 	 ExpenseRead.clear() ;
-	 ifstream inputExpenseFile(userledger);
+	 ifstream inputExpenseFile(expensewithnotes);
 	if (!inputExpenseFile.is_open()) {
 		ShowMessage("Failed to open Ledger the file.");
 		return;
@@ -949,6 +1011,9 @@ void AddExpenseOperations()
 					fileExpenseinput.Addcategory(c);
 					fileExpenseinput.Addamount(amount);
 					//IncomeClass::TotalIncome+=amount;
+					getline(inputExpenseFile, line);
+					UnicodeString L = UnicodeString(line.c_str());
+					fileExpenseinput.Addnotes(L);
 				}
 			}
 			ExpenseRead.push_back(fileExpenseinput);
@@ -961,7 +1026,7 @@ void AddExpenseOperations()
 	 }
 	 inputExpenseFile.close();
 }
- void AddNewExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString exDate,UnicodeString exMonth,UnicodeString exYear)
+ void AddNewExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString exDate,UnicodeString exMonth,UnicodeString exYear,UnicodeString exNote)
    {
 	   //ShowMessage("Function is being called");
 	   int A =StrToInt(exAmnt);
@@ -1010,6 +1075,7 @@ void AddExpenseOperations()
 			 ExpenseRead[i].Adddate(D);
 			 ExpenseRead[i].Addamount(A);
 			 ExpenseRead[i].Addcategory(exCat);
+			 ExpenseRead[i].Addnotes(exNote);
 			 break;
 			}
 		 }
@@ -1049,12 +1115,52 @@ void AddExpenseOperations()
 		}
 	}
 	outExpenseFile.close();
+
+
+	//for writing notes in file
+	 std::ofstream outExpenseFile2(expensewithnotes);
+	if (!outExpenseFile2.is_open()) {
+		ShowMessage("Cannot open Ledger file");
+		return;
+	}
+
+	for ( auto& exp : ExpenseRead) {
+		std::stringstream ss;
+		// Start tag
+		ss << "Start" << std::endl;
+		// Year and Month
+		ss << exp.Getyear() << std::endl;
+		ss << std::setfill('0') << std::setw(2) << exp.Getmonth() << std::endl;
+		// Data entries
+		for (size_t i = 0; i < exp.date.size(); ++i) {
+			wstring wstr = exp.category[i].c_str();
+			string cat= string(wstr.begin(), wstr.end());
+			ss << std::setw(2) << exp.date[i] << " "
+			   << cat << " "
+			   << exp.amount[i] << std::endl;
+			  wstring wnotes = exp.notes[i].c_str();
+			string snotes=   string(wnotes.begin(), wnotes.end());
+			ss << snotes << std::endl;
+		}
+		 //string(income.category[i].c_str())
+		// End tag
+		ss << "End" << std::endl;
+		outExpenseFile2 << ss.str();
+		if (outExpenseFile2.fail())
+		{
+			std::cerr << "Error writing to the output file!" << std::endl;
+			ShowMessage("Error writing to the output file.");
+			outExpenseFile2.close();  // Close the file before returning
+			return;
+		}
+	}
+	outExpenseFile2.close();
 	ShowMessage("New entry added to your Expense");
 	return;
    }
 void __fastcall TForm3::Button1Click(TObject *Sender)
 {
- if( Edit8->Text == ""||Edit9->Text == "" ||Edit10->Text == ""||Edit11->Text == "" || Edit12->Text == "")
+ if( Edit8->Text == ""||Edit9->Text == "" ||Edit10->Text == ""||Edit11->Text == "" || Edit12->Text == ""||Edit16->Text == "")
   {
 	  ShowMessage("Please Provide Valid Input In All Fields.");
   }
@@ -1066,12 +1172,13 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 		UnicodeString expenseDate=Edit10->Text;
 		UnicodeString expenseMonth=Edit11->Text;
 		UnicodeString expenseYear=Edit12->Text;
-		AddNewExpenseEntry(expenseAmnt,expenseCat, expenseDate, expenseMonth, expenseYear);
+		UnicodeString expenseNote= Edit16->Text;
+		AddNewExpenseEntry(expenseAmnt,expenseCat, expenseDate, expenseMonth, expenseYear,expenseNote);
 		AddIncomeOperations();
 		refreshSavings();
   }
 }
-  void EditIncomeEntry(UnicodeString Amount ,UnicodeString Source,UnicodeString Date,UnicodeString Month,UnicodeString Year)
+  void EditIncomeEntry(UnicodeString Amount ,UnicodeString Source,UnicodeString Date,UnicodeString Month,UnicodeString Year,UnicodeString Note)
    {
 	   //ShowMessage("Function is being called");
 	   int A =StrToInt(Amount);
@@ -1118,12 +1225,15 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 		 {
 			if(IncomeRead[i].Getmonth() == M && IncomeRead[i].Getyear() == Y)
 			{
+			//IncomeClass found= IncomeRead[i];
+			//return found
 			  for(int j=0;j< IncomeRead[i].category.size();j++)
 			  {
 				  if(IncomeRead[i].category[j]== Source && IncomeRead[i].date[j]== D)
 				  {
 					   flag++;
 					   IncomeRead[i].amount[j]=A;
+					   IncomeRead[i].notes[j]=Note;
 					   break;
 				  }
 			  }
@@ -1170,13 +1280,52 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 		}
 	}
 	outFile.close();
+    	std::ofstream outFile2(incomewithnotes);
+	if (!outFile2.is_open())
+	{
+		ShowMessage("Cannot open file");
+		return;
+	}
+
+	for (auto& income : IncomeRead)
+	{
+		std::stringstream ss;
+		ss << "Start" << std::endl;
+		ss << income.Getyear() << std::endl;
+		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
+
+		for (size_t i = 0; i < income.date.size(); ++i)
+		{
+			wstring wstr = income.category[i].c_str();
+			string cat = string(wstr.begin(), wstr.end());
+			ss << std::setw(2) << income.date[i] << " "
+			   << cat << " "
+			   << income.amount[i] << std::endl;
+			wstring wnotes = income.notes[i].c_str();
+			string snotes=   string(wnotes.begin(), wnotes.end());
+			ss << snotes << std::endl;
+		}
+
+		ss << "End" << std::endl;
+		outFile2 << ss.str();
+
+		if (outFile2.fail())
+		{
+			std::cerr << "Error writing to the output file!" << std::endl;
+			ShowMessage("Error writing to the output file.");
+			outFile2.close();
+			return;
+		}
+	}
+
+	outFile2.close();
 		ShowMessage("Requested Edit Completed");
 	return;
    }
 //---------------------------------------------------------------------------
 void __fastcall TForm3::Button4Click(TObject *Sender)
 {
- if( Edit2->Text == ""||Edit4->Text == "" ||Edit5->Text == ""||Edit6->Text == "" || Edit5->Text == "")
+ if( Edit2->Text == ""||Edit4->Text == "" ||Edit5->Text == ""||Edit6->Text == "" || Edit5->Text == "" ||Edit13->Text == "")
   {
 	  ShowMessage("Please Provide Valid Input In All Fields.");
   }
@@ -1188,8 +1337,9 @@ void __fastcall TForm3::Button4Click(TObject *Sender)
 		UnicodeString Date=Edit4->Text;
 		UnicodeString Month=Edit5->Text;
 		UnicodeString Year=Edit6->Text;
-		EditIncomeEntry(Amount,Source,Date,Month,Year);
-        AddExpenseOperations();
+		UnicodeString Note= Edit13->Text;
+		EditIncomeEntry(Amount,Source,Date,Month,Year,Note);
+		AddExpenseOperations();
 		refreshSavings();
   }
 }
@@ -1204,7 +1354,7 @@ void __fastcall TForm3::Button6Click(TObject *Sender)
 		Edit6->Text=year;
 }
 //---------------------------------------------------------------------------
-void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString exDate,UnicodeString exMonth,UnicodeString exYear)
+void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString exDate,UnicodeString exMonth,UnicodeString exYear,UnicodeString exNote)
    {
 	   //ShowMessage("Function is being called");
 	   int A =StrToInt(exAmnt);
@@ -1258,6 +1408,7 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 				  {
 					   flag++;
 					   ExpenseRead[i].amount[j]=A;
+					   ExpenseRead[i].notes[j]=exNote;
 					   break;
 				  }
 			  }
@@ -1304,13 +1455,52 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 		}
 	}
 	outExpenseFile.close();
+
+	//writing notes oin file
+    std::ofstream outExpenseFile2(expensewithnotes);
+	if (!outExpenseFile2.is_open()) {
+		ShowMessage("Cannot open Ledger file");
+		return;
+	}
+
+	for ( auto& exp : ExpenseRead) {
+		std::stringstream ss;
+		// Start tag
+		ss << "Start" << std::endl;
+		// Year and Month
+		ss << exp.Getyear() << std::endl;
+		ss << std::setfill('0') << std::setw(2) << exp.Getmonth() << std::endl;
+		// Data entries
+		for (size_t i = 0; i < exp.date.size(); ++i) {
+			wstring wstr = exp.category[i].c_str();
+			string cat= string(wstr.begin(), wstr.end());
+			ss << std::setw(2) << exp.date[i] << " "
+			   << cat << " "
+			   << exp.amount[i] << std::endl;
+			  wstring wnotes = exp.notes[i].c_str();
+			string snotes=   string(wnotes.begin(), wnotes.end());
+			ss << snotes << std::endl;
+		}
+		 //string(income.category[i].c_str())
+		// End tag
+		ss << "End" << std::endl;
+		outExpenseFile2 << ss.str();
+		if (outExpenseFile2.fail())
+		{
+			std::cerr << "Error writing to the output file!" << std::endl;
+			ShowMessage("Error writing to the output file.");
+			outExpenseFile2.close();  // Close the file before returning
+			return;
+		}
+	}
+	outExpenseFile2.close();
 	ShowMessage("Requested Edit Completed");
 	return;
    }
 
 void __fastcall TForm3::Button7Click(TObject *Sender)
 {
-if( Edit8->Text == ""||Edit9->Text == "" ||Edit10->Text == ""||Edit11->Text == "" || Edit12->Text == "")
+if( Edit8->Text == ""||Edit9->Text == "" ||Edit10->Text == ""||Edit11->Text == "" ||Edit16->Text == ""|| Edit12->Text == "")
   {
 	  ShowMessage("Please Provide Valid Input In All Fields.");
   }
@@ -1322,7 +1512,8 @@ if( Edit8->Text == ""||Edit9->Text == "" ||Edit10->Text == ""||Edit11->Text == "
 		UnicodeString expenseDate=Edit10->Text;
 		UnicodeString expenseMonth=Edit11->Text;
 		UnicodeString expenseYear=Edit12->Text;
-		EditExpenseEntry(expenseAmnt,expenseCat, expenseDate, expenseMonth, expenseYear);
+		UnicodeString expenseNote=Edit16->Text;
+		EditExpenseEntry(expenseAmnt,expenseCat, expenseDate, expenseMonth, expenseYear,expenseNote);
         AddIncomeOperations();
 		refreshSavings();
   }
@@ -1339,3 +1530,25 @@ void __fastcall TForm3::Button8Click(TObject *Sender)
 		Edit12->Text=year;
 }
 //---------------------------------------------------------------------------
+void __fastcall TForm3::Button9Click(TObject *Sender)
+{
+   ListBox1->Items->Clear();
+   ListBox1->Items->Add( "Testing works" );
+   ListBox1->Items->Add( "Rumman will implement this" );
+   ListBox1->Items->Add( "Best of luck" );
+   //UnicodeString selectedMonth=
+   //UnicodeString selectedyear=
+   //call function
+   //IncomeClass found= findObj;
+   //for(i.......)
+   //unicodestring date,category,Note,amount
+   //date=found.date[i] ,category,Note,amount
+   //unicodestring line 1= date + " " + catergory +am
+   //Listbox1->Items->Add(line1 );
+	  //Listbox1->Items->Add(Note );
+	  //loop end
+
+}
+//---------------------------------------------------------------------------
+
+

@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 448
-  ClientWidth = 603
+  ClientHeight = 415
+  ClientWidth = 589
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,20 +15,18 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 603
-    Height = 448
+    Width = 589
+    Height = 415
     ActivePage = Income
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
-    ExplicitWidth = 553
-    ExplicitHeight = 382
     object Income: TTabSheet
       Caption = 'Income'
       ImageIndex = 3
       object Label1: TLabel
-        Left = 174
-        Top = 16
+        Left = 150
+        Top = 3
         Width = 209
         Height = 38
         Caption = 'Income Tracker'
@@ -54,7 +52,7 @@ object Form3: TForm3
       end
       object Label3: TLabel
         Left = 30
-        Top = 160
+        Top = 156
         Width = 66
         Height = 26
         Caption = 'Amount'
@@ -67,7 +65,7 @@ object Form3: TForm3
       end
       object Label4: TLabel
         Left = 32
-        Top = 225
+        Top = 215
         Width = 42
         Height = 26
         Caption = 'Date'
@@ -79,8 +77,8 @@ object Form3: TForm3
         ParentFont = False
       end
       object Label9: TLabel
-        Left = 30
-        Top = 64
+        Left = 27
+        Top = 60
         Width = 129
         Height = 29
         Caption = 'Add Or Edit '
@@ -93,17 +91,17 @@ object Form3: TForm3
       end
       object Label10: TLabel
         Left = 80
-        Top = 232
+        Top = 223
         Width = 76
         Height = 15
         Caption = 'DD/MM/YYYY'
       end
       object Label11: TLabel
-        Left = 360
-        Top = 59
-        Width = 69
+        Left = 320
+        Top = 60
+        Width = 177
         Height = 29
-        Caption = 'Search'
+        Caption = 'Search By Date'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -21
@@ -111,9 +109,48 @@ object Form3: TForm3
         Font.Style = []
         ParentFont = False
       end
+      object Label13: TLabel
+        Left = 32
+        Top = 273
+        Width = 112
+        Height = 29
+        Caption = 'Short Note'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Comic Sans MS'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label14: TLabel
+        Left = 320
+        Top = 279
+        Width = 55
+        Height = 30
+        Caption = 'Month'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Comic Sans MS'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label15: TLabel
+        Left = 389
+        Top = 279
+        Width = 41
+        Height = 26
+        Caption = 'Year'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Comic Sans MS'
+        Font.Style = []
+        ParentFont = False
+      end
       object Button5: TButton
-        Left = 30
-        Top = 303
+        Left = 32
+        Top = 344
         Width = 75
         Height = 25
         Caption = 'Add '
@@ -122,7 +159,7 @@ object Form3: TForm3
       end
       object Edit2: TEdit
         Left = 30
-        Top = 192
+        Top = 186
         Width = 100
         Height = 23
         TabOrder = 1
@@ -130,7 +167,7 @@ object Form3: TForm3
       end
       object Edit4: TEdit
         Left = 30
-        Top = 257
+        Top = 244
         Width = 44
         Height = 23
         TabOrder = 2
@@ -138,7 +175,7 @@ object Form3: TForm3
       end
       object Edit5: TEdit
         Left = 80
-        Top = 257
+        Top = 244
         Width = 44
         Height = 23
         TabOrder = 3
@@ -146,7 +183,7 @@ object Form3: TForm3
       end
       object Edit6: TEdit
         Left = 130
-        Top = 257
+        Top = 244
         Width = 75
         Height = 23
         TabOrder = 4
@@ -160,40 +197,72 @@ object Form3: TForm3
         TabOrder = 5
         Text = 'Edit7'
       end
-      object Memo1: TMemo
-        Left = 360
-        Top = 94
-        Width = 185
-        Height = 186
-        Lines.Strings = (
-          'Memo1')
-        TabOrder = 6
-      end
       object Button4: TButton
-        Left = 136
-        Top = 303
+        Left = 130
+        Top = 344
         Width = 75
         Height = 25
         Caption = 'Edit'
-        TabOrder = 7
+        TabOrder = 6
         OnClick = Button4Click
       end
       object Button6: TButton
         Left = 162
-        Top = 225
+        Top = 212
         Width = 43
         Height = 26
         Caption = 'Auto'
-        TabOrder = 8
+        TabOrder = 7
         OnClick = Button6Click
+      end
+      object ListBox1: TListBox
+        Left = 320
+        Top = 99
+        Width = 250
+        Height = 174
+        ItemHeight = 15
+        TabOrder = 8
+      end
+      object Edit13: TEdit
+        Left = 32
+        Top = 304
+        Width = 173
+        Height = 34
+        TabOrder = 9
+        Text = 'Edit13'
+      end
+      object Button9: TButton
+        Left = 480
+        Top = 303
+        Width = 75
+        Height = 25
+        Caption = 'Search'
+        TabOrder = 10
+        OnClick = Button9Click
+      end
+      object Edit14: TEdit
+        Left = 320
+        Top = 304
+        Width = 63
+        Height = 23
+        TabOrder = 11
+        Text = 'Edit14'
+      end
+      object Edit15: TEdit
+        Left = 389
+        Top = 304
+        Width = 85
+        Height = 23
+        TabOrder = 12
+        Text = 'Edit15'
       end
     end
     object Expense: TTabSheet
       Caption = 'Expense'
       ImageIndex = 4
       object Label5: TLabel
-        Left = 192
-        Top = 24
+        Left = 156
+        Top = 27
         Width = 213
         Height = 31
         Caption = 'EXPENSE TRACKER'
@@ -205,8 +274,8 @@ object Form3: TForm3
         ParentFont = False
       end
       object Label6: TLabel
-        Left = 43
-        Top = 148
+        Left = 21
+        Top = 123
         Width = 78
         Height = 30
         Caption = 'Amount'
@@ -218,8 +287,8 @@ object Form3: TForm3
         ParentFont = False
       end
       object Label7: TLabel
-        Left = 43
-        Top = 80
+        Left = 21
+        Top = 56
         Width = 92
         Height = 32
         Caption = 'Category'
@@ -231,15 +300,15 @@ object Form3: TForm3
         ParentFont = False
       end
       object Label12: TLabel
-        Left = 98
-        Top = 237
+        Left = 74
+        Top = 200
         Width = 76
         Height = 15
         Caption = 'DD/MM/YYYY'
       end
       object Label8: TLabel
-        Left = 43
-        Top = 225
+        Left = 19
+        Top = 188
         Width = 49
         Height = 30
         Caption = 'Date'
@@ -250,49 +319,62 @@ object Form3: TForm3
         Font.Style = []
         ParentFont = False
       end
+      object Label16: TLabel
+        Left = 19
+        Top = 253
+        Width = 112
+        Height = 29
+        Caption = 'Short Note'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -21
+        Font.Name = 'Comic Sans MS'
+        Font.Style = []
+        ParentFont = False
+      end
       object Edit8: TEdit
-        Left = 43
-        Top = 184
+        Left = 19
+        Top = 159
         Width = 138
         Height = 23
         TabOrder = 0
         Text = 'Edit8'
       end
       object Edit9: TEdit
-        Left = 43
-        Top = 119
+        Left = 21
+        Top = 94
         Width = 136
         Height = 23
         TabOrder = 1
         Text = 'Edit9'
       end
       object Edit10: TEdit
-        Left = 43
-        Top = 262
+        Left = 21
+        Top = 224
         Width = 57
         Height = 23
         TabOrder = 2
         Text = 'Edit10'
       end
       object Edit11: TEdit
-        Left = 106
-        Top = 262
+        Left = 84
+        Top = 224
         Width = 65
         Height = 23
         TabOrder = 3
         Text = 'Edit11'
       end
       object Edit12: TEdit
-        Left = 184
-        Top = 262
+        Left = 156
+        Top = 224
         Width = 65
         Height = 23
         TabOrder = 4
         Text = 'Edit12'
       end
       object Button1: TButton
-        Left = 43
-        Top = 312
+        Left = 21
+        Top = 320
         Width = 70
         Height = 25
         Caption = 'Add'
@@ -306,31 +388,38 @@ object Form3: TForm3
         OnClick = Button1Click
       end
       object Button7: TButton
-        Left = 152
-        Top = 312
+        Left = 120
+        Top = 320
         Width = 75
         Height = 25
         Caption = 'Edit'
         TabOrder = 6
         OnClick = Button7Click
       end
-      object Memo2: TMemo
-        Left = 352
-        Top = 112
-        Width = 217
-        Height = 185
-        Lines.Strings = (
-          'Memo2')
-        TabOrder = 7
-      end
       object Button8: TButton
-        Left = 192
-        Top = 231
-        Width = 57
-        Height = 25
+        Left = 168
+        Top = 191
+        Width = 45
+        Height = 27
         Caption = 'Auto'
-        TabOrder = 8
+        TabOrder = 7
         OnClick = Button8Click
+      end
+      object Edit16: TEdit
+        Left = 19
+        Top = 280
+        Width = 202
+        Height = 34
+        TabOrder = 8
+        Text = 'Edit16'
+      end
+      object ListBox2: TListBox
+        Left = 352
+        Top = 103
+        Width = 201
+        Height = 179
+        ItemHeight = 15
+        TabOrder = 9
       end
     end
     object Analytics: TTabSheet
@@ -340,8 +429,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 581
-        Height = 399
+        Width = 567
+        Height = 366
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False

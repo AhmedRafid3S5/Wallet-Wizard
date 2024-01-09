@@ -1,0 +1,392 @@
+Start
+2023
+01
+01 Donations 100
+Expense added as Donations category
+01 Bills 252
+Expense added as Bills category
+05 Rent 7000
+Expense added as Rent category
+05 Food 70
+Expense added as Food category
+06 Food 80
+Expense added as Food category
+10 Games 750
+Expense added as Games category
+11 Food 50
+Expense added as Food category
+14 Games 3000
+Expense added as Games category
+15 Clothes 450
+Expense added as Clothes category
+15 Food 500
+Expense added as Food category
+16 Electricity_Bill 760
+Expense added as Electricity_Bill category
+17 Donations 3000
+Expense added as Donations category
+End
+Start
+2023
+02
+02 Games 450
+Expense added as Games category
+05 Rent 7000
+Expense added as Rent category
+05 Food 70
+Expense added as Food category
+06 Food 80
+Expense added as Food category
+10 Games 750
+Expense added as Games category
+11 Food 50
+Expense added as Food category
+14 Games 3000
+Expense added as Games category
+15 Clothes 450
+Expense added as Clothes category
+15 Food 500
+Expense added as Food category
+16 Electricity_Bill 760
+Expense added as Electricity_Bill category
+17 Groceries 1000
+Expense added as Groceries category
+20 Groceries 450
+Expense added as Groceries category
+End
+Start
+2023
+03
+02 Games 450
+Expense added as Games category
+05 Rent 7000
+Expense added as Rent category
+05 Food 70
+Expense added as Food category
+06 Food 80
+Expense added as Food category
+10 Games 750
+Expense added as Games category
+11 Food 50
+Expense added as Food category
+14 Games 3000
+Expense added as Games category
+15 Clothes 450
+15 Food 500
+16 Electricity_Bill 760
+Expense added as Electricity_Bill category
+17 Groceries 1000
+Expense added as Groceries category
+20 Groceries 450
+Expense added as Groceries category
+25 Appliances 2000
+Expense added as Appliances category
+End
+Start
+2023
+04
+02 Travel 250
+Expense added as Travel category
+05 Entertainment 6000
+Expense added as Entertainment category
+05 Dining 90
+Expense added as Dining category
+06 Shopping 120
+Expense added as Shopping category
+10 Hobbies 800
+Expense added as Hobbies category
+11 Dining 45
+Expense added as Dining category
+14 Travel 2800
+Expense added as Travel category
+15 Electronics 300
+Expense added as Electronics category
+15 Groceries 400
+Expense added as Groceries category
+16 Rent 700
+Expense added as Rent category
+17 Health 1200
+Expense added as Health category
+20 Home_Decor 350
+Expense added as Home_Decor category
+25 Utilities 1500
+Expense added as Utilities category
+End
+Start
+2023
+05
+02 Travel 250
+Expense added as Travel category
+05 Entertainment 600
+Expense added as Entertainment category
+05 Dining 90
+Expense added as Dining category
+06 Shopping 120
+Expense added as Shopping category
+10 Hobbies 800
+Expense added as Hobbies category
+11 Dining 45
+Expense added as Dining category
+14 Travel 2800
+Expense added as Travel category
+15 Electronics 300
+Expense added as Electronics category
+15 Groceries 400
+Expense added as Groceries category
+16 Rent 700
+Expense added as Rent category
+17 Health 1200
+Expense added as Health category
+20 Home_Decor 350
+Expense added as Home_Decor category
+25 Utilities 1500
+Expense added as Utilities category
+End
+Start
+2023
+06
+02 Travel 250
+Expense added as Travel category
+05 Entertainment 600
+Expense added as Entertainment category
+05 Dining 90
+Expense added as Dining category
+06 Shopping 120
+Expense added as Shopping category
+10 Hobbies 800
+Expense added as Hobbies category
+11 Dining 45
+Expense added as Dining category
+14 Travel 2800
+Expense added as Travel category
+15 Electronics 300
+Expense added as Electronics category
+15 Groceries 400
+Expense added as Groceries category
+16 Rent 700
+Expense added as Rent category
+17 Health 1200
+Expense added as Health category
+20 Home_Decor 350
+Expense added as Home_Decor category
+25 Utilities 1500
+Expense added as Utilities category
+End
+Start
+2023
+07
+02 Travel 250
+Expense added as Travel category
+05 Entertainment 600
+Expense added as Entertainment category
+05 Dining 90
+Expense added as Dining category
+06 Shopping 120
+Expense added as Shopping category
+10 Hobbies 800
+Expense added as Hobbies category
+11 Dining 45
+Expense added as Dining category
+14 Travel 2800
+Expense added as Travel category
+15 Electronics 300
+Expense added as Electronics category
+15 Groceries 400
+Expense added as Groceries category
+16 Rent 700
+Expense added as Rent category
+17 Health 1200
+Expense added as Health category
+20 Home_Decor 350
+Expense added as Home_Decor category
+25 Utilities 1500
+Expense added as Utilities category
+End
+Start
+2023
+08
+02 Travel 250
+Expense added as Travel category
+05 Entertainment 600
+Expense added as Entertainment category
+05 Dining 90
+Expense added as Dining category
+06 Shopping 120
+Expense added as Shopping category
+10 Hobbies 800
+Expense added as Hobbies category
+11 Dining 45
+Expense added as Dining category
+14 Travel 2800
+Expense added as Travel category
+15 Electronics 300
+Expense added as Electronics category
+15 Groceries 400
+Expense added as Groceries category
+16 Rent 700
+Expense added as Rent category
+17 Health 1200
+Expense added as Health category
+20 Home_Decor 350
+Expense added as Home_Decor category
+25 Utilities 1500
+Expense added as Utilities category
+End
+Start
+2023
+09
+02 Travel 250
+Expense added as Travel category
+05 Entertainment 600
+Expense added as Entertainment category
+05 Dining 90
+Expense added as Dining category
+06 Shopping 120
+Expense added as Shopping category
+10 Hobbies 800
+Expense added as Hobbies category
+11 Dining 45
+Expense added as Dining category
+14 Travel 2800
+Expense added as Travel category
+15 Electronics 300
+Expense added as Electronics category
+15 Groceries 400
+Expense added as Groceries category
+16 Rent 700
+Expense added as Rent category
+17 Health 1200
+Expense added as Health category
+20 Home_Decor 350
+Expense added as Home_Decor category
+25 Utilities 1500
+Expense added as Utilities category
+End
+Start
+2023
+10
+02 Travel 250
+Expense added as Travel category
+05 Entertainment 600
+Expense added as Entertainment category
+05 Dining 90
+Expense added as Dining category
+06 Shopping 120
+Expense added as Shopping category
+10 Hobbies 800
+Expense added as Hobbies category
+11 Dining 45
+Expense added as Dining category
+14 Travel 2800
+Expense added as Travel category
+15 Electronics 300
+Expense added as Electronics category
+15 Groceries 400
+Expense added as Groceries category
+16 Rent 700
+Expense added as Rent category
+17 Health 1200
+Expense added as Health category
+20 Home_Decor 350
+Expense added as Home_Decor category
+25 Utilities 1500
+Expense added as Utilities category
+End
+Start
+2023
+11
+02 Travel 250
+Expense added as Travel category
+05 Entertainment 600
+Expense added as Entertainment category
+05 Dining 90
+Expense added as Dining category
+06 Shopping 120
+Expense added as Shopping category
+10 Hobbies 800
+Expense added as Hobbies category
+11 Dining 45
+Expense added as Dining category
+14 Travel 2800
+Expense added as Travel category
+15 Electronics 300
+Expense added as Electronics category
+15 Groceries 400
+Expense added as Groceries category
+16 Rent 700
+Expense added as Rent category
+17 Health 1200
+Expense added as Health category
+20 Home_Decor 350
+Expense added as Home_Decor category
+25 Utilities 1500
+Expense added as Utilities category
+End
+Start
+2023
+12
+02 Travel 250
+Expense added as Travel category
+05 Entertainment 600
+Expense added as Entertainment category
+05 Dining 90
+Expense added as Dining category
+06 Shopping 120
+Expense added as Shopping category
+10 Hobbies 800
+Expense added as Hobbies category
+11 Dining 45
+Expense added as Dining category
+14 Travel 2800
+Expense added as Travel category
+15 Electronics 300
+Expense added as Electronics category
+15 Groceries 400
+Expense added as Groceries category
+16 Rent 700
+Expense added as Rent category
+17 Health 1200
+Expense added as Health category
+20 Home_Decor 350
+Expense added as Home_Decor category
+25 Utilities 1500
+Expense added as Utilities category
+End
+Start
+2024
+01
+02 Travel 250
+Expense added as Travel category
+05 Entertainment 600
+Expense added as Entertainment category
+05 Dining 90
+Expense added as Dining category
+06 Shopping 1200
+Expense added as Shopping category
+09 Car 6000
+Repaired my car
+10 Hobbies 800
+Expense added as Hobbies category
+11 Dining 45
+Expense added as Dining category
+14 Travel 2800
+Expense added as Travel category
+15 Electronics 300
+Expense added as Electronics category
+15 Groceries 400
+Expense added as Groceries category
+16 Rent 700
+Expense added as Rent category
+17 Health 1200
+Expense added as Health category
+20 Home_Decor 350
+Expense added as Home_Decor category
+20 Dining 1850
+Expense added as Dining category
+25 Utilities 1500
+Expense added as Utilities category
+27 Utilities 5000
+Expense added as Utilities category
+28 Travel 3500
+Expense added as Travel category
+End
