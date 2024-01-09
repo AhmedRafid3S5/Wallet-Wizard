@@ -698,9 +698,10 @@ void __fastcall TForm3::Series3ClickPointer(TCustomSeries *Sender, int ValueInde
    double xValue_prevMonth = Sender->XValues->Value[ValueIndex-1] -1;
    double yValue_prevMonth = Sender->YValues->Value[ValueIndex-1];
    double chng = yValue - yValue_prevMonth;
+
    UnicodeString info_cmp = "";
    if(ComboBox2->ItemIndex == 0){
-   UnicodeString info_avg = " Month = " + FormatSettings.LongMonthNames[xValue] + ", Average Income = " + FloatToStr(yValue) + " TK";
+   UnicodeString info_avg = " Month = " + FormatSettings.LongMonthNames[ (int)xValue%12 -1] + ", Average Income = " + FloatToStr(yValue) + " TK";
 
    if(chng < 0)
    {
@@ -719,7 +720,7 @@ void __fastcall TForm3::Series3ClickPointer(TCustomSeries *Sender, int ValueInde
    }
    }
    else if(ComboBox2->ItemIndex == 1){
-   UnicodeString info_avg = " Month = " + FormatSettings.LongMonthNames[xValue] + ", Total Income = " + FloatToStr(yValue) + " TK";
+   UnicodeString info_avg = " Month = " + FormatSettings.LongMonthNames[ (int)xValue%12 -1] + ", Total Income = " + FloatToStr(yValue) + " TK";
 
    if(chng < 0)
    {
@@ -752,7 +753,7 @@ void __fastcall TForm3::Series4ClickPointer(TCustomSeries *Sender, int ValueInde
    double chng = yValue - yValue_prevMonth;
    UnicodeString info_cmp = "";
    if(ComboBox2->ItemIndex == 0){
-   UnicodeString info_avg = " Month = " + FormatSettings.LongMonthNames[xValue] + ", Average Expense = " + FloatToStr(yValue) + " TK";
+   UnicodeString info_avg = " Month = " + FormatSettings.LongMonthNames[(int)xValue%12] + ", Average Expense = " + FloatToStr(yValue) + " TK";
    if(chng < 0)
    {
 	  info_cmp = "Average expense has decreased by " + FloatToStr(abs(chng)) + " Tk since last month";
@@ -770,7 +771,7 @@ void __fastcall TForm3::Series4ClickPointer(TCustomSeries *Sender, int ValueInde
    }
    }
    else if(ComboBox2->ItemIndex == 1){
-   UnicodeString info_avg = " Month = " + FormatSettings.LongMonthNames[xValue] + ", Total Expense = " + FloatToStr(yValue) + " TK";
+   UnicodeString info_avg = " Month = " + FormatSettings.LongMonthNames[(int)xValue%12] + ", Total Expense = " + FloatToStr(yValue) + " TK";
    if(chng < 0)
    {
 	  info_cmp = "Total expense has decreased by " + FloatToStr(abs(chng)) + " Tk since last month";
