@@ -1,4 +1,4 @@
-﻿//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 #include <vcl.h>
 #include <IdHTTP.hpp>
 #include <SysUtils.hpp>
@@ -1725,23 +1725,21 @@ void __fastcall TForm3::Button8Click(TObject *Sender)
 IncomeClass FindIncomeClassObject(int IM, int IY)
 {
 
-	   int flag = 0;
 
 	   for(int i=0; i< IncomeRead.size(); i++)
 	   {
 		   if(IncomeRead[i].Getmonth() == IM && IncomeRead[i].Getyear() == IY)
 		   {
-			   flag++;
+
 			   IncomeClass curr = IncomeRead[i];
 			   return curr;
 		   }
 	   }
 
-	   if(flag == 0)
-	   {
+
 		   IncomeClass Empty;
 		   return  Empty;
-	   }
+
 }
 
 
@@ -1818,23 +1816,21 @@ void __fastcall TForm3::Button9Click(TObject *Sender)
 ExpenseClass FindExpenseClassObject(int EM, int EY)
 {
 
-	   int flag = 0;
+
 
 	   for(int i=0; i< ExpenseRead.size(); i++)
 	   {
 		   if(ExpenseRead[i].Getmonth() == EM && ExpenseRead[i].Getyear() == EY)
 		   {
-			   flag++;
 			   ExpenseClass curr = ExpenseRead[i];
 			   return curr;
 		   }
 	   }
 
-       if(flag == 0)
-	   {
+
 		   ExpenseClass Empty;
 		   return  Empty;
-	   }
+
 }
 
 
@@ -2079,5 +2075,6 @@ UnicodeString newCategory = Edit9->Text.Trim();  // Get the text from Edit9 and 
     }
 }
 //---------------------------------------------------------------------------
+
 
 
