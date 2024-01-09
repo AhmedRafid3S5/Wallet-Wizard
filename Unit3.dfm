@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 492
-  ClientWidth = 678
+  ClientHeight = 483
+  ClientWidth = 672
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,9 +15,9 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 678
-    Height = 492
-    ActivePage = Expense
+    Width = 672
+    Height = 483
+    ActivePage = Income
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
@@ -287,11 +287,12 @@ object Form3: TForm3
       end
       object Button12: TButton
         Left = 176
-        Top = 423
+        Top = 424
         Width = 57
         Height = 26
         Caption = 'Delete'
         TabOrder = 15
+        OnClick = Button12Click
       end
     end
     object Expense: TTabSheet
@@ -571,6 +572,7 @@ object Form3: TForm3
         Height = 25
         Caption = 'Delete'
         TabOrder = 15
+        OnClick = Button13Click
       end
     end
     object Analytics: TTabSheet
@@ -580,8 +582,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 664
-        Height = 456
+        Width = 658
+        Height = 447
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False

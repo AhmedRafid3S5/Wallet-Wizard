@@ -378,7 +378,7 @@ Expense added as Electronics category
 15 Groceries 400
 Expense added as Groceries category
 16 Rent 700
-Expense added as Rent category
+Expense added as Rent Category
 17 Health 1200
 Expense added as Health category
 20 Home_Decor 350

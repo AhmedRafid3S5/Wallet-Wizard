@@ -170,7 +170,7 @@ Start
 2024
 01
 01 Salary 69000
-Added income from Salary Source
+added salary
 03 Bonus 400
 Added income from Bonus Source
 05 Freelance 1250

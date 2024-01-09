@@ -276,6 +276,8 @@ __published:	// IDE-managed Components
 	void __fastcall LoadFromSavingsClick(TObject *Sender);
 	void __fastcall Button10Click(TObject *Sender);
 	void __fastcall Button11Click(TObject *Sender);
+	void __fastcall Button12Click(TObject *Sender);
+	void __fastcall Button13Click(TObject *Sender);
 
 
 
