@@ -1,0 +1,194 @@
+Start
+2023
+01
+01 Salary 50000
+Added income from Salary Source
+05 Freelance 800
+Added income from Freelance Source
+10 Investment 1200
+Added income from Investment Source
+15 Gifts 300
+Added income from Gifts Source
+20 Bonus 600
+Added income from Bonus Source
+End
+Start
+2023
+02
+01 Salary 52000
+Added income from Salary Source
+05 Freelance 850
+Added income from Freelance Source
+10 Investment 1300
+Added income from Investment Source
+15 Gifts 350
+Added income from Gifts Source
+20 Bonus 700
+Added income from Bonus Source
+End
+Start
+2023
+03
+01 Salary 53000
+Added income from Salary Source
+05 Freelance 880
+Added income from Freelance Source
+10 Investment 1400
+Added income from Investment Source
+15 Gifts 370
+Added income from Gifts Source
+20 Bonus 750
+Added income from Bonus Source
+End
+Start
+2023
+04
+01 Salary 55000
+Added income from Salary Source
+05 Freelance 920
+Added income from Freelance Source
+10 Investment 1500
+Added income from Investment Source
+15 Gifts 400
+Added income from Gifts Source
+20 Bonus 800
+Added income from Bonus Source
+End
+Start
+2023
+05
+01 Salary 56000
+Added income from Salary Source
+05 Freelance 950
+Added income from Freelance Source
+10 Investment 1600
+Added income from Investment Source
+15 Gifts 420
+Added income from Gifts Source
+20 Bonus 850
+Added income from Bonus Source
+End
+Start
+2023
+06
+01 Salary 58000
+Added income from Salary Source
+05 Freelance 980
+Added income from Freelance Source
+10 Investment 1700
+Added income from Investment Source
+15 Gifts 450
+Added income from Gifts Source
+20 Bonus 900
+Added income from Bonus Source
+End
+Start
+2023
+07
+01 Salary 59000
+Added income from Salary Source
+05 Freelance 1000
+Added income from Freelance Source
+10 Investment 1800
+Added income from Investment Source
+15 Gifts 470
+Added income from Gifts Source
+20 Bonus 950
+Added income from Bonus Source
+End
+Start
+2023
+08
+01 Salary 60000
+Added income from Salary Source
+05 Freelance 1050
+Added income from Freelance Source
+10 Investment 1900
+Added income from Investment Source
+15 Gifts 500
+Added income from Gifts Source
+20 Bonus 1000
+Added income from Bonus Source
+End
+Start
+2023
+09
+01 Salary 62000
+Added income from Salary Source
+05 Freelance 1100
+Added income from Freelance Source
+10 Investment 2000
+Added income from Investment Source
+15 Gifts 530
+Added income from Gifts Source
+20 Bonus 1050
+Added income from Bonus Source
+End
+Start
+2023
+10
+01 Salary 63000
+Added income from Salary Source
+05 Freelance 1150
+Added income from Freelance Source
+10 Investment 2100
+Added income from Investment Source
+15 Gifts 550
+Added income from Gifts Source
+20 Bonus 1100
+Added income from Bonus Source
+End
+Start
+2023
+11
+01 Salary 65000
+Added income from Salary Source
+05 Freelance 1200
+Added income from Freelance Source
+10 Investment 2200
+Added income from Investment Source
+15 Gifts 580
+Added income from Gifts Source
+20 Bonus 1150
+Added income from Bonus Source
+End
+Start
+2023
+12
+01 Salary 66000
+Added income from Salary Source
+05 Freelance 1250
+Added income from Freelance Source
+10 Investment 2300
+Added income from Investment Source
+15 Gifts 600
+Added income from Gifts Source
+20 Bonus 1200
+Added income from Bonus Source
+End
+Start
+2024
+01
+01 Salary 69000
+Added income from Salary Source
+03 Bonus 400
+Added income from Bonus Source
+05 Freelance 1250
+Added income from Freelance Source
+06 Salary 4000
+Added income from Salary Source
+08 Bonus 500
+Added income from Bonus Source
+09 Bonus 1000
+salami from baba
+09 Bonus 400
+Added income from Bonus Source
+09 Freelance 500
+Did some freelancing
+10 Investment 2600
+Added income from Investment Source
+15 Gifts 600
+Added income from Gifts Source
+20 Bonus 1200
+Added income from Bonus Source
+End

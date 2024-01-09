@@ -2,7 +2,7 @@ Start
 2023
 01
 01 Donations 100
-01 Bills 400
+01 Bills 252
 05 Rent 7000
 05 Food 70
 06 Food 80
@@ -41,7 +41,6 @@ Start
 11 Food 50
 14 Games 3000
 15 Clothes 450
-15 Food 500
 16 Electricity_Bill 760
 17 Groceries 1000
 20 Groceries 450
@@ -207,6 +206,7 @@ Start
 05 Entertainment 600
 05 Dining 90
 06 Shopping 1200
+09 Car 6000
 10 Hobbies 800
 11 Dining 45
 14 Travel 2800
@@ -215,5 +215,8 @@ Start
 16 Rent 700
 17 Health 1200
 20 Home_Decor 350
+20 Dining 1850
 25 Utilities 1500
+27 Utilities 5000
+28 Travel 3500
 End

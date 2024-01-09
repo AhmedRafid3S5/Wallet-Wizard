@@ -1,7 +1,7 @@
 Start
 2023
 01
-01 Salary 5000
+01 Salary 50000
 05 Freelance 800
 10 Investment 1200
 15 Gifts 300
@@ -10,7 +10,7 @@ End
 Start
 2023
 02
-01 Salary 5200
+01 Salary 52000
 05 Freelance 850
 10 Investment 1300
 15 Gifts 350
@@ -19,7 +19,7 @@ End
 Start
 2023
 03
-01 Salary 5300
+01 Salary 53000
 05 Freelance 880
 10 Investment 1400
 15 Gifts 370
@@ -28,7 +28,7 @@ End
 Start
 2023
 04
-01 Salary 5500
+01 Salary 55000
 05 Freelance 920
 10 Investment 1500
 15 Gifts 400
@@ -37,7 +37,7 @@ End
 Start
 2023
 05
-01 Salary 5600
+01 Salary 56000
 05 Freelance 950
 10 Investment 1600
 15 Gifts 420
@@ -46,7 +46,7 @@ End
 Start
 2023
 06
-01 Salary 5800
+01 Salary 58000
 05 Freelance 980
 10 Investment 1700
 15 Gifts 450
@@ -55,7 +55,7 @@ End
 Start
 2023
 07
-01 Salary 5900
+01 Salary 59000
 05 Freelance 1000
 10 Investment 1800
 15 Gifts 470
@@ -64,7 +64,7 @@ End
 Start
 2023
 08
-01 Salary 6000
+01 Salary 60000
 05 Freelance 1050
 10 Investment 1900
 15 Gifts 500
@@ -73,7 +73,7 @@ End
 Start
 2023
 09
-01 Salary 6200
+01 Salary 62000
 05 Freelance 1100
 10 Investment 2000
 15 Gifts 530
@@ -82,7 +82,7 @@ End
 Start
 2023
 10
-01 Salary 6300
+01 Salary 63000
 05 Freelance 1150
 10 Investment 2100
 15 Gifts 550
@@ -91,7 +91,7 @@ End
 Start
 2023
 11
-01 Salary 6500
+01 Salary 65000
 05 Freelance 1200
 10 Investment 2200
 15 Gifts 580
@@ -100,7 +100,7 @@ End
 Start
 2023
 12
-01 Salary 6600
+01 Salary 66000
 05 Freelance 1250
 10 Investment 2300
 15 Gifts 600
@@ -109,8 +109,14 @@ End
 Start
 2024
 01
-01 Salary 6900
+01 Salary 69000
+03 Bonus 400
 05 Freelance 1250
+06 Salary 4000
+08 Bonus 500
+09 Bonus 1000
+09 Bonus 400
+09 Freelance 500
 10 Investment 2600
 15 Gifts 600
 20 Bonus 1200
