@@ -367,6 +367,8 @@ Expense added as Shopping category
 Repaired my car
 10 Hobbies 800
 Expense added as Hobbies category
+10 Bills 700
+Electricity bill(Updated)
 11 Dining 45
 Expense added as Dining category
 14 Travel 2800

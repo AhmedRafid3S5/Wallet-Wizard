@@ -238,6 +238,12 @@ __published:	// IDE-managed Components
 	TButton *ManualBTInfo;
 	TStaticText *StaticText5;
 	TButton *LoadFromSavings;
+	TButton *Button10;
+	TLabel *Label21;
+	TComboBox *ComboBox5;
+	TButton *Button11;
+	TLabel *Label22;
+	TComboBox *ComboBox4;
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
@@ -266,6 +272,8 @@ __published:	// IDE-managed Components
 	void __fastcall ManualBTInfoClick(TObject *Sender);
 	void __fastcall ComboBox3Change(TObject *Sender);
 	void __fastcall LoadFromSavingsClick(TObject *Sender);
+	void __fastcall Button10Click(TObject *Sender);
+	void __fastcall Button11Click(TObject *Sender);
 
 
 

@@ -208,6 +208,7 @@ Start
 06 Shopping 1200
 09 Car 6000
 10 Hobbies 800
+10 Bills 700
 11 Dining 45
 14 Travel 2800
 15 Electronics 300

@@ -224,7 +224,26 @@ __published:	// IDE-managed Components
 	TEdit *Edit16;
 	TLabel *Label16;
 	TListBox *ListBox2;
-	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
+	TLabel *Label17;
+	TLabel *Label18;
+	TLabel *Label19;
+	TLabel *Label20;
+	TEdit *Edit17;
+	TEdit *Edit18;
+	TButton *Search;
+	TScrollBox *ScrollBox2;
+	TStaticText *StaticText3;
+	TComboBox *ComboBox3;
+	TButton *ByWeightInfo;
+	TButton *ManualBTInfo;
+	TStaticText *StaticText5;
+	TButton *LoadFromSavings;
+	TButton *Button10;
+	TLabel *Label21;
+	TComboBox *ComboBox5;
+	TButton *Button11;
+	TLabel *Label22;
+	TComboBox *ComboBox4;
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
@@ -248,6 +267,13 @@ __published:	// IDE-managed Components
 	void __fastcall Button7Click(TObject *Sender);
 	void __fastcall Button8Click(TObject *Sender);
 	void __fastcall Button9Click(TObject *Sender);
+	void __fastcall SearchClick(TObject *Sender);
+	void __fastcall ByWeightInfoClick(TObject *Sender);
+	void __fastcall ManualBTInfoClick(TObject *Sender);
+	void __fastcall ComboBox3Change(TObject *Sender);
+	void __fastcall LoadFromSavingsClick(TObject *Sender);
+	void __fastcall Button10Click(TObject *Sender);
+	void __fastcall Button11Click(TObject *Sender);
 
 
 

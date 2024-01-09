@@ -1,0 +1,8 @@
+Rent
+Food
+Bills
+Clothes
+Donations
+Zakat
+Games
+Transportation

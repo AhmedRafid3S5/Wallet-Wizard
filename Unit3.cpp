@@ -63,6 +63,74 @@ vector<ExpenseClass> ExpenseRead;
 //IncomeClass SearchedIncome;
 //ExpenseClass SearchedExpense;
 
+
+//Sourcelist for income combobox
+vector<std::string> sourcelist;
+void ReadFileAndPopulateVector()
+{
+    sourcelist.clear();  // Clear the vector before reading the file
+
+	std::ifstream inputFile("sources.txt");
+	if (!inputFile.is_open()) {
+        ShowMessage("Failed to open the file.");
+        return;
+    }
+
+    std::string line;
+    while (std::getline(inputFile, line)) {
+		sourcelist.push_back(line);
+	}
+
+	inputFile.close();
+}
+
+          void WriteVectorToFile()
+{
+    std::ofstream outFile("sources.txt");
+    if (!outFile.is_open()) {
+        ShowMessage("Cannot open file for writing.");
+        return;
+    }
+
+    for (const auto& source : sourcelist) {
+        outFile << source << std::endl;
+    }
+
+    outFile.close();
+}
+std::vector<std::string> categorylist;
+void ReadCategoriesFromFile() {
+    categorylist.clear();  // Clear the list before reading
+
+    std::ifstream inFile("categories.txt");
+    if (!inFile.is_open()) {
+        ShowMessage("Unable to open file: categories.txt");
+        return;
+    }
+
+    std::string line;
+    while (std::getline(inFile, line)) {
+        categorylist.push_back(line);
+    }
+
+    inFile.close();
+}
+
+void WriteCategoriesToFile() {
+    std::ofstream outFile("categories.txt");
+    if (!outFile.is_open()) {
+        ShowMessage("Unable to open file for writing: categories.txt");
+        return;
+    }
+
+    for ( auto& category : categorylist) {
+        outFile << category << std::endl;
+    }
+
+    outFile.close();
+}
+
+
 void loadGoldFile()
 {
       // URL of the webpage
@@ -182,6 +250,20 @@ __fastcall TForm3::TForm3(TComponent* Owner)
    loadGoldFile();
    loadSilverFile();
    loadZakat();
+
+   //For the income combobox4
+   ReadFileAndPopulateVector();
+
+	// Populate ComboBox4 from the sourcelist
+	ComboBox4->Items->Clear();
+	for (auto& source : sourcelist) {
+		ComboBox4->Items->Add(UnicodeString(source.c_str()));
+	}
+	//same operations for expense tab
+	ReadCategoriesFromFile();
+	for (auto& category : categorylist) {
+        ComboBox5->Items->Add(UnicodeString(category.c_str()));
+	}
    //This is to clear the input boxes
 	Edit2->Text = "";
 	Edit6->Text = "";
@@ -1006,7 +1088,7 @@ void AddIncomeOperations()
 
 void __fastcall TForm3::Button5Click(TObject *Sender)
 {
-  if( Edit2->Text == ""||Edit4->Text == "" ||Edit5->Text == ""||Edit6->Text == "" || Edit5->Text == ""||Edit13->Text == "")
+  if( Edit2->Text == ""||Edit4->Text == "" ||Edit5->Text == ""||Edit6->Text == "" ||Edit13->Text == "")
   {
 	  ShowMessage("Please Provide Valid Input In All Fields.");
   }
@@ -1014,7 +1096,14 @@ void __fastcall TForm3::Button5Click(TObject *Sender)
   {
 		AddIncomeOperations() ;
 		UnicodeString Amount=Edit2->Text;
-		UnicodeString Source=Edit7->Text;
+	   // Here we will use the combobox
+        UnicodeString Source;
+	   if (ComboBox4->ItemIndex != -1) {  // Check if an item is selected
+		Source = ComboBox4->Items->Strings[ComboBox4->ItemIndex];
+		}
+		 else {
+		ShowMessage("Please select a source from the Dropdown.");
+		}
 		UnicodeString Date=Edit4->Text;
 		UnicodeString Month=Edit5->Text;
 		UnicodeString Year=Edit6->Text;
@@ -1243,7 +1332,7 @@ void AddExpenseOperations()
    }
 void __fastcall TForm3::Button1Click(TObject *Sender)
 {
- if( Edit8->Text == ""||Edit9->Text == "" ||Edit10->Text == ""||Edit11->Text == "" || Edit12->Text == ""||Edit16->Text == "")
+ if( Edit8->Text == ""||Edit10->Text == ""||Edit11->Text == "" || Edit12->Text == ""||Edit16->Text == "")
   {
 	  ShowMessage("Please Provide Valid Input In All Fields.");
   }
@@ -1251,7 +1340,12 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
   {
 		AddExpenseOperations() ;
 		UnicodeString expenseAmnt=Edit8->Text;
-		UnicodeString expenseCat=Edit9->Text;
+		UnicodeString expenseCat;
+		if (ComboBox5->ItemIndex != -1) {  // Check if an item is selected
+		expenseCat = ComboBox5->Items->Strings[ComboBox5->ItemIndex].Trim();  // Trim any leading/trailing spaces
+	} else {
+		ShowMessage("Please select a category from the ComboBox.");
+	}
 		UnicodeString expenseDate=Edit10->Text;
 		UnicodeString expenseMonth=Edit11->Text;
 		UnicodeString expenseYear=Edit12->Text;
@@ -1408,7 +1502,7 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm3::Button4Click(TObject *Sender)
 {
- if( Edit2->Text == ""||Edit4->Text == "" ||Edit5->Text == ""||Edit6->Text == "" || Edit5->Text == "" ||Edit13->Text == "")
+ if( Edit2->Text == ""||Edit4->Text == "" ||Edit5->Text == ""||Edit6->Text == ""  ||Edit13->Text == "")
   {
 	  ShowMessage("Please Provide Valid Input In All Fields.");
   }
@@ -1416,7 +1510,14 @@ void __fastcall TForm3::Button4Click(TObject *Sender)
   {
 		AddIncomeOperations();
 		UnicodeString Amount=Edit2->Text;
-		UnicodeString Source=Edit7->Text;
+		//Here we will use the combobox
+		UnicodeString Source;
+	   if (ComboBox4->ItemIndex != -1) {  // Check if an item is selected
+		Source = ComboBox4->Items->Strings[ComboBox4->ItemIndex];
+		}
+		 else {
+		ShowMessage("Please select a source from the Dropdown.");
+		}
 		UnicodeString Date=Edit4->Text;
 		UnicodeString Month=Edit5->Text;
 		UnicodeString Year=Edit6->Text;
@@ -1583,7 +1684,7 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 
 void __fastcall TForm3::Button7Click(TObject *Sender)
 {
-if( Edit8->Text == ""||Edit9->Text == "" ||Edit10->Text == ""||Edit11->Text == "" ||Edit16->Text == ""|| Edit12->Text == "")
+if( Edit8->Text == ""||Edit10->Text == ""||Edit11->Text == "" ||Edit16->Text == ""|| Edit12->Text == "")
   {
 	  ShowMessage("Please Provide Valid Input In All Fields.");
   }
@@ -1591,7 +1692,13 @@ if( Edit8->Text == ""||Edit9->Text == "" ||Edit10->Text == ""||Edit11->Text == "
   {
 		AddExpenseOperations() ;
 		UnicodeString expenseAmnt=Edit8->Text;
-		UnicodeString expenseCat=Edit9->Text;
+		UnicodeString expenseCat;
+		if (ComboBox5->ItemIndex != -1) {  // Check if an item is selected
+		expenseCat = ComboBox5->Items->Strings[ComboBox5->ItemIndex].Trim();  // Trim any leading/trailing spaces
+		}
+		else {
+		ShowMessage("Please select a category from the ComboBox.");
+        }
 		UnicodeString expenseDate=Edit10->Text;
 		UnicodeString expenseMonth=Edit11->Text;
 		UnicodeString expenseYear=Edit12->Text;
@@ -1682,9 +1789,17 @@ void __fastcall TForm3::Button9Click(TObject *Sender)
 		  fcategory = found.category[i];
 		  fnote = found.notes[i];
 		  famount = found.amount[i];
+		   UnicodeString iline1;
+		  if(fdate.Length() == 1)
+		  {
+			  iline1 = "    " + fdate + "          " + fcategory + "--> " + famount;
+		  }
+		  else
+		  {
+			  iline1 = "   " + fdate + "         " + fcategory + "--> " + famount;
+		  }
 
-		  UnicodeString iline1 = "Date: " + fdate + "    Source: " + fcategory + "    Amount: " + famount;
-		  UnicodeString iline2 = "Short Note: "+ fnote;
+		  UnicodeString iline2 = "                ("+ fnote + ")";
 
 		  ListBox1->Items->Add(iline1);
 		  ListBox1->Items->Add(iline2);
@@ -1767,8 +1882,17 @@ void __fastcall TForm3::SearchClick(TObject *Sender)
 		  fnote = found.notes[i];
 		  famount = found.amount[i];
 
-		  UnicodeString eline1 = "Date: " + fdate + "    Source: " + fcategory + "    Amount: " + famount;
-		  UnicodeString eline2 = "Short Note: "+ fnote;
+		   UnicodeString eline1;
+		  if(fdate.Length() == 1)
+		  {
+			  eline1 = "    " + fdate + "          " + fcategory + "--> " + famount;
+		  }
+		  else
+		  {
+			  eline1 = "   " + fdate + "         " + fcategory + "--> " + famount;
+		  }
+
+		  UnicodeString eline2 = "                ("+ fnote + ")";
 
 		  ListBox2->Items->Add(eline1);
 		  ListBox2->Items->Add(eline2);
@@ -1914,4 +2038,46 @@ void __fastcall TForm3::LoadFromSavingsClick(TObject *Sender)
   }
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TForm3::Button10Click(TObject *Sender)
+{
+	UnicodeString newSource = Edit7->Text.Trim();  // Get the text from EditBox17 and trim any leading/trailing spaces
+
+	if (newSource != "") {
+		 std::wstring wstr = newSource.c_str();
+		std::string str(wstr.begin(), wstr.end());   // Add the new source to the vector
+
+        // Update ComboBox1
+		ComboBox4->Items->Add(newSource);
+		sourcelist.push_back(str);
+		ShowMessage("New source added.");
+		// Write the updated vector back to the file
+		WriteVectorToFile();
+	} else {
+		ShowMessage("Please enter a valid source.");
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::Button11Click(TObject *Sender)
+{
+UnicodeString newCategory = Edit9->Text.Trim();  // Get the text from Edit9 and trim any leading/trailing spaces
+
+    if (newCategory != "") {
+        std::wstring wstr = newCategory.c_str();
+        std::string str(wstr.begin(), wstr.end());  // Convert wstring to string
+
+        categorylist.push_back(str);  // Add the new category to the vector
+
+        // Update ComboBox5
+        ComboBox5->Items->Add(newCategory);
+
+        // Write the updated vector back to the file
+        WriteCategoriesToFile();
+    } else {
+        ShowMessage("Please enter a valid category.");
+    }
+}
+//---------------------------------------------------------------------------
+
 
