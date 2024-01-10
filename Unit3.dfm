@@ -1,9 +1,9 @@
 object Form3: TForm3
   Left = 613
   Top = 150
-  Caption = 'Form3'
-  ClientHeight = 491
-  ClientWidth = 707
+  Caption = 'Wallet-Wizard'
+  ClientHeight = 473
+  ClientWidth = 695
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -31,9 +31,9 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 707
-    Height = 491
-    ActivePage = Expense
+    Width = 695
+    Height = 473
+    ActivePage = Income
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
@@ -56,12 +56,12 @@ object Form3: TForm3
       object Label2: TLabel
         Left = 32
         Top = 109
-        Width = 62
-        Height = 26
+        Width = 58
+        Height = 24
         Caption = 'Source'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -18
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
@@ -69,12 +69,12 @@ object Form3: TForm3
       object Label3: TLabel
         Left = 30
         Top = 225
-        Width = 66
-        Height = 26
+        Width = 61
+        Height = 24
         Caption = 'Amount'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -17
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
@@ -82,12 +82,12 @@ object Form3: TForm3
       object Label4: TLabel
         Left = 32
         Top = 286
-        Width = 42
-        Height = 26
+        Width = 39
+        Height = 24
         Caption = 'Date'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -17
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
@@ -95,18 +95,18 @@ object Form3: TForm3
       object Label9: TLabel
         Left = 27
         Top = 60
-        Width = 129
-        Height = 29
+        Width = 134
+        Height = 30
         Caption = 'Add Or Edit '
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -22
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
       end
       object Label10: TLabel
-        Left = 80
+        Left = 77
         Top = 297
         Width = 76
         Height = 15
@@ -115,25 +115,25 @@ object Form3: TForm3
       object Label11: TLabel
         Left = 264
         Top = 60
-        Width = 152
-        Height = 29
+        Width = 159
+        Height = 30
         Caption = 'Search By Date'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -22
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
       end
       object Label13: TLabel
         Left = 30
-        Top = 347
-        Width = 112
-        Height = 29
+        Top = 352
+        Width = 94
+        Height = 24
         Caption = 'Short Note'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -17
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
@@ -141,12 +141,12 @@ object Form3: TForm3
       object Label14: TLabel
         Left = 264
         Top = 313
-        Width = 55
-        Height = 26
+        Width = 51
+        Height = 24
         Caption = 'Month'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -18
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
@@ -154,12 +154,12 @@ object Form3: TForm3
       object Label15: TLabel
         Left = 333
         Top = 313
-        Width = 41
-        Height = 26
+        Width = 40
+        Height = 24
         Caption = 'Year'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -18
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
@@ -167,12 +167,12 @@ object Form3: TForm3
       object Label21: TLabel
         Left = 32
         Top = 170
-        Width = 123
-        Height = 23
+        Width = 137
+        Height = 24
         Caption = 'Add New Source'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -16
+        Font.Height = -17
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
@@ -237,9 +237,9 @@ object Form3: TForm3
       end
       object Button6: TButton
         Left = 190
-        Top = 286
+        Top = 290
         Width = 43
-        Height = 26
+        Height = 22
         Caption = 'Auto'
         TabOrder = 7
         OnClick = Button6Click
@@ -281,7 +281,7 @@ object Form3: TForm3
       object Edit15: TEdit
         Left = 333
         Top = 345
-        Width = 85
+        Width = 70
         Height = 23
         TabOrder = 12
         Text = 'Edit15'
@@ -336,71 +336,71 @@ object Form3: TForm3
       object Label5: TLabel
         Left = 207
         Top = 3
-        Width = 213
-        Height = 31
-        Caption = 'EXPENSE TRACKER'
+        Width = 220
+        Height = 38
+        Caption = 'Expense Tracker'
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
-        Font.Height = -22
+        Font.Height = -27
         Font.Name = 'Comic Sans MS'
         Font.Style = [fsBold]
         ParentFont = False
       end
       object Label6: TLabel
         Left = 21
-        Top = 214
-        Width = 78
-        Height = 30
+        Top = 220
+        Width = 61
+        Height = 24
         Caption = 'Amount'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -22
+        Font.Height = -17
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
       end
       object Label7: TLabel
         Left = 21
-        Top = 80
-        Width = 92
-        Height = 32
+        Top = 89
+        Width = 73
+        Height = 24
         Caption = 'Category'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -22
+        Font.Height = -17
         Font.Name = 'Comic Sans MS'
-        Font.Style = [fsItalic]
+        Font.Style = []
         ParentFont = False
       end
       object Label12: TLabel
-        Left = 76
-        Top = 291
+        Left = 66
+        Top = 294
         Width = 76
         Height = 15
         Caption = 'DD/MM/YYYY'
       end
       object Label8: TLabel
         Left = 21
-        Top = 279
-        Width = 49
-        Height = 30
+        Top = 285
+        Width = 39
+        Height = 24
         Caption = 'Date'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -22
+        Font.Height = -17
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
       end
       object Label16: TLabel
         Left = 21
-        Top = 344
-        Width = 112
-        Height = 29
+        Top = 349
+        Width = 94
+        Height = 24
         Caption = 'Short Note'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -17
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
@@ -408,12 +408,12 @@ object Form3: TForm3
       object Label17: TLabel
         Left = 21
         Top = 54
-        Width = 114
-        Height = 28
+        Width = 127
+        Height = 30
         Caption = 'Add Or Edit'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -20
+        Font.Height = -22
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
@@ -439,33 +439,33 @@ object Form3: TForm3
         Caption = 'Month'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -17
+        Font.Height = -18
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
       end
       object Label20: TLabel
-        Left = 350
+        Left = 335
         Top = 315
-        Width = 38
+        Width = 40
         Height = 24
         Caption = 'Year'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -17
+        Font.Height = -18
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
       end
       object Label22: TLabel
         Left = 23
-        Top = 150
-        Width = 184
-        Height = 29
+        Top = 155
+        Width = 152
+        Height = 24
         Caption = 'Add New Category'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -21
+        Font.Height = -17
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
@@ -536,9 +536,9 @@ object Form3: TForm3
       end
       object Button8: TButton
         Left = 175
-        Top = 282
+        Top = 287
         Width = 45
-        Height = 27
+        Height = 22
         Caption = 'Auto'
         TabOrder = 7
         OnClick = Button8Click
@@ -563,15 +563,15 @@ object Form3: TForm3
       object Edit17: TEdit
         Left = 264
         Top = 345
-        Width = 70
+        Width = 65
         Height = 23
         TabOrder = 10
         Text = 'Edit17'
       end
       object Edit18: TEdit
-        Left = 350
+        Left = 335
         Top = 345
-        Width = 81
+        Width = 74
         Height = 23
         TabOrder = 11
         Text = 'Edit18'
@@ -634,26 +634,26 @@ object Form3: TForm3
       ImageIndex = 4
       object Label24: TLabel
         Left = 16
-        Top = 18
-        Width = 195
-        Height = 26
+        Top = 23
+        Width = 185
+        Height = 24
         Caption = 'Current Month Budget'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -18
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
       end
       object Label25: TLabel
         Left = 16
-        Top = 192
-        Width = 157
-        Height = 26
+        Top = 194
+        Width = 148
+        Height = 24
         Caption = 'Remaining Amount'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -19
+        Font.Height = -18
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
@@ -714,7 +714,7 @@ object Form3: TForm3
       object Edit19: TEdit
         Left = 407
         Top = 3
-        Width = 241
+        Width = 221
         Height = 23
         Color = clBtnFace
         TabOrder = 3
@@ -766,9 +766,9 @@ object Form3: TForm3
         TabOrder = 8
       end
       object Button16: TButton
-        Left = 562
+        Left = 554
         Top = 223
-        Width = 75
+        Width = 71
         Height = 25
         Caption = 'Delete'
         TabOrder = 9
@@ -782,8 +782,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 699
-        Height = 464
+        Width = 687
+        Height = 446
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False

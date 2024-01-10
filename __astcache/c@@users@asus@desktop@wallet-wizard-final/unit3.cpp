@@ -380,10 +380,11 @@ for (const auto& category : currentBudget.categories) {
     ComboBox6->Items->Add(uCategory);
 }
 
-	 if(currentBudget.month != month)
+	 if(currentBudget.month != month )
 	 {
 		  currentBudget.clear();
 		  ListBox3->Items->Clear();
+		  currentBudget.month = month;
 	 }
 	 writeBudgetToFile();
 
@@ -1434,7 +1435,7 @@ void AddExpenseOperations()
 		return;
 	}
 
-	for ( auto& exp : ExpenseRead) {
+	for(auto& exp : ExpenseRead) {
 		std::stringstream ss;
 		// Start tag
 		ss << "Start" << std::endl;
@@ -1895,10 +1896,10 @@ if( Edit8->Text == ""||Edit10->Text == ""||Edit11->Text == "" ||Edit16->Text == 
 void __fastcall TForm3::Button8Click(TObject *Sender)
 {
 	   TDateTime currentDate = Now();
-	year = YearOf(currentDate);
-	month = MonthOf(currentDate);
-	day = DayOf(currentDate);
-		Edit10->Text =day;
+	   year = YearOf(currentDate);
+	   month = MonthOf(currentDate);
+	   day = DayOf(currentDate);
+		Edit10->Text=day;
 		Edit11->Text=month;
 		Edit12->Text=year;
 }
@@ -2253,7 +2254,7 @@ void __fastcall TForm3::Button11Click(TObject *Sender)
  UnicodeString newCategory = Edit9->Text.Trim();  // Get the text from Edit9 and trim any leading/trailing spaces
 
  if (newCategory.Pos(L" ") != 0) {
-    ShowMessage("Category name cannot contain blank spaces.");
+	ShowMessage("Category name cannot contain blank spaces.");
     return;  // Exit the function without adding the category
 }
 	if (newCategory != "") {
@@ -2269,7 +2270,7 @@ void __fastcall TForm3::Button11Click(TObject *Sender)
 		// Add the new category to the vector
 		categorylist.push_back(str);
 
-        ShowMessage("New Category added.");
+		ShowMessage("New Category added.");
 
 		// Update ComboBox5
 		ComboBox5->Items->Add(newCategory);
@@ -2658,7 +2659,7 @@ Budget updatedBudget;
 void __fastcall TForm3::Button14Click(TObject *Sender)
 {
 	   //ShowButtonRefresh();
-        ListBox4->Clear();
+		ListBox4->Clear();
 	displayBudgetInListBox(ListBox3);
 	AddExpenseOperations();
 	// Find the ExpenseClass object for the given month and year
@@ -2880,7 +2881,7 @@ void __fastcall TForm3::Button18Click(TObject *Sender)
         ComboBox5->Items->Delete(ComboBox5->ItemIndex);
 
         // Remove the selected category from categorylist
-        RemoveCategoryFromList(selectedCategory);
+		RemoveCategoryFromList(selectedCategory);
 
         // Write the updated categorylist to categories.txt
         WriteCategoriesToFile();
@@ -2908,4 +2909,7 @@ void __fastcall TForm3::Button20Click(TObject *Sender)
 			  );
 }
 //---------------------------------------------------------------------------
+
+
+
 

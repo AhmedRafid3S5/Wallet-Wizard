@@ -348,7 +348,8 @@ class Transaction
 		void SetTypeToCat(map<UnicodeString,int> val) { TypeToCat = val; }
 		vector<int> Getdate() { return date; }
 		void Adddate(int val) { date.push_back(val); }
-        bool operator<(const Transaction& other) const {
+
+		bool operator<(const Transaction& other) const {
         if (year < other.year) return true;
         if (year > other.year) return false;
 		return month < other.month;}
@@ -439,33 +440,33 @@ public:
         }
     }
       // Function to clear the object
-    void clear() {
-        categories.clear();
-        amounts.clear();
-        month = 0;  // Reset the month
-    }
+	void clear() {
+		categories.clear();
+		amounts.clear();
+		month = 0;  // Reset the month
+	}
 
     // Getter and setter functions for month
-    int getMonth() const {
+	int getMonth() const {
         return month;
-    }
+	}
 
-    void setMonth(int m) {
-        month = m;
+	void setMonth(int m) {
+		month = m;
 	}
      void removeEntry(const std::string& categoryToRemove) {
-        auto it = std::find(categories.begin(), categories.end(), categoryToRemove);
-        if (it != categories.end()) {
-            // Calculate the index of the category to remove
-            size_t index = std::distance(categories.begin(), it);
+		auto it = std::find(categories.begin(), categories.end(), categoryToRemove);
+		if (it != categories.end()) {
+			// Calculate the index of the category to remove
+			size_t index = std::distance(categories.begin(), it);
 
-            // Remove the category and its corresponding amount from the vectors
-            categories.erase(categories.begin() + index);
-            amounts.erase(amounts.begin() + index);
-        } else {
-            // Category not found
-            std::cerr << "Category '" << categoryToRemove << "' not found in the budget." << std::endl;
-        }
+			// Remove the category and its corresponding amount from the vectors
+			categories.erase(categories.begin() + index);
+			amounts.erase(amounts.begin() + index);
+		} else {
+			// Category not found
+			std::cerr << "Category '" << categoryToRemove << "' not found in the budget." << std::endl;
+		}
     }
 };
 //---------------------------------------------------------------------------
