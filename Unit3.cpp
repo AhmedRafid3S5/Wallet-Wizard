@@ -527,6 +527,11 @@ void TForm3::drawCharts(int year,int month )
    Chart2->Foot->Text->Add(footerTitleMonth + " " + footerTitleYear);
    //-------------------------------------------------------------------------------------
    //Avg_Income and Avg_Expense
+    int mod;
+	if(ExpenseList.size()<=12)
+	   mod = 0;
+	else
+	   mod = ExpenseList.size() - 12;
 	Series3->Clear();
 	Series4->Clear();
 	Series4->LinePen->Color = clRed;
@@ -535,7 +540,7 @@ void TForm3::drawCharts(int year,int month )
 	Chart3->Title->Caption="Transaction averages over the months";
 	Series3->LegendTitle = "Avg_Income";
 	Series4->LegendTitle = "Avg_Expense";
-	for(int i=ExpenseList.size()-12;i<ExpenseList.size();i++)
+	for(int i=mod;i<ExpenseList.size();i++)
 	{
 	   Transaction_Summary<UnicodeString,int> entry = IncomeList[i];
 	   double monthAvg =  entry.return_avg();
@@ -544,7 +549,7 @@ void TForm3::drawCharts(int year,int month )
 	   Series3->AddXY(i+1,monthAvg,m);
 	}
 	// Add data points for average expense
-	for(int i=ExpenseList.size()-12;i<ExpenseList.size();i++)
+	for(int i=mod;i<ExpenseList.size();i++)
 	{
 	   Transaction_Summary<UnicodeString,int> entry = ExpenseList[i];
 	   double monthAvg =  entry.return_avg();
@@ -558,7 +563,7 @@ void TForm3::drawCharts(int year,int month )
 		Chart3->Title->Caption="Transaction summations over the months";
 		Series3->LegendTitle = "Total_Income";
 		Series4->LegendTitle = "Total_Expense";
-	for(int i=ExpenseList.size()-12;i<ExpenseList.size();i++)
+	for(int i=mod;i<ExpenseList.size();i++)
 	{
 	   Transaction_Summary<UnicodeString,int> entry = IncomeList[i];
 	   double monthTotal =  entry.return_total();
@@ -567,7 +572,7 @@ void TForm3::drawCharts(int year,int month )
 	   Series3->AddXY(i+1,monthTotal,m);
 	}
 	// Add data points for average expense
-	for(int i=ExpenseList.size()-12;i<ExpenseList.size();i++)
+	for(int i=mod;i<ExpenseList.size();i++)
 	{
 	   Transaction_Summary<UnicodeString,int> entry = ExpenseList[i];
 	   double monthTotal =  entry.return_total();
@@ -758,7 +763,7 @@ void __fastcall TForm3::PageControl1Change(TObject *Sender)
 	  if(totalZakat > -1)
 	  {
 	   RichEdit2->SelAttributes->Color = clTeal;
-	   RichEdit2->Lines->Add("*You net payable zakat currently is : " + FloatToStr(totalZakat) + " Tk");
+	   RichEdit2->Lines->Add("*Your net payable zakat currently is : " + FloatToStr(totalZakat) + " Tk");
 	   RichEdit2->SelAttributes->Color = clBlack;
 	  }
 	}

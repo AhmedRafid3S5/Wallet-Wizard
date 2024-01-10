@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 429
-  ClientWidth = 653
+  ClientHeight = 420
+  ClientWidth = 647
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -31,8 +31,8 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 653
-    Height = 429
+    Width = 647
+    Height = 420
     ActivePage = Budget
     Align = alClient
     TabOrder = 0
@@ -625,8 +625,8 @@ object Form3: TForm3
       object Label26: TLabel
         Left = 544
         Top = 56
-        Width = 86
-        Height = 20
+        Width = 54
+        Height = 18
         Caption = 'Category'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -638,8 +638,8 @@ object Form3: TForm3
       object Label27: TLabel
         Left = 544
         Top = 97
-        Width = 52
-        Height = 42
+        Width = 44
+        Height = 18
         Caption = 'Amount'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -714,8 +714,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 631
-        Height = 380
+        Width = 639
+        Height = 393
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
@@ -724,6 +724,8 @@ object Form3: TForm3
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
+        ExplicitWidth = 631
+        ExplicitHeight = 380
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0

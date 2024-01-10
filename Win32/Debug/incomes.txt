@@ -1,129 +1,140 @@
 Start
 2023
 01
-01 Salary 50000
-05 Freelance 800
-07 Tuition 500
-10 Investment 1200
-15 Gifts 300
-20 Bonus 600
+10 Salary 80000
+15 Freelance 12000
+20 Investment 5000
+21 Bonus 3000
+25 Tuition 10000
+27 Home_Rent 18000
 End
 Start
 2023
 02
-01 Salary 52000
-05 Freelance 850
-10 Investment 1300
-15 Gifts 350
-20 Bonus 700
+10 Salary 82000
+15 Freelance 15000
+20 Investment 6000
+21 Bonus 3500
+25 Tuition 12000
+27 Home_Rent 20000
 End
 Start
 2023
 03
-01 Salary 53000
-05 Freelance 880
-10 Investment 1400
-15 Gifts 370
-20 Bonus 750
+10 Salary 85000
+15 Freelance 13000
+20 Investment 5500
+21 Bonus 3200
+25 Tuition 11000
+27 Home_Rent 19000
 End
 Start
 2023
 04
-01 Salary 55000
-05 Freelance 920
-10 Investment 1500
-15 Gifts 400
-20 Bonus 800
+10 Salary 83000
+15 Freelance 14000
+20 Investment 5800
+21 Bonus 3300
+25 Tuition 11500
+27 Home_Rent 19500
 End
 Start
 2023
 05
-01 Salary 56000
-05 Freelance 950
-10 Investment 1600
-15 Gifts 420
-20 Bonus 850
+10 Salary 87000
+15 Freelance 16000
+20 Investment 6200
+21 Bonus 3800
+25 Tuition 12500
+27 Home_Rent 21000
 End
 Start
 2023
 06
-01 Salary 58000
-05 Freelance 980
-10 Investment 1700
-15 Gifts 450
-20 Bonus 900
+10 Salary 80000
+15 Freelance 17000
+20 Investment 6500
+21 Bonus 4000
+25 Tuition 13000
+27 Home_Rent 22000
 End
 Start
 2023
 07
-01 Salary 59000
-05 Freelance 1000
-10 Investment 1800
-15 Gifts 470
-20 Bonus 950
+10 Salary 85000
+15 Freelance 18000
+20 Investment 7000
+21 Bonus 4200
+25 Tuition 13500
+27 Home_Rent 23000
 End
 Start
 2023
 08
-01 Salary 60000
-05 Freelance 1050
-10 Investment 1900
-15 Gifts 500
-20 Bonus 1000
+10 Salary 75000
+15 Freelance 20000
+20 Investment 7500
+21 Bonus 4500
+25 Tuition 14000
+27 Home_Rent 24000
 End
 Start
 2023
 09
-01 Salary 62000
-05 Freelance 1100
-10 Investment 2000
-15 Gifts 530
-20 Bonus 1050
+10 Salary 81500
+15 Freelance 22000
+20 Investment 8000
+21 Bonus 4800
+25 Tuition 14500
+27 Home_Rent 25000
 End
 Start
 2023
 10
-01 Salary 63000
-05 Freelance 1150
-10 Investment 2100
-15 Gifts 550
-20 Bonus 1100
+10 Salary 86500
+15 Freelance 24000
+20 Investment 8500
+21 Bonus 5000
+25 Tuition 15000
+27 Home_Rent 26000
 End
 Start
 2023
 11
-01 Salary 65000
-05 Freelance 1200
-10 Investment 2200
-15 Gifts 580
-20 Bonus 1150
+10 Salary 86500
+15 Freelance 26000
+20 Investment 9000
+21 Bonus 5200
+25 Tuition 15500
+27 Home_Rent 27000
 End
 Start
 2023
 12
-01 Salary 66000
-05 Freelance 1250
-10 Investment 2300
-15 Gifts 600
-20 Bonus 1200
+10 Salary 87000
+15 Freelance 28000
+20 Investment 9500
+21 Bonus 5500
+25 Tuition 16000
+27 Home_Rent 28000
 End
 Start
 2024
 01
-01 Salary 69000
-03 Bonus 400
-05 Freelance 1250
-06 Salary 4000
-08 Bonus 500
-09 Bonus 1000
-09 Bonus 400
-09 Freelance 500
-10 Investment 2600
-10 Freelance 700
-15 Gifts 600
-20 Bonus 1200
+10 Salary 89000
+15 Freelance 30000
+20 Investment 10000
+21 Bonus 5800
+25 Tuition 16500
+27 Home_Rent 29000
 End
 Start
-2009
-01
+2024
+02
+10 Salary 88000
+15 Freelance 32000
+20 Investment 10500
+21 Bonus 6000
+25 Tuition 17000
+27 Home_Rent 30000
 End
