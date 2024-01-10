@@ -1,4 +1,4 @@
-﻿//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 
 #ifndef Unit3H
 #define Unit3H
@@ -244,6 +244,8 @@ __published:	// IDE-managed Components
 	TButton *Button11;
 	TLabel *Label22;
 	TComboBox *ComboBox4;
+	TButton *Button12;
+	TButton *Button13;
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
@@ -274,6 +276,8 @@ __published:	// IDE-managed Components
 	void __fastcall LoadFromSavingsClick(TObject *Sender);
 	void __fastcall Button10Click(TObject *Sender);
 	void __fastcall Button11Click(TObject *Sender);
+	void __fastcall Button12Click(TObject *Sender);
+	void __fastcall Button13Click(TObject *Sender);
 
 
 
