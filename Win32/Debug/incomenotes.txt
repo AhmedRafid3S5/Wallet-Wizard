@@ -5,6 +5,8 @@ Start
 Added income from Salary Source
 05 Freelance 800
 Added income from Freelance Source
+07 Tuition 500
+New Tuition
 10 Investment 1200
 Added income from Investment Source
 15 Gifts 300
@@ -193,4 +195,8 @@ Freelance increase
 Added income from Gifts Source
 20 Bonus 1200
 Added income from Bonus Source
+End
+Start
+2009
+01
 End

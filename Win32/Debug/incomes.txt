@@ -3,6 +3,7 @@ Start
 01
 01 Salary 50000
 05 Freelance 800
+07 Tuition 500
 10 Investment 1200
 15 Gifts 300
 20 Bonus 600
@@ -121,4 +122,8 @@ Start
 10 Freelance 700
 15 Gifts 600
 20 Bonus 1200
+End
+Start
+2009
+01
 End

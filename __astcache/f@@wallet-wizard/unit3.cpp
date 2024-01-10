@@ -105,7 +105,7 @@ void ReadCategoriesFromFile() {
     std::ifstream inFile("categories.txt");
     if (!inFile.is_open()) {
         ShowMessage("Unable to open file: categories.txt");
-        return;
+		return;
     }
 
     std::string line;
@@ -123,14 +123,71 @@ void WriteCategoriesToFile() {
         return;
     }
 
-    for ( auto& category : categorylist) {
-        outFile << category << std::endl;
-    }
+	for ( auto& category : categorylist) {
+		outFile << category << std::endl;
+	}
 
-    outFile.close();
+	outFile.close();
 }
 
+// Global Budget object
+Budget currentBudget;
 
+void readBudgetFromFile() {
+	std::ifstream inFile("currentbudgetwhyisthisnotworking.txt");
+	 //ShowMessage("Function called readbudget");
+	if (!inFile.is_open()) {
+		std::cerr << "Unable to open file currentbudget.txt" << std::endl;
+		return;
+	}
+
+	std::string line;
+	while (std::getline(inFile, line)) {
+		std::istringstream iss(line);
+	   // ShowMessage(line);
+		std::string category;
+		int amount;
+
+		if (iss >> category >> amount) {
+			currentBudget.addEntry(category, amount);
+		}
+	}
+
+	inFile.close();
+}
+
+// Function to write the contents of the global Budget object back to the file
+void writeBudgetToFile() {
+	std::ofstream outFile("currentbudgetisthisworking?.txt");
+
+	if (!outFile.is_open()) {
+		std::cerr << "Unable to open file currentbudget.txt for writing." << std::endl;
+		return;
+	}
+
+	auto categories = currentBudget.getCategories();
+	auto amounts = currentBudget.getAmounts();
+
+	for (size_t i = 0; i < categories.size(); ++i) {
+		outFile << categories[i] << " " << amounts[i] << std::endl;
+	}
+
+	outFile.close();
+}
+//Show current budget to listbox
+void displayBudgetInListBox(TListBox* listBox) {
+	//listBox->Clear();  // Clear existing items
+
+	auto categories = currentBudget.getCategories();
+	auto amounts = currentBudget.getAmounts();
+
+	for (size_t i = 0; i < categories.size(); ++i) {
+		std::string combinedStr = categories[i] + ": " + std::to_string(amounts[i]);  // Combine the strings
+		UnicodeString entry = UnicodeString(combinedStr.c_str());
+		ShowMessage(entry);
+		listBox->Items->Add(entry);
+	}
+}
 void loadGoldFile()
 {
       // URL of the webpage
@@ -264,6 +321,11 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 	for (auto& category : categorylist) {
         ComboBox5->Items->Add(UnicodeString(category.c_str()));
 	}
+
+    //same for the budget categories
+
+	//  readBudgetFromFile()
+   // displayBudgetInListBox(TListBox* listBox)
    //This is to clear the input boxes
 	Edit2->Text = "";
 	Edit6->Text = "";
@@ -2454,4 +2516,18 @@ void __fastcall TForm3::Button13Click(TObject *Sender)
   }
 }
 //---------------------------------------------------------------------------
+
+
+
+void __fastcall TForm3::Button14Click(TObject *Sender)
+{
+	 readBudgetFromFile()  ;
+ListBox4->Items->Clear();
+  ListBox3->Items->Clear();
+  writeBudgetToFile();
+
+}
+//---------------------------------------------------------------------------
+
+
 

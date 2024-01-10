@@ -246,6 +246,10 @@ __published:	// IDE-managed Components
 	TComboBox *ComboBox4;
 	TButton *Button12;
 	TButton *Button13;
+	TTabSheet *Budget;
+	TButton *Button14;
+	TListBox *ListBox3;
+	TListBox *ListBox4;
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
@@ -278,6 +282,8 @@ __published:	// IDE-managed Components
 	void __fastcall Button11Click(TObject *Sender);
 	void __fastcall Button12Click(TObject *Sender);
 	void __fastcall Button13Click(TObject *Sender);
+	void __fastcall Button14Click(TObject *Sender);
+
 
 
 
@@ -353,7 +359,58 @@ class ExpenseClass : public Transaction
 
 	private:
 };
+//Budget class creation
 
+class Budget {
+public:
+	std::vector<std::string> categories;
+    std::vector<int> amounts;
+
+    // Default constructor
+    Budget() {}
+
+    // Getter for categories
+    std::vector<std::string> getCategories() const {
+        return categories;
+    }
+
+    // Getter for amounts
+    std::vector<int> getAmounts() const {
+        return amounts;
+    }
+
+	// Setter for categories
+	void setCategories( std::vector<std::string>& cats) {
+		categories = cats;
+    }
+
+    // Setter for amounts
+	void setAmounts( std::vector<int>& amts) {
+        amounts = amts;
+    }
+
+    // Add a new category and its corresponding amount
+	void addEntry(std::string cat, int am) {
+		categories.push_back(cat);
+		amounts.push_back(am);
+	}
+
+    // Delete a category and its corresponding amount by index
+    void deleteCategory(int index) {
+        if (index >= 0 && index < categories.size()) {
+            categories.erase(categories.begin() + index);
+            amounts.erase(amounts.begin() + index);
+        }
+    }
+
+    // Edit the amount at a given index
+    void editAmount(int index, int newAmount) {
+        if (index >= 0 && index < amounts.size()) {
+            amounts[index] = newAmount;
+        }
+    }
+
+};
 //---------------------------------------------------------------------------
 extern PACKAGE TForm3 *Form3;
 //---------------------------------------------------------------------------

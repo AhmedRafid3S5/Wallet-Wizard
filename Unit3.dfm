@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 483
-  ClientWidth = 672
+  ClientHeight = 462
+  ClientWidth = 667
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,15 +12,33 @@ object Form3: TForm3
   Font.Style = []
   Position = poDesigned
   TextHeight = 15
+  object Label23: TLabel
+    Left = 173
+    Top = 88
+    Width = 93
+    Height = 40
+    Caption = 'label23'
+    Color = clBackground
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -29
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+    Transparent = True
+  end
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 672
-    Height = 483
-    ActivePage = Income
+    Width = 667
+    Height = 462
+    ActivePage = Budget
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
+    ExplicitWidth = 644
+    ExplicitHeight = 417
     object Income: TTabSheet
       Caption = 'Income'
       ImageIndex = 3
@@ -233,6 +251,7 @@ object Form3: TForm3
         Top = 117
         Width = 329
         Height = 190
+        Color = clBtnFace
         ItemHeight = 15
         TabOrder = 8
       end
@@ -521,6 +540,7 @@ object Form3: TForm3
         Top = 107
         Width = 337
         Height = 202
+        Color = clBtnFace
         ItemHeight = 15
         TabOrder = 9
       end
@@ -575,6 +595,71 @@ object Form3: TForm3
         OnClick = Button13Click
       end
     end
+    object Budget: TTabSheet
+      Caption = 'Budget'
+      ImageIndex = 4
+      object Label24: TLabel
+        Left = 16
+        Top = 18
+        Width = 195
+        Height = 26
+        Caption = 'Current Month Budget'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Comic Sans MS'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label25: TLabel
+        Left = 16
+        Top = 192
+        Width = 157
+        Height = 26
+        Caption = 'Remaining Amount'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Comic Sans MS'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Button14: TButton
+        Left = 16
+        Top = 368
+        Width = 75
+        Height = 25
+        Caption = 'Show'
+        TabOrder = 0
+        OnClick = Button14Click
+      end
+      object ListBox3: TListBox
+        Left = 16
+        Top = 53
+        Width = 195
+        Height = 132
+        Color = clBtnFace
+        ItemHeight = 15
+        TabOrder = 1
+      end
+      object ListBox4: TListBox
+        Left = 16
+        Top = 224
+        Width = 195
+        Height = 129
+        Color = clBtnFace
+        ItemHeight = 15
+        TabOrder = 2
+      end
+      object Edit19: TEdit
+        Left = 407
+        Top = 3
+        Width = 241
+        Height = 23
+        Color = clBtnFace
+        TabOrder = 3
+      end
+    end
     object Analytics: TTabSheet
       Caption = 'Analytics'
       ImageIndex = 1
@@ -582,8 +667,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 658
-        Height = 447
+        Width = 645
+        Height = 413
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
@@ -592,6 +677,8 @@ object Form3: TForm3
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
+        ExplicitWidth = 622
+        ExplicitHeight = 368
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0
