@@ -262,6 +262,10 @@ __published:	// IDE-managed Components
 	TRichEdit *RichEdit1;
 	TComboBox *ComboBox6;
 	TButton *Button16;
+	TButton *Button17;
+	TButton *Button18;
+	TButton *Button19;
+	TButton *Button20;
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
@@ -297,6 +301,10 @@ __published:	// IDE-managed Components
 	void __fastcall Button14Click(TObject *Sender);
 	void __fastcall Button15Click(TObject *Sender);
 	void __fastcall Button16Click(TObject *Sender);
+	void __fastcall Button17Click(TObject *Sender);
+	void __fastcall Button18Click(TObject *Sender);
+	void __fastcall Button19Click(TObject *Sender);
+	void __fastcall Button20Click(TObject *Sender);
 
 
 
@@ -340,6 +348,13 @@ class Transaction
 		void SetTypeToCat(map<UnicodeString,int> val) { TypeToCat = val; }
 		vector<int> Getdate() { return date; }
 		void Adddate(int val) { date.push_back(val); }
+        bool operator<(const Transaction& other) const {
+        if (year < other.year) return true;
+        if (year > other.year) return false;
+		return month < other.month;}
+
+		bool operator==(const Transaction& other) const {
+        return year == other.year && month == other.month;}
 
   //	private:
 		int month;

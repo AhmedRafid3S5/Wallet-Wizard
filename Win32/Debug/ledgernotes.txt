@@ -255,8 +255,6 @@ Start
 Monthly rent payment
 10 Food 1050
 Grocery shopping
-10 Zakat 500
-changed Zakat amount
 15 Bills 15500
 Utility bills payment
 17 Clothes 12500
@@ -291,10 +289,4 @@ Purchased new video games
 Dining out
 29 Transportation 12000
 Monthly transportation expenses
-End
-Start
-2024
-01
-10 Zakat 200
-Paid Zakat
 End

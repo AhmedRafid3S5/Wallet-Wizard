@@ -6,5 +6,5 @@ Clothes 10000
 Donations 5000
 Zakat 10000
 Transportation 10000
-Travel 20000
 Furniture 3000
+Travel 6000

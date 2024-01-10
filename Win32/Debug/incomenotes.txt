@@ -1,4 +1,10 @@
 Start
+2010
+01
+11 Salary 6700
+added salary txt file replaced
+End
+Start
 2023
 01
 10 Salary 80000

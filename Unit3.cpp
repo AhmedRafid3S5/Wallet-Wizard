@@ -63,6 +63,13 @@ vector<ExpenseClass> ExpenseRead;
 //IncomeClass SearchedIncome;
 //ExpenseClass SearchedExpense;
 
+void sortIncomeVector(std::vector<IncomeClass>& incomeVector) {
+    std::sort(incomeVector.begin(), incomeVector.end());
+}
+void sortExpenseVector(std::vector<ExpenseClass>& expenseVector) {
+	std::sort(expenseVector.begin(), expenseVector.end());
+}
+
 
 //Sourcelist for income combobox
 vector<std::string> sourcelist;
@@ -1145,6 +1152,7 @@ void AddIncomeOperations()
 
 	}
 	SortIncome();
+	sortIncomeVector(IncomeRead);
 
 	std::ofstream outFile(incomeledger);
 	if (!outFile.is_open())
@@ -1385,7 +1393,7 @@ void AddExpenseOperations()
 			return;
 		}
 	}
-	if (exCat == "Zakat")
+	if (exCat == "Zakat" && Y == year)
 	{
 		int New= totalZakat-A;
 		if(New<0) totalZakat=0;
@@ -1418,6 +1426,7 @@ void AddExpenseOperations()
 
 	}
 		 SortExpense();
+		 sortExpenseVector(ExpenseRead);
 		 //ShowMessage("Received data " + Amount );
 		 std::ofstream outExpenseFile(userledger);
 	if (!outExpenseFile.is_open()) {
@@ -1766,7 +1775,7 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 			  break;
 			}
 		 }
-          if (exCat == "Zakat")
+          if (exCat == "Zakat" && Y == year)
 			{
 			totalZakat+=prev;
             totalZakat-=A;
@@ -2229,7 +2238,7 @@ void __fastcall TForm3::Button10Click(TObject *Sender)
         // Add the new source to the vector
         sourcelist.push_back(str);
 
-        ShowMessage("New source added.");
+		ShowMessage("New source added.");
 
         // Write the updated vector back to the file
         WriteVectorToFile();
@@ -2259,6 +2268,8 @@ void __fastcall TForm3::Button11Click(TObject *Sender)
 
 		// Add the new category to the vector
 		categorylist.push_back(str);
+
+        ShowMessage("New Category added.");
 
 		// Update ComboBox5
 		ComboBox5->Items->Add(newCategory);
@@ -2801,6 +2812,100 @@ currentBudget.removeEntry(str);
         ShowMessage("Please select a category to delete.");
 	}
 
+}
+//---------------------------------------------------------------------------
+
+//Function to delete source
+void RemoveSourceFromList(UnicodeString source)
+{
+    // Find and remove the source from sourcelist
+    std::wstring wstr = source.c_str();
+    std::string str(wstr.begin(), wstr.end());
+    auto it = std::find(sourcelist.begin(), sourcelist.end(), str);
+    if (it != sourcelist.end()) {
+        sourcelist.erase(it);
+        ShowMessage("Source deleted successfully.");
+    } else {
+        ShowMessage("Selected source not found in the list.");
+    }
+}
+
+
+
+//------------------------------------------------------------------
+void __fastcall TForm3::Button17Click(TObject *Sender)
+{
+	// Check if an item is selected in ComboBox4
+    if (ComboBox4->ItemIndex != -1) {
+        UnicodeString selectedSource = ComboBox4->Items->Strings[ComboBox4->ItemIndex];
+
+        // Remove the selected source from ComboBox4
+        ComboBox4->Items->Delete(ComboBox4->ItemIndex);
+
+        // Remove the selected source from sourcelist
+        RemoveSourceFromList(selectedSource);
+
+        // Write the updated sourcelist to sources.txt
+        WriteVectorToFile();
+    }
+    else {
+        ShowMessage("Please select a source to delete.");
+	}
+}
+//---------------------------------------------------------------------------
+
+//Function to delete the category list
+void RemoveCategoryFromList(UnicodeString category)
+{
+    // Find and remove the category from categorylist
+    std::wstring wstr = category.c_str();
+    std::string str(wstr.begin(), wstr.end());
+    auto it = std::find(categorylist.begin(), categorylist.end(), str);
+    if (it != categorylist.end()) {
+        categorylist.erase(it);
+        ShowMessage("Category deleted successfully.");
+    } else {
+        ShowMessage("Selected category not found in the list.");
+    }
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TForm3::Button18Click(TObject *Sender)
+{
+   // Check if an item is selected in ComboBox5
+    if (ComboBox5->ItemIndex != -1) {
+        UnicodeString selectedCategory = ComboBox5->Items->Strings[ComboBox5->ItemIndex];
+
+        // Remove the selected category from ComboBox5
+        ComboBox5->Items->Delete(ComboBox5->ItemIndex);
+
+        // Remove the selected category from categorylist
+        RemoveCategoryFromList(selectedCategory);
+
+        // Write the updated categorylist to categories.txt
+        WriteCategoriesToFile();
+    }
+    else {
+        ShowMessage("Please select a category to delete.");
+	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::Button19Click(TObject *Sender)
+{
+	ShowMessage("1. To Add: Source, Amount, Date and Note fields must be filled\n"
+			  "2. To Edit: Source, Amount, Date and Note fields must be filled\n"
+			  "3. To Delete: Source, Amount and Date fields must be filled\n"
+			  );
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::Button20Click(TObject *Sender)
+{
+        ShowMessage("1. To Add: Source, Amount, Date and Note fields must be filled\n"
+			  "2. To Edit: Source, Amount, Date and Note fields must be filled\n"
+			  "3. To Delete: Source, Amount and Date fields must be filled\n"
+			  );
 }
 //---------------------------------------------------------------------------
 

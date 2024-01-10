@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 509
-  ClientWidth = 719
+  ClientHeight = 491
+  ClientWidth = 707
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -31,14 +31,12 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 719
-    Height = 509
+    Width = 707
+    Height = 491
     ActivePage = Expense
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
-    ExplicitWidth = 633
-    ExplicitHeight = 387
     object Income: TTabSheet
       Caption = 'Income'
       ImageIndex = 3
@@ -229,7 +227,7 @@ object Form3: TForm3
         Text = 'Edit7'
       end
       object Button4: TButton
-        Left = 100
+        Left = 87
         Top = 423
         Width = 55
         Height = 25
@@ -300,18 +298,36 @@ object Form3: TForm3
       object ComboBox4: TComboBox
         Left = 30
         Top = 141
-        Width = 145
+        Width = 139
         Height = 23
         TabOrder = 14
       end
       object Button12: TButton
-        Left = 176
-        Top = 424
+        Left = 148
+        Top = 423
         Width = 57
         Height = 26
         Caption = 'Delete'
         TabOrder = 15
         OnClick = Button12Click
+      end
+      object Button17: TButton
+        Left = 175
+        Top = 141
+        Width = 58
+        Height = 23
+        Caption = 'Delete'
+        TabOrder = 16
+        OnClick = Button17Click
+      end
+      object Button19: TButton
+        Left = 211
+        Top = 423
+        Width = 24
+        Height = 25
+        Caption = '!'
+        TabOrder = 17
+        OnClick = Button19Click
       end
     end
     object Expense: TTabSheet
@@ -510,9 +526,9 @@ object Form3: TForm3
         OnClick = Button1Click
       end
       object Button7: TButton
-        Left = 91
+        Left = 84
         Top = 416
-        Width = 58
+        Width = 49
         Height = 25
         Caption = 'Edit'
         TabOrder = 6
@@ -571,8 +587,8 @@ object Form3: TForm3
       end
       object ComboBox5: TComboBox
         Left = 21
-        Top = 118
-        Width = 145
+        Top = 121
+        Width = 135
         Height = 23
         TabOrder = 13
       end
@@ -586,13 +602,31 @@ object Form3: TForm3
         OnClick = Button11Click
       end
       object Button13: TButton
-        Left = 165
+        Left = 139
         Top = 416
-        Width = 58
+        Width = 53
         Height = 25
         Caption = 'Delete'
         TabOrder = 15
         OnClick = Button13Click
+      end
+      object Button18: TButton
+        Left = 169
+        Top = 119
+        Width = 54
+        Height = 25
+        Caption = 'Delete'
+        TabOrder = 16
+        OnClick = Button18Click
+      end
+      object Button20: TButton
+        Left = 198
+        Top = 416
+        Width = 25
+        Height = 25
+        Caption = '!'
+        TabOrder = 17
+        OnClick = Button20Click
       end
     end
     object Budget: TTabSheet
@@ -625,8 +659,8 @@ object Form3: TForm3
         ParentFont = False
       end
       object Label26: TLabel
-        Left = 571
-        Top = 89
+        Left = 562
+        Top = 50
         Width = 66
         Height = 23
         Caption = 'Category'
@@ -639,7 +673,7 @@ object Form3: TForm3
       end
       object Label27: TLabel
         Left = 571
-        Top = 131
+        Top = 100
         Width = 54
         Height = 23
         Caption = 'Amount'
@@ -687,22 +721,22 @@ object Form3: TForm3
       end
       object Edit20: TEdit
         Left = 407
-        Top = 88
+        Top = 53
         Width = 141
-        Height = 30
+        Height = 23
         TabOrder = 4
       end
       object Edit21: TEdit
         Left = 407
-        Top = 124
+        Top = 100
         Width = 141
-        Height = 30
+        Height = 23
         TabOrder = 5
       end
       object Button15: TButton
         Left = 407
         Top = 160
-        Width = 226
+        Width = 218
         Height = 25
         Caption = 'Add Budget Field'
         TabOrder = 6
@@ -726,14 +760,14 @@ object Form3: TForm3
       end
       object ComboBox6: TComboBox
         Left = 407
-        Top = 53
+        Top = 224
         Width = 141
         Height = 23
         TabOrder = 8
       end
       object Button16: TButton
-        Left = 568
-        Top = 52
+        Left = 562
+        Top = 223
         Width = 75
         Height = 25
         Caption = 'Delete'
@@ -748,8 +782,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 697
-        Height = 460
+        Width = 699
+        Height = 464
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
@@ -758,8 +792,6 @@ object Form3: TForm3
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
-        ExplicitWidth = 611
-        ExplicitHeight = 338
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0
