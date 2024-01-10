@@ -259,6 +259,9 @@ __published:	// IDE-managed Components
 	TButton *Button15;
 	TLabel *Label26;
 	TLabel *Label27;
+	TRichEdit *RichEdit1;
+	TComboBox *ComboBox6;
+	TButton *Button16;
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
@@ -293,6 +296,7 @@ __published:	// IDE-managed Components
 	void __fastcall Button13Click(TObject *Sender);
 	void __fastcall Button14Click(TObject *Sender);
 	void __fastcall Button15Click(TObject *Sender);
+	void __fastcall Button16Click(TObject *Sender);
 
 
 
@@ -375,7 +379,7 @@ class Budget {
 public:
 	std::vector<std::string> categories;
     std::vector<int> amounts;
-
+	int month;
     // Default constructor
     Budget() {}
 
@@ -419,7 +423,35 @@ public:
             amounts[index] = newAmount;
         }
     }
+      // Function to clear the object
+    void clear() {
+        categories.clear();
+        amounts.clear();
+        month = 0;  // Reset the month
+    }
 
+    // Getter and setter functions for month
+    int getMonth() const {
+        return month;
+    }
+
+    void setMonth(int m) {
+        month = m;
+	}
+     void removeEntry(const std::string& categoryToRemove) {
+        auto it = std::find(categories.begin(), categories.end(), categoryToRemove);
+        if (it != categories.end()) {
+            // Calculate the index of the category to remove
+            size_t index = std::distance(categories.begin(), it);
+
+            // Remove the category and its corresponding amount from the vectors
+            categories.erase(categories.begin() + index);
+            amounts.erase(amounts.begin() + index);
+        } else {
+            // Category not found
+            std::cerr << "Category '" << categoryToRemove << "' not found in the budget." << std::endl;
+        }
+    }
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm3 *Form3;

@@ -139,6 +139,9 @@ void readBudgetFromFile() {
 		std::cerr << "Unable to open file currentbudget.txt" << std::endl;
 		return;
 	}
+	 int Month;
+	inFile >> Month;
+	currentBudget.setMonth(Month);
 
 	std::string line;
 	while (std::getline(inFile, line)) {
@@ -163,6 +166,8 @@ void writeBudgetToFile() {
 		return;
 	}
 	// ShowMessage("Write Function called");
+    // Write the month as the first line
+	outFile << currentBudget.getMonth() << std::endl;
 	auto categories = currentBudget.getCategories();
 	auto amounts = currentBudget.getAmounts();
 
@@ -174,7 +179,7 @@ void writeBudgetToFile() {
 }
 //Show current budget to listbox
 void displayBudgetInListBox(TListBox* listBox) {
-	//listBox->Clear();  // Clear existing items
+	listBox->Clear();  // Clear existing items
 
 	auto categories = currentBudget.getCategories();
 	auto amounts = currentBudget.getAmounts();
@@ -358,9 +363,24 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 	  readBudgetFromFile()  ;
 	ListBox4->Items->Clear();
 	ListBox3->Items->Clear();
-	writeBudgetToFile();
 	displayBudgetInListBox(ListBox3);
 	 Edit19->Text= FindMonth();
+     ComboBox6->Items->Clear();
+
+// Populate ComboBox6 with all budget categories
+for (const auto& category : currentBudget.categories) {
+    UnicodeString uCategory = UnicodeString(category.c_str());
+    ComboBox6->Items->Add(uCategory);
+}
+
+	 if(currentBudget.month != month)
+	 {
+		  currentBudget.clear();
+		  ListBox3->Items->Clear();
+	 }
+	 writeBudgetToFile();
+
+
 	//  readBudgetFromFile()
    // displayBudgetInListBox(TListBox* listBox)
    //This is to clear the input boxes
@@ -1365,6 +1385,14 @@ void AddExpenseOperations()
 			return;
 		}
 	}
+	if (exCat == "Zakat")
+	{
+		int New= totalZakat-A;
+		if(New<0) totalZakat=0;
+		else totalZakat=New;
+		ShowMessage("The Zakat payment has been noted");  // Set totalZakat to the maximum of 0 and A
+	}
+
 	int flag=0;
 	   for(int i=0;i<ExpenseRead.size();i++)
 		 {
@@ -1719,7 +1747,7 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 		}
 	}
 	   int flag =0;
-
+	   int prev;
 	   for(int i=0;i<ExpenseRead.size();i++)
 		 {
 			if(ExpenseRead[i].Getmonth() == M && ExpenseRead[i].Getyear() == Y)
@@ -1729,6 +1757,7 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 				  if(ExpenseRead[i].category[j]== exCat && ExpenseRead[i].date[j]== D)
 				  {
 					   flag++;
+					   prev=ExpenseRead[i].amount[j];
 					   ExpenseRead[i].amount[j]=A;
 					   ExpenseRead[i].notes[j]=exNote;
 					   break;
@@ -1737,6 +1766,13 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 			  break;
 			}
 		 }
+          if (exCat == "Zakat")
+			{
+			totalZakat+=prev;
+            totalZakat-=A;
+			if(totalZakat<0) totalZakat=0;
+
+		}
 		 if(flag==0)
 		 {
 			 ShowMessage("Record does not exist" );
@@ -2177,40 +2213,61 @@ void __fastcall TForm3::Button10Click(TObject *Sender)
 {
 	UnicodeString newSource = Edit7->Text.Trim();  // Get the text from EditBox17 and trim any leading/trailing spaces
 
-	if (newSource != "") {
-		 std::wstring wstr = newSource.c_str();
-		std::string str(wstr.begin(), wstr.end());   // Add the new source to the vector
+    if (newSource != "") {
+        std::wstring wstr = newSource.c_str();
+        std::string str(wstr.begin(), wstr.end());   // Convert the UnicodeString to std::string
 
-        // Update ComboBox1
-		ComboBox4->Items->Add(newSource);
-		sourcelist.push_back(str);
-		ShowMessage("New source added.");
-		// Write the updated vector back to the file
-		WriteVectorToFile();
-	} else {
-		ShowMessage("Please enter a valid source.");
-	}
+        // Check if the source already exists in the vector
+        if (std::find(sourcelist.begin(), sourcelist.end(), str) != sourcelist.end()) {
+            ShowMessage("Source already exists.");
+            return;  // Exit the function without adding the source again
+        }
+
+        // Add the new source to the ComboBox
+        ComboBox4->Items->Add(newSource);
+
+        // Add the new source to the vector
+        sourcelist.push_back(str);
+
+        ShowMessage("New source added.");
+
+        // Write the updated vector back to the file
+        WriteVectorToFile();
+    } else {
+        ShowMessage("Please enter a valid source.");
+    }
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm3::Button11Click(TObject *Sender)
 {
-UnicodeString newCategory = Edit9->Text.Trim();  // Get the text from Edit9 and trim any leading/trailing spaces
+ UnicodeString newCategory = Edit9->Text.Trim();  // Get the text from Edit9 and trim any leading/trailing spaces
 
-    if (newCategory != "") {
-        std::wstring wstr = newCategory.c_str();
-        std::string str(wstr.begin(), wstr.end());  // Convert wstring to string
+ if (newCategory.Pos(L" ") != 0) {
+    ShowMessage("Category name cannot contain blank spaces.");
+    return;  // Exit the function without adding the category
+}
+	if (newCategory != "") {
+		std::wstring wstr = newCategory.c_str();
+		std::string str(wstr.begin(), wstr.end());  // Convert wstring to string
 
-        categorylist.push_back(str);  // Add the new category to the vector
+		// Check if the category already exists in the vector
+		if (std::find(categorylist.begin(), categorylist.end(), str) != categorylist.end()) {
+			ShowMessage("Category already exists.");
+			return;  // Exit the function without adding the category again
+		}
 
-        // Update ComboBox5
-        ComboBox5->Items->Add(newCategory);
+		// Add the new category to the vector
+		categorylist.push_back(str);
 
-        // Write the updated vector back to the file
-        WriteCategoriesToFile();
-    } else {
-        ShowMessage("Please enter a valid category.");
-    }
+		// Update ComboBox5
+		ComboBox5->Items->Add(newCategory);
+
+		// Write the updated vector back to the file
+		WriteCategoriesToFile();
+	} else {
+		ShowMessage("Please enter a valid category.");
+	}
 }
 //---------------------------------------------------------------------------
 
@@ -2584,13 +2641,75 @@ void __fastcall TForm3::Button13Click(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
+Budget updatedBudget;
+
 
 void __fastcall TForm3::Button14Click(TObject *Sender)
 {
+	   //ShowButtonRefresh();
+        ListBox4->Clear();
 	displayBudgetInListBox(ListBox3);
 	AddExpenseOperations();
+	// Find the ExpenseClass object for the given month and year
+	ExpenseClass* matchingExpense = nullptr;
+	for (auto& expense : ExpenseRead) {
+		if (expense.month == month && expense.year == year) {
+			matchingExpense = &expense;
+			break;
+		}
+	}
 
+	if (!matchingExpense) {
+		ShowMessage("No matching expenses found for the selected month and year.");
+		return;
+	}
+	 updatedBudget.month = currentBudget.month; // Copy the month
+updatedBudget.categories = currentBudget.categories; // Copy the categories vector
+updatedBudget.amounts = currentBudget.amounts;
 
+	auto categories = updatedBudget.categories;  // Using updatedBudget
+	auto amounts = updatedBudget.amounts;
+
+	 bool crossedBudget = false;
+	 UnicodeString warningCategories;
+	for (size_t i = 0; i < categories.size(); ++i) {
+		// Convert the category from updatedBudget to UnicodeString
+		UnicodeString currentCategory = UnicodeString(categories[i].c_str());
+
+		// Find the category in the ExpenseClass object
+		int expenseAmount = 0;
+		for (size_t j = 0; j < matchingExpense->category.size(); ++j) { // Adjusted to match the member name
+			// Convert the category from matchingExpense to UnicodeString
+			UnicodeString expenseCategory = matchingExpense->category[j];
+
+			if (expenseCategory == currentCategory) {
+				expenseAmount += matchingExpense->amount[j];          // Adjusted to match the member name
+			   //	break;
+			}
+		}
+
+		// Calculate the remaining budget amount
+		int remainingAmount = amounts[i] - expenseAmount;
+		// Check if the remaining amount is less than 0
+		if (remainingAmount < 0) {
+		crossedBudget = true;
+		warningCategories += currentCategory + L", ";
+	   }
+		// Display the result on the list box
+		UnicodeString result = currentCategory + L": Remaining Budget = " + IntToStr(remainingAmount);
+		ListBox4->Items->Add(result);
+	}
+	RichEdit1->Text = "";
+	if (crossedBudget) {
+	RichEdit1->SelStart = RichEdit1->Text.Length();
+	RichEdit1->SelAttributes->Color = clRed;
+	RichEdit1->SelText = "Warning: Budget crossed in " + warningCategories + "\n";
+} else {
+	// Display the success message
+	RichEdit1->SelStart = RichEdit1->Text.Length();
+	RichEdit1->SelAttributes->Color = clGreen;
+	RichEdit1->SelText = "No budget crossed. You are on track!\n";
+}
 }
 //---------------------------------------------------------------------------
 
@@ -2599,38 +2718,88 @@ void __fastcall TForm3::Button14Click(TObject *Sender)
 void __fastcall TForm3::Button15Click(TObject *Sender)
 {
 	UnicodeString category = Edit20->Text.Trim();
-UnicodeString amount = Edit21->Text.Trim();
+    UnicodeString amount = Edit21->Text.Trim();
 
-std::wstring wCategory = category.w_str();
-std::wstring wAmount = amount.w_str();
-
-std::string newCategoryStr(wCategory.begin(), wCategory.end());
-std::string newAmountStr(wAmount.begin(), wAmount.end());
-
-	if (newCategoryStr.empty() || newAmountStr.empty())
+    // Check for empty strings
+    if (category.IsEmpty() || amount.IsEmpty())
     {
         ShowMessage("Both category and amount fields must be filled.");
         return;
     }
 
+    // Convert UnicodeString to std::string
+    std::wstring wCategory = category.w_str();
+    std::wstring wAmount = amount.w_str();
+
+    std::string newCategoryStr(wCategory.begin(), wCategory.end());
+    std::string newAmountStr(wAmount.begin(), wAmount.end());
+
+    // Check if category already exists
+    if (std::find(currentBudget.categories.begin(), currentBudget.categories.end(), newCategoryStr) != currentBudget.categories.end())
+    {
+        ShowMessage("Category already exists.");
+        return;
+    }
+
+    // Check for blank spaces in the category
+    if (std::any_of(newCategoryStr.begin(), newCategoryStr.end(), ::isspace))
+    {
+        ShowMessage("Category cannot contain blank spaces.");
+        return;
+    }
+
     // Convert the amount string to an integer
-	int newAmount = stoi(newAmountStr);
+    int newAmount = stoi(newAmountStr);
 
     // Add the new category and amount to the Budget object
-	currentBudget.addEntry(newCategoryStr,newAmount);
+    currentBudget.addEntry(newCategoryStr, newAmount);
 
     // Update the output file with the new category and amount
-	//updateBudgetFile();
-	writeBudgetToFile() ;
+    writeBudgetToFile();
 
-	// Update and display the budget in ListBox3
+    // Update and display the budget in ListBox3
     ListBox3->Clear();
-
     displayBudgetInListBox(ListBox3);
 
+    // Add the new category to ComboBox6 if it doesn't already exist
+    if (ComboBox6->Items->IndexOf(category) == -1)
+    {
+        ComboBox6->Items->Add(category);
+    }
+
     // Optionally, clear the Edit boxes after adding
-	Edit20->Clear();
-	Edit21->Clear();
+    Edit20->Clear();
+    Edit21->Clear();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm3::Button16Click(TObject *Sender)
+{
+	  // Check if an item is selected in ComboBox6
+    if (ComboBox6->ItemIndex != -1)
+	{
+		// Retrieve the selected item
+UnicodeString selectedCategory = ComboBox6->Items->Strings[ComboBox6->ItemIndex];
+
+// Convert the UnicodeString to a wstring
+std::wstring wstr = selectedCategory.w_str();
+
+// Convert the wstring to a string
+std::string str(wstr.begin(), wstr.end());
+
+// Remove the selected item from the currentBudget object
+
+currentBudget.removeEntry(str);
+        // Remove the selected item from ComboBox6
+        ComboBox6->Items->Delete(ComboBox6->ItemIndex);
+
+        // Update the file to reflect the changes
+        writeBudgetToFile();
+    }
+    else
+    {
+        ShowMessage("Please select a category to delete.");
+	}
 
 }
 //---------------------------------------------------------------------------

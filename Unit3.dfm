@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 420
-  ClientWidth = 647
+  ClientHeight = 509
+  ClientWidth = 719
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -31,12 +31,14 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 647
-    Height = 420
-    ActivePage = Budget
+    Width = 719
+    Height = 509
+    ActivePage = Expense
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
+    ExplicitWidth = 633
+    ExplicitHeight = 387
     object Income: TTabSheet
       Caption = 'Income'
       ImageIndex = 3
@@ -623,27 +625,27 @@ object Form3: TForm3
         ParentFont = False
       end
       object Label26: TLabel
-        Left = 544
-        Top = 56
-        Width = 54
-        Height = 18
+        Left = 571
+        Top = 89
+        Width = 66
+        Height = 23
         Caption = 'Category'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
       end
       object Label27: TLabel
-        Left = 544
-        Top = 97
-        Width = 44
-        Height = 18
+        Left = 571
+        Top = 131
+        Width = 54
+        Height = 23
         Caption = 'Amount'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Comic Sans MS'
         Font.Style = []
         ParentFont = False
@@ -660,7 +662,7 @@ object Form3: TForm3
       object ListBox3: TListBox
         Left = 16
         Top = 53
-        Width = 195
+        Width = 265
         Height = 132
         Color = clBtnFace
         ItemHeight = 15
@@ -669,7 +671,7 @@ object Form3: TForm3
       object ListBox4: TListBox
         Left = 16
         Top = 224
-        Width = 195
+        Width = 265
         Height = 129
         Color = clBtnFace
         ItemHeight = 15
@@ -685,26 +687,58 @@ object Form3: TForm3
       end
       object Edit20: TEdit
         Left = 407
-        Top = 53
-        Width = 121
-        Height = 23
+        Top = 88
+        Width = 141
+        Height = 30
         TabOrder = 4
       end
       object Edit21: TEdit
         Left = 407
-        Top = 96
-        Width = 121
-        Height = 23
+        Top = 124
+        Width = 141
+        Height = 30
         TabOrder = 5
       end
       object Button15: TButton
         Left = 407
-        Top = 136
+        Top = 160
         Width = 226
         Height = 25
         Caption = 'Add Budget Field'
         TabOrder = 6
         OnClick = Button15Click
+      end
+      object RichEdit1: TRichEdit
+        Left = 128
+        Top = 368
+        Width = 497
+        Height = 25
+        Color = clBtnFace
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        Lines.Strings = (
+          'RichEdit1')
+        ParentFont = False
+        TabOrder = 7
+      end
+      object ComboBox6: TComboBox
+        Left = 407
+        Top = 53
+        Width = 141
+        Height = 23
+        TabOrder = 8
+      end
+      object Button16: TButton
+        Left = 568
+        Top = 52
+        Width = 75
+        Height = 25
+        Caption = 'Delete'
+        TabOrder = 9
+        OnClick = Button16Click
       end
     end
     object Analytics: TTabSheet
@@ -714,8 +748,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 639
-        Height = 393
+        Width = 697
+        Height = 460
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
@@ -724,8 +758,8 @@ object Form3: TForm3
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
-        ExplicitWidth = 631
-        ExplicitHeight = 380
+        ExplicitWidth = 611
+        ExplicitHeight = 338
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0

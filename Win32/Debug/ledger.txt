@@ -152,6 +152,7 @@ Start
 01
 10 Rent 9200
 10 Food 1050
+10 Zakat 500
 15 Bills 15500
 17 Clothes 12500
 17 Donations 10500
@@ -171,4 +172,9 @@ Start
 19 Games 10500
 20 Food 4400
 29 Transportation 12000
+End
+Start
+2024
+01
+10 Zakat 200
 End

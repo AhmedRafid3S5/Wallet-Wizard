@@ -1,11 +1,10 @@
-Rent 10000
-Food 5000
-Bills 2000
-Clothes 1000
-Donations 1000
-Zakat 1000
-Games 1000
-Transportation 1000
-Travel 2000
-Picnic 500
-Entertainment 500
+1
+Rent 70000
+Food 50000
+Bills 20000
+Clothes 10000
+Donations 5000
+Zakat 10000
+Transportation 10000
+Travel 20000
+Furniture 3000
