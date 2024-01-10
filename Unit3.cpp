@@ -2591,3 +2591,42 @@ void __fastcall TForm3::Button14Click(TObject *Sender)
 
 
 
+void __fastcall TForm3::Button15Click(TObject *Sender)
+{
+	UnicodeString category = Edit20->Text.Trim();
+UnicodeString amount = Edit21->Text.Trim();
+
+std::wstring wCategory = category.w_str();
+std::wstring wAmount = amount.w_str();
+
+std::string newCategoryStr(wCategory.begin(), wCategory.end());
+std::string newAmountStr(wAmount.begin(), wAmount.end());
+
+	if (newCategoryStr.empty() || newAmountStr.empty())
+    {
+        ShowMessage("Both category and amount fields must be filled.");
+        return;
+    }
+
+    // Convert the amount string to an integer
+	int newAmount = stoi(newAmountStr);
+
+    // Add the new category and amount to the Budget object
+	currentBudget.addEntry(newCategoryStr,newAmount);
+
+    // Update the output file with the new category and amount
+	//updateBudgetFile();
+	writeBudgetToFile() ;
+
+	// Update and display the budget in ListBox3
+    ListBox3->Clear();
+
+    displayBudgetInListBox(ListBox3);
+
+    // Optionally, clear the Edit boxes after adding
+	Edit20->Clear();
+	Edit21->Clear();
+
+}
+//---------------------------------------------------------------------------
+

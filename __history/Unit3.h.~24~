@@ -195,7 +195,6 @@ __published:	// IDE-managed Components
 	TEdit *Edit5;
 	TEdit *Edit6;
 	TEdit *Edit7;
-	TMemo *Memo1;
 	TLabel *Label5;
 	TLabel *Label6;
 	TLabel *Label7;
@@ -212,10 +211,49 @@ __published:	// IDE-managed Components
 	TButton *Button6;
 	TLabel *Label12;
 	TButton *Button7;
-	TMemo *Memo2;
 	TButton *Button8;
 	TLabel *Label8;
-	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
+	TListBox *ListBox1;
+	TEdit *Edit13;
+	TLabel *Label13;
+	TButton *Button9;
+	TEdit *Edit14;
+	TEdit *Edit15;
+	TLabel *Label14;
+	TLabel *Label15;
+	TEdit *Edit16;
+	TLabel *Label16;
+	TListBox *ListBox2;
+	TLabel *Label17;
+	TLabel *Label18;
+	TLabel *Label19;
+	TLabel *Label20;
+	TEdit *Edit17;
+	TEdit *Edit18;
+	TButton *Search;
+	TScrollBox *ScrollBox2;
+	TStaticText *StaticText3;
+	TComboBox *ComboBox3;
+	TButton *ByWeightInfo;
+	TButton *ManualBTInfo;
+	TStaticText *StaticText5;
+	TButton *LoadFromSavings;
+	TButton *Button10;
+	TLabel *Label21;
+	TComboBox *ComboBox5;
+	TButton *Button11;
+	TLabel *Label22;
+	TComboBox *ComboBox4;
+	TButton *Button12;
+	TButton *Button13;
+	TTabSheet *Budget;
+	TButton *Button14;
+	TListBox *ListBox3;
+	TLabel *Label23;
+	TLabel *Label24;
+	TListBox *ListBox4;
+	TLabel *Label25;
+	TEdit *Edit19;
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
@@ -238,6 +276,18 @@ __published:	// IDE-managed Components
 	//void __fastcall Label8Click(TObject *Sender);
 	void __fastcall Button7Click(TObject *Sender);
 	void __fastcall Button8Click(TObject *Sender);
+	void __fastcall Button9Click(TObject *Sender);
+	void __fastcall SearchClick(TObject *Sender);
+	void __fastcall ByWeightInfoClick(TObject *Sender);
+	void __fastcall ManualBTInfoClick(TObject *Sender);
+	void __fastcall ComboBox3Change(TObject *Sender);
+	void __fastcall LoadFromSavingsClick(TObject *Sender);
+	void __fastcall Button10Click(TObject *Sender);
+	void __fastcall Button11Click(TObject *Sender);
+	void __fastcall Button12Click(TObject *Sender);
+	void __fastcall Button13Click(TObject *Sender);
+	void __fastcall Button14Click(TObject *Sender);
+
 
 
 
@@ -275,6 +325,7 @@ class Transaction
 		void Addamount(int val) { amount.push_back(val); }
 		vector<UnicodeString> Getcategory() { return category; }
 		void Addcategory(UnicodeString val) { category.push_back(val); }
+		void Addnotes(UnicodeString val) { notes.push_back(val); }   //For short notes
 		map<UnicodeString,int> GetTypeToCat() { return TypeToCat; }
 		void SetTypeToCat(map<UnicodeString,int> val) { TypeToCat = val; }
 		vector<int> Getdate() { return date; }
@@ -287,6 +338,7 @@ class Transaction
 		vector<UnicodeString> category;
 		map<UnicodeString,int> TypeToCat;
 		vector<int> date;
+		vector<UnicodeString> notes;  //Will keep the notes
 };
 
  class IncomeClass : public Transaction
@@ -311,7 +363,58 @@ class ExpenseClass : public Transaction
 
 	private:
 };
+//Budget class creation
 
+class Budget {
+public:
+	std::vector<std::string> categories;
+    std::vector<int> amounts;
+
+    // Default constructor
+    Budget() {}
+
+    // Getter for categories
+    std::vector<std::string> getCategories() const {
+        return categories;
+    }
+
+    // Getter for amounts
+    std::vector<int> getAmounts() const {
+        return amounts;
+    }
+
+	// Setter for categories
+	void setCategories( std::vector<std::string>& cats) {
+		categories = cats;
+    }
+
+    // Setter for amounts
+	void setAmounts( std::vector<int>& amts) {
+        amounts = amts;
+    }
+
+    // Add a new category and its corresponding amount
+	void addEntry(std::string cat, int am) {
+		categories.push_back(cat);
+		amounts.push_back(am);
+	}
+
+    // Delete a category and its corresponding amount by index
+    void deleteCategory(int index) {
+        if (index >= 0 && index < categories.size()) {
+            categories.erase(categories.begin() + index);
+            amounts.erase(amounts.begin() + index);
+        }
+    }
+
+    // Edit the amount at a given index
+    void editAmount(int index, int newAmount) {
+        if (index >= 0 && index < amounts.size()) {
+            amounts[index] = newAmount;
+        }
+    }
+
+};
 //---------------------------------------------------------------------------
 extern PACKAGE TForm3 *Form3;
 //---------------------------------------------------------------------------

@@ -2,8 +2,8 @@ object Form3: TForm3
   Left = 613
   Top = 150
   Caption = 'Form3'
-  ClientHeight = 462
-  ClientWidth = 667
+  ClientHeight = 429
+  ClientWidth = 653
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -31,14 +31,12 @@ object Form3: TForm3
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 667
-    Height = 462
+    Width = 653
+    Height = 429
     ActivePage = Budget
     Align = alClient
     TabOrder = 0
     OnChange = PageControl1Change
-    ExplicitWidth = 644
-    ExplicitHeight = 417
     object Income: TTabSheet
       Caption = 'Income'
       ImageIndex = 3
@@ -624,6 +622,32 @@ object Form3: TForm3
         Font.Style = []
         ParentFont = False
       end
+      object Label26: TLabel
+        Left = 544
+        Top = 56
+        Width = 86
+        Height = 20
+        Caption = 'Category'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Comic Sans MS'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label27: TLabel
+        Left = 544
+        Top = 97
+        Width = 52
+        Height = 42
+        Caption = 'Amount'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Comic Sans MS'
+        Font.Style = []
+        ParentFont = False
+      end
       object Button14: TButton
         Left = 16
         Top = 368
@@ -659,6 +683,29 @@ object Form3: TForm3
         Color = clBtnFace
         TabOrder = 3
       end
+      object Edit20: TEdit
+        Left = 407
+        Top = 53
+        Width = 121
+        Height = 23
+        TabOrder = 4
+      end
+      object Edit21: TEdit
+        Left = 407
+        Top = 96
+        Width = 121
+        Height = 23
+        TabOrder = 5
+      end
+      object Button15: TButton
+        Left = 407
+        Top = 136
+        Width = 226
+        Height = 25
+        Caption = 'Add Budget Field'
+        TabOrder = 6
+        OnClick = Button15Click
+      end
     end
     object Analytics: TTabSheet
       Caption = 'Analytics'
@@ -667,8 +714,8 @@ object Form3: TForm3
         AlignWithMargins = True
         Left = 3
         Top = 3
-        Width = 645
-        Height = 413
+        Width = 631
+        Height = 380
         HorzScrollBar.ButtonSize = 10
         HorzScrollBar.Color = clBtnShadow
         HorzScrollBar.ParentColor = False
@@ -677,8 +724,6 @@ object Form3: TForm3
         TabOrder = 0
         OnMouseWheelDown = ScrollBox1MouseWheelDown
         OnMouseWheelUp = ScrollBox1MouseWheelUp
-        ExplicitWidth = 622
-        ExplicitHeight = 368
         object Chart1: TChart
           AlignWithMargins = True
           Left = 0

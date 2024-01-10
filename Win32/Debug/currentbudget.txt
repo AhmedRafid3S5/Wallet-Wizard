@@ -7,3 +7,5 @@ Zakat 1000
 Games 1000
 Transportation 1000
 Travel 2000
+Picnic 500
+Entertainment 500

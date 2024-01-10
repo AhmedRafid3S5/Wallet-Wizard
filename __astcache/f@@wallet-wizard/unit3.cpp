@@ -134,8 +134,7 @@ void WriteCategoriesToFile() {
 Budget currentBudget;
 
 void readBudgetFromFile() {
-	std::ifstream inFile("currentbudgetwhyisthisnotworking.txt");
-	 //ShowMessage("Function called readbudget");
+	std::ifstream inFile("currentbudget.txt");
 	if (!inFile.is_open()) {
 		std::cerr << "Unable to open file currentbudget.txt" << std::endl;
 		return;
@@ -144,7 +143,6 @@ void readBudgetFromFile() {
 	std::string line;
 	while (std::getline(inFile, line)) {
 		std::istringstream iss(line);
-	   // ShowMessage(line);
 		std::string category;
 		int amount;
 
@@ -158,13 +156,13 @@ void readBudgetFromFile() {
 
 // Function to write the contents of the global Budget object back to the file
 void writeBudgetToFile() {
-	std::ofstream outFile("currentbudgetisthisworking?.txt");
+	std::ofstream outFile("currentbudget.txt");
 
 	if (!outFile.is_open()) {
 		std::cerr << "Unable to open file currentbudget.txt for writing." << std::endl;
 		return;
 	}
-
+	// ShowMessage("Write Function called");
 	auto categories = currentBudget.getCategories();
 	auto amounts = currentBudget.getAmounts();
 
@@ -184,8 +182,42 @@ void displayBudgetInListBox(TListBox* listBox) {
 	for (size_t i = 0; i < categories.size(); ++i) {
 		std::string combinedStr = categories[i] + ": " + std::to_string(amounts[i]);  // Combine the strings
 		UnicodeString entry = UnicodeString(combinedStr.c_str());
-		ShowMessage(entry);
+		//ShowMessage(entry);
 		listBox->Items->Add(entry);
+	}
+}
+
+// To display on the Budget Tab
+UnicodeString FindMonth()
+{
+   switch (month)
+    {
+        case 1:
+			return UnicodeString("For the month of January");
+        case 2:
+			return UnicodeString("For the month of February");
+        case 3:
+			return UnicodeString("For the month of March");
+        case 4:
+            return UnicodeString("For the month of April");
+        case 5:
+            return UnicodeString("For the month of May");
+        case 6:
+            return UnicodeString("For the month of June");
+        case 7:
+            return UnicodeString("For the month of July");
+        case 8:
+            return UnicodeString("For the month of August");
+        case 9:
+            return UnicodeString("For the month of September");
+        case 10:
+            return UnicodeString("For the month of October");
+        case 11:
+            return UnicodeString("For the month of November");
+        case 12:
+            return UnicodeString("For the month of December");
+        default:
+            return UnicodeString("Invalid month");
 	}
 }
 void loadGoldFile()
@@ -323,7 +355,12 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 	}
 
     //same for the budget categories
-
+	  readBudgetFromFile()  ;
+	ListBox4->Items->Clear();
+	ListBox3->Items->Clear();
+	writeBudgetToFile();
+	displayBudgetInListBox(ListBox3);
+	 Edit19->Text= FindMonth();
 	//  readBudgetFromFile()
    // displayBudgetInListBox(TListBox* listBox)
    //This is to clear the input boxes
@@ -1054,7 +1091,7 @@ void AddIncomeOperations()
 		}
 	}
 
-	//int flag=0;
+	int flag=0;
 	for (int i = 0; i < IncomeRead.size(); i++)
 	{
 		if (IncomeRead[i].Getmonth() == M && IncomeRead[i].Getyear() == Y)
@@ -1062,7 +1099,7 @@ void AddIncomeOperations()
 
 		   //for(j=0; j<incomeRead[i].date.size(); j++)
 		   //if(incomeread[i].date[j] == D && incomeread[i].category[j] == source && IncomeRead[i].amount[j] == A)
-		   //flag++;
+			flag++;
 			IncomeRead[i].Adddate(D);
 			IncomeRead[i].Addamount(A);
 			IncomeRead[i].Addcategory(Source);
@@ -1070,7 +1107,18 @@ void AddIncomeOperations()
 			break;
 		}
 	}
+	if(flag==0)
+	{
+		IncomeClass temp;
+		temp.Adddate(D);
+		temp.Addamount(A);
+		temp.Addcategory(Source);
+		temp.Addnotes(Note);
+		temp.month=M;
+		temp.year=Y;
+		IncomeRead.push_back(temp);
 
+	}
 	SortIncome();
 
 	std::ofstream outFile(incomeledger);
@@ -1312,6 +1360,7 @@ void AddExpenseOperations()
 			return;
 		}
 	}
+	int flag=0;
 	   for(int i=0;i<ExpenseRead.size();i++)
 		 {
 			if(ExpenseRead[i].Getmonth() == M && ExpenseRead[i].Getyear() == Y)
@@ -1323,6 +1372,18 @@ void AddExpenseOperations()
 			 break;
 			}
 		 }
+         if(flag==0)
+	{
+		ExpenseClass temp;
+		temp.Adddate(D);
+		temp.Addamount(A);
+		temp.Addcategory(exCat);
+		temp.Addnotes(exNote);
+		temp.month=M;
+		temp.year=Y;
+		ExpenseRead.push_back(temp);
+
+	}
 		 SortExpense();
 		 //ShowMessage("Received data " + Amount );
 		 std::ofstream outExpenseFile(userledger);
@@ -2521,13 +2582,51 @@ void __fastcall TForm3::Button13Click(TObject *Sender)
 
 void __fastcall TForm3::Button14Click(TObject *Sender)
 {
-	 readBudgetFromFile()  ;
-ListBox4->Items->Clear();
-  ListBox3->Items->Clear();
-  writeBudgetToFile();
+	displayBudgetInListBox(ListBox3);
+	AddExpenseOperations();
+
 
 }
 //---------------------------------------------------------------------------
 
 
+
+void __fastcall TForm3::Button15Click(TObject *Sender)
+{
+	UnicodeString category = Edit20->Text.Trim();
+UnicodeString amount = Edit21->Text.Trim();
+
+std::wstring wCategory = category.w_str();
+std::wstring wAmount = amount.w_str();
+
+std::string newCategoryStr(wCategory.begin(), wCategory.end());
+std::string newAmountStr(wAmount.begin(), wAmount.end());
+
+	if (newCategoryStr.empty() || newAmountStr.empty())
+    {
+        ShowMessage("Both category and amount fields must be filled.");
+        return;
+    }
+
+    // Convert the amount string to an integer
+	int newAmount = stoi(newAmountStr);
+
+    // Add the new category and amount to the Budget object
+	currentBudget.addEntry(newCategoryStr,newAmount);
+
+    // Update the output file with the new category and amount
+	//updateBudgetFile();
+	writeBudgetToFile() ;
+
+	// Update and display the budget in ListBox3
+    ListBox3->Clear();
+
+    displayBudgetInListBox(ListBox3);
+
+    // Optionally, clear the Edit boxes after adding
+	Edit20->Clear();
+	Edit21->Clear();
+
+}
+//---------------------------------------------------------------------------
 

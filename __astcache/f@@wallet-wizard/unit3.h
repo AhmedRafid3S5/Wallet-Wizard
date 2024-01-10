@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+﻿//---------------------------------------------------------------------------
 
 #ifndef Unit3H
 #define Unit3H
@@ -249,7 +249,16 @@ __published:	// IDE-managed Components
 	TTabSheet *Budget;
 	TButton *Button14;
 	TListBox *ListBox3;
+	TLabel *Label23;
+	TLabel *Label24;
 	TListBox *ListBox4;
+	TLabel *Label25;
+	TEdit *Edit19;
+	TEdit *Edit20;
+	TEdit *Edit21;
+	TButton *Button15;
+	TLabel *Label26;
+	TLabel *Label27;
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
@@ -283,6 +292,7 @@ __published:	// IDE-managed Components
 	void __fastcall Button12Click(TObject *Sender);
 	void __fastcall Button13Click(TObject *Sender);
 	void __fastcall Button14Click(TObject *Sender);
+	void __fastcall Button15Click(TObject *Sender);
 
 
 
