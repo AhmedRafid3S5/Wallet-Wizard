@@ -1,0 +1,10 @@
+1
+Rent 70000
+Food 50000
+Bills 20000
+Clothes 10000
+Donations 5000
+Zakat 10000
+Transportation 10000
+Furniture 3000
+Travel 6000

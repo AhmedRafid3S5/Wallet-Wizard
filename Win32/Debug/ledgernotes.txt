@@ -1,392 +1,317 @@
 Start
 2023
 01
-01 Donations 100
-Expense added as Donations category
-01 Bills 252
-Expense added as Bills category
-05 Rent 7000
-Expense added as Rent category
-05 Food 70
-Expense added as Food category
-06 Food 80
-Expense added as Food category
-10 Games 750
-Expense added as Games category
-11 Food 50
-Expense added as Food category
-14 Games 3000
-Expense added as Games category
-15 Clothes 450
-Expense added as Clothes category
-15 Food 500
-Expense added as Food category
-16 Electricity_Bill 760
-Expense added as Electricity_Bill category
-17 Donations 3000
-Expense added as Donations category
+10 Rent 8000
+Monthly rent payment
+10 Food 500
+Grocery shopping
+15 Bills 10000
+Utility bills payment
+17 Clothes 7000
+Clothing shopping
+17 Donations 5000
+Contributed to charity
+19 Games 4500
+Purchased new video games
+20 Food 2000
+Dining out
+29 Transportation 6000
+Monthly transportation expenses
+31 Travel 20000
+Planned vacation expenses
 End
 Start
 2023
 02
-02 Games 450
-Expense added as Games category
-05 Rent 7000
-Expense added as Rent category
-05 Food 70
-Expense added as Food category
-06 Food 80
-Expense added as Food category
-10 Games 750
-Expense added as Games category
-11 Food 50
-Expense added as Food category
-14 Games 3000
-Expense added as Games category
-15 Clothes 450
-Expense added as Clothes category
-15 Food 500
-Expense added as Food category
-16 Electricity_Bill 760
-Expense added as Electricity_Bill category
-17 Groceries 1000
-Expense added as Groceries category
-20 Groceries 450
-Expense added as Groceries category
+10 Rent 8500
+Monthly rent payment
+10 Food 500
+Grocery shopping
+15 Bills 10000
+Utility bills payment
+17 Clothes 1000
+Clothing shopping
+17 Donations 5000
+Contributed to charity
+20 Food 3000
+Dining out
+28 Transportation 7000
+Monthly transportation expenses
 End
 Start
 2023
 03
-02 Games 450
-Expense added as Games category
-05 Rent 7000
-Expense added as Rent category
-05 Food 70
-Expense added as Food category
-06 Food 80
-Expense added as Food category
-10 Games 750
-Expense added as Games category
-11 Food 50
-Expense added as Food category
-14 Games 3000
-Expense added as Games category
-15 Clothes 450
-15 Food 500
-16 Electricity_Bill 760
-Expense added as Electricity_Bill category
-17 Groceries 1000
-Expense added as Groceries category
-20 Groceries 450
-Expense added as Groceries category
-25 Appliances 2000
-Expense added as Appliances category
+10 Rent 8200
+Monthly rent payment
+10 Food 550
+Grocery shopping
+15 Bills 10500
+Utility bills payment
+17 Clothes 7500
+Clothing shopping
+17 Donations 5500
+Contributed to charity
+19 Games 5000
+Purchased new video games
+20 Food 2200
+Dining out
+29 Transportation 6500
+Monthly transportation expenses
+31 Travel 21000
+Planned vacation expenses
 End
 Start
 2023
 04
-02 Travel 250
-Expense added as Travel category
-05 Entertainment 6000
-Expense added as Entertainment category
-05 Dining 90
-Expense added as Dining category
-06 Shopping 120
-Expense added as Shopping category
-10 Hobbies 800
-Expense added as Hobbies category
-11 Dining 45
-Expense added as Dining category
-14 Travel 2800
-Expense added as Travel category
-15 Electronics 300
-Expense added as Electronics category
-15 Groceries 400
-Expense added as Groceries category
-16 Rent 700
-Expense added as Rent category
-17 Health 1200
-Expense added as Health category
-20 Home_Decor 350
-Expense added as Home_Decor category
-25 Utilities 1500
-Expense added as Utilities category
+10 Rent 8300
+Monthly rent payment
+10 Food 600
+Grocery shopping
+15 Bills 11000
+Utility bills payment
+17 Clothes 8000
+Clothing shopping
+17 Donations 6000
+Contributed to charity
+19 Games 5500
+Purchased new video games
+20 Food 2400
+Dining out
+29 Transportation 7000
+Monthly transportation expenses
 End
 Start
 2023
 05
-02 Travel 250
-Expense added as Travel category
-05 Entertainment 600
-Expense added as Entertainment category
-05 Dining 90
-Expense added as Dining category
-06 Shopping 120
-Expense added as Shopping category
-10 Hobbies 800
-Expense added as Hobbies category
-11 Dining 45
-Expense added as Dining category
-14 Travel 2800
-Expense added as Travel category
-15 Electronics 300
-Expense added as Electronics category
-15 Groceries 400
-Expense added as Groceries category
-16 Rent 700
-Expense added as Rent category
-17 Health 1200
-Expense added as Health category
-20 Home_Decor 350
-Expense added as Home_Decor category
-25 Utilities 1500
-Expense added as Utilities category
+10 Rent 8400
+Monthly rent payment
+10 Food 650
+Grocery shopping
+15 Bills 11500
+Utility bills payment
+17 Clothes 8500
+Clothing shopping
+17 Donations 6500
+Contributed to charity
+19 Games 6000
+Purchased new video games
+20 Food 2600
+Dining out
+29 Transportation 7500
+Monthly transportation expenses
+31 Travel 22000
+Planned vacation expenses
 End
 Start
 2023
 06
-02 Travel 250
-Expense added as Travel category
-05 Entertainment 600
-Expense added as Entertainment category
-05 Dining 90
-Expense added as Dining category
-06 Shopping 120
-Expense added as Shopping category
-10 Hobbies 800
-Expense added as Hobbies category
-11 Dining 45
-Expense added as Dining category
-14 Travel 2800
-Expense added as Travel category
-15 Electronics 300
-Expense added as Electronics category
-15 Groceries 400
-Expense added as Groceries category
-16 Rent 700
-Expense added as Rent category
-17 Health 1200
-Expense added as Health category
-20 Home_Decor 350
-Expense added as Home_Decor category
-25 Utilities 1500
-Expense added as Utilities category
+10 Rent 8500
+Monthly rent payment
+10 Food 700
+Grocery shopping
+15 Bills 12000
+Utility bills payment
+17 Clothes 9000
+Clothing shopping
+17 Donations 7000
+Contributed to charity
+19 Games 6500
+Purchased new video games
+20 Food 2800
+Dining out
+29 Transportation 8000
+Monthly transportation expenses
 End
 Start
 2023
 07
-02 Travel 250
-Expense added as Travel category
-05 Entertainment 600
-Expense added as Entertainment category
-05 Dining 90
-Expense added as Dining category
-06 Shopping 120
-Expense added as Shopping category
-10 Hobbies 800
-Expense added as Hobbies category
-11 Dining 45
-Expense added as Dining category
-14 Travel 2800
-Expense added as Travel category
-15 Electronics 300
-Expense added as Electronics category
-15 Groceries 400
-Expense added as Groceries category
-16 Rent 700
-Expense added as Rent category
-17 Health 1200
-Expense added as Health category
-20 Home_Decor 350
-Expense added as Home_Decor category
-25 Utilities 1500
-Expense added as Utilities category
+10 Rent 8600
+Monthly rent payment
+10 Food 750
+Grocery shopping
+15 Bills 12500
+Utility bills payment
+17 Clothes 9500
+Clothing shopping
+17 Donations 7500
+Contributed to charity
+19 Games 7000
+Purchased new video games
+20 Food 3000
+Dining out
+29 Transportation 8500
+Monthly transportation expenses
+31 Travel 23000
+Planned vacation expenses
 End
 Start
 2023
 08
-02 Travel 250
-Expense added as Travel category
-05 Entertainment 600
-Expense added as Entertainment category
-05 Dining 90
-Expense added as Dining category
-06 Shopping 120
-Expense added as Shopping category
-10 Hobbies 800
-Expense added as Hobbies category
-11 Dining 45
-Expense added as Dining category
-14 Travel 2800
-Expense added as Travel category
-15 Electronics 300
-Expense added as Electronics category
-15 Groceries 400
-Expense added as Groceries category
-16 Rent 700
-Expense added as Rent category
-17 Health 1200
-Expense added as Health category
-20 Home_Decor 350
-Expense added as Home_Decor category
-25 Utilities 1500
-Expense added as Utilities category
+10 Rent 8700
+Monthly rent payment
+10 Food 800
+Grocery shopping
+15 Bills 13000
+Utility bills payment
+17 Clothes 10000
+Clothing shopping
+17 Donations 8000
+Contributed to charity
+19 Games 7500
+Purchased new video games
+20 Food 3200
+Dining out
+29 Transportation 9000
+Monthly transportation expenses
 End
 Start
 2023
 09
-02 Travel 250
-Expense added as Travel category
-05 Entertainment 600
-Expense added as Entertainment category
-05 Dining 90
-Expense added as Dining category
-06 Shopping 120
-Expense added as Shopping category
-10 Hobbies 800
-Expense added as Hobbies category
-11 Dining 45
-Expense added as Dining category
-14 Travel 2800
-Expense added as Travel category
-15 Electronics 300
-Expense added as Electronics category
-15 Groceries 400
-Expense added as Groceries category
-16 Rent 700
-Expense added as Rent category
-17 Health 1200
-Expense added as Health category
-20 Home_Decor 350
-Expense added as Home_Decor category
-25 Utilities 1500
-Expense added as Utilities category
+10 Rent 8800
+Monthly rent payment
+10 Food 850
+Grocery shopping
+15 Bills 13500
+Utility bills payment
+17 Clothes 10500
+Clothing shopping
+17 Donations 8500
+Contributed to charity
+19 Games 8000
+Purchased new video games
+20 Food 3400
+Dining out
+29 Transportation 9500
+Monthly transportation expenses
+31 Travel 24000
+Planned vacation expenses
 End
 Start
 2023
 10
-02 Travel 250
-Expense added as Travel category
-05 Entertainment 600
-Expense added as Entertainment category
-05 Dining 90
-Expense added as Dining category
-06 Shopping 120
-Expense added as Shopping category
-10 Hobbies 800
-Expense added as Hobbies category
-11 Dining 45
-Expense added as Dining category
-14 Travel 2800
-Expense added as Travel category
-15 Electronics 300
-Expense added as Electronics category
-15 Groceries 400
-Expense added as Groceries category
-16 Rent 700
-Expense added as Rent category
-17 Health 1200
-Expense added as Health category
-20 Home_Decor 350
-Expense added as Home_Decor category
-25 Utilities 1500
-Expense added as Utilities category
+10 Rent 8900
+Monthly rent payment
+10 Food 900
+Grocery shopping
+15 Bills 14000
+Utility bills payment
+17 Clothes 11000
+Clothing shopping
+17 Donations 9000
+Contributed to charity
+19 Games 8500
+Purchased new video games
+20 Food 3600
+Dining out
+29 Transportation 10000
+Monthly transportation expenses
 End
 Start
 2023
 11
-02 Travel 250
-Expense added as Travel category
-05 Entertainment 600
-Expense added as Entertainment category
-05 Dining 90
-Expense added as Dining category
-06 Shopping 120
-Expense added as Shopping category
-10 Hobbies 800
-Expense added as Hobbies category
-11 Dining 45
-Expense added as Dining category
-14 Travel 2800
-Expense added as Travel category
-15 Electronics 300
-Expense added as Electronics category
-15 Groceries 400
-Expense added as Groceries category
-16 Rent 700
-Expense added as Rent category
-17 Health 1200
-Expense added as Health category
-20 Home_Decor 350
-Expense added as Home_Decor category
-25 Utilities 1500
-Expense added as Utilities category
+10 Rent 9000
+Monthly rent payment
+10 Food 950
+Grocery shopping
+15 Bills 14500
+Utility bills payment
+17 Clothes 11500
+Clothing shopping
+17 Donations 9500
+Contributed to charity
+19 Games 9000
+Purchased new video games
+20 Food 3800
+Dining out
+29 Transportation 10500
+Monthly transportation expenses
+31 Travel 25000
+Planned vacation expenses
 End
 Start
 2023
 12
-02 Travel 250
-Expense added as Travel category
-05 Entertainment 600
-Expense added as Entertainment category
-05 Dining 90
-Expense added as Dining category
-06 Shopping 120
-Expense added as Shopping category
-10 Hobbies 800
-Expense added as Hobbies category
-11 Dining 45
-Expense added as Dining category
-14 Travel 2800
-Expense added as Travel category
-15 Electronics 300
-Expense added as Electronics category
-15 Groceries 400
-Expense added as Groceries category
-16 Rent 700
-Expense added as Rent category
-17 Health 1200
-Expense added as Health category
-20 Home_Decor 350
-Expense added as Home_Decor category
-25 Utilities 1500
-Expense added as Utilities category
+10 Rent 9100
+Monthly rent payment
+10 Food 1000
+Grocery shopping
+15 Bills 15000
+Utility bills payment
+17 Clothes 12000
+Clothing shopping
+17 Donations 10000
+Contributed to charity
+19 Games 9500
+Purchased new video games
+20 Food 4000
+Dining out
+29 Transportation 11000
+Monthly transportation expenses
 End
 Start
 2024
 01
-02 Travel 250
-Expense added as Travel category
-05 Entertainment 600
-Expense added as Entertainment category
-05 Dining 90
-Expense added as Dining category
-06 Shopping 1200
-Expense added as Shopping category
-09 Car 6000
-Repaired my car
-10 Hobbies 800
-Expense added as Hobbies category
-11 Dining 45
-Expense added as Dining category
-14 Travel 2800
-Expense added as Travel category
-15 Electronics 300
-Expense added as Electronics category
-15 Groceries 400
-Expense added as Groceries category
-16 Rent 700
-Expense added as Rent category
-17 Health 1200
-Expense added as Health category
-20 Home_Decor 350
-Expense added as Home_Decor category
-20 Dining 1850
-Expense added as Dining category
-25 Utilities 1500
-Expense added as Utilities category
-27 Utilities 5000
-Expense added as Utilities category
-28 Travel 3500
-Expense added as Travel category
+10 Rent 9200
+Monthly rent payment
+10 Food 1050
+Grocery shopping
+11 Zakat 27000
+paid in full
+15 Bills 15500
+Utility bills payment
+17 Clothes 12500
+Clothing shopping
+17 Donations 10500
+Contributed to charity
+19 Games 10000
+Purchased new video games
+20 Food 4200
+Dining out
+29 Transportation 11500
+Monthly transportation expenses
+31 Travel 26000
+Planned vacation expenses
 End
+Start
+2024
+01
+End
+Start
+2024
+01
+End
+Start
+2024
+01
+End
+Start
+2024
+01
+End
+Start
+2024
+01
+11 Zakat 27000
+paid in full
+End
+Start
+2024
+02
+10 Rent 9300
+Monthly rent payment
+10 Food 1100
+Grocery shopping
+15 Bills 16000
+Utility bills payment
+17 Clothes 13000
+Clothing shopping
+17 Donations 11000
+Contributed to charity
+19 Games 10500
+Purchased new video games
+20 Food 4400
+Dining out
+29 Transportation 12000
+Monthly transportation expenses
+End
+

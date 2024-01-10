@@ -224,7 +224,44 @@ __published:	// IDE-managed Components
 	TEdit *Edit16;
 	TLabel *Label16;
 	TListBox *ListBox2;
-	void __fastcall ZakatPageContextPopup(TObject *Sender, TPoint &MousePos, bool &Handled);
+	TLabel *Label17;
+	TLabel *Label18;
+	TLabel *Label19;
+	TLabel *Label20;
+	TEdit *Edit17;
+	TEdit *Edit18;
+	TButton *Search;
+	TScrollBox *ScrollBox2;
+	TStaticText *StaticText3;
+	TComboBox *ComboBox3;
+	TButton *ByWeightInfo;
+	TButton *ManualBTInfo;
+	TStaticText *StaticText5;
+	TButton *LoadFromSavings;
+	TButton *Button10;
+	TLabel *Label21;
+	TComboBox *ComboBox5;
+	TButton *Button11;
+	TLabel *Label22;
+	TComboBox *ComboBox4;
+	TButton *Button12;
+	TButton *Button13;
+	TTabSheet *Budget;
+	TButton *Button14;
+	TListBox *ListBox3;
+	TLabel *Label23;
+	TLabel *Label24;
+	TListBox *ListBox4;
+	TLabel *Label25;
+	TEdit *Edit19;
+	TEdit *Edit20;
+	TEdit *Edit21;
+	TButton *Button15;
+	TLabel *Label26;
+	TLabel *Label27;
+	TRichEdit *RichEdit1;
+	TComboBox *ComboBox6;
+	TButton *Button16;
 	void __fastcall PageControl1Change(TObject *Sender);
 	void __fastcall Button2Click(TObject *Sender);
 	void __fastcall Button3Click(TObject *Sender);
@@ -248,6 +285,19 @@ __published:	// IDE-managed Components
 	void __fastcall Button7Click(TObject *Sender);
 	void __fastcall Button8Click(TObject *Sender);
 	void __fastcall Button9Click(TObject *Sender);
+	void __fastcall SearchClick(TObject *Sender);
+	void __fastcall ByWeightInfoClick(TObject *Sender);
+	void __fastcall ManualBTInfoClick(TObject *Sender);
+	void __fastcall ComboBox3Change(TObject *Sender);
+	void __fastcall LoadFromSavingsClick(TObject *Sender);
+	void __fastcall Button10Click(TObject *Sender);
+	void __fastcall Button11Click(TObject *Sender);
+	void __fastcall Button12Click(TObject *Sender);
+	void __fastcall Button13Click(TObject *Sender);
+	void __fastcall Button14Click(TObject *Sender);
+	void __fastcall Button15Click(TObject *Sender);
+	void __fastcall Button16Click(TObject *Sender);
+
 
 
 
@@ -323,7 +373,86 @@ class ExpenseClass : public Transaction
 
 	private:
 };
+//Budget class creation
 
+class Budget {
+public:
+	std::vector<std::string> categories;
+    std::vector<int> amounts;
+	int month;
+    // Default constructor
+    Budget() {}
+
+    // Getter for categories
+    std::vector<std::string> getCategories() const {
+        return categories;
+    }
+
+    // Getter for amounts
+    std::vector<int> getAmounts() const {
+        return amounts;
+    }
+
+	// Setter for categories
+	void setCategories( std::vector<std::string>& cats) {
+		categories = cats;
+    }
+
+    // Setter for amounts
+	void setAmounts( std::vector<int>& amts) {
+        amounts = amts;
+    }
+
+    // Add a new category and its corresponding amount
+	void addEntry(std::string cat, int am) {
+		categories.push_back(cat);
+		amounts.push_back(am);
+	}
+
+    // Delete a category and its corresponding amount by index
+    void deleteCategory(int index) {
+        if (index >= 0 && index < categories.size()) {
+            categories.erase(categories.begin() + index);
+            amounts.erase(amounts.begin() + index);
+        }
+    }
+
+    // Edit the amount at a given index
+    void editAmount(int index, int newAmount) {
+        if (index >= 0 && index < amounts.size()) {
+            amounts[index] = newAmount;
+        }
+    }
+      // Function to clear the object
+    void clear() {
+        categories.clear();
+        amounts.clear();
+        month = 0;  // Reset the month
+    }
+
+    // Getter and setter functions for month
+    int getMonth() const {
+        return month;
+    }
+
+    void setMonth(int m) {
+        month = m;
+	}
+     void removeEntry(const std::string& categoryToRemove) {
+        auto it = std::find(categories.begin(), categories.end(), categoryToRemove);
+        if (it != categories.end()) {
+            // Calculate the index of the category to remove
+            size_t index = std::distance(categories.begin(), it);
+
+            // Remove the category and its corresponding amount from the vectors
+            categories.erase(categories.begin() + index);
+            amounts.erase(amounts.begin() + index);
+        } else {
+            // Category not found
+            std::cerr << "Category '" << categoryToRemove << "' not found in the budget." << std::endl;
+        }
+    }
+};
 //---------------------------------------------------------------------------
 extern PACKAGE TForm3 *Form3;
 //---------------------------------------------------------------------------

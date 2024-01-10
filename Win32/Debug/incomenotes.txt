@@ -1,194 +1,233 @@
 Start
+2010
+01
+11 Salary 6700
+added salary txt file replaced
+End
+Start
 2023
 01
-01 Salary 50000
-Added income from Salary Source
-05 Freelance 800
-Added income from Freelance Source
-10 Investment 1200
-Added income from Investment Source
-15 Gifts 300
-Added income from Gifts Source
-20 Bonus 600
-Added income from Bonus Source
+10 Salary 80000
+Received first salary at the new job
+15 Freelance 12000
+Completed Client 1 Project
+20 Investment 5000
+Invested in stocks
+21 Bonus 3000
+Received performance bonus
+25 Tuition 10000
+Paid tuition for student: Alex
+27 Home_Rent 18000
+Paid home rent on time
 End
 Start
 2023
 02
-01 Salary 52000
-Added income from Salary Source
-05 Freelance 850
-Added income from Freelance Source
-10 Investment 1300
-Added income from Investment Source
-15 Gifts 350
-Added income from Gifts Source
-20 Bonus 700
-Added income from Bonus Source
+10 Salary 82000
+Received second salary
+15 Freelance 15000
+Completed Client 2 Project
+20 Investment 6000
+Increased stock investments
+21 Bonus 3500
+Received performance bonus
+25 Tuition 12000
+Paid tuition for student: Alex
+27 Home_Rent 20000
+Paid home rent, but it was late
 End
 Start
 2023
 03
-01 Salary 53000
-Added income from Salary Source
-05 Freelance 880
-Added income from Freelance Source
-10 Investment 1400
-Added income from Investment Source
-15 Gifts 370
-Added income from Gifts Source
-20 Bonus 750
-Added income from Bonus Source
+10 Salary 85000
+Received salary
+15 Freelance 13000
+Completed Client 3 Project
+20 Investment 5500
+Strengthened stock portfolio
+21 Bonus 3200
+Received performance bonus
+25 Tuition 11000
+Paid tuition for student: Alex
+25 Salary 85000
+job 
+27 Home_Rent 19000
+Paid home rent on time
 End
 Start
 2023
 04
-01 Salary 55000
-Added income from Salary Source
-05 Freelance 920
-Added income from Freelance Source
-10 Investment 1500
-Added income from Investment Source
-15 Gifts 400
-Added income from Gifts Source
-20 Bonus 800
-Added income from Bonus Source
+10 Salary 83000
+Received salary
+15 Freelance 14000
+Completed Client 4 Project
+20 Investment 5800
+Continued stock investments
+21 Bonus 3300
+Received performance bonus
+25 Tuition 11500
+Paid tuition for student: Alex
+27 Home_Rent 19500
+Paid home rent on time
 End
 Start
 2023
 05
-01 Salary 56000
-Added income from Salary Source
-05 Freelance 950
-Added income from Freelance Source
-10 Investment 1600
-Added income from Investment Source
-15 Gifts 420
-Added income from Gifts Source
-20 Bonus 850
-Added income from Bonus Source
+10 Salary 87000
+Received salary
+15 Freelance 16000
+Completed Client 5 Project
+20 Investment 6200
+Diversified stock investments
+21 Bonus 3800
+Received performance bonus
+25 Tuition 12500
+Paid tuition for student: Alex
+27 Home_Rent 21000
+Paid home rent, but it was late
 End
 Start
 2023
 06
-01 Salary 58000
-Added income from Salary Source
-05 Freelance 980
-Added income from Freelance Source
-10 Investment 1700
-Added income from Investment Source
-15 Gifts 450
-Added income from Gifts Source
-20 Bonus 900
-Added income from Bonus Source
+10 Salary 80000
+Received salary
+15 Freelance 17000
+Completed Client 6 Project
+20 Investment 6500
+Increased stock investments
+21 Bonus 4000
+Received performance bonus
+25 Tuition 13000
+Paid tuition for student: Alex
+27 Home_Rent 22000
+Paid home rent on time
 End
 Start
 2023
 07
-01 Salary 59000
-Added income from Salary Source
-05 Freelance 1000
-Added income from Freelance Source
-10 Investment 1800
-Added income from Investment Source
-15 Gifts 470
-Added income from Gifts Source
-20 Bonus 950
-Added income from Bonus Source
+10 Salary 85000
+Received salary
+15 Freelance 18000
+Completed Client 7 Project
+20 Investment 7000
+Strengthened stock portfolio
+21 Bonus 4200
+Received performance bonus
+25 Tuition 13500
+Paid tuition for student: Alex
+27 Home_Rent 23000
+Paid home rent on time
 End
 Start
 2023
 08
-01 Salary 60000
-Added income from Salary Source
-05 Freelance 1050
-Added income from Freelance Source
-10 Investment 1900
-Added income from Investment Source
-15 Gifts 500
-Added income from Gifts Source
-20 Bonus 1000
-Added income from Bonus Source
+10 Salary 75000
+Received salary
+15 Freelance 20000
+Completed Client 8 Project
+20 Investment 7500
+Continued stock investments
+21 Bonus 4500
+Received performance bonus
+25 Tuition 14000
+Paid tuition for student: Alex
+27 Home_Rent 24000
+Paid home rent, but it was late
 End
 Start
 2023
 09
-01 Salary 62000
-Added income from Salary Source
-05 Freelance 1100
-Added income from Freelance Source
-10 Investment 2000
-Added income from Investment Source
-15 Gifts 530
-Added income from Gifts Source
-20 Bonus 1050
-Added income from Bonus Source
+10 Salary 81500
+Received salary
+15 Freelance 22000
+Completed Client 9 Project
+20 Investment 8000
+Diversified stock investments
+21 Bonus 4800
+Received performance bonus
+25 Tuition 14500
+Paid tuition for student: Alex
+27 Home_Rent 25000
+Paid home rent on time
 End
 Start
 2023
 10
-01 Salary 63000
-Added income from Salary Source
-05 Freelance 1150
-Added income from Freelance Source
-10 Investment 2100
-Added income from Investment Source
-15 Gifts 550
-Added income from Gifts Source
-20 Bonus 1100
-Added income from Bonus Source
+10 Salary 86500
+Received salary
+15 Freelance 24000
+Completed Client 10 Project
+20 Investment 8500
+Increased stock investments
+21 Bonus 5000
+Received performance bonus
+25 Tuition 15000
+Paid tuition for student: Alex
+27 Home_Rent 26000
+Paid home rent, but it was late
 End
 Start
 2023
 11
-01 Salary 65000
-Added income from Salary Source
-05 Freelance 1200
-Added income from Freelance Source
-10 Investment 2200
-Added income from Investment Source
-15 Gifts 580
-Added income from Gifts Source
-20 Bonus 1150
-Added income from Bonus Source
+10 Salary 86500
+Received salary
+15 Freelance 26000
+Completed Client 11 Project
+20 Investment 9000
+Strengthened stock portfolio
+21 Bonus 5200
+Received performance bonus
+25 Tuition 15500
+Paid tuition for student: Alex
+27 Home_Rent 27000
+Paid home rent on time
 End
 Start
 2023
 12
-01 Salary 66000
-Added income from Salary Source
-05 Freelance 1250
-Added income from Freelance Source
-10 Investment 2300
-Added income from Investment Source
-15 Gifts 600
-Added income from Gifts Source
-20 Bonus 1200
-Added income from Bonus Source
+10 Salary 87000
+Received salary
+15 Freelance 28000
+Completed Client 12 Project
+20 Investment 9500
+Continued stock investments
+21 Bonus 5500
+Received performance bonus
+25 Tuition 16000
+Paid tuition for student: Alex
+27 Home_Rent 28000
+Paid home rent on time
 End
 Start
 2024
 01
-01 Salary 69000
-Added income from Salary Source
-03 Bonus 400
-Added income from Bonus Source
-05 Freelance 1250
-Added income from Freelance Source
-06 Salary 4000
-Added income from Salary Source
-08 Bonus 500
-Added income from Bonus Source
-09 Bonus 1000
-salami from baba
-09 Bonus 400
-Added income from Bonus Source
-09 Freelance 500
-Did some freelancing
-10 Investment 2600
-Added income from Investment Source
-15 Gifts 600
-Added income from Gifts Source
-20 Bonus 1200
-Added income from Bonus Source
+10 Salary 89000
+Received salary
+15 Freelance 30000
+Completed Client 13 Project
+20 Investment 10000
+Increased stock investments
+21 Bonus 5800
+Received performance bonus
+25 Tuition 16500
+Paid tuition for student: Alex
+27 Home_Rent 29000
+Paid home rent, but it was late
 End
+Start
+2024
+02
+10 Salary 88000
+Received salary
+15 Freelance 32000
+Completed Client 14 Project
+20 Investment 10500
+Strengthened stock portfolio
+21 Bonus 6000
+Received performance bonus
+25 Tuition 17000
+Paid tuition for student: Alex
+27 Home_Rent 30000
+Paid home rent on time
+End
+
