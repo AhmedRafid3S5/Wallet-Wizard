@@ -3,8 +3,8 @@ object Form1: TForm1
   Top = 0
   BorderStyle = bsToolWindow
   Caption = 'Welcome To Wallet-Wizard !'
-  ClientHeight = 484
-  ClientWidth = 699
+  ClientHeight = 651
+  ClientWidth = 753
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,8 +17,8 @@ object Form1: TForm1
   object Image1: TImage
     Left = 0
     Top = 0
-    Width = 699
-    Height = 484
+    Width = 753
+    Height = 651
     Align = alClient
     Picture.Data = {
       0A544A504547496D61676529460200FFD8FFE10950687474703A2F2F6E732E61
@@ -4686,8 +4686,8 @@ object Form1: TForm1
     ExplicitHeight = 480
   end
   object StaticText1: TStaticText
-    Left = 192
-    Top = 400
+    Left = 224
+    Top = 552
     Width = 317
     Height = 53
     Caption = 'Wallet-Wizard'

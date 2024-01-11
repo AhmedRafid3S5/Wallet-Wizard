@@ -55,35 +55,35 @@ float currentAccountBalance;
 //Global variables for zakat and nisab
 float totalZakat = 0;
 float nisab=0;
-
 //Variables for income tab
 int IncomeClass::TotalIncome=0;
 vector<IncomeClass> IncomeRead;
 vector<ExpenseClass> ExpenseRead;
 //IncomeClass SearchedIncome;
 //ExpenseClass SearchedExpense;
-
+void sortIncomeVector(std::vector<IncomeClass>& incomeVector) {
+    std::sort(incomeVector.begin(), incomeVector.end());
+}
+void sortExpenseVector(std::vector<ExpenseClass>& expenseVector) {
+	std::sort(expenseVector.begin(), expenseVector.end());
+}
 
 //Sourcelist for income combobox
 vector<std::string> sourcelist;
 void ReadFileAndPopulateVector()
 {
     sourcelist.clear();  // Clear the vector before reading the file
-
 	std::ifstream inputFile("sources.txt");
 	if (!inputFile.is_open()) {
         ShowMessage("Failed to open the file.");
         return;
     }
-
     std::string line;
     while (std::getline(inputFile, line)) {
 		sourcelist.push_back(line);
 	}
-
 	inputFile.close();
 }
-
           void WriteVectorToFile()
 {
     std::ofstream outFile("sources.txt");
@@ -91,94 +91,80 @@ void ReadFileAndPopulateVector()
         ShowMessage("Cannot open file for writing.");
         return;
     }
-
     for (const auto& source : sourcelist) {
         outFile << source << std::endl;
     }
-
     outFile.close();
 }
 std::vector<std::string> categorylist;
 void ReadCategoriesFromFile() {
     categorylist.clear();  // Clear the list before reading
-
     std::ifstream inFile("categories.txt");
     if (!inFile.is_open()) {
         ShowMessage("Unable to open file: categories.txt");
 		return;
     }
-
     std::string line;
     while (std::getline(inFile, line)) {
         categorylist.push_back(line);
     }
-
     inFile.close();
 }
-
 void WriteCategoriesToFile() {
     std::ofstream outFile("categories.txt");
     if (!outFile.is_open()) {
         ShowMessage("Unable to open file for writing: categories.txt");
         return;
     }
-
 	for ( auto& category : categorylist) {
 		outFile << category << std::endl;
 	}
-
 	outFile.close();
 }
-
 // Global Budget object
 Budget currentBudget;
-
 void readBudgetFromFile() {
 	std::ifstream inFile("currentbudget.txt");
 	if (!inFile.is_open()) {
 		std::cerr << "Unable to open file currentbudget.txt" << std::endl;
 		return;
 	}
-
+	 int Month;
+	inFile >> Month;
+	currentBudget.setMonth(Month);
 	std::string line;
 	while (std::getline(inFile, line)) {
 		std::istringstream iss(line);
 		std::string category;
 		int amount;
-
 		if (iss >> category >> amount) {
 			currentBudget.addEntry(category, amount);
 		}
 	}
-
 	inFile.close();
 }
-
 // Function to write the contents of the global Budget object back to the file
 void writeBudgetToFile() {
 	std::ofstream outFile("currentbudget.txt");
-
 	if (!outFile.is_open()) {
 		std::cerr << "Unable to open file currentbudget.txt for writing." << std::endl;
 		return;
 	}
 	// ShowMessage("Write Function called");
+    // Write the month as the first line
+	outFile << currentBudget.getMonth() << std::endl;
 	auto categories = currentBudget.getCategories();
 	auto amounts = currentBudget.getAmounts();
-
 	for (size_t i = 0; i < categories.size(); ++i) {
 		outFile << categories[i] << " " << amounts[i] << std::endl;
 	}
-
 	outFile.close();
 }
 //Show current budget to listbox
 void displayBudgetInListBox(TListBox* listBox) {
-	//listBox->Clear();  // Clear existing items
-
+	listBox->Clear();  // Clear existing items
 	auto categories = currentBudget.getCategories();
 	auto amounts = currentBudget.getAmounts();
-
 	for (size_t i = 0; i < categories.size(); ++i) {
 		std::string combinedStr = categories[i] + ": " + std::to_string(amounts[i]);  // Combine the strings
 		UnicodeString entry = UnicodeString(combinedStr.c_str());
@@ -186,7 +172,6 @@ void displayBudgetInListBox(TListBox* listBox) {
 		listBox->Items->Add(entry);
 	}
 }
-
 // To display on the Budget Tab
 UnicodeString FindMonth()
 {
@@ -223,7 +208,7 @@ UnicodeString FindMonth()
 void loadGoldFile()
 {
       // URL of the webpage
-	std::string url = "https://www.livepriceofgold.com/bangladesh-gold-price.html"; //chnange url here with your location's url
+	std::string url = "https://www.livepriceofgold.com/bangladesh-gold-price.html";
 	// Create a file stream to store the webpage content
 	std::ofstream webpageFile("goldwebpage.html");
 	if (!webpageFile.is_open()) {
@@ -250,11 +235,10 @@ void loadGoldFile()
 	}
 	file.close();
 }
-
 void loadSilverFile()
 {
 	  // URL of the webpage
-	std::string url = "https://www.livepriceofgold.com/silver-price/bangladesh.html"; //chnange url here with your location's url
+	std::string url = "https://www.livepriceofgold.com/silver-price/bangladesh.html";
 	// Create a file stream to store the webpage content
 	std::ofstream webpageFile("silverwebpage.html");
 	if (!webpageFile.is_open()) {
@@ -288,7 +272,6 @@ void loadZakat ()
 		ShowMessage("Failed to open the file{zakatFile} for reading.");
 		return;
 	}
-
 	zakatFile>>totalZakat;
 	zakatFile.close();
 }
@@ -302,10 +285,12 @@ void saveZakat()
 	zakatFile << totalZakat;
 }
 //---------------------------------------------------------------------------
+ UnicodeString Mymonth[] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 __fastcall TForm3::TForm3(TComponent* Owner)
 	: TForm(Owner)
 {
 //All Initializations
+
    //Get present date
 	TDateTime currentDate = Now();
 	year = YearOf(currentDate);
@@ -339,10 +324,8 @@ __fastcall TForm3::TForm3(TComponent* Owner)
    loadGoldFile();
    loadSilverFile();
    loadZakat();
-
    //For the income combobox4
    ReadFileAndPopulateVector();
-
 	// Populate ComboBox4 from the sourcelist
 	ComboBox4->Items->Clear();
 	for (auto& source : sourcelist) {
@@ -353,14 +336,25 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 	for (auto& category : categorylist) {
         ComboBox5->Items->Add(UnicodeString(category.c_str()));
 	}
-
     //same for the budget categories
 	  readBudgetFromFile()  ;
 	ListBox4->Items->Clear();
 	ListBox3->Items->Clear();
-	writeBudgetToFile();
 	displayBudgetInListBox(ListBox3);
 	 Edit19->Text= FindMonth();
+     ComboBox6->Items->Clear();
+// Populate ComboBox6 with all budget categories
+for (const auto& category : currentBudget.categories) {
+    UnicodeString uCategory = UnicodeString(category.c_str());
+    ComboBox6->Items->Add(uCategory);
+}
+	 if(currentBudget.month != month)
+	 {
+		  currentBudget.clear();
+		  ListBox3->Items->Clear();
+	 }
+	 writeBudgetToFile();
+
 	//  readBudgetFromFile()
    // displayBudgetInListBox(TListBox* listBox)
    //This is to clear the input boxes
@@ -381,7 +375,7 @@ __fastcall TForm3::TForm3(TComponent* Owner)
 	Edit17->Text = "";
 	Edit18->Text = "";
 
-
+	RichEdit1->Clear();
 
 }
 //---------------------------------------------------------------------------
@@ -405,7 +399,6 @@ void SortIncome()
 	   }
    }
 }
-
  //Sorts Expense entries according to date
 void SortExpense()
 {
@@ -427,7 +420,6 @@ void SortExpense()
    }
 }
 //Calculate total savings
-
 //Necessary Prototypes
 void AddExpenseOperations();
 void refreshSavings()
@@ -476,7 +468,6 @@ void refreshSavings()
 	outFile.close();
 }
 //---------------------------------------------------------------------------
-
   //float nisab=0;
 //create a linear expense model to predict total expense for a required savings
 void update_regression_model(regression& r)
@@ -492,10 +483,39 @@ void update_regression_model(regression& r)
 	   savings.push_back(IncomeList[i].return_total() - ExpenseList[i].return_total());
    }
    r.takeInput(expenses,savings);
+
 }
+void mergeExpenseListEntries(std::vector<Transaction_Summary<UnicodeString, int>>& expenseList)
+{
+    for (size_t i = 0; i < expenseList.size(); ++i)
+    {
+        for (size_t j = i + 1; j < expenseList.size(); ++j)
+        {
+            if (expenseList[i].getYear() == expenseList[j].getYear() && expenseList[i].getMonth() == expenseList[j].getMonth())
+            {
+                // Merge entries
+                expenseList[i].mergeEntries(expenseList[j]);
+
+                // Erase the merged entry
+                expenseList.erase(expenseList.begin() + j);
+
+                // Update the loop counter and size since we removed an element
+                --j;
+            }
+        }
+    }
+}
+
 //drawCharts takes parameters year and month for which we want to see the analytics
+
+
+
 void TForm3::drawCharts(int year,int month )
   {
+
+
+
+   mergeExpenseListEntries(ExpenseList);
    String footerTitleMonth = FormatSettings.ShortMonthNames[month-1];
    String footerTitleYear = IntToStr(year);
    //Series1
@@ -545,7 +565,8 @@ void TForm3::drawCharts(int year,int month )
 	   Transaction_Summary<UnicodeString,int> entry = IncomeList[i];
 	   double monthAvg =  entry.return_avg();
 	   int month = entry.getMonth();
-		UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
+	UnicodeString mm = Mymonth[month];
+		UnicodeString m =mm+ IntToStr(entry.getYear()%1000) ;
 	   Series3->AddXY(i+1,monthAvg,m);
 	}
 	// Add data points for average expense
@@ -554,7 +575,8 @@ void TForm3::drawCharts(int year,int month )
 	   Transaction_Summary<UnicodeString,int> entry = ExpenseList[i];
 	   double monthAvg =  entry.return_avg();
 	   int month = entry.getMonth();
-		UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
+		UnicodeString mm = Mymonth[month];
+		UnicodeString m =mm+ IntToStr(entry.getYear()%1000) ;
 	   Series4->AddXY(i+1,monthAvg,m);
 	}
 	}
@@ -568,7 +590,8 @@ void TForm3::drawCharts(int year,int month )
 	   Transaction_Summary<UnicodeString,int> entry = IncomeList[i];
 	   double monthTotal =  entry.return_total();
 	   int month = entry.getMonth();
-	   UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
+	  UnicodeString mm = Mymonth[month];
+		UnicodeString m =mm+ IntToStr(entry.getYear()%1000) ;
 	   Series3->AddXY(i+1,monthTotal,m);
 	}
 	// Add data points for average expense
@@ -577,7 +600,8 @@ void TForm3::drawCharts(int year,int month )
 	   Transaction_Summary<UnicodeString,int> entry = ExpenseList[i];
 	   double monthTotal =  entry.return_total();
 	   int month = entry.getMonth();
-	   UnicodeString m = FormatSettings.ShortMonthNames[month-1] + IntToStr(year%1000);
+	UnicodeString mm = Mymonth[month];
+		UnicodeString m =mm+ IntToStr(entry.getYear()%1000) ;
 	   Series4->AddXY(i+1,monthTotal,m);
 	}
 	}
@@ -597,7 +621,6 @@ void TForm3::drawCharts(int year,int month )
 	}
 	Series5->AddXY(0,c);
 	Series5->AddXY(-c/m,0) ;
-
    // Add points to the series based on the equation y = ax + b
    for (double x =r.get_min_X()-1000; x <r.get_max_X()+10000; x += 1000) {
 	double y = m * x + c;
@@ -613,7 +636,6 @@ RichEdit3->ReadOnly = true;
 // Add empty line
 RichEdit3->Lines->Add("");
 // Estimated Base Expense with red font
-
 RichEdit3->Lines->Add("  Estimated Base Expense " + BaseExp + " Tk");
 RichEdit3->SelStart = 26;
 RichEdit3->SelLength = BaseExp.Length()+1;
@@ -637,7 +659,6 @@ RichEdit3->SelStart = RichEdit3->Text.Length();
 RichEdit3->SelLength = 0;
 RichEdit3->SelAttributes->Color = clMenuHighlight;
 RichEdit3->Lines->Add("  Advice: To maintain good financial health, your savings rate should be at least 20%");
-
 }
 void loadPieData(std::vector<Transaction_Summary<UnicodeString,int>>& List,
 				 std::string ledger,
@@ -665,6 +686,9 @@ void loadPieData(std::vector<Transaction_Summary<UnicodeString,int>>& List,
 	  //Set year and month for (class) entry
 	  entry.setYear(year);
 	  entry.setMonth(month);
+	  std::getline(inputFile,line);
+	  if(line == "End")
+		 continue;
 	  //Read entries until 'End' marker is found
 	  while (std::getline(inputFile, line) && line != "End") {
 				std::istringstream iss(line);
@@ -681,7 +705,6 @@ void loadPieData(std::vector<Transaction_Summary<UnicodeString,int>>& List,
 	  List.push_back(entry);
 	}
   }
-
   //Temporary fix for now
   for(int i=0;i<List.size();i++)
   {
@@ -742,7 +765,6 @@ void __fastcall TForm3::PageControl1Change(TObject *Sender)
 	 if(ComboBox3->ItemIndex == 1)
 	  nisab = 595*unitSilverPrice  ;
 	 UnicodeString moneyThreshold = IntToStr((int)nisab);
-
 	//Testing with Static Text
 	 UnicodeString youMustHave = " You must have " ;
 	 UnicodeString Tk = " Tk";
@@ -769,15 +791,12 @@ void __fastcall TForm3::PageControl1Change(TObject *Sender)
 	}
 }
 //---------------------------------------------------------------------------
-
 //---------------------------------------------------------------------------
-
 //---------------------------------------------------------------------------
 void __fastcall TForm3::Button2Click(TObject *Sender)
 {
    // Get the user input from the Edit1 component
     UnicodeString userInput = Edit1->Text;
-
     try {
         // Convert the user input to an integer
 		 inputValue = StrToInt(userInput);
@@ -814,7 +833,6 @@ void __fastcall TForm3::Button3Click(TObject *Sender)
 	drawCharts(StrToInt(year),1+ComboBox1->ItemIndex);
 	//ShowMessage("List size" + IntToStr(static_cast<int>(ExpenseList.size())));
 }
-
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 void __fastcall TForm3::ScrollBox1MouseWheelDown(TObject *Sender, TShiftState Shift,
@@ -829,7 +847,6 @@ void __fastcall TForm3::ScrollBox1MouseWheelUp(TObject *Sender, TShiftState Shif
   ScrollBox1->VertScrollBar->Position -= 50;
 }
 //---------------------------------------------------------------------------
-
 void __fastcall TForm3::ComboBox1Change(TObject *Sender)
 {
    //Call the load function and populate the vectors
@@ -884,11 +901,9 @@ void __fastcall TForm3::Series3ClickPointer(TCustomSeries *Sender, int ValueInde
    double xValue_prevMonth = Sender->XValues->Value[ValueIndex-1] -1;
    double yValue_prevMonth = Sender->YValues->Value[ValueIndex-1];
    double chng = yValue - yValue_prevMonth;
-
    UnicodeString info_cmp = "";
    if(ComboBox2->ItemIndex == 0){
    UnicodeString info_avg = " Month = " + FormatSettings.LongMonthNames[ (int)xValue%12 -1] + ", Average Income = " + FloatToStr(yValue) + " TK";
-
    if(chng < 0)
    {
 	  info_cmp = "Average income has decreased by " + FloatToStr(abs(chng)) + " Tk since last month";
@@ -907,7 +922,6 @@ void __fastcall TForm3::Series3ClickPointer(TCustomSeries *Sender, int ValueInde
    }
    else if(ComboBox2->ItemIndex == 1){
    UnicodeString info_avg = " Month = " + FormatSettings.LongMonthNames[ (int)xValue%12 -1] + ", Total Income = " + FloatToStr(yValue) + " TK";
-
    if(chng < 0)
    {
 	  info_cmp = "Total income has decreased by " + FloatToStr(abs(chng)) + " Tk since last month";
@@ -924,7 +938,6 @@ void __fastcall TForm3::Series3ClickPointer(TCustomSeries *Sender, int ValueInde
 	   ShowFormattedText(Sender,info_avg,info_cmp,clGreen);
    }
    }
-
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm3::Series4ClickPointer(TCustomSeries *Sender, int ValueIndex,
@@ -974,15 +987,12 @@ void __fastcall TForm3::Series4ClickPointer(TCustomSeries *Sender, int ValueInde
 	   ShowFormattedText(Sender,info_avg,info_cmp,clRed);
    }
    }
-
 	// Display a popup or perform any other action with xValue and yValue
 	//ShowMessage(" Month = " + FormatSettings.LongMonthNames[xValue] + ", Average Expense = " + FloatToStr(yValue) + " TK");
 }
 //---------------------------------------------------------------------------
 
-
 //---------------------------------------------------------------------------
-
 void __fastcall TForm3::Chart4Scroll(TObject *Sender)
 {
    regression r;
@@ -1002,9 +1012,7 @@ void __fastcall TForm3::Chart4Scroll(TObject *Sender)
 		}
 }
 //---------------------------------------------------------------------------
-
 //---------------------------------------------------------------------------
-
 void AddIncomeOperations()
 {
 	 IncomeRead.clear() ;
@@ -1027,7 +1035,6 @@ void AddIncomeOperations()
 		   //Set year and month for (class) entry
 		   fileinput.Setyear(year);
 		   fileinput.Setmonth(month);
-
 		   while (std::getline(inputFile, line) && line != "End") {
 				istringstream iss(line);
 				int day, amount;
@@ -1059,25 +1066,21 @@ void AddIncomeOperations()
 	int D = StrToInt(Date);
 	int M = StrToInt(Month);
 	int Y = StrToInt(Year);
-
 	if (Source.Pos(" ") != 0)
 	{
 		ShowMessage("Source Name Cannot Be More Than One Word");
 		return;
 	}
-
 	if (A < 0)
 	{
 		ShowMessage("Amount cannot be negative");
 		return;
 	}
-
 	if (D <= 0 || M <= 0 || Y <= 0 || M > 12 || D > 31)
 	{
 		ShowMessage("Invalid date input.");
 		return;
 	}
-
 	if (M == 2 && ((Y % 4 == 0 && Y % 100 != 0) || (Y % 400 == 0)))
 	{
 		if (D > 29)
@@ -1095,13 +1098,11 @@ void AddIncomeOperations()
 			return;
 		}
 	}
-
 	int flag=0;
 	for (int i = 0; i < IncomeRead.size(); i++)
 	{
 		if (IncomeRead[i].Getmonth() == M && IncomeRead[i].Getyear() == Y)
 		{
-
 		   //for(j=0; j<incomeRead[i].date.size(); j++)
 		   //if(incomeread[i].date[j] == D && incomeread[i].category[j] == source && IncomeRead[i].amount[j] == A)
 			flag++;
@@ -1122,24 +1123,21 @@ void AddIncomeOperations()
 		temp.month=M;
 		temp.year=Y;
 		IncomeRead.push_back(temp);
-
 	}
 	SortIncome();
-
+	sortIncomeVector(IncomeRead);
 	std::ofstream outFile(incomeledger);
 	if (!outFile.is_open())
 	{
 		ShowMessage("Cannot open file");
 		return;
 	}
-
 	for (auto& income : IncomeRead)
 	{
 		std::stringstream ss;
 		ss << "Start" << std::endl;
 		ss << income.Getyear() << std::endl;
 		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
-
 		for (size_t i = 0; i < income.date.size(); ++i)
 		{
 			wstring wstr = income.category[i].c_str();
@@ -1148,10 +1146,8 @@ void AddIncomeOperations()
 			   << cat << " "
 			   << income.amount[i] << std::endl;
 		}
-
 		ss << "End" << std::endl;
 		outFile << ss.str();
-
 		if (outFile.fail())
 		{
 			std::cerr << "Error writing to the output file!" << std::endl;
@@ -1161,21 +1157,18 @@ void AddIncomeOperations()
 		}
 	}
 		outFile.close();
-
 	std::ofstream outFile2(incomewithnotes);
 	if (!outFile2.is_open())
 	{
 		ShowMessage("Cannot open file");
 		return;
 	}
-
 	for (auto& income : IncomeRead)
 	{
 		std::stringstream ss;
 		ss << "Start" << std::endl;
 		ss << income.Getyear() << std::endl;
 		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
-
 		for (size_t i = 0; i < income.date.size(); ++i)
 		{
 			wstring wstr = income.category[i].c_str();
@@ -1187,10 +1180,8 @@ void AddIncomeOperations()
 			string snotes=   string(wnotes.begin(), wnotes.end());
 			ss << snotes << std::endl;
 		}
-
 		ss << "End" << std::endl;
 		outFile2 << ss.str();
-
 		if (outFile2.fail())
 		{
 			std::cerr << "Error writing to the output file!" << std::endl;
@@ -1199,16 +1190,12 @@ void AddIncomeOperations()
 			return;
 		}
 	}
-
 	outFile2.close();
-
 	//if(flag==0)showerror
 	//else{Successfully deleted};
 	ShowMessage("New entry added to your income");
 	return;
 }
-
-
 
 void __fastcall TForm3::Button5Click(TObject *Sender)
 {
@@ -1274,7 +1261,6 @@ void __fastcall TForm3::MoreInfoClick(TObject *Sender)
 		pop_up(Sender);
 }
 //---------------------------------------------------------------------------
-
 void AddExpenseOperations()
 {
 	 ExpenseRead.clear() ;
@@ -1297,7 +1283,6 @@ void AddExpenseOperations()
 		   //Set year and month for (class) entry
 		   fileExpenseinput.Setyear(year);
 		   fileExpenseinput.Setmonth(month);
-
 		   while (std::getline(inputExpenseFile, line) && line != "End") {
 				istringstream iss(line);
 				int day, amount;
@@ -1346,7 +1331,6 @@ void AddExpenseOperations()
 		ShowMessage("Invalid date input.");
 		return;
 	}
-
 	// Validate the date based on the month and year
 	if (M == 2 && ((Y % 4 == 0 && Y % 100 != 0) || (Y % 400 == 0)))
 	{
@@ -1364,6 +1348,14 @@ void AddExpenseOperations()
 			ShowMessage("Invalid date for the given month.");
 			return;
 		}
+	}
+	if (exCat == "Zakat" && Y == year)
+	{
+		int New= totalZakat-A;
+		if(New<0) totalZakat=0;
+		else totalZakat=New;
+		ShowMessage("The Zakat payment has been noted");  // Set totalZakat to the maximum of 0 and A
+        saveZakat();
 	}
 	int flag=0;
 	   for(int i=0;i<ExpenseRead.size();i++)
@@ -1387,16 +1379,15 @@ void AddExpenseOperations()
 		temp.month=M;
 		temp.year=Y;
 		ExpenseRead.push_back(temp);
-
 	}
 		 SortExpense();
+		 sortExpenseVector(ExpenseRead);
 		 //ShowMessage("Received data " + Amount );
 		 std::ofstream outExpenseFile(userledger);
 	if (!outExpenseFile.is_open()) {
 		ShowMessage("Cannot open Ledger file");
 		return;
 	}
-
 	for ( auto& exp : ExpenseRead) {
 		std::stringstream ss;
 		// Start tag
@@ -1426,14 +1417,12 @@ void AddExpenseOperations()
 	}
 	outExpenseFile.close();
 
-
 	//for writing notes in file
 	 std::ofstream outExpenseFile2(expensewithnotes);
 	if (!outExpenseFile2.is_open()) {
 		ShowMessage("Cannot open Ledger file");
 		return;
 	}
-
 	for ( auto& exp : ExpenseRead) {
 		std::stringstream ss;
 		// Start tag
@@ -1516,7 +1505,6 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 		ShowMessage("Invalid date input.");
 		return;
 	}
-
 	// Validate the date based on the month and year
 	if (M == 2 && ((Y % 4 == 0 && Y % 100 != 0) || (Y % 400 == 0)))
 	{
@@ -1566,7 +1554,6 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 		ShowMessage("Cannot open file");
 		return;
 	}
-
 	for ( auto& income : IncomeRead) {
 		std::stringstream ss;
 		// Start tag
@@ -1601,14 +1588,12 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 		ShowMessage("Cannot open file");
 		return;
 	}
-
 	for (auto& income : IncomeRead)
 	{
 		std::stringstream ss;
 		ss << "Start" << std::endl;
 		ss << income.Getyear() << std::endl;
 		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
-
 		for (size_t i = 0; i < income.date.size(); ++i)
 		{
 			wstring wstr = income.category[i].c_str();
@@ -1620,10 +1605,8 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 			string snotes=   string(wnotes.begin(), wnotes.end());
 			ss << snotes << std::endl;
 		}
-
 		ss << "End" << std::endl;
 		outFile2 << ss.str();
-
 		if (outFile2.fail())
 		{
 			std::cerr << "Error writing to the output file!" << std::endl;
@@ -1632,7 +1615,6 @@ void __fastcall TForm3::Button1Click(TObject *Sender)
 			return;
 		}
 	}
-
 	outFile2.close();
 		ShowMessage("Requested Edit Completed");
 	return;
@@ -1699,7 +1681,6 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 		ShowMessage("Invalid date input.");
 		return;
 	}
-
 	// Validate the date based on the month and year
 	if (M == 2 && ((Y % 4 == 0 && Y % 100 != 0) || (Y % 400 == 0)))
 	{
@@ -1719,7 +1700,7 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 		}
 	}
 	   int flag =0;
-
+	   int prev;
 	   for(int i=0;i<ExpenseRead.size();i++)
 		 {
 			if(ExpenseRead[i].Getmonth() == M && ExpenseRead[i].Getyear() == Y)
@@ -1729,6 +1710,7 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 				  if(ExpenseRead[i].category[j]== exCat && ExpenseRead[i].date[j]== D)
 				  {
 					   flag++;
+					   prev=ExpenseRead[i].amount[j];
 					   ExpenseRead[i].amount[j]=A;
 					   ExpenseRead[i].notes[j]=exNote;
 					   break;
@@ -1737,6 +1719,12 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 			  break;
 			}
 		 }
+          if (exCat == "Zakat" && Y == year)
+			{
+			totalZakat+=prev;
+            totalZakat-=A;
+			if(totalZakat<0) totalZakat=0;
+		}
 		 if(flag==0)
 		 {
 			 ShowMessage("Record does not exist" );
@@ -1748,7 +1736,6 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 		ShowMessage("Cannot open Ledger file");
 		return;
 	}
-
 	for ( auto& exp : ExpenseRead) {
 		std::stringstream ss;
 		// Start tag
@@ -1777,14 +1764,12 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 		}
 	}
 	outExpenseFile.close();
-
 	//writing notes oin file
 	std::ofstream outExpenseFile2(expensewithnotes);
 	if (!outExpenseFile2.is_open()) {
 		ShowMessage("Cannot open Ledger file");
 		return;
 	}
-
 	for ( auto& exp : ExpenseRead) {
 		std::stringstream ss;
 		// Start tag
@@ -1819,7 +1804,6 @@ void EditExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString ex
 	ShowMessage("Requested Edit Completed");
 	return;
    }
-
 void __fastcall TForm3::Button7Click(TObject *Sender)
 {
 if( Edit8->Text == ""||Edit10->Text == ""||Edit11->Text == "" ||Edit16->Text == ""|| Edit12->Text == "")
@@ -1857,65 +1841,50 @@ void __fastcall TForm3::Button8Click(TObject *Sender)
 		Edit11->Text=month;
 		Edit12->Text=year;
 }
-
 //---------------------------------------------------------------------------
 //Function to find the searched income class object
 IncomeClass FindIncomeClassObject(int IM, int IY)
 {
 
-
 	   for(int i=0; i< IncomeRead.size(); i++)
 	   {
 		   if(IncomeRead[i].Getmonth() == IM && IncomeRead[i].Getyear() == IY)
 		   {
-
 			   IncomeClass curr = IncomeRead[i];
 			   return curr;
 		   }
 	   }
 
-
 		   IncomeClass Empty;
 		   return  Empty;
-
 }
-
 
 //---------------------------------------------------------------------------
 void __fastcall TForm3::Button9Click(TObject *Sender)
 {
 	ListBox1->Items->Clear();
-
 	AddIncomeOperations();
-
    //ListBox1->Items->Add( "Testing works" );
-
    if(Edit14->Text == "" || Edit15->Text == "")
    {
 	   ShowMessage("Please Provide Valid Input In All Fields.");
 	   return;
    }
-
 	  UnicodeString IncomeSelectedMonth = Edit14->Text;
 	  UnicodeString IncomeSelectedYear =  Edit15->Text;
-
 		int IM =StrToInt(IncomeSelectedMonth);
 		int IY =StrToInt(IncomeSelectedYear);
-
 	   if(IM <= 0 || IY <= 0 || IM > 12)
 		{
 		ShowMessage("Invalid date input.");
 		return;
 		}
-
 	  IncomeClass found = FindIncomeClassObject(IM, IY);
-
 	  if(found.date.size() == 0)
 	  {
 		UnicodeString ErrLine = "No Record Found.";
 		ListBox1->Items->Add(ErrLine);
       }
-
 	  else
 	  {
          for(int i=0; i<found.date.size(); i++)
@@ -1934,27 +1903,18 @@ void __fastcall TForm3::Button9Click(TObject *Sender)
 		  {
 			  iline1 = "   " + fdate + "         " + fcategory + "--> " + famount;
 		  }
-
 		  UnicodeString iline2 = "                ("+ fnote + ")";
-
 		  ListBox1->Items->Add(iline1);
 		  ListBox1->Items->Add(iline2);
-
 	  }
       }
 
-
-
 }
 //---------------------------------------------------------------------------
-
 //---------------------------------------------------------------------------
 //Function to find the searched Expense class object
-
 ExpenseClass FindExpenseClassObject(int EM, int EY)
 {
-
-
 
 	   for(int i=0; i< ExpenseRead.size(); i++)
 	   {
@@ -1965,47 +1925,35 @@ ExpenseClass FindExpenseClassObject(int EM, int EY)
 		   }
 	   }
 
-
 		   ExpenseClass Empty;
 		   return  Empty;
-
 }
-
-
 
 
 void __fastcall TForm3::SearchClick(TObject *Sender)
 {
 		  ListBox2->Items->Clear();
-
 		  AddExpenseOperations();
-
 		  if(Edit17->Text == "" || Edit18->Text == "")
 		  {
 		   ShowMessage("Please Provide Valid Input In All Fields.");
 		   return;
 		  }
-
 		  UnicodeString ExpenseSelectedMonth = Edit17->Text;
 		  UnicodeString ExpenseSelectedYear=  Edit18->Text;
-
           int EM =StrToInt(ExpenseSelectedMonth);
 		  int EY =StrToInt(ExpenseSelectedYear);
-
 		 if(EM <= 0 || EY <= 0 || EM > 12)
 		 {
 		  ShowMessage("Invalid date input.");
 		  return;
 		 }
-
 		 ExpenseClass found = FindExpenseClassObject(EM, EY);
-
 		 if(found.date.size() == 0)
 		 {
 			   UnicodeString ErrLine = "No Record Found.";
 			   ListBox2->Items->Add(ErrLine);
          }
-
 		 else
 		 {
            for(int i=0; i<found.date.size(); i++)
@@ -2015,7 +1963,6 @@ void __fastcall TForm3::SearchClick(TObject *Sender)
 		  fcategory = found.category[i];
 		  fnote = found.notes[i];
 		  famount = found.amount[i];
-
 		   UnicodeString eline1;
 		  if(fdate.Length() == 1)
 		  {
@@ -2025,25 +1972,17 @@ void __fastcall TForm3::SearchClick(TObject *Sender)
 		  {
 			  eline1 = "   " + fdate + "         " + fcategory + "--> " + famount;
 		  }
-
 		  UnicodeString eline2 = "                ("+ fnote + ")";
-
 		  ListBox2->Items->Add(eline1);
 		  ListBox2->Items->Add(eline2);
-
 		  }
          }
-
-
 
 }
 //---------------------------------------------------------------------------
 
-
-
 void __fastcall TForm3::ByWeightInfoClick(TObject *Sender)
 {
-
   ShowMessage("Select the method by which you want to calculate nisab.\n"
 			  "1) By Gold Weight, nisab equals 85 grams of 24K gold.\n"
 			  "2) By Silver Weight, nisab equals 595 grams of pure silver.\n"
@@ -2051,13 +1990,11 @@ void __fastcall TForm3::ByWeightInfoClick(TObject *Sender)
 			  );
 }
 //---------------------------------------------------------------------------
-
 void __fastcall TForm3::ManualBTInfoClick(TObject *Sender)
 {
     ShowMessage("You can enter your current balance manually if the account balance in the app does not reflect your actual balance.");
 }
 //---------------------------------------------------------------------------
-
 void __fastcall TForm3::ComboBox3Change(TObject *Sender)
 {
   //Extracting gold price
@@ -2087,7 +2024,6 @@ void __fastcall TForm3::ComboBox3Change(TObject *Sender)
 	 if(ComboBox3->ItemIndex == 1)
 	  nisab = 595*unitSilverPrice  ;
 	 UnicodeString moneyThreshold = IntToStr((int)nisab);
-
 	 //Testing with Static Text
 	 UnicodeString youMustHave = " You must have " ;
 	 UnicodeString Tk = " Tk";
@@ -2116,10 +2052,8 @@ void __fastcall TForm3::ComboBox3Change(TObject *Sender)
 	  }
 }
 //---------------------------------------------------------------------------
-
 void __fastcall TForm3::LoadFromSavingsClick(TObject *Sender)
 {
-
   //Clear any existing data in the savings array
    monthly_savings.clear();
    //Read from savings file
@@ -2138,20 +2072,16 @@ void __fastcall TForm3::LoadFromSavingsClick(TObject *Sender)
 	  int year = std::stoi(line);
 	  std::getline(inputFile,line);
 	  int month = std::stoi(line);
-
 	  //Read entries until 'End' marker is found
 	  while (std::getline(inputFile, line) && line != "End") {
 				std::istringstream iss(line);
 				float amount;
-
 				if (iss >>amount) {
 					monthly_savings.push_back(amount);
 				}
 			}
-
 	}
   }
-
    currentAccountBalance = std::accumulate(monthly_savings.begin(),monthly_savings.end(),0);
    //Displaying on panel
   inputValue = currentAccountBalance;
@@ -2172,73 +2102,77 @@ void __fastcall TForm3::LoadFromSavingsClick(TObject *Sender)
   }
 }
 //---------------------------------------------------------------------------
-
 void __fastcall TForm3::Button10Click(TObject *Sender)
 {
 	UnicodeString newSource = Edit7->Text.Trim();  // Get the text from EditBox17 and trim any leading/trailing spaces
-
-	if (newSource != "") {
-		 std::wstring wstr = newSource.c_str();
-		std::string str(wstr.begin(), wstr.end());   // Add the new source to the vector
-
-        // Update ComboBox1
-		ComboBox4->Items->Add(newSource);
-		sourcelist.push_back(str);
+    if (newSource != "") {
+        std::wstring wstr = newSource.c_str();
+        std::string str(wstr.begin(), wstr.end());   // Convert the UnicodeString to std::string
+        // Check if the source already exists in the vector
+        if (std::find(sourcelist.begin(), sourcelist.end(), str) != sourcelist.end()) {
+            ShowMessage("Source already exists.");
+            return;  // Exit the function without adding the source again
+        }
+        // Add the new source to the ComboBox
+        ComboBox4->Items->Add(newSource);
+        // Add the new source to the vector
+        sourcelist.push_back(str);
 		ShowMessage("New source added.");
-		// Write the updated vector back to the file
-		WriteVectorToFile();
-	} else {
-		ShowMessage("Please enter a valid source.");
-	}
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TForm3::Button11Click(TObject *Sender)
-{
-UnicodeString newCategory = Edit9->Text.Trim();  // Get the text from Edit9 and trim any leading/trailing spaces
-
-    if (newCategory != "") {
-        std::wstring wstr = newCategory.c_str();
-        std::string str(wstr.begin(), wstr.end());  // Convert wstring to string
-
-        categorylist.push_back(str);  // Add the new category to the vector
-
-        // Update ComboBox5
-        ComboBox5->Items->Add(newCategory);
-
         // Write the updated vector back to the file
-        WriteCategoriesToFile();
+        WriteVectorToFile();
     } else {
-        ShowMessage("Please enter a valid category.");
+        ShowMessage("Please enter a valid source.");
     }
 }
 //---------------------------------------------------------------------------
-
+void __fastcall TForm3::Button11Click(TObject *Sender)
+{
+ UnicodeString newCategory = Edit9->Text.Trim();  // Get the text from Edit9 and trim any leading/trailing spaces
+ if (newCategory.Pos(L" ") != 0) {
+    ShowMessage("Category name cannot contain blank spaces.");
+    return;  // Exit the function without adding the category
+}
+	if (newCategory != "") {
+		std::wstring wstr = newCategory.c_str();
+		std::string str(wstr.begin(), wstr.end());  // Convert wstring to string
+		// Check if the category already exists in the vector
+		if (std::find(categorylist.begin(), categorylist.end(), str) != categorylist.end()) {
+			ShowMessage("Category already exists.");
+			return;  // Exit the function without adding the category again
+		}
+		// Add the new category to the vector
+		categorylist.push_back(str);
+        ShowMessage("New Category added.");
+		// Update ComboBox5
+		ComboBox5->Items->Add(newCategory);
+		// Write the updated vector back to the file
+		WriteCategoriesToFile();
+	} else {
+		ShowMessage("Please enter a valid category.");
+	}
+}
+//---------------------------------------------------------------------------
 void DeleteIncomeEntry(UnicodeString Amount, UnicodeString Source, UnicodeString Date, UnicodeString Month, UnicodeString Year, UnicodeString Note)
 {
 	int A = StrToInt(Amount);
 	int D = StrToInt(Date);
 	int M = StrToInt(Month);
 	int Y = StrToInt(Year);
-
 	if (Source.Pos(" ") != 0)
 	{
 		ShowMessage("Source Name Cannot Be More Than One Word");
 		return;
 	}
-
 	if (A < 0)
 	{
 		ShowMessage("Amount cannot be negative");
 		return;
 	}
-
 	if (D <= 0 || M <= 0 || Y <= 0 || M > 12 || D > 31)
 	{
 		ShowMessage("Invalid date input.");
 		return;
 	}
-
 	if (M == 2 && ((Y % 4 == 0 && Y % 100 != 0) || (Y % 400 == 0)))
 	{
 		if (D > 29)
@@ -2256,13 +2190,11 @@ void DeleteIncomeEntry(UnicodeString Amount, UnicodeString Source, UnicodeString
 			return;
 		}
 	}
-
 	int flag=0;
 	for (int i = 0; i < IncomeRead.size(); i++)
 	{
 		if (IncomeRead[i].Getmonth() == M && IncomeRead[i].Getyear() == Y)
 		{
-
 		   for(int j=0; j<IncomeRead[i].date.size(); j++)
 		   {
 			if(IncomeRead[i].date[j] == D && IncomeRead[i].category[j] == Source && IncomeRead[i].amount[j] == A)
@@ -2273,28 +2205,22 @@ void DeleteIncomeEntry(UnicodeString Amount, UnicodeString Source, UnicodeString
 				IncomeRead[i].notes.erase(IncomeRead[i].notes.begin() + j);
 				flag++;
 			}
-
 		   }
-
 		}
 	}
-
 	SortIncome();
-
 	std::ofstream outFile(incomeledger);
 	if (!outFile.is_open())
 	{
 		ShowMessage("Cannot open file");
 		return;
 	}
-
 	for (auto& income : IncomeRead)
 	{
 		std::stringstream ss;
 		ss << "Start" << std::endl;
 		ss << income.Getyear() << std::endl;
 		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
-
 		for (size_t i = 0; i < income.date.size(); ++i)
 		{
 			wstring wstr = income.category[i].c_str();
@@ -2303,10 +2229,8 @@ void DeleteIncomeEntry(UnicodeString Amount, UnicodeString Source, UnicodeString
 			   << cat << " "
 			   << income.amount[i] << std::endl;
 		}
-
 		ss << "End" << std::endl;
 		outFile << ss.str();
-
 		if (outFile.fail())
 		{
 			std::cerr << "Error writing to the output file!" << std::endl;
@@ -2316,21 +2240,18 @@ void DeleteIncomeEntry(UnicodeString Amount, UnicodeString Source, UnicodeString
 		}
 	}
 		outFile.close();
-
 	std::ofstream outFile2(incomewithnotes);
 	if (!outFile2.is_open())
 	{
 		ShowMessage("Cannot open file");
 		return;
 	}
-
 	for (auto& income : IncomeRead)
 	{
 		std::stringstream ss;
 		ss << "Start" << std::endl;
 		ss << income.Getyear() << std::endl;
 		ss << std::setfill('0') << std::setw(2) << income.Getmonth() << std::endl;
-
 		for (size_t i = 0; i < income.date.size(); ++i)
 		{
 			wstring wstr = income.category[i].c_str();
@@ -2342,10 +2263,8 @@ void DeleteIncomeEntry(UnicodeString Amount, UnicodeString Source, UnicodeString
 			string snotes=   string(wnotes.begin(), wnotes.end());
 			ss << snotes << std::endl;
 		}
-
 		ss << "End" << std::endl;
 		outFile2 << ss.str();
-
 		if (outFile2.fail())
 		{
 			std::cerr << "Error writing to the output file!" << std::endl;
@@ -2354,9 +2273,7 @@ void DeleteIncomeEntry(UnicodeString Amount, UnicodeString Source, UnicodeString
 			return;
 		}
 	}
-
 	outFile2.close();
-
 	if(flag==0)
 	{
 		ShowMessage("No Record Found");
@@ -2365,10 +2282,8 @@ void DeleteIncomeEntry(UnicodeString Amount, UnicodeString Source, UnicodeString
 	{
 		ShowMessage("Successfully Deleted");
 	};
-
 	return;
 }
-
 //-----------------------------------------------------------------------
 void __fastcall TForm3::Button12Click(TObject *Sender)
 {
@@ -2378,7 +2293,6 @@ void __fastcall TForm3::Button12Click(TObject *Sender)
   }
   else
   {
-
 		AddIncomeOperations() ;
 		UnicodeString Amount=Edit2->Text;
 	   // Here we will use the combobox
@@ -2397,10 +2311,10 @@ void __fastcall TForm3::Button12Click(TObject *Sender)
 		AddExpenseOperations();
 		refreshSavings();
 
+        Button9Click(Sender);
   }
 }
 //---------------------------------------------------------------------------
-
 
 //----------------------------------------------------------------------------
 //Function for deleting an Entry
@@ -2426,7 +2340,6 @@ void DeleteExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString 
 		ShowMessage("Invalid date input.");
 		return;
 	}
-
 	// Validate the date based on the month and year
 	if (M == 2 && ((Y % 4 == 0 && Y % 100 != 0) || (Y % 400 == 0)))
 	{
@@ -2461,7 +2374,6 @@ void DeleteExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString 
 				flag++;
 				}
 
-
 			 }
 		}
 	   }
@@ -2472,7 +2384,6 @@ void DeleteExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString 
 		ShowMessage("Cannot open Ledger file");
 		return;
 	}
-
 	for ( auto& exp : ExpenseRead) {
 		std::stringstream ss;
 		// Start tag
@@ -2502,14 +2413,12 @@ void DeleteExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString 
 	}
 	outExpenseFile.close();
 
-
 	//for writing notes in file
 	 std::ofstream outExpenseFile2(expensewithnotes);
 	if (!outExpenseFile2.is_open()) {
 		ShowMessage("Cannot open Ledger file");
 		return;
 	}
-
 	for ( auto& exp : ExpenseRead) {
 		std::stringstream ss;
 		// Start tag
@@ -2541,7 +2450,6 @@ void DeleteExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString 
 		}
 	}
 	outExpenseFile2.close();
-
 	if(flag==0)
 	{
 		ShowMessage("No Record Found");
@@ -2550,10 +2458,8 @@ void DeleteExpenseEntry(UnicodeString exAmnt ,UnicodeString exCat,UnicodeString 
 	{
 		ShowMessage("Successfully Deleted");
 	};
-
 	return;
 }
-
 //-----------------------------------------------------------------------------
 void __fastcall TForm3::Button13Click(TObject *Sender)
 {
@@ -2561,7 +2467,6 @@ void __fastcall TForm3::Button13Click(TObject *Sender)
   {
 	  ShowMessage("Please Provide Valid Inputs In Category, Date and Amount Fields.");
   }
-
   else
   {
 		AddExpenseOperations() ;
@@ -2579,59 +2484,230 @@ void __fastcall TForm3::Button13Click(TObject *Sender)
 		DeleteExpenseEntry(expenseAmnt,expenseCat, expenseDate, expenseMonth, expenseYear,expenseNote);
 		AddIncomeOperations();
 		refreshSavings();
+
+        SearchClick(Sender);
+
   }
 }
 //---------------------------------------------------------------------------
 
-
+Budget updatedBudget;
 
 void __fastcall TForm3::Button14Click(TObject *Sender)
 {
+	   //ShowButtonRefresh();
+        ListBox4->Clear();
 	displayBudgetInListBox(ListBox3);
 	AddExpenseOperations();
-
-
+	// Find the ExpenseClass object for the given month and year
+	ExpenseClass* matchingExpense = nullptr;
+	for (auto& expense : ExpenseRead) {
+		if (expense.month == month && expense.year == year) {
+			matchingExpense = &expense;
+			break;
+		}
+	}
+	if (!matchingExpense) {
+		ShowMessage("No matching expenses found for the selected month and year.");
+		return;
+	}
+	 updatedBudget.month = currentBudget.month; // Copy the month
+updatedBudget.categories = currentBudget.categories; // Copy the categories vector
+updatedBudget.amounts = currentBudget.amounts;
+	auto categories = updatedBudget.categories;  // Using updatedBudget
+	auto amounts = updatedBudget.amounts;
+	 bool crossedBudget = false;
+	 UnicodeString warningCategories;
+	for (size_t i = 0; i < categories.size(); ++i) {
+		// Convert the category from updatedBudget to UnicodeString
+		UnicodeString currentCategory = UnicodeString(categories[i].c_str());
+		// Find the category in the ExpenseClass object
+		int expenseAmount = 0;
+		for (size_t j = 0; j < matchingExpense->category.size(); ++j) { // Adjusted to match the member name
+			// Convert the category from matchingExpense to UnicodeString
+			UnicodeString expenseCategory = matchingExpense->category[j];
+			if (expenseCategory == currentCategory) {
+				expenseAmount += matchingExpense->amount[j];          // Adjusted to match the member name
+			   //	break;
+			}
+		}
+		// Calculate the remaining budget amount
+		int remainingAmount = amounts[i] - expenseAmount;
+		// Check if the remaining amount is less than 0
+		if (remainingAmount < 0) {
+		crossedBudget = true;
+		warningCategories += currentCategory + L", ";
+	   }
+		// Display the result on the list box
+		UnicodeString result = currentCategory + L": Remaining Budget = " + IntToStr(remainingAmount);
+		ListBox4->Items->Add(result);
+	}
+	RichEdit1->Text = "";
+	if (crossedBudget) {
+	RichEdit1->SelStart = RichEdit1->Text.Length();
+	RichEdit1->SelAttributes->Color = clRed;
+	RichEdit1->SelText = "Warning: Budget crossed in " + warningCategories + "\n";
+} else {
+	// Display the success message
+	RichEdit1->SelStart = RichEdit1->Text.Length();
+	RichEdit1->SelAttributes->Color = clGreen;
+	RichEdit1->SelText = "No budget crossed. You are on track!\n";
+}
 }
 //---------------------------------------------------------------------------
-
-
 
 void __fastcall TForm3::Button15Click(TObject *Sender)
 {
 	UnicodeString category = Edit20->Text.Trim();
-UnicodeString amount = Edit21->Text.Trim();
-
-std::wstring wCategory = category.w_str();
-std::wstring wAmount = amount.w_str();
-
-std::string newCategoryStr(wCategory.begin(), wCategory.end());
-std::string newAmountStr(wAmount.begin(), wAmount.end());
-
-	if (newCategoryStr.empty() || newAmountStr.empty())
+    UnicodeString amount = Edit21->Text.Trim();
+    // Check for empty strings
+    if (category.IsEmpty() || amount.IsEmpty())
     {
         ShowMessage("Both category and amount fields must be filled.");
         return;
     }
-
+    // Convert UnicodeString to std::string
+    std::wstring wCategory = category.w_str();
+    std::wstring wAmount = amount.w_str();
+    std::string newCategoryStr(wCategory.begin(), wCategory.end());
+    std::string newAmountStr(wAmount.begin(), wAmount.end());
+    // Check if category already exists
+    if (std::find(currentBudget.categories.begin(), currentBudget.categories.end(), newCategoryStr) != currentBudget.categories.end())
+    {
+        ShowMessage("Category already exists.");
+        return;
+    }
+    // Check for blank spaces in the category
+    if (std::any_of(newCategoryStr.begin(), newCategoryStr.end(), ::isspace))
+    {
+        ShowMessage("Category cannot contain blank spaces.");
+        return;
+    }
     // Convert the amount string to an integer
-	int newAmount = stoi(newAmountStr);
-
+    int newAmount = stoi(newAmountStr);
     // Add the new category and amount to the Budget object
-	currentBudget.addEntry(newCategoryStr,newAmount);
-
+    currentBudget.addEntry(newCategoryStr, newAmount);
     // Update the output file with the new category and amount
-	//updateBudgetFile();
-	writeBudgetToFile() ;
-
-	// Update and display the budget in ListBox3
+    writeBudgetToFile();
+    // Update and display the budget in ListBox3
     ListBox3->Clear();
-
     displayBudgetInListBox(ListBox3);
-
+    // Add the new category to ComboBox6 if it doesn't already exist
+    if (ComboBox6->Items->IndexOf(category) == -1)
+    {
+        ComboBox6->Items->Add(category);
+    }
     // Optionally, clear the Edit boxes after adding
-	Edit20->Clear();
-	Edit21->Clear();
-
+    Edit20->Clear();
+    Edit21->Clear();
 }
 //---------------------------------------------------------------------------
+void __fastcall TForm3::Button16Click(TObject *Sender)
+{
+	  // Check if an item is selected in ComboBox6
+    if (ComboBox6->ItemIndex != -1)
+	{
+		// Retrieve the selected item
+UnicodeString selectedCategory = ComboBox6->Items->Strings[ComboBox6->ItemIndex];
+// Convert the UnicodeString to a wstring
+std::wstring wstr = selectedCategory.w_str();
+// Convert the wstring to a string
+std::string str(wstr.begin(), wstr.end());
+// Remove the selected item from the currentBudget object
+currentBudget.removeEntry(str);
+        // Remove the selected item from ComboBox6
+        ComboBox6->Items->Delete(ComboBox6->ItemIndex);
+        // Update the file to reflect the changes
+        writeBudgetToFile();
+    }
+    else
+    {
+        ShowMessage("Please select a category to delete.");
+	}
+}
+//---------------------------------------------------------------------------
+//Function to delete source
+void RemoveSourceFromList(UnicodeString source)
+{
+    // Find and remove the source from sourcelist
+    std::wstring wstr = source.c_str();
+    std::string str(wstr.begin(), wstr.end());
+    auto it = std::find(sourcelist.begin(), sourcelist.end(), str);
+    if (it != sourcelist.end()) {
+        sourcelist.erase(it);
+        ShowMessage("Source deleted successfully.");
+    } else {
+        ShowMessage("Selected source not found in the list.");
+    }
+}
+
+//------------------------------------------------------------------
+void __fastcall TForm3::Button17Click(TObject *Sender)
+{
+	// Check if an item is selected in ComboBox4
+    if (ComboBox4->ItemIndex != -1) {
+        UnicodeString selectedSource = ComboBox4->Items->Strings[ComboBox4->ItemIndex];
+        // Remove the selected source from ComboBox4
+        ComboBox4->Items->Delete(ComboBox4->ItemIndex);
+        // Remove the selected source from sourcelist
+        RemoveSourceFromList(selectedSource);
+        // Write the updated sourcelist to sources.txt
+        WriteVectorToFile();
+    }
+    else {
+        ShowMessage("Please select a source to delete.");
+	}
+}
+//---------------------------------------------------------------------------
+//Function to delete the category list
+void RemoveCategoryFromList(UnicodeString category)
+{
+    // Find and remove the category from categorylist
+    std::wstring wstr = category.c_str();
+    std::string str(wstr.begin(), wstr.end());
+    auto it = std::find(categorylist.begin(), categorylist.end(), str);
+    if (it != categorylist.end()) {
+        categorylist.erase(it);
+        ShowMessage("Category deleted successfully.");
+    } else {
+        ShowMessage("Selected category not found in the list.");
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm3::Button18Click(TObject *Sender)
+{
+   // Check if an item is selected in ComboBox5
+    if (ComboBox5->ItemIndex != -1) {
+        UnicodeString selectedCategory = ComboBox5->Items->Strings[ComboBox5->ItemIndex];
+        // Remove the selected category from ComboBox5
+        ComboBox5->Items->Delete(ComboBox5->ItemIndex);
+        // Remove the selected category from categorylist
+        RemoveCategoryFromList(selectedCategory);
+        // Write the updated categorylist to categories.txt
+        WriteCategoriesToFile();
+    }
+    else {
+        ShowMessage("Please select a category to delete.");
+	}
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm3::Button19Click(TObject *Sender)
+{
+	ShowMessage("1. To Add: Source, Amount, Date and Note fields must be filled\n"
+			  "2. To Edit: Source, Amount, Date and Note fields must be filled\n"
+			  "3. To Delete: Source, Amount and Date fields must be filled\n"
+			  );
+}
+//---------------------------------------------------------------------------
+void __fastcall TForm3::Button20Click(TObject *Sender)
+{
+		ShowMessage("1. To Add: Source, Amount, Date and Note fields must be filled\n"
+			  "2. To Edit: Source, Amount, Date and Note fields must be filled\n"
+			  "3. To Delete: Category, Amount and Date fields must be filled\n"
+			  );
+}
+//---------------------------------------------------------------------------
+
+
+
 
