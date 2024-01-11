@@ -1,4 +1,4 @@
-﻿//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 #ifndef Unit3H
 #define Unit3H
 //---------------------------------------------------------------------------
@@ -28,12 +28,7 @@ using namespace std;
 template <class type,class typeVal>
 class Transaction_Summary
 {
-  /*public:
-   enum Month
-   {
-	Jan,Feb,Mar,Apr,May,Jun,July,Aug,Sep,Oct,Nov,Dec
-   };
-   */
+  
   private:
 	int month;
 	int year;
@@ -133,7 +128,10 @@ class Transaction_Summary
             // Merge categories
             for (typename std::vector<type>::const_iterator it = other.returnCategories().begin(); it != other.returnCategories().end(); ++it)
             {
-                updateCategory(*it, other.categoryAmount.at(*it));
+				updateCategory(*it, other.categoryAmount.at(*it));
+				amount.clear();
+                category.clear();
+				populateArrays();
             }
         }
         else
@@ -338,7 +336,6 @@ class Transaction
 		return month < other.month;}
 		bool operator==(const Transaction& other) const {
         return year == other.year && month == other.month;}
-  //	private:
 		int month;
 		int year;
 		vector<int> amount;

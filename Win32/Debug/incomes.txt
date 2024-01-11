@@ -7,7 +7,6 @@ Start
 2023
 01
 10 Salary 80000
-15 Freelance 12000
 20 Investment 5000
 21 Bonus 3000
 25 Tuition 10000
@@ -18,7 +17,6 @@ Start
 02
 10 Salary 82000
 15 Freelance 15000
-20 Investment 6000
 21 Bonus 3500
 25 Tuition 12000
 27 Home_Rent 20000
@@ -127,7 +125,7 @@ End
 Start
 2024
 01
-10 Salary 89000
+11 Salary 70000
 15 Freelance 30000
 20 Investment 10000
 21 Bonus 5800
@@ -144,4 +142,3 @@ Start
 25 Tuition 17000
 27 Home_Rent 30000
 End
-

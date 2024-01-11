@@ -208,7 +208,7 @@ UnicodeString FindMonth()
 void loadGoldFile()
 {
       // URL of the webpage
-	std::string url = "https://www.livepriceofgold.com/bangladesh-gold-price.html"; //chnange url here with your location's url
+	std::string url = "https://www.livepriceofgold.com/bangladesh-gold-price.html";
 	// Create a file stream to store the webpage content
 	std::ofstream webpageFile("goldwebpage.html");
 	if (!webpageFile.is_open()) {
@@ -238,7 +238,7 @@ void loadGoldFile()
 void loadSilverFile()
 {
 	  // URL of the webpage
-	std::string url = "https://www.livepriceofgold.com/silver-price/bangladesh.html"; //chnange url here with your location's url
+	std::string url = "https://www.livepriceofgold.com/silver-price/bangladesh.html";
 	// Create a file stream to store the webpage content
 	std::ofstream webpageFile("silverwebpage.html");
 	if (!webpageFile.is_open()) {
@@ -285,10 +285,12 @@ void saveZakat()
 	zakatFile << totalZakat;
 }
 //---------------------------------------------------------------------------
+ UnicodeString Mymonth[] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
 __fastcall TForm3::TForm3(TComponent* Owner)
 	: TForm(Owner)
 {
 //All Initializations
+
    //Get present date
 	TDateTime currentDate = Now();
 	year = YearOf(currentDate);
@@ -372,6 +374,8 @@ for (const auto& category : currentBudget.categories) {
 	Edit16->Text = "";
 	Edit17->Text = "";
 	Edit18->Text = "";
+
+	RichEdit1->Clear();
 
 }
 //---------------------------------------------------------------------------
@@ -503,8 +507,14 @@ void mergeExpenseListEntries(std::vector<Transaction_Summary<UnicodeString, int>
 }
 
 //drawCharts takes parameters year and month for which we want to see the analytics
+
+
+
 void TForm3::drawCharts(int year,int month )
   {
+
+
+
    mergeExpenseListEntries(ExpenseList);
    String footerTitleMonth = FormatSettings.ShortMonthNames[month-1];
    String footerTitleYear = IntToStr(year);
@@ -555,7 +565,8 @@ void TForm3::drawCharts(int year,int month )
 	   Transaction_Summary<UnicodeString,int> entry = IncomeList[i];
 	   double monthAvg =  entry.return_avg();
 	   int month = entry.getMonth();
-		UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
+	UnicodeString mm = Mymonth[month];
+		UnicodeString m =mm+ IntToStr(entry.getYear()%1000) ;
 	   Series3->AddXY(i+1,monthAvg,m);
 	}
 	// Add data points for average expense
@@ -564,7 +575,8 @@ void TForm3::drawCharts(int year,int month )
 	   Transaction_Summary<UnicodeString,int> entry = ExpenseList[i];
 	   double monthAvg =  entry.return_avg();
 	   int month = entry.getMonth();
-		UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
+		UnicodeString mm = Mymonth[month];
+		UnicodeString m =mm+ IntToStr(entry.getYear()%1000) ;
 	   Series4->AddXY(i+1,monthAvg,m);
 	}
 	}
@@ -578,7 +590,8 @@ void TForm3::drawCharts(int year,int month )
 	   Transaction_Summary<UnicodeString,int> entry = IncomeList[i];
 	   double monthTotal =  entry.return_total();
 	   int month = entry.getMonth();
-	   UnicodeString m = FormatSettings.ShortMonthNames[month-1]+ IntToStr(entry.getYear()%1000) ;
+	  UnicodeString mm = Mymonth[month];
+		UnicodeString m =mm+ IntToStr(entry.getYear()%1000) ;
 	   Series3->AddXY(i+1,monthTotal,m);
 	}
 	// Add data points for average expense
@@ -587,7 +600,8 @@ void TForm3::drawCharts(int year,int month )
 	   Transaction_Summary<UnicodeString,int> entry = ExpenseList[i];
 	   double monthTotal =  entry.return_total();
 	   int month = entry.getMonth();
-	   UnicodeString m = FormatSettings.ShortMonthNames[month-1] + IntToStr(year%1000);
+	UnicodeString mm = Mymonth[month];
+		UnicodeString m =mm+ IntToStr(entry.getYear()%1000) ;
 	   Series4->AddXY(i+1,monthTotal,m);
 	}
 	}
@@ -1341,6 +1355,7 @@ void AddExpenseOperations()
 		if(New<0) totalZakat=0;
 		else totalZakat=New;
 		ShowMessage("The Zakat payment has been noted");  // Set totalZakat to the maximum of 0 and A
+        saveZakat();
 	}
 	int flag=0;
 	   for(int i=0;i<ExpenseRead.size();i++)
@@ -2295,6 +2310,8 @@ void __fastcall TForm3::Button12Click(TObject *Sender)
 		DeleteIncomeEntry(Amount,Source,Date,Month,Year,Note);
 		AddExpenseOperations();
 		refreshSavings();
+
+        Button9Click(Sender);
   }
 }
 //---------------------------------------------------------------------------
@@ -2467,6 +2484,9 @@ void __fastcall TForm3::Button13Click(TObject *Sender)
 		DeleteExpenseEntry(expenseAmnt,expenseCat, expenseDate, expenseMonth, expenseYear,expenseNote);
 		AddIncomeOperations();
 		refreshSavings();
+
+        SearchClick(Sender);
+
   }
 }
 //---------------------------------------------------------------------------
@@ -2681,9 +2701,13 @@ void __fastcall TForm3::Button19Click(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm3::Button20Click(TObject *Sender)
 {
-        ShowMessage("1. To Add: Source, Amount, Date and Note fields must be filled\n"
+		ShowMessage("1. To Add: Source, Amount, Date and Note fields must be filled\n"
 			  "2. To Edit: Source, Amount, Date and Note fields must be filled\n"
-			  "3. To Delete: Source, Amount and Date fields must be filled\n"
+			  "3. To Delete: Category, Amount and Date fields must be filled\n"
 			  );
 }
 //---------------------------------------------------------------------------
+
+
+
+

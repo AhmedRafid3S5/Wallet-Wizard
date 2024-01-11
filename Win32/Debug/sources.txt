@@ -1,6 +1,6 @@
-Salary
 Freelance
 Investment
-Gifts
 Bonus
 Tuition
+Gift
+Salary

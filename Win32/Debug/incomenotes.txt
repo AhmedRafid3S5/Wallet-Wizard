@@ -9,8 +9,6 @@ Start
 01
 10 Salary 80000
 Received first salary at the new job
-15 Freelance 12000
-Completed Client 1 Project
 20 Investment 5000
 Invested in stocks
 21 Bonus 3000
@@ -27,8 +25,6 @@ Start
 Received second salary
 15 Freelance 15000
 Completed Client 2 Project
-20 Investment 6000
-Increased stock investments
 21 Bonus 3500
 Received performance bonus
 25 Tuition 12000
@@ -201,8 +197,8 @@ End
 Start
 2024
 01
-10 Salary 89000
-Received salary
+11 Salary 70000
+Added salary of the current month edited
 15 Freelance 30000
 Completed Client 13 Project
 20 Investment 10000
@@ -230,4 +226,3 @@ Paid tuition for student: Alex
 27 Home_Rent 30000
 Paid home rent on time
 End
-

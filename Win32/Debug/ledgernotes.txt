@@ -3,8 +3,6 @@ Start
 01
 10 Rent 8000
 Monthly rent payment
-10 Food 500
-Grocery shopping
 15 Bills 10000
 Utility bills payment
 17 Clothes 7000
@@ -257,6 +255,8 @@ Monthly rent payment
 Grocery shopping
 11 Zakat 27000
 paid in full
+11 Zakat 500
+Paid to Faruk
 15 Bills 15500
 Utility bills payment
 17 Clothes 12500
@@ -296,6 +296,16 @@ paid in full
 End
 Start
 2024
+01
+End
+Start
+2024
+01
+11 Zakat 500
+Paid to Faruk
+End
+Start
+2024
 02
 10 Rent 9300
 Monthly rent payment
@@ -314,4 +324,7 @@ Dining out
 29 Transportation 12000
 Monthly transportation expenses
 End
-
+Start
+2024
+03
+End

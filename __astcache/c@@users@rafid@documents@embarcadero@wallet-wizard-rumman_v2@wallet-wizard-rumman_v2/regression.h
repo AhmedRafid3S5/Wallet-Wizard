@@ -194,7 +194,7 @@ public:
 
 	float get_min_X()
      {
-		float min = 10000000;
+		float min = INT64_MAX;
 		for(int i=0;i<x.size();i++)
 		{
 		  if( x[i] < min)

@@ -123,6 +123,12 @@
             <DependentOn>Regression.h</DependentOn>
             <BuildOrder>3</BuildOrder>
         </CppCompile>
+        <CppCompile Include="Unit1.cpp">
+            <Form>Form1</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>Unit1.h</DependentOn>
+            <BuildOrder>4</BuildOrder>
+        </CppCompile>
         <CppCompile Include="Unit3.cpp">
             <Form>Form3</Form>
             <FormType>dfm</FormType>
@@ -137,6 +143,7 @@
             <PCH>true</PCH>
         </PCHCompile>
         <FormResources Include="Unit3.dfm"/>
+        <FormResources Include="Unit1.dfm"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -2,7 +2,6 @@ Start
 2023
 01
 10 Rent 8000
-10 Food 500
 15 Bills 10000
 17 Clothes 7000
 17 Donations 5000
@@ -153,6 +152,7 @@ Start
 10 Rent 9200
 10 Food 1050
 11 Zakat 27000
+11 Zakat 500
 15 Bills 15500
 17 Clothes 12500
 17 Donations 10500
@@ -184,6 +184,15 @@ Start
 End
 Start
 2024
+01
+End
+Start
+2024
+01
+11 Zakat 500
+End
+Start
+2024
 02
 10 Rent 9300
 10 Food 1100
@@ -194,4 +203,7 @@ Start
 20 Food 4400
 29 Transportation 12000
 End
-
+Start
+2024
+03
+End
