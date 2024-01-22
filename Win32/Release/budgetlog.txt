@@ -1,0 +1,169 @@
+Start
+2023
+01
+Rent 9500
+Food 4800
+Bills 1900
+Clothes 950
+Donations 900
+Zakat 950
+Games 950
+Transportation 950
+Travel 1900
+End
+Start
+2023
+02
+Rent 9400
+Food 4900
+Bills 1950
+Clothes 960
+Donations 910
+Zakat 960
+Games 960
+Transportation 960
+Travel 1950
+End
+Start
+2023
+03
+Rent 9300
+Food 5000
+Bills 2000
+Clothes 970
+Donations 920
+Zakat 970
+Games 970
+Transportation 970
+Travel 2000
+End
+Start
+2023
+04
+Rent 9200
+Food 5100
+Bills 2050
+Clothes 980
+Donations 930
+Zakat 980
+Games 980
+Transportation 980
+Travel 2050
+End
+Start
+2023
+05
+Rent 9100
+Food 5200
+Bills 2100
+Clothes 990
+Donations 940
+Zakat 990
+Games 990
+Transportation 990
+Travel 2100
+End
+Start
+2023
+06
+Rent 9000
+Food 5300
+Bills 2150
+Clothes 1000
+Donations 950
+Zakat 1000
+Games 1000
+Transportation 1000
+Travel 2150
+End
+Start
+2023
+07
+Rent 8900
+Food 5400
+Bills 2200
+Clothes 1010
+Donations 960
+Zakat 1010
+Games 1010
+Transportation 1010
+Travel 2200
+End
+Start
+2023
+08
+Rent 8800
+Food 5500
+Bills 2250
+Clothes 1020
+Donations 970
+Zakat 1020
+Games 1020
+Transportation 1020
+Travel 2250
+End
+Start
+2023
+09
+Rent 8700
+Food 5600
+Bills 2300
+Clothes 1030
+Donations 980
+Zakat 1030
+Games 1030
+Transportation 1030
+Travel 2300
+End
+Start
+2023
+10
+Rent 8600
+Food 5700
+Bills 2350
+Clothes 1040
+Donations 990
+Zakat 1040
+Games 1040
+Transportation 1040
+Travel 2350
+End
+Start
+2023
+11
+Rent 8500
+Food 5800
+Bills 2400
+Clothes 1050
+Donations 1000
+Zakat 1050
+Games 1050
+Transportation 1050
+Travel 2400
+End
+Start
+2023
+12
+Rent 8400
+Food 5900
+Bills 2450
+Clothes 1060
+Donations 1010
+Zakat 1060
+Games 1060
+Transportation 1060
+Travel 2450
+End
+Start
+2024
+01
+Rent 10000
+Food 5000
+Bills 2000
+Clothes 1000
+Donations 1000
+Zakat 1000
+Games 1000
+Transportation 1000
+Travel 2000
+End

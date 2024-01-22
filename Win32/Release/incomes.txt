@@ -1,0 +1,144 @@
+Start
+2010
+01
+11 Salary 6700
+End
+Start
+2023
+01
+10 Salary 80000
+20 Investment 5000
+21 Bonus 3000
+25 Tuition 10000
+27 Home_Rent 18000
+End
+Start
+2023
+02
+10 Salary 82000
+15 Freelance 15000
+21 Bonus 3500
+25 Tuition 12000
+27 Home_Rent 20000
+End
+Start
+2023
+03
+10 Salary 85000
+15 Freelance 13000
+20 Investment 5500
+21 Bonus 3200
+25 Tuition 11000
+25 Salary 85000
+27 Home_Rent 19000
+End
+Start
+2023
+04
+10 Salary 83000
+15 Freelance 14000
+20 Investment 5800
+21 Bonus 3300
+25 Tuition 11500
+27 Home_Rent 19500
+End
+Start
+2023
+05
+10 Salary 87000
+15 Freelance 16000
+20 Investment 6200
+21 Bonus 3800
+25 Tuition 12500
+27 Home_Rent 21000
+End
+Start
+2023
+06
+10 Salary 80000
+15 Freelance 17000
+20 Investment 6500
+21 Bonus 4000
+25 Tuition 13000
+27 Home_Rent 22000
+End
+Start
+2023
+07
+10 Salary 85000
+15 Freelance 18000
+20 Investment 7000
+21 Bonus 4200
+25 Tuition 13500
+27 Home_Rent 23000
+End
+Start
+2023
+08
+10 Salary 75000
+15 Freelance 20000
+20 Investment 7500
+21 Bonus 4500
+25 Tuition 14000
+27 Home_Rent 24000
+End
+Start
+2023
+09
+10 Salary 81500
+15 Freelance 22000
+20 Investment 8000
+21 Bonus 4800
+25 Tuition 14500
+27 Home_Rent 25000
+End
+Start
+2023
+10
+10 Salary 86500
+15 Freelance 24000
+20 Investment 8500
+21 Bonus 5000
+25 Tuition 15000
+27 Home_Rent 26000
+End
+Start
+2023
+11
+10 Salary 86500
+15 Freelance 26000
+20 Investment 9000
+21 Bonus 5200
+25 Tuition 15500
+27 Home_Rent 27000
+End
+Start
+2023
+12
+10 Salary 87000
+15 Freelance 28000
+20 Investment 9500
+21 Bonus 5500
+25 Tuition 16000
+27 Home_Rent 28000
+End
+Start
+2024
+01
+11 Salary 70000
+15 Freelance 30000
+20 Investment 10000
+21 Bonus 5800
+25 Tuition 16500
+27 Home_Rent 29000
+End
+Start
+2024
+02
+10 Salary 88000
+15 Freelance 32000
+20 Investment 10500
+21 Bonus 6000
+25 Tuition 17000
+27 Home_Rent 30000
+End
