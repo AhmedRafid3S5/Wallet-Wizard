@@ -26,4 +26,4 @@ To run the app, `Win32->Release->Webscraping.exe`
 ## Glitches and Ongoing work
 Webpage htmls may load with data that can't be searched using hardcoded search phrases since websites are getting updated constantly, working on a fix for that.
 
-All your files and folders are presented as a tree in the file explorer. You can switch from one to another by clicking a file in the tree.
+
